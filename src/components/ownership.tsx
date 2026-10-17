@@ -25,9 +25,9 @@ export function Ownership() {
         />
 
         <Reveal delay={0.05} className="mt-14">
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="rail sm:grid gap-4 md:grid-cols-3">
             {LAYER_MODELS.map((model) => (
-              <div key={model.name} className={`spotlight rounded-[22px] p-6 ring-1 ${model.own === 5 ? "bg-violet text-white ring-violet" : "bg-card text-ink ring-line"}`}>
+              <div key={model.name} className={`spotlight rounded-[22px] p-6 ring-1 ${model.own === 5 ? "-order-1 bg-violet text-white ring-violet sm:order-none" : "bg-card text-ink ring-line"}`}>
                 <p className={`text-[13px] font-medium ${model.own === 5 ? "text-blob" : "text-muted"}`}>{model.name}</p>
                 <p className="display-tight mt-2 text-[44px] font-medium leading-none">
                   {model.own}
@@ -55,7 +55,7 @@ export function Ownership() {
           </p>
         </Reveal>
 
-        <div className="mt-5 grid gap-4 md:grid-cols-2 md:gap-5">
+        <div className="rail sm:grid mt-5 gap-4 md:grid-cols-2 md:gap-5">
           {setups.map((setup, index) => {
             const night = index === 1;
             const Icon = night ? HardDrive : Cloud;
@@ -94,7 +94,7 @@ export function Ownership() {
         </div>
 
         <Reveal delay={0.05} className="mt-5">
-          <ul className="space-y-2 md:hidden">
+          <ul className="rail sm:grid gap-2 md:hidden">
             {comparison.map((row) => (
               <li key={row.name} className={`rounded-[18px] p-5 ring-1 ${row.own ? "bg-blob/30 ring-blob" : "bg-card ring-line"}`}>
                 <p className="flex items-center gap-2 font-semibold text-ink">

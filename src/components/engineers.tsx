@@ -175,7 +175,7 @@ export function Engineers() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <div className="min-h-[470px] p-5 md:px-7 md:py-6">
+                    <div className="min-h-[320px] p-5 md:min-h-[470px] md:px-7 md:py-6">
                       <Code code={file.code} language={file.language} />
                     </div>
                     <p className="border-t border-white/[0.06] px-5 py-4 text-[14px] leading-relaxed text-white/65 md:px-7">{file.caption}</p>
@@ -186,7 +186,7 @@ export function Engineers() {
           </div>
         </Reveal>
 
-        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rail sm:grid mt-5 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {POINTS.map((point, index) => (
             <Reveal key={point.title} delay={index * 0.06} className="h-full">
               <ArtCard art={point.art} title={point.title} body={point.body} />

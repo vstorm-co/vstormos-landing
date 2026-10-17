@@ -103,13 +103,13 @@ export function Expertise() {
                     role="tab"
                     aria-selected={selected}
                     onClick={() => setActive(index)}
-                    className={`relative flex min-w-[220px] items-center gap-3 rounded-[20px] p-4 text-left transition-colors lg:min-w-0 ${selected ? "" : "hover:bg-white/50"}`}
+                    className={`relative flex shrink-0 items-center gap-3 rounded-[18px] px-3.5 py-3 text-left transition-colors lg:shrink lg:rounded-[20px] lg:p-4 ${selected ? "" : "hover:bg-white/50"}`}
                   >
                     {selected ? <motion.span layoutId="expert-pill" className="absolute inset-0 rounded-[20px] bg-card shadow-[0_18px_40px_-26px_rgba(43,37,71,0.5)] ring-1 ring-line" transition={{ type: "spring", stiffness: 380, damping: 34 }} /> : null}
-                    <span className="relative"><BlobAgent color={entry.color} size={40} delay={index * 0.6} hop={selected} /></span>
+                    <span className="relative"><BlobAgent color={entry.color} size={34} delay={index * 0.6} hop={selected} /></span>
                     <span className="relative min-w-0">
-                      <span className="block text-[15.5px] font-semibold text-ink">{entry.role}</span>
-                      <span className="block text-[13px] text-muted">becomes {entry.agent}</span>
+                      <span className="block whitespace-nowrap text-[14.5px] font-semibold text-ink lg:text-[15.5px]">{entry.role}</span>
+                      <span className="hidden text-[13px] text-muted lg:block">becomes {entry.agent}</span>
                     </span>
                   </button>
                 );

@@ -78,7 +78,7 @@ export function Hero() {
         />
       </motion.div>
 
-      <div className="relative z-10 mx-auto flex max-w-[1240px] flex-col items-center px-5 pt-[156px] text-center md:px-8 md:pt-[184px]">
+      <div className="relative z-10 mx-auto flex max-w-[1240px] flex-col items-center px-5 pt-[128px] text-center md:px-8 md:pt-[184px]">
         <motion.div style={{ opacity: copyOpacity, y: copyY }} className="flex flex-col items-center">
         <motion.a
           href="#product"

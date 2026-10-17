@@ -33,7 +33,7 @@ export function Control() {
           body="Roles, budgets, approvals, guardrails and a recorded run, whether the request came from chat, Slack, a schedule or the API. Administrators decide who uses each agent, what it may spend and which actions wait for a person."
         />
 
-        <div className="mt-14 grid gap-4 lg:grid-cols-2 lg:gap-5">
+        <div className="rail sm:grid mt-14 gap-4 lg:grid-cols-2 lg:gap-5">
           <Reveal>
             <ScreenCard
               src="/screens/crop-approvals.webp"
@@ -52,7 +52,7 @@ export function Control() {
           </Reveal>
         </div>
 
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:mt-5 lg:grid-cols-3">
+        <div className="rail sm:grid mt-4 gap-4 sm:grid-cols-2 lg:mt-5 lg:grid-cols-3">
           {controls.map((item, index) => (
             <Reveal key={item.title} delay={(index % 3) * 0.06} className="h-full">
               <ArtCard art={item.art} title={item.title} body={item.body} />

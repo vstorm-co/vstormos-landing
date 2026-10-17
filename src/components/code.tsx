@@ -63,7 +63,7 @@ function highlight(code: string, language: CodeLanguage): ReactNode[] {
 
 export function Code({ code, language }: { code: string; language: CodeLanguage }) {
   return (
-    <pre className="overflow-x-auto whitespace-pre-wrap break-words font-mono text-[12.5px] sm:whitespace-pre sm:break-normal leading-[1.7] text-white/80 [scrollbar-width:thin] md:text-[13px]">
+    <pre className="overflow-x-auto whitespace-pre-wrap break-words font-mono text-[11.5px] sm:text-[12.5px] sm:whitespace-pre sm:break-normal leading-[1.7] text-white/80 [scrollbar-width:thin] md:text-[13px]">
       <code>{highlight(code, language)}</code>
     </pre>
   );

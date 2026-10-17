@@ -383,16 +383,16 @@ export function ProductMovie() {
 
   return (
     <div>
-      <ol className="grid grid-cols-4 gap-1.5 rounded-[18px] bg-card p-1.5 ring-1 ring-line md:grid-cols-7">
+      <ol className="flex gap-1.5 overflow-x-auto rounded-[18px] bg-card p-1.5 ring-1 ring-line [scrollbar-width:none] md:grid md:grid-cols-7 [&::-webkit-scrollbar]:hidden">
         {SCENES.map((item, index) => {
           const current = index === sceneIndex;
           return (
-            <li key={item.id}>
+            <li key={item.id} className="shrink-0 md:shrink">
               <button
                 type="button"
                 onClick={() => go(index)}
                 aria-current={current ? "step" : undefined}
-                className={`relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-[13px] px-1 py-2.5 text-[13px] font-medium transition-colors duration-300 sm:text-[14px] md:py-3 lg:justify-start lg:px-4 ${
+                className={`relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-[13px] px-4 py-2.5 text-[13px] font-medium transition-colors duration-300 sm:text-[14px] md:py-3 lg:justify-start lg:px-4 ${
                   current ? "bg-ink text-white" : "text-ink-soft hover:bg-ink/[0.04] hover:text-ink"
                 }`}
               >
