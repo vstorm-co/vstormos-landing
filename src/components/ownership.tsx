@@ -4,6 +4,15 @@ import { Reveal, SectionHeading } from "@/components/ui";
 import { comparison, links, setups } from "@/content";
 import { asset } from "@/lib/site";
 
+const LAYERS = ["Process logic", "Data", "Models", "Codebase", "Infrastructure"] as const;
+
+/** The comparison vstorm.co/agenticos makes: how many of the five layers stay yours. */
+const LAYER_MODELS = [
+  { name: "Full lock-in platform", own: 0 },
+  { name: "Semi lock-in platform", own: 3 },
+  { name: "AgenticOS", own: 5 },
+] as const;
+
 export function Ownership() {
   return (
     <section id="ownership" className="bg-paper px-5 pb-24 md:px-8 md:pb-32">
@@ -15,7 +24,38 @@ export function Ownership() {
           body="AgenticOS is Apache-2.0 software you can inspect, modify and operate. AI teammates are arriving in every vendor’s cloud; this is the one you run yourself, on any model, with the source open."
         />
 
-        <div className="mt-14 grid gap-4 md:grid-cols-2 md:gap-5">
+        <Reveal delay={0.05} className="mt-14">
+          <div className="grid gap-4 md:grid-cols-3">
+            {LAYER_MODELS.map((model) => (
+              <div key={model.name} className={`spotlight rounded-[22px] p-6 ring-1 ${model.own === 5 ? "bg-violet text-white ring-violet" : "bg-card text-ink ring-line"}`}>
+                <p className={`text-[13px] font-medium ${model.own === 5 ? "text-blob" : "text-muted"}`}>{model.name}</p>
+                <p className="display-tight mt-2 text-[44px] font-medium leading-none">
+                  {model.own}
+                  <span className={model.own === 5 ? "text-white/45" : "text-faint"}> of 5</span>
+                </p>
+                <p className={`mt-1 text-[13.5px] ${model.own === 5 ? "text-white/70" : "text-muted"}`}>layers you own</p>
+                <ul className="mt-5 space-y-2">
+                  {LAYERS.map((layer, i) => {
+                    const owned = i < model.own;
+                    return (
+                      <li key={layer} className={`flex items-center gap-2.5 text-[14px] ${owned ? "" : model.own === 5 ? "text-white/40" : "text-faint"}`}>
+                        <span className={`inline-flex size-5 items-center justify-center rounded-full ${owned ? (model.own === 5 ? "bg-blob text-violet" : "bg-ok text-white") : "ring-1 ring-current"}`}>
+                          {owned ? <Check className="size-3" strokeWidth={3} /> : null}
+                        </span>
+                        {model.own === 5 ? layer : owned ? "Yours" : "The vendor’s"}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-center text-[13px] text-faint">
+            Process logic, data, models, codebase and infrastructure. Nothing in AgenticOS needs anyone’s permission to keep running.
+          </p>
+        </Reveal>
+
+        <div className="mt-5 grid gap-4 md:grid-cols-2 md:gap-5">
           {setups.map((setup, index) => {
             const night = index === 1;
             const Icon = night ? HardDrive : Cloud;

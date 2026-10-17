@@ -1,7 +1,7 @@
 import { Trophy } from "lucide-react";
 import type { ReactNode } from "react";
 
-import { BrandIcon } from "@/components/brand-icon";
+import { BrandIcon, Mark, providerGlyph } from "@/components/brand-icon";
 import { Reveal } from "@/components/ui";
 import { vstorm } from "@/content";
 import { asset } from "@/lib/site";
@@ -33,6 +33,26 @@ export function Credentials() {
       href: pydantic.href,
     },
     {
+      mark: (
+        <span className="inline-flex items-center gap-2">
+          <Mark glyph={providerGlyph("openai")} className="size-6 text-ink" mono />
+          <Wordmark>OpenAI</Wordmark>
+        </span>
+      ),
+      title: "Select Partner",
+      caption: "Partner on the models Vstorm ships",
+    },
+    {
+      mark: (
+        <span className="inline-flex items-center gap-2">
+          <Mark glyph={providerGlyph("anthropic")} className="size-6 text-[#d97757]" mono />
+          <Wordmark>Anthropic</Wordmark>
+        </span>
+      ),
+      title: "Claude Certified Services Partner",
+      caption: "Partner on the models Vstorm ships",
+    },
+    {
       mark: <img src={asset("/logos/aaif.svg")} alt="Agentic AI Foundation" width={838} height={203} className="h-8 w-auto" />,
       title: aaif.title,
       caption: "The first agentic AI engineering company to join",
@@ -55,9 +75,9 @@ export function Credentials() {
     <Reveal className="mt-5">
       <div className="overflow-hidden rounded-[22px] bg-card ring-1 ring-line">
         <p className="border-b border-line px-6 py-3.5 text-center font-mono text-[11.5px] uppercase tracking-[0.1em] text-faint">
-          Recognised by the industry
+          Partners and recognition
         </p>
-        <ul className="grid grid-cols-2 gap-px bg-line md:grid-cols-5">
+        <ul className="grid grid-cols-2 gap-px bg-line md:grid-cols-12">
           {items.map((item, index) => {
             const body = (
               <>
@@ -68,7 +88,7 @@ export function Credentials() {
             );
             const cell = "flex h-full flex-col items-center px-4 py-6 text-center";
             return (
-              <li key={item.title + index} className={`bg-card ${index === items.length - 1 ? "col-span-2 md:col-span-1" : ""}`}>
+              <li key={item.title + index} className={`bg-card ${index === items.length - 1 ? "col-span-2" : ""} ${index < 4 ? "md:col-span-3" : "md:col-span-4"}`}>
                 {item.href ? (
                   <a href={item.href} target="_blank" rel="noreferrer" className={`${cell} transition-colors hover:bg-paper/70`}>
                     {body}

@@ -17,6 +17,7 @@ import { Statement } from "@/components/statement";
 import { Teammates } from "@/components/teammates";
 import { UseCases } from "@/components/use-cases";
 import { Engineers } from "@/components/engineers";
+import { Expertise } from "@/components/expertise";
 import { Pricing } from "@/components/pricing";
 import { Vstorm } from "@/components/vstorm";
 
@@ -31,6 +32,7 @@ export default function Home() {
         <Hero />
         <Statement />
         <Teammates />
+        <Expertise />
         <HowItWorks />
         <Showcase />
         <Capabilities />

@@ -11,11 +11,14 @@ Key facts (release 1.1.1):
 - Integrations: 4,700+ MCP servers in the gallery; document sync from Google Drive, S3/MinIO, Git, websites, SharePoint and OneDrive.
 - Surfaces: one agent answers in web chat, a website widget, a hosted page, the HTTP API, a WebSocket, Slack, Mattermost and Telegram.
 - Control: roles and department groups, company sign-in (OIDC SSO, LDAP, Kerberos), monthly budgets checked before each model call, approvals for sensitive tools, a hash-chained audit log, an envelope-encrypted credential vault, sandboxed code execution. Native MFA, SAML and SCIM are not available yet; MFA comes from the identity provider.
+- Skills and context: a team's procedures become skills and its standing facts (thresholds, owners, policies) become context; every agent reads both, so a rule changed once changes every agent that uses it.
 - Agents are versioned specs that export to YAML.
 - AgenticOS is also an MCP server: Claude Code, Codex and Cursor can run its agents and read runs.
 - Install: curl -fsSL https://raw.githubusercontent.com/vstorm-co/agenticos/main/scripts/quickstart.sh | bash
 
-Who makes it: Vstorm (https://vstorm.co), an agentic AI engineering company from Wrocław, Poland; official Pydantic implementation partner and Agentic AI Foundation member. Vstorm also rolls AgenticOS out for companies: implementation and tailoring, no subscription, no seat count, no long-term commitment.
+Who makes it: Vstorm (https://vstorm.co), an agentic AI engineering company from Wrocław, Poland. Vstorm is an official Pydantic implementation partner, an OpenAI Select Partner, an Anthropic Claude Certified Services Partner and a member of the Agentic AI Foundation.
+
+Product or service: both. AgenticOS is open-source software anyone can run; Vstorm also rolls it out for companies in three phases (Foundation, Engineering, Handover) with forward-deployed engineers and a transformation manager. You pay for implementation and tailoring: no subscription, no seat count, no long-term commitment. Ownership covers all five layers: process logic, data, models, codebase and infrastructure.
 
 ## Docs
 

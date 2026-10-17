@@ -89,7 +89,11 @@ function Stage() {
               </li>
             ))}
           </ul>
-          <p className="mt-5 border-t border-line pt-4 text-[13px] text-muted">
+          <p className="mt-5 rounded-[14px] bg-paper px-4 py-3 text-[13.5px] leading-relaxed text-ink-soft ring-1 ring-line">
+            The first meeting maps which processes AgenticOS should take on first, what already exists for them and
+            what the first ninety days look like. You speak with the engineers who would do the work.
+          </p>
+          <p className="mt-4 text-[13px] text-muted">
             {vstorm.call.reply} Or write to{" "}
             <a href={`mailto:${vstorm.email}`} className="font-medium text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink">
               {vstorm.email}
@@ -116,8 +120,9 @@ export function Vstorm() {
             <h3 className="display-tight text-[clamp(1.7rem,3vw,2.5rem)] font-medium text-ink">
               How we deliver it <span className="text-faint">in three phases.</span>
             </h3>
-            <p className="max-w-[44ch] text-[15px] text-muted">
-              You pay for implementation and tailoring. No subscription, no seat count, no long-term commitment.
+            <p className="max-w-[46ch] text-[15px] text-muted">
+              A transformation manager runs the change alongside: the roadmap, adoption and upskilling. You pay for
+              implementation and tailoring. No subscription, no seat count, no long-term commitment.
             </p>
           </Reveal>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
