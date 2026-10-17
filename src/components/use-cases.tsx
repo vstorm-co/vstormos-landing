@@ -15,7 +15,7 @@ export function UseCases() {
           body="29 tutorials give you a sample input, the configuration, the exact prompt and a check you can run. Pick the one whose result somebody on the team can judge."
         />
 
-        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="rail sm:grid mt-14 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {useCases.map((group, index) => (
             <Reveal key={group.team} delay={(index % 3) * 0.07} className="h-full">
               <article className="spotlight lift group/card flex h-full flex-col rounded-[22px] bg-card p-6 ring-1 ring-line">

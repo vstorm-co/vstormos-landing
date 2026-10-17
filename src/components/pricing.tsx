@@ -131,7 +131,7 @@ export function Pricing() {
             </>
           }
         />
-        <div className="mt-14 grid gap-4 lg:grid-cols-3 lg:items-stretch">
+        <div className="rail sm:grid mt-14 gap-4 lg:grid-cols-3 lg:items-stretch">
           {PLANS.map((plan, index) => (
             <Reveal key={plan.name} delay={index * 0.07} className="h-full">
               <PlanCard plan={plan} />

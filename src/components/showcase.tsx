@@ -172,7 +172,7 @@ export function Showcase() {
               </div>
 
               <div className="rounded-[14px] bg-white/15 p-1 shadow-[0_30px_80px_-30px_rgba(15,10,40,0.85)] ring-1 ring-white/30 backdrop-blur-sm md:rounded-[18px] md:p-1.5">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[10px] bg-white md:rounded-[13px]">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[10px] bg-white sm:aspect-[16/10] md:rounded-[13px]">
                   {showcase.map((entry, index) => (
                     <motion.img
                       key={entry.id}
@@ -185,7 +185,7 @@ export function Showcase() {
                       initial={false}
                       animate={{ opacity: index === active ? 1 : 0, scale: index === active ? 1 : 1.015 }}
                       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                      className="absolute inset-0 size-full object-cover object-top"
+                      className="absolute inset-0 size-full object-cover object-[58%_0%] sm:object-top"
                     />
                   ))}
                 </div>

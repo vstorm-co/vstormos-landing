@@ -6,10 +6,10 @@ import { figures } from "@/content";
 
 export function Statement() {
   return (
-    <section className="relative z-40 -mt-7 rounded-t-[28px] bg-paper px-5 pb-24 pt-20 md:-mt-9 md:rounded-t-[36px] md:px-8 md:pb-32 md:pt-32">
+    <section className="relative z-40 -mt-7 rounded-t-[28px] bg-paper px-5 pb-24 pt-16 md:-mt-9 md:rounded-t-[36px] md:px-8 md:pb-32 md:pt-32">
       <div className="mx-auto max-w-[1240px]">
         <Reveal>
-          <p className="display-tight mx-auto max-w-[1080px] text-balance text-center text-[clamp(1.65rem,3.6vw,3rem)] font-medium leading-[1.14]">
+          <p className="display-tight mx-auto max-w-[1080px] text-balance text-center text-[clamp(1.4rem,3.6vw,3rem)] font-medium leading-[1.14]">
             AgenticOS gives every team{" "}
             <span className="inline-flex translate-y-[0.06em] items-center align-middle" aria-hidden>
               {AGENT_COLORS.slice(0, 3).map((color, index) => (

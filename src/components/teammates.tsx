@@ -17,12 +17,12 @@ const DWELL_MS = 5600;
  * rows of three; from `lg` the six stand in one staggered line.
  */
 const SPOTS = [
-  { x: 10, y: 30, s: 0.9, mx: 18, my: 41, ms: 0.85 },
-  { x: 26, y: 24, s: 1.04, mx: 50, my: 43, ms: 0.85 },
-  { x: 42, y: 29, s: 0.94, mx: 82, my: 41, ms: 0.85 },
-  { x: 58, y: 23, s: 1.08, mx: 18, my: 25, ms: 1 },
-  { x: 74, y: 28, s: 0.96, mx: 50, my: 23, ms: 1 },
-  { x: 90, y: 32, s: 0.95, mx: 82, my: 25, ms: 1 },
+  { x: 10, y: 30, s: 0.9, mx: 18, my: 50, ms: 0.8 },
+  { x: 26, y: 24, s: 1.04, mx: 50, my: 53, ms: 0.8 },
+  { x: 42, y: 29, s: 0.94, mx: 82, my: 50, ms: 0.8 },
+  { x: 58, y: 23, s: 1.08, mx: 18, my: 22, ms: 1 },
+  { x: 74, y: 28, s: 0.96, mx: 50, my: 19, ms: 1 },
+  { x: 90, y: 32, s: 0.95, mx: 82, my: 22, ms: 1 },
 ] as const;
 
 /** Both meadow layers share one box, so the cut-out grass lands on the grass it was cut from. */

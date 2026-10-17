@@ -78,7 +78,7 @@ export function Quickstart() {
           </div>
         </Reveal>
 
-        <ol className="mt-5 grid gap-4 md:grid-cols-3">
+        <ol className="rail sm:grid mt-5 gap-4 md:grid-cols-3">
           {STEPS.map((step, index) => (
             <Reveal key={step.title} delay={index * 0.07} className="h-full">
               <li className="h-full">

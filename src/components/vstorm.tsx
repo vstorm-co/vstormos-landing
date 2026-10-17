@@ -125,7 +125,7 @@ export function Vstorm() {
               implementation and tailoring. No subscription, no seat count, no long-term commitment.
             </p>
           </Reveal>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="rail sm:grid mt-8 gap-4 md:grid-cols-3">
             {vstorm.phases.map((phase, index) => (
               <Reveal key={phase.n} delay={index * 0.07} className="h-full">
                 <ArtCard art={PHASE_ART[index] ?? "planning"} badge={`${phase.n} · ${phase.who}`} title={phase.title} body={phase.body}>
@@ -152,7 +152,7 @@ export function Vstorm() {
               All case studies <ArrowUpRight className="size-4" />
             </a>
           </Reveal>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rail sm:grid mt-8 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {vstorm.cases.map((item, index) => (
               <Reveal key={item.client} delay={index * 0.06} className="h-full">
                 <a href={item.href} target="_blank" rel="noreferrer" className="spotlight lift group flex h-full flex-col rounded-[22px] bg-card p-6 ring-1 ring-line">

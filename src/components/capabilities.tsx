@@ -45,7 +45,7 @@ export function Capabilities() {
           body="Each one is a card in the agent’s toolbox: switch it on, set it up, test it in the chat beside it. Plus any tool from a connected MCP server, and capabilities your engineers add in typed Python."
         />
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="rail sm:grid mt-14 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {capabilityGroups.map((group, index) => (
             <Reveal key={group.title} delay={(index % 3) * 0.07} className="h-full">
               <article className="spotlight group flex h-full flex-col overflow-hidden rounded-[22px] bg-card shadow-[0_30px_60px_-36px_rgba(0,0,0,0.6)] ring-1 ring-white/10 transition-transform duration-500 ease-out-soft hover:-translate-y-1">

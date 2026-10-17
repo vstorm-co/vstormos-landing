@@ -273,6 +273,33 @@
   animation: rain-fall 0.9s linear infinite;
 }
 
+/*
+ * On a phone a row of cards becomes a swipeable rail: each card takes most of
+ * the width and the next one peeks in, instead of a column many screens long.
+ * Give the element its grid from `sm:` up (`sm:grid`), so the two layouts
+ * never compete for `display`.
+ */
+@utility rail {
+  @media (width < 40rem) {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    /* Inline only: the element keeps its own top margin, and the cards bleed to the screen edge. */
+    margin-inline: -1.25rem;
+    padding: 0.25rem 1.25rem 0.75rem;
+    scroll-padding-inline: 1.25rem;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    & > * {
+      flex: 0 0 84%;
+      scroll-snap-align: start;
+    }
+  }
+}
+
 @utility grain {
   position: relative;
   &::after {
