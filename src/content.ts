@@ -273,6 +273,10 @@ export const faq = [
     a: "Yes. It is licensed under Apache-2.0, which allows commercial use, modification and private deployment. You pay for the infrastructure you run it on and for the model providers and services you choose.",
   },
   {
+    q: "Is AgenticOS a product or a service?",
+    a: "Both. It is an open-source product you can install and run yourself, and Vstorm tailors it to your processes, data and integrations when you want help. Either way the code, the data and the infrastructure stay yours.",
+  },
+  {
     q: "Can Vstorm roll it out for us, and what does that cost?",
     a: "Yes. Vstorm, the team that builds AgenticOS, maps your processes, builds the agents inside your environment and hands the system over to your team, or maintains it for you. You pay for implementation and tailoring: no subscription, no seat count and no long-term commitment. A first call is 15 or 30 minutes and free of charge.",
   },
