@@ -1,0 +1,332 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* The logo tile and its blob: the only two brand colours. */
+  --color-violet: #2b2547;
+  --color-violet-deep: #1d1931;
+  --color-blob: #bbd1ff;
+
+  --color-ink: #16141f;
+  --color-ink-soft: #3b3846;
+  --color-muted: #6e6b79;
+  --color-faint: #96929f;
+  --color-paper: #f6f5f1;
+  --color-card: #ffffff;
+  --color-line: #e7e4dd;
+  --color-line-strong: #d6d2c9;
+  --color-ok: #1f9d63;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  /* Lenis drives the scroll; native smoothing would ease every frame twice. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: var(--color-blob);
+    color: var(--color-violet);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-violet);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* <ArrowCursor /> draws the pointer; it sets this class only for a mouse without reduced motion. */
+  html.arrow-cursor,
+  html.arrow-cursor * {
+    cursor: none !important;
+  }
+
+  section[id] {
+    scroll-margin-top: 88px;
+  }
+}
+
+/* Agent blobs: an idle hop with squash and stretch, a blink, a glance around. */
+@keyframes blob-hop {
+  0%, 52%, 100% { transform: translateY(0) scale(1, 1); }
+  58% { transform: translateY(0) scale(1.08, 0.9); }
+  70% { transform: translateY(-26%) scale(0.95, 1.06); }
+  82% { transform: translateY(0) scale(1.06, 0.93); }
+  90% { transform: translateY(0) scale(0.99, 1.01); }
+}
+@keyframes blob-shadow {
+  0%, 52%, 100% { transform: scaleX(1); opacity: 0.22; }
+  70% { transform: scaleX(0.7); opacity: 0.1; }
+  82% { transform: scaleX(1.06); opacity: 0.26; }
+}
+@keyframes blob-blink {
+  0%, 44%, 50%, 100% { transform: scaleY(1); }
+  47% { transform: scaleY(0.1); }
+}
+@keyframes blob-look {
+  0%, 30%, 100% { transform: translateX(0); }
+  38%, 55% { transform: translateX(7%); }
+  63%, 80% { transform: translateX(-6%); }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes walk {
+  from { transform: translateX(-10vw); }
+  to { transform: translateX(110vw); }
+}
+@keyframes walk-step {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-18%) rotate(3deg); }
+}
+
+/* Fireflies over the hero forest: drift on a loop, pulse on another, so no two read alike. */
+@keyframes firefly-drift {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(14px, -22px); }
+  50% { transform: translate(-10px, -36px); }
+  75% { transform: translate(-18px, -12px); }
+}
+@keyframes firefly-glow {
+  0%, 100% { opacity: 0; }
+  40%, 60% { opacity: 1; }
+}
+
+/* One diagonal sweep of light across a surface. */
+@keyframes glint {
+  from { transform: translateX(-120%) skewX(-18deg); }
+  to { transform: translateX(260%) skewX(-18deg); }
+}
+
+@keyframes beam-spin {
+  to { --beam-angle: 360deg; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* Lightning: long quiet, then a double flicker. */
+@keyframes lightning {
+  0%, 86%, 100% { opacity: 0; }
+  87% { opacity: 0.9; }
+  88% { opacity: 0.15; }
+  89.5% { opacity: 1; }
+  92% { opacity: 0; }
+}
+
+/* One tile in the logo grid lights up and lifts, as if it just connected. */
+@keyframes tile-pop {
+  0%, 88%, 100% { transform: translateY(0); background-color: var(--color-paper); box-shadow: 0 0 0 0 rgba(91, 91, 214, 0); }
+  92% { transform: translateY(-4px); background-color: #ffffff; box-shadow: 0 14px 28px -14px rgba(43, 37, 71, 0.45), 0 0 0 2px rgba(187, 209, 255, 0.9); }
+}
+
+@keyframes rain-fall {
+  to { background-position: -32px 140px, -50px 220px; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility display-tight {
+  font-family: var(--font-display);
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  font-variation-settings: "wdth" 100;
+}
+
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* A soft light that follows the pointer across a card; --mx/--my come from <Spotlights />. */
+@utility spotlight {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out-soft);
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 50%),
+      var(--spot, rgba(91, 91, 214, 0.1)),
+      transparent 55%
+    );
+  }
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+/* A gloss that crosses a button on hover. */
+@utility shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -2px auto -2px 0;
+    width: 40%;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+    transform: translateX(-160%) skewX(-18deg);
+  }
+  &:hover::before {
+    animation: glint 0.85s var(--ease-out-soft);
+  }
+}
+
+/* A light that runs round a frame's edge. The frame keeps its own background; the beam is drawn in a masked ring. */
+@utility beam {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    padding: 1.5px;
+    border-radius: inherit;
+    pointer-events: none;
+    background: conic-gradient(
+      from var(--beam-angle),
+      transparent 0deg,
+      transparent 250deg,
+      var(--beam, #bbd1ff) 300deg,
+      #ffffff 320deg,
+      var(--beam, #bbd1ff) 340deg,
+      transparent 360deg
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: beam-spin 6s linear infinite;
+  }
+}
+
+/*
+ * Cards lift a little under the pointer, with a shadow that grows into the page.
+ * It sets Tailwind's --tw-shadow rather than box-shadow, so a card's ring-1
+ * border, which is also a box-shadow, is composed with it instead of replaced.
+ */
+@utility lift {
+  transition:
+    transform 0.45s var(--ease-out-soft),
+    box-shadow 0.45s var(--ease-out-soft);
+  --tw-shadow: 0 1px 2px rgba(22, 20, 31, 0.04);
+  &:hover {
+    transform: translateY(-3px);
+    --tw-shadow: 0 18px 40px -22px rgba(43, 37, 71, 0.35), 0 6px 14px -8px rgba(43, 37, 71, 0.12);
+  }
+}
+
+/* Fine slanted rain in two layers, the nearer one faster. */
+@utility rain {
+  background-image:
+    repeating-linear-gradient(104deg, transparent 0 11px, rgba(220, 215, 255, 0.5) 11px 12px, transparent 12px 23px),
+    repeating-linear-gradient(104deg, transparent 0 19px, rgba(220, 215, 255, 0.35) 19px 20px, transparent 20px 37px);
+  background-size: 23px 140px, 37px 220px;
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%);
+  mask-image: linear-gradient(180deg, #000, transparent 85%);
+  animation: rain-fall 0.9s linear infinite;
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+}
+
+@utility hatch {
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 7px,
+    color-mix(in oklab, var(--color-line-strong) 70%, transparent) 7px 8px
+  );
+}
+
+/* The FAQ is plain <details>: the marker is drawn by us so it can rotate. */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Where the browser can animate to `auto`, an answer slides open instead of jumping. */
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+  details::details-content {
+    height: 0;
+    overflow: clip;
+    transition:
+      height 0.35s var(--ease-out-soft),
+      content-visibility 0.35s allow-discrete;
+  }
+  details[open]::details-content {
+    height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,50 @@
+name: Deploy to GitHub Pages
+
+# Builds the static site and publishes it with GitHub Pages. Pages works out
+# the base path (/<repository> for a project site, empty for a custom domain)
+# and the origin, so canonical links and every asset point at the right place.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.5
+      - id: pages
+        uses: actions/configure-pages@v5
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL || steps.pages.outputs.origin }}
+      # After the build, which writes next-env.d.ts that the type check needs.
+      - run: bun run typecheck
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

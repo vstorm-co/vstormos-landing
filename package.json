@@ -1,0 +1,31 @@
+{
+  "name": "agenticos-landing",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 3100",
+    "build": "next build",
+    "preview": "bunx serve@14.2.4 out -l 3100",
+    "typecheck": "tsc --noEmit",
+    "gen:logos": "node scripts/gen-logos.mjs",
+    "gen:contributors": "node scripts/gen-contributors.mjs"
+  },
+  "dependencies": {
+    "lenis": "^1.3.27",
+    "lucide-react": "^1.59.0",
+    "motion": "^14.3.0",
+    "next": "^16.3.8",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@iconify-json/logos": "^1.2.16",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  }
+}

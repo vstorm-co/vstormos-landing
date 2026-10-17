@@ -1,0 +1,37 @@
+# AgenticOS
+
+> AgenticOS is open-source (Apache-2.0), self-hosted software for a company's AI agents: "AI teammates" that work with files, run code in a sandbox, browse the web and use the company's own tools and knowledge. Teams build and publish agents in a browser; engineers extend them in typed Python. It runs on the company's own infrastructure with Docker Compose and is built on Pydantic AI by Vstorm.
+
+Key facts (release 1.1.1):
+
+- Licence: Apache-2.0. Commercial use, modification and private deployment are allowed. There is no seat or credit fee; you pay for your infrastructure and the model usage you choose.
+- Where it runs: your own servers (Docker Compose). A host with 4 vCPU and 8 GB RAM runs it. It can run fully local with Ollama or vLLM.
+- Models: 27 providers, hosted (OpenAI, Anthropic, Google Gemini, Mistral and others), through your cloud contract (Azure OpenAI, AWS Bedrock, Google Vertex AI) or local.
+- Capabilities: 26 built in, switched on per agent: knowledge search with citations (RAG), skills, context, memory, web search, a real web browser the user can take over, a code sandbox with files and a shell, charts, image generation, apps (published pages with a stable link and versions), subagents, planning, guardrails that redact secrets and personal data.
+- Integrations: 4,700+ MCP servers in the gallery; document sync from Google Drive, S3/MinIO, Git, websites, SharePoint and OneDrive.
+- Surfaces: one agent answers in web chat, a website widget, a hosted page, the HTTP API, a WebSocket, Slack, Mattermost and Telegram.
+- Control: roles and department groups, company sign-in (OIDC SSO, LDAP, Kerberos), monthly budgets checked before each model call, approvals for sensitive tools, a hash-chained audit log, an envelope-encrypted credential vault, sandboxed code execution. Native MFA, SAML and SCIM are not available yet; MFA comes from the identity provider.
+- Agents are versioned specs that export to YAML.
+- AgenticOS is also an MCP server: Claude Code, Codex and Cursor can run its agents and read runs.
+- Install: curl -fsSL https://raw.githubusercontent.com/vstorm-co/agenticos/main/scripts/quickstart.sh | bash
+
+Who makes it: Vstorm (https://vstorm.co), an agentic AI engineering company from Wrocław, Poland; official Pydantic implementation partner and Agentic AI Foundation member. Vstorm also rolls AgenticOS out for companies: implementation and tailoring, no subscription, no seat count, no long-term commitment.
+
+## Docs
+
+- [Documentation](https://vstorm-co.github.io/agenticos/): the full documentation site
+- [Installation](https://vstorm-co.github.io/agenticos/install/): Docker Compose setup and the installer
+- [Capability reference](https://vstorm-co.github.io/agenticos/reference/capabilities/): every capability, its tools and settings
+- [Security and data flows](https://vstorm-co.github.io/agenticos/security/): threat model, controls, what leaves the deployment
+- [Comparisons](https://vstorm-co.github.io/agenticos/about/comparison/): AgenticOS against Claude, ChatGPT, Copilot Studio, Dify, n8n and others
+- [Tutorials](https://vstorm-co.github.io/agenticos/use-cases/): 29 tutorials, each with a check you can run
+
+## Source
+
+- [GitHub repository](https://github.com/vstorm-co/agenticos)
+- [Release notes](https://vstorm-co.github.io/agenticos/release-notes/)
+
+## Contact
+
+- [Talk to Vstorm](https://vstorm.co/contact-us/): rollouts and implementation
+- Email: info@vstorm.co

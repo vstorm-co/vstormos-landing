@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.next-build/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.vercel/
+.DS_Store
+# Reference screenshots of other landing pages, used while designing; not part of the site.
+examples/
