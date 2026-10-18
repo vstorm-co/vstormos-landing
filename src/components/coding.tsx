@@ -7,7 +7,8 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BlobAgent } from "@/components/blob";
 import { BrandIcon, Mark, ServiceIcon, providerGlyph } from "@/components/brand-icon";
 import { CodingTask } from "@/components/together";
-import { Reveal, SectionHeading } from "@/components/ui";
+import { Reveal, SectionHeading, SectionLinks } from "@/components/ui";
+import { links } from "@/content";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const TECH_LEAD = "#4f7cf7";
@@ -175,7 +176,7 @@ export function Coding() {
           eyebrow="New · Coding agents"
           title="Claude Code and Codex,"
           muted="on your team."
-          body="Any agent can hand software work to Claude Code or Codex. They work in the agent's own sandbox, on the subscription you already pay for, and report every step under the answer like a colleague would."
+          body="Any agent can hand software work to Claude Code or Codex. They work on the agent's own private computer, on the subscription you already pay for, and report every step under the answer like a colleague would."
         />
         <Reveal delay={0.1} className="mt-12 grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
           <Card
@@ -193,7 +194,7 @@ export function Coding() {
               <Subscription />
             </Card>
             <div className="grid gap-4 lg:grid-cols-2">
-              <Card title="Agents from other companies" body="Serve an agent to a partner over A2A, or ask theirs. It joins your team like any colleague.">
+              <Card title="Agents from other companies" body="A partner's agent can ask yours, and yours can ask theirs, over the open A2A protocol. No custom integration.">
                 <A2A />
               </Card>
               <Card title="AgenticOS inside Claude Code" body="Build agents, read runs and check spend from the coding tool you already live in.">
@@ -202,6 +203,7 @@ export function Coding() {
             </div>
           </div>
         </Reveal>
+        <SectionLinks docs={links.codingAgent} docsLabel="Read about the coding agent" />
       </div>
     </section>
   );

@@ -5,7 +5,8 @@ import { motion, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import { BlobAgent } from "@/components/blob";
-import { Reveal, SectionHeading } from "@/components/ui";
+import { Reveal, SectionHeading, SectionLinks } from "@/components/ui";
+import { links } from "@/content";
 
 const SUPPORT = "#f2b8c6";
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -139,7 +140,7 @@ export function Draws() {
           eyebrow="New · Visuals"
           title="Ask how it works,"
           muted="get a drawing you can use."
-          body="An agent draws while it writes: a flow from your policy, a calculator with sliders, a 3D scene. It runs in a sandbox, and one click saves it as an app your team opens by link. Try the one below."
+          body="An agent draws while it writes: a flow from your policy, a calculator with sliders, a 3D scene. It runs safely walled off from your data, and one click saves it as an app your team opens by link. Try the one below."
         />
         <Reveal delay={0.1} className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-center">
           <div ref={ref} className="min-w-0 rounded-[28px] bg-gradient-to-b from-[#efeaf8] to-[#e8e2f6] p-3 ring-1 ring-[#ddd6f5] sm:p-5">
@@ -207,6 +208,7 @@ export function Draws() {
             ))}
           </ul>
         </Reveal>
+        <SectionLinks docs={links.visuals} docsLabel="What agents can draw" />
       </div>
     </section>
   );

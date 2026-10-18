@@ -7,7 +7,8 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BlobAgent } from "@/components/blob";
 import { BrandIcon, ServiceIcon } from "@/components/brand-icon";
 import { Typed } from "@/components/movie/parts";
-import { Reveal, SectionHeading } from "@/components/ui";
+import { Reveal, SectionHeading, SectionLinks } from "@/components/ui";
+import { links } from "@/content";
 import { asset, assetSet } from "@/lib/site";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -27,8 +28,8 @@ const DETAILS = [
   { icon: Radio, title: "Watch work as it happens", body: "A colleague's agent answers live on your screen. Nobody pastes the output into Slack." },
   { icon: Reply, title: "Reply to anyone, person or agent", body: "The agent knows who said what, and whose word changed the plan." },
   { icon: AtSign, title: "Bring anything in with @", body: "A tool, an agent, a document: one keystroke and it joins the conversation." },
-  { icon: FolderOpen, title: "One project, one memory", body: "Files, instructions and a sandbox that every chat in the project shares." },
-  { icon: Code2, title: "Hand code to Claude Code or Codex", body: "The coding agent works in the project's sandbox, step by step, under the answer." },
+  { icon: FolderOpen, title: "One project, one memory", body: "Files, instructions and a computer that every chat in the project shares." },
+  { icon: Code2, title: "Hand code to Claude Code or Codex", body: "They build in the project's computer while the whole room watches, step by step." },
 ] as const;
 
 const SPOTLIGHT = [0, 3, 1, 1, 2, 2, 2, 3, 3, 5, 5] as const;
@@ -307,7 +308,7 @@ export function Together() {
           eyebrow="New · Projects"
           title="Your team and your agents,"
           muted="in one live room."
-          body="A project gives everyone the same files, instructions and sandbox. Invite your colleagues and work the way a team works: see who is here, watch an agent's answer as it is written, reply to anyone and bring any tool in with an @."
+          body="A project gives everyone the same files, instructions and a shared computer for the agents. Invite your colleagues and work the way a team works: see who is here, watch an agent's answer as it is written, reply to anyone and bring any tool in with an @."
         />
 
         <Reveal delay={0.1} className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:items-stretch">
@@ -345,6 +346,8 @@ export function Together() {
             })}
           </ul>
         </Reveal>
+
+        <SectionLinks docs={links.projects} docsLabel="How projects work" />
 
         <Reveal delay={0.15} className="mt-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[14px] text-muted">
           <span>Y Combinator put “multiplayer AI” in its Fall 2026 Requests for Startups.</span>

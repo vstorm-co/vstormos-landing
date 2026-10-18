@@ -6,7 +6,8 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { BlobAgent } from "@/components/blob";
 import { ServiceIcon } from "@/components/brand-icon";
-import { Reveal } from "@/components/ui";
+import { ButtonLink, Reveal } from "@/components/ui";
+import { links } from "@/content";
 import { asset, assetSet } from "@/lib/site";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -254,6 +255,10 @@ export function Soon() {
               <Voice live={visible} />
             </Glass>
           </div>
+        </Reveal>
+        <Reveal delay={0.12} className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <ButtonLink href={links.workflowsPr} tone="white">Follow workflows on GitHub <span aria-hidden>↗</span></ButtonLink>
+          <ButtonLink href={links.voicePr} tone="ghost-light">Follow voice <span aria-hidden>↗</span></ButtonLink>
         </Reveal>
       </div>
     </section>
