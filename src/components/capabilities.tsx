@@ -40,7 +40,7 @@ export function Capabilities() {
         <SectionHeading
           tone="dark"
           eyebrow="What ships today"
-          title="26 built-in capabilities,"
+          title="29 built-in capabilities,"
           muted="switched on per agent."
           body="Each one is a card in the agent’s toolbox: switch it on, set it up, test it in the chat beside it. Plus any tool from a connected MCP server, and capabilities your engineers add in typed Python."
         />

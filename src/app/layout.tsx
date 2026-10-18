@@ -119,9 +119,10 @@ const structuredData = {
       installUrl: links.install,
       softwareHelp: { "@type": "CreativeWork", url: links.docs },
       featureList: [
-        "26 built-in capabilities: knowledge search with citations, a real web browser, a code sandbox, charts, apps, subagents, guardrails",
+        "29 built-in capabilities: knowledge search with citations, a real web browser, a code sandbox, a coding agent (Claude Code or Codex), drawings, charts, apps, subagents, guardrails",
         "4,700+ MCP servers in the gallery",
-        "27 model providers, including local models through Ollama and vLLM",
+        "28 model providers, including a ChatGPT subscription and local models through Ollama and vLLM",
+        "Projects: shared files, instructions and a sandbox, with several people and agents in one live chat",
         "8 surfaces: web chat, website widget, hosted page, HTTP API, WebSocket, Slack, Mattermost, Telegram",
         "Budgets checked before each model call, approvals, roles and groups, a hash-chained audit log",
         "Company sign-in through OIDC, LDAP and Kerberos",

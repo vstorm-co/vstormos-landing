@@ -3,7 +3,7 @@
 import type { LogoName } from "@/components/brand-icon";
 
 /** The product release the page describes; update it with the figures below at each release. */
-export const RELEASE = "1.1.1";
+export const RELEASE = "1.5.0";
 
 export const DOCS = "https://vstorm-co.github.io/agenticos";
 export const REPO = "https://github.com/vstorm-co/agenticos";
@@ -68,8 +68,8 @@ export const heroModels: readonly { name: string; provider: string }[] = [
 ];
 
 export const figures = [
-  { value: "26", art: "tool_search", label: "built-in capabilities, switched on per agent" },
-  { value: "27", art: "thinking", label: "model providers, hosted or local" },
+  { value: "29", art: "tool_search", label: "built-in capabilities, switched on per agent" },
+  { value: "28", art: "thinking", label: "model providers, hosted, your plan or local" },
   { value: "8", art: "media", label: "places one agent answers" },
   { value: "4,700+", art: "web_research", label: "MCP servers in the gallery" },
 ] as const;
@@ -138,7 +138,7 @@ export const showcase: readonly Showcase[] = [
   },
 ];
 
-/** The README's six groups; the names add up to the 26 built-in capabilities. `art` keys the console's dioramas. */
+/** The README's six groups; the names add up to the 29 built-in capabilities. `art` keys the console's dioramas. */
 export const capabilityGroups = [
   {
     art: "knowledge",
@@ -155,14 +155,14 @@ export const capabilityGroups = [
   {
     art: "sandbox",
     title: "Files, code and output",
-    body: "Its own computer with files and a shell, and results people can open.",
-    names: ["Calculations", "Sandbox", "Charts", "Image generation", "Apps"],
+    body: "Its own computer with files and a shell, Claude Code or Codex for software work, and drawings and pages people can open.",
+    names: ["Calculations", "Sandbox", "Coding agent", "Charts", "Visuals", "Image generation", "Apps"],
   },
   {
     art: "subagents",
     title: "Reasoning and teamwork",
     body: "Plan, think, hand parts of a job to other agents, and ask you when it is unsure.",
-    names: ["Subagents", "Planning", "Thinking", "Tool search", "Date and time", "Instruction reminders", "Ask the user"],
+    names: ["Subagents", "Planning", "Thinking", "Work while tools run", "Tool search", "Date and time", "Instruction reminders", "Ask the user"],
   },
   {
     art: "guardrails",
@@ -252,7 +252,7 @@ export const controls = [
 ] as const;
 
 export const comparison = [
-  { name: "AgenticOS", where: "Your infrastructure", source: "Apache-2.0", models: "27 providers, including local ones", own: true },
+  { name: "AgenticOS", where: "Your infrastructure", source: "Apache-2.0", models: "28 providers, including local ones and your ChatGPT plan", own: true },
   { name: "OpenAI dots", where: "OpenAI’s cloud", source: "Proprietary", models: "OpenAI only", own: false },
   { name: "Grok Bot", where: "xAI’s cloud", source: "Proprietary", models: "Grok only", own: false },
   { name: "Viktor", where: "Viktor’s cloud", source: "Proprietary", models: "OpenAI, Anthropic, Google, Kimi", own: false },
@@ -288,6 +288,14 @@ export const faq = [
   {
     q: "Do we need engineers to use it?",
     a: "Not to build agents: instructions, tools and knowledge are set up in the browser by the people who know the work. You need someone to operate the deployment, and engineers only when you want a capability that does not exist yet, which they add in typed Python.",
+  },
+  {
+    q: "Can several people work with the same agents at once?",
+    a: "Yes. A project gives a team the same files, instructions and sandbox, and its chats are shared: everyone sees who is in the room, watches an agent's answer as it is written, replies to any message and brings in another agent, tool or document with an @. Each message carries its author's name, and each person keeps their own permissions.",
+  },
+  {
+    q: "Can it use the AI subscription we already pay for?",
+    a: "Yes. A person can sign in with ChatGPT once and run agents on that plan through Codex instead of a metered API key, and the coding agent can run Claude Code or Codex on a subscription. Budgets still count every run. A subscription belongs to one person, so for agents the whole company uses, an organization API key is the better fit.",
   },
   {
     q: "Can it run with local models only?",

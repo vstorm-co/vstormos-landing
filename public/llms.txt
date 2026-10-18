@@ -6,12 +6,15 @@ Key facts (release 1.1.1):
 
 - Licence: Apache-2.0. Commercial use, modification and private deployment are allowed. There is no seat or credit fee; you pay for your infrastructure and the model usage you choose.
 - Where it runs: your own servers (Docker Compose). A host with 4 vCPU and 8 GB RAM runs it. It can run fully local with Ollama or vLLM.
-- Models: 27 providers, hosted (OpenAI, Anthropic, Google Gemini, Mistral and others), through your cloud contract (Azure OpenAI, AWS Bedrock, Google Vertex AI) or local.
-- Capabilities: 26 built in, switched on per agent: knowledge search with citations (RAG), skills, context, memory, web search, a real web browser the user can take over, a code sandbox with files and a shell, charts, image generation, apps (published pages with a stable link and versions), subagents, planning, guardrails that redact secrets and personal data.
+- Models: 28 providers, a ChatGPT subscription through Codex, hosted (OpenAI, Anthropic, Google Gemini, Mistral and others), through your cloud contract (Azure OpenAI, AWS Bedrock, Google Vertex AI) or local.
+- Capabilities: 29 built in, switched on per agent: knowledge search with citations (RAG), skills, context, memory, web search, a real web browser the user can take over, a code sandbox with files and a shell, a coding agent that hands work to Claude Code or Codex, drawings (diagrams, calculators, 3D scenes), charts, image generation, apps (published pages with a stable link and versions), subagents, planning, guardrails that redact secrets and personal data.
 - Integrations: 4,700+ MCP servers in the gallery; document sync from Google Drive, S3/MinIO, Git, websites, SharePoint and OneDrive.
 - Surfaces: one agent answers in web chat, a website widget, a hosted page, the HTTP API, a WebSocket, Slack, Mattermost and Telegram.
 - Control: roles and department groups, company sign-in (OIDC SSO, LDAP, Kerberos), monthly budgets checked before each model call, approvals for sensitive tools, a hash-chained audit log, an envelope-encrypted credential vault, sandboxed code execution. Native MFA, SAML and SCIM are not available yet; MFA comes from the identity provider.
 - Skills and context: a team's procedures become skills and its standing facts (thresholds, owners, policies) become context; every agent reads both, so a rule changed once changes every agent that uses it.
+- Projects: a project gives several people and their agents the same files, instructions and sandbox, in one live chat with presence, replies and @-mentions.
+- Visuals: agents draw diagrams, calculators with sliders, charts and 3D scenes under their answer, and save them as apps.
+- Background work: a turn keeps running for up to an hour after the person leaves, and notifies them when it ends.
 - Agents are versioned specs that export to YAML.
 - AgenticOS is also an MCP server: Claude Code, Codex and Cursor can run its agents and read runs.
 - Install: curl -fsSL https://raw.githubusercontent.com/vstorm-co/agenticos/main/scripts/quickstart.sh | bash
