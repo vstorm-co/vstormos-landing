@@ -1,265 +1,511 @@
 "use client";
 
-import { Hand, Mic, PhoneOff, Table2, Zap } from "lucide-react";
-import { LayoutGroup, motion, useInView, useReducedMotion } from "motion/react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Check, GitBranch, Hand, History, Mic, PhoneOff, Table2, Workflow as WorkflowIcon, Zap } from "lucide-react";
+import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 
 import { BlobAgent } from "@/components/blob";
 import { ServiceIcon } from "@/components/brand-icon";
-import { ButtonLink, Reveal } from "@/components/ui";
+import { Typed } from "@/components/movie/parts";
+import { ButtonLink, Reveal, SectionHeading } from "@/components/ui";
 import { links } from "@/content";
 import { asset, assetSet } from "@/lib/site";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const STEP_MS = 1300;
+const STEP_MS = 1900;
+const LAST = 8;
+const SALES = "#f5cdb6";
+const MAYA = { initials: "MC", color: "#f0a77f" };
 
-/** The nodes of the lead-routing workflow, in the order a run reaches them. */
-const NODES = [
-  { id: "trigger", x: 10, y: 120, title: "New row in Leads", kind: "Trigger" },
-  { id: "agent", x: 236, y: 120, title: "Qualify the lead", kind: "Agent · structured output" },
-  { id: "check", x: 462, y: 120, title: "Score above 70?", kind: "Condition" },
-  { id: "approve", x: 700, y: 40, title: "Ask the sales lead", kind: "Approval" },
-  { id: "slack", x: 932, y: 40, title: "Post to #sales", kind: "Slack" },
-  { id: "table", x: 932, y: 200, title: "Move to Qualified", kind: "Table" },
+type Tab = "leads" | "workflow" | "calls";
+
+/** Which tab of the window each step shows, and which promise beside it the step proves. */
+const TABS: readonly Tab[] = ["leads", "workflow", "workflow", "workflow", "workflow", "workflow", "leads", "workflow", "calls"];
+const SPOTLIGHT = [0, 0, 1, 2, 3, 3, 4, 5, 6] as const;
+
+const DETAILS = [
+  {
+    icon: Zap,
+    title: "Start on any event",
+    body: "A new row, a schedule, a webhook or an email starts the run.",
+  },
+  {
+    icon: WorkflowIcon,
+    title: "Agents as steps",
+    body: "An agent reads the lead and returns fields the next step can use.",
+  },
+  {
+    icon: GitBranch,
+    title: "Branches you can read",
+    body: "Conditions, loops and fallbacks, drawn the way the work flows.",
+  },
+  {
+    icon: Hand,
+    title: "A person signs off",
+    body: "The run waits for an approval before anything leaves the company.",
+  },
+  {
+    icon: Table2,
+    title: "Tables your agents keep",
+    body: "Grid and kanban views, relations and formulas, written by runs.",
+  },
+  {
+    icon: History,
+    title: "Every run on the record",
+    body: "Each step's input, output, time and cost. Retry from the step that failed.",
+  },
+  {
+    icon: Mic,
+    title: "Talk to any agent",
+    body: "A voice call with the agent that knows the answer, from the console.",
+  },
 ] as const;
-const W = 190;
-const H = 56;
 
-const EDGES = [
-  { from: 0, to: 1, at: 1 },
-  { from: 1, to: 2, at: 2 },
-  { from: 2, to: 3, at: 3, label: "yes" },
-  { from: 3, to: 4, at: 4 },
-  { from: 3, to: 5, at: 4 },
+const STEPS = [
+  {
+    id: "trigger",
+    icon: <Zap className="size-4 text-[#e0a10b]" />,
+    title: "New row in Leads",
+    kind: "Trigger",
+    at: 1,
+    result: "Acme Corp",
+  },
+  {
+    id: "agent",
+    icon: <BlobAgent color={SALES} size={18} hop={false} />,
+    title: "Qualify the lead",
+    kind: "Agent · Sales Researcher",
+    at: 2,
+    result: "score 82 · mid-market",
+  },
+  {
+    id: "check",
+    icon: <GitBranch className="size-4 text-[#5b5bd6]" />,
+    title: "Score above 70?",
+    kind: "Condition",
+    at: 3,
+    result: "yes",
+  },
+  {
+    id: "approve",
+    icon: <Hand className="size-4 text-[#db2777]" />,
+    title: "Ask the sales lead",
+    kind: "Approval",
+    at: 5,
+    result: "Maya approved",
+  },
+  {
+    id: "slack",
+    icon: <ServiceIcon name="slack" className="size-4" />,
+    title: "Post to #sales",
+    kind: "Slack",
+    at: 5,
+    result: "posted",
+  },
+  {
+    id: "table",
+    icon: <Table2 className="size-4 text-[#16794c]" />,
+    title: "Move to Qualified",
+    kind: "Table",
+    at: 5,
+    result: "updated",
+  },
 ] as const;
 
-function edgePath(fromIndex: number, toIndex: number) {
-  const from = NODES[fromIndex];
-  const to = NODES[toIndex];
-  if (!from || !to) return "";
-  const x1 = from.x + W;
-  const y1 = from.y + H / 2;
-  const x2 = to.x;
-  const y2 = to.y + H / 2;
-  const mid = (x1 + x2) / 2;
-  return `M${x1} ${y1} C ${mid} ${y1}, ${mid} ${y2}, ${x2} ${y2}`;
+function Spinner() {
+  return <span className="size-3 shrink-0 animate-spin rounded-full border-[1.5px] border-[#d4d4d8] border-t-[#18181b]" />;
 }
 
-function NodeIcon({ id }: { id: string }) {
-  if (id === "trigger") return <Zap className="size-4 text-[#e0a10b]" />;
-  if (id === "agent") return <BlobAgent color="#f5cdb6" size={18} hop={false} />;
-  if (id === "check") return <span className="font-mono text-[13px] font-semibold text-[#5b5bd6]">?</span>;
-  if (id === "approve") return <Hand className="size-4 text-[#db2777]" />;
-  if (id === "slack") return <ServiceIcon name="slack" className="size-4" />;
-  return <Table2 className="size-4 text-[#16794c]" />;
-}
-
-function Workflow({ step }: { step: number }) {
+function Maya({ size = 22 }: { size?: number }) {
   return (
-    <div className="relative mx-auto h-[290px] w-[1130px]">
-      <svg viewBox="0 0 1130 290" className="absolute inset-0 size-full" aria-hidden>
-        {EDGES.map((edge) => {
-          const live = step >= edge.at;
-          const d = edgePath(edge.from, edge.to);
-          return (
-            <g key={`${edge.from}-${edge.to}`}>
-              <path d={d} fill="none" stroke={live ? "#a5b4fc" : "rgba(255,255,255,0.22)"} strokeWidth={live ? 2 : 1.5} strokeDasharray={live ? undefined : "5 5"} className="transition-[stroke] duration-500" />
-              {step === edge.at ? (
-                <circle r="5" fill="#c7d2fe">
-                  <animateMotion dur={`${STEP_MS / 1000}s`} repeatCount="1" fill="freeze" path={d} />
-                </circle>
-              ) : null}
-            </g>
-          );
-        })}
-        <path d="M652 148 C 676 148, 676 248, 700 248" fill="none" stroke="rgba(255,255,255,0.18)" strokeDasharray="5 5" />
-        <text x="706" y="252" fontSize="11" fill="rgba(255,255,255,0.5)">no → nurture list</text>
-        <text x="682" y="96" fontSize="11" fill="rgba(199,210,254,0.9)">yes</text>
-      </svg>
-      {NODES.map((node, index) => {
-        const reached = index === 0 ? step >= 0 : step >= (EDGES.find((edge) => edge.to === index)?.at ?? 99);
-        return (
-          <motion.div
-            key={node.id}
-            className="absolute flex items-center gap-2.5 rounded-[12px] px-3 ring-1 backdrop-blur-md"
-            style={{ left: node.x, top: node.y, width: W, height: H }}
-            animate={{
-              backgroundColor: reached ? "rgba(255,255,255,0.96)" : "rgba(255,255,255,0.10)",
-              boxShadow: reached ? "0 0 0 1px rgba(165,180,252,0.9), 0 14px 30px -14px rgba(91,91,214,0.7)" : "0 0 0 1px rgba(255,255,255,0.2)",
-            }}
-            transition={{ duration: 0.45, ease: EASE }}
+    <span
+      className="inline-flex shrink-0 items-center justify-center rounded-full font-semibold text-white"
+      style={{
+        width: size,
+        height: size,
+        background: MAYA.color,
+        fontSize: size * 0.38,
+      }}
+    >
+      {MAYA.initials}
+    </span>
+  );
+}
+
+/** The Leads table: Acme arrives as a new row, and the run later fills in its score and stage. */
+function Leads({ step }: { step: number }) {
+  const scored = step >= 6;
+  const rows = [
+    {
+      name: "Orbit Freight",
+      size: "1,200",
+      score: "91",
+      stage: "Qualified",
+      tone: "green",
+    },
+    {
+      name: "Lumen Health",
+      size: "85",
+      score: "64",
+      stage: "Nurture",
+      tone: "grey",
+    },
+  ] as const;
+  return (
+    <div className="text-[12.5px]">
+      <div className="mb-3 flex items-center justify-between">
+        <p className="font-semibold text-[#18181b]">
+          Leads <span className="font-normal text-[#a1a1aa]">· 3 rows</span>
+        </p>
+        <span className="rounded-[7px] bg-[#f4f4f5] px-2 py-0.5 text-[11px] text-[#52525b]">Grid</span>
+      </div>
+      <div className="overflow-hidden rounded-[12px] border border-[#ececef]">
+        <div className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,0.6fr)_minmax(0,0.5fr)_minmax(0,0.9fr)] gap-2 border-b border-[#ececef] bg-[#fafafa] px-3 py-2 text-[10.5px] font-medium uppercase tracking-[0.05em] text-[#a1a1aa]">
+          <span>Company</span>
+          <span>People</span>
+          <span>Score</span>
+          <span>Stage</span>
+        </div>
+        <motion.div
+          initial={{ opacity: 0, height: 0, backgroundColor: "#eef2ff" }}
+          animate={{
+            opacity: 1,
+            height: "auto",
+            backgroundColor: scored ? "#f2fbf6" : "#eef2ff",
+          }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,0.6fr)_minmax(0,0.5fr)_minmax(0,0.9fr)] items-center gap-2 border-b border-[#ececef] px-3 py-2.5"
+        >
+          <span className="flex min-w-0 items-center gap-1.5 truncate font-medium text-[#18181b]">
+            Acme Corp {scored ? null : <span className="hidden rounded-full bg-[#5b5bd6] px-1.5 text-[9.5px] font-semibold text-white sm:inline">NEW</span>}
+          </span>
+          <span className="text-[#52525b]">240</span>
+          <span className="font-medium text-[#18181b]">
+            {scored ? (
+              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                82
+              </motion.span>
+            ) : (
+              <span className="text-[#d4d4d8]">—</span>
+            )}
+          </span>
+          <span>
+            {scored ? (
+              <motion.span
+                initial={{ scale: 0.6, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 420, damping: 20 }}
+                className="inline-flex rounded-full bg-[#dcfce7] px-2 py-[1px] text-[11px] font-medium text-[#166534]"
+              >
+                Qualified
+              </motion.span>
+            ) : (
+              <span className="inline-flex rounded-full bg-[#f4f4f5] px-2 py-[1px] text-[11px] text-[#71717a]">New</span>
+            )}
+          </span>
+        </motion.div>
+        {rows.map((row) => (
+          <div
+            key={row.name}
+            className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,0.6fr)_minmax(0,0.5fr)_minmax(0,0.9fr)] items-center gap-2 border-b border-[#f4f4f5] px-3 py-2.5 last:border-b-0"
           >
-            <span className={`inline-flex size-8 shrink-0 items-center justify-center rounded-[9px] ${reached ? "bg-[#f4f4f5]" : "bg-white/10"}`}>
-              <NodeIcon id={node.id} />
+            <span className="truncate font-medium text-[#18181b]">{row.name}</span>
+            <span className="text-[#52525b]">{row.size}</span>
+            <span className="font-medium text-[#18181b]">{row.score}</span>
+            <span>
+              <span
+                className={`inline-flex rounded-full px-2 py-[1px] text-[11px] font-medium ${row.tone === "green" ? "bg-[#dcfce7] text-[#166534]" : "bg-[#f4f4f5] text-[#71717a]"}`}
+              >
+                {row.stage}
+              </span>
             </span>
-            <span className="min-w-0">
-              <span className={`block truncate text-[12.5px] font-semibold ${reached ? "text-[#18181b]" : "text-white/85"}`}>{node.title}</span>
-              <span className={`block truncate text-[10.5px] ${reached ? "text-[#71717a]" : "text-white/50"}`}>{node.kind}</span>
-            </span>
-          </motion.div>
-        );
-      })}
+          </div>
+        ))}
+      </div>
+      <p className="mt-3 text-[11.5px] text-[#a1a1aa]">{scored ? "Updated by Lead routing, run 1,284" : "Acme Corp added from the website form, 11:42"}</p>
     </div>
   );
 }
 
-const CARDS = [
-  { id: "acme", name: "Acme Corp", score: 82 },
-  { id: "lumen", name: "Lumen Health", score: 64 },
-  { id: "orbit", name: "Orbit Freight", score: 91 },
-] as const;
-
-function Board({ moved }: { moved: boolean }) {
-  const columns = [
-    { title: "New", ids: moved ? ["lumen"] : ["acme", "lumen"] },
-    { title: "Qualified", ids: moved ? ["acme", "orbit"] : ["orbit"] },
-    { title: "Won", ids: [] as string[] },
-  ];
+/** The workflow as the console draws it, read top to bottom, lighting up as the run reaches each step. */
+function Flow({ step }: { step: number }) {
   return (
-    <LayoutGroup>
-      <div className="grid grid-cols-3 gap-2">
-        {columns.map((column) => (
-          <div key={column.title} className="min-h-[150px] rounded-[12px] bg-white/[0.07] p-2 ring-1 ring-white/10">
-            <p className="mb-2 px-1 text-[10.5px] font-medium uppercase tracking-[0.06em] text-white/55">{column.title}</p>
-            <div className="space-y-1.5">
-              {column.ids.map((id) => {
-                const card = CARDS.find((item) => item.id === id);
-                if (!card) return null;
-                return (
-                  <motion.div
-                    layout
-                    layoutId={card.id}
-                    key={card.id}
-                    transition={{ type: "spring", stiffness: 260, damping: 26 }}
-                    className={`rounded-[9px] bg-white px-2.5 py-2 text-[11.5px] shadow-sm ${card.id === "acme" && moved ? "ring-2 ring-[#a5b4fc]" : ""}`}
+    <div className="relative">
+      <div className="space-y-2">
+        {STEPS.map((item, index) => {
+          const done = step >= item.at && !(item.id === "approve" && step < 5);
+          const branch = item.id === "slack" || item.id === "table";
+          // The branch after the approval waits without a spinner: nothing runs until Maya answers.
+          const running = !done && !branch && step === item.at - 1 && step >= 1 && index > 0;
+          return (
+            <div key={item.id} className={`relative ${branch ? "ml-6 sm:ml-8" : ""}`}>
+              {index > 0 ? (
+                <span
+                  className={`absolute -top-2 h-2 w-px ${branch ? "left-[-10px] sm:left-[-14px]" : "left-[22px]"} ${done ? "bg-[#a5b4fc]" : "bg-[#e4e4e7]"}`}
+                />
+              ) : null}
+              <motion.div
+                animate={{
+                  backgroundColor: done ? "#ffffff" : "#fafafa",
+                  boxShadow: done ? "0 0 0 1px #c7d2fe, 0 10px 24px -16px rgba(91,91,214,0.6)" : running ? "0 0 0 1px #d4d4d8" : "0 0 0 1px #ececef",
+                }}
+                transition={{ duration: 0.45, ease: EASE }}
+                className="flex items-center gap-2.5 rounded-[11px] px-2.5 py-2"
+              >
+                <span className="inline-flex size-[30px] shrink-0 items-center justify-center rounded-[8px] bg-[#f4f4f5]">{item.icon}</span>
+                <span className="min-w-0 flex-1">
+                  <span className={`block truncate text-[12.5px] font-semibold ${done || running ? "text-[#18181b]" : "text-[#a1a1aa]"}`}>{item.title}</span>
+                  <span className="block truncate text-[10.5px] text-[#a1a1aa]">{item.kind}</span>
+                </span>
+                {done ? (
+                  <motion.span
+                    initial={{ opacity: 0, x: 6 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="flex shrink-0 items-center gap-1 text-[11px] text-[#16794c]"
                   >
-                    <p className="truncate font-semibold text-[#18181b]">{card.name}</p>
-                    <p className="text-[10.5px] text-[#71717a]">score {card.score}</p>
-                  </motion.div>
-                );
-              })}
+                    <Check className="size-3.5" /> <span className="hidden sm:inline">{item.result}</span>
+                  </motion.span>
+                ) : running ? (
+                  <Spinner />
+                ) : null}
+              </motion.div>
+              {/* The approval opens under its step, the way the person asked sees it. */}
+              {item.id === "approve" ? (
+                <AnimatePresence initial={false}>
+                  {step === 4 ? (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.4, ease: EASE }}
+                      className="overflow-hidden"
+                    >
+                      <div className="mt-2 rounded-[12px] border border-[#fbcfe8] bg-[#fdf2f8] p-2.5">
+                        <div className="flex items-start gap-2">
+                          <Maya />
+                          <p className="min-w-0 flex-1 text-[12px] leading-snug text-[#3f3f46]">
+                            <span className="font-semibold text-[#18181b]">Approve Acme Corp for sales?</span> Score 82, 240 people, demo requested.
+                          </p>
+                        </div>
+                        <div className="mt-2 flex items-center justify-end gap-2">
+                          <span className="rounded-[8px] border border-[#e4e4e7] bg-white px-2.5 py-1 text-[12px] text-[#52525b]">Reject</span>
+                          <motion.span
+                            animate={{ scale: [1, 0.92, 1] }}
+                            transition={{ delay: 1.2, duration: 0.3 }}
+                            className="rounded-[8px] bg-[#18181b] px-2.5 py-1 text-[12px] font-medium text-white"
+                          >
+                            Approve
+                          </motion.span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
+              ) : null}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
-    </LayoutGroup>
+      <p className="mt-2 pl-[50px] text-[10.5px] text-[#a1a1aa]">no → nurture list</p>
+    </div>
   );
 }
 
-function Voice({ live }: { live: boolean }) {
-  const bars = Array.from({ length: 28 }, (_, index) => index);
+/** A voice call with the agent, asked about the lead the run just handled. */
+function Call({ active }: { active: boolean }) {
+  const bars = Array.from({ length: 32 }, (_, index) => index);
   return (
-    <div className="space-y-3">
-      <div className="flex items-center gap-3">
-        <BlobAgent color="#1fb58f" size={30} hop={false} />
-        <div className="min-w-0 flex-1">
-          <p className="text-[13px] font-semibold text-white">Finance Analyst</p>
-          <p className="text-[11px] text-white/55">Voice call · 01:12</p>
-        </div>
-        <span className="inline-flex size-8 items-center justify-center rounded-full bg-white/10 text-white">
-          <Mic className="size-4" />
-        </span>
-        <span className="inline-flex size-8 items-center justify-center rounded-full bg-[#ef4444] text-white">
-          <PhoneOff className="size-4" />
-        </span>
-      </div>
-      <div className="flex h-10 items-center gap-[3px]">
+    <div className="flex h-full flex-col items-center text-center">
+      <BlobAgent color={SALES} size={64} />
+      <p className="mt-3 text-[15px] font-semibold text-[#18181b]">Sales Researcher</p>
+      <p className="text-[11.5px] text-[#a1a1aa]">Voice call · 00:18</p>
+      <div className="mt-4 flex h-10 items-center gap-[3px]">
         {bars.map((bar) => (
           <motion.span
             key={bar}
             className="w-[4px] rounded-full bg-[#a5b4fc]"
-            animate={live ? { height: [6, 8 + ((bar * 37) % 26), 6] } : { height: 6 }}
-            transition={{ duration: 0.9 + (bar % 5) * 0.12, repeat: Infinity, ease: "easeInOut", delay: (bar % 7) * 0.08 }}
+            animate={active ? { height: [5, 8 + ((bar * 37) % 26), 5] } : { height: 5 }}
+            transition={{
+              duration: 0.9 + (bar % 5) * 0.12,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: (bar % 7) * 0.08,
+            }}
           />
         ))}
       </div>
-      <div className="space-y-1.5 text-[12.5px] leading-snug">
-        <p className="text-white/70">
-          <span className="font-medium text-white">You:</span> What did we invoice in October?
-        </p>
-        <p className="text-white/70">
-          <span className="font-medium text-white">Finance Analyst:</span> $231k, up 12% on September. I am drawing the split by client now.
-        </p>
+      <div className="mt-4 w-full space-y-2 text-left text-[12.5px] leading-snug">
+        <div className="flex gap-2">
+          <Maya />
+          <p className="rounded-[12px] bg-[#f4f4f5] px-3 py-2 text-[#27272a]">What happened with Acme?</p>
+        </div>
+        <div className="flex gap-2">
+          <span className="mt-0.5">
+            <BlobAgent color={SALES} size={22} hop={false} />
+          </span>
+          <p className="px-1 py-1 text-[#27272a]">
+            <Typed
+              text="It scored 82, you approved it at 11:43, and it is in Qualified. I posted it to #sales for Tom."
+              active={active}
+              done={!active}
+              cps={52}
+            />
+          </p>
+        </div>
+      </div>
+      <div className="mt-auto flex items-center gap-3 pt-4">
+        <span className="inline-flex size-10 items-center justify-center rounded-full bg-[#f4f4f5] text-[#3f3f46]">
+          <Mic className="size-4" />
+        </span>
+        <span className="inline-flex size-10 items-center justify-center rounded-full bg-[#ef4444] text-white">
+          <PhoneOff className="size-4" />
+        </span>
       </div>
     </div>
   );
 }
 
-function Glass({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`rounded-[22px] bg-[#16141f]/55 p-4 ring-1 ring-white/12 backdrop-blur-xl sm:p-5 ${className}`}>{children}</div>;
+function Window({ step }: { step: number }) {
+  const tab = TABS[step] ?? "workflow";
+  const finished = step >= 5;
+  return (
+    <div className="flex h-full min-h-0 flex-col">
+      <div className="flex items-center justify-between gap-3 border-b border-[#ececef] px-4 py-3">
+        <div className="flex min-w-0 items-center gap-2.5">
+          <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-[8px] bg-[#f4f4f5] text-[#3f3f46]">
+            <WorkflowIcon className="size-4" />
+          </span>
+          <div className="min-w-0">
+            <p className="truncate text-[13.5px] font-semibold text-[#18181b]">Lead routing</p>
+            <p className="hidden text-[11px] text-[#a1a1aa] sm:block">Workflow · published v3</p>
+          </div>
+        </div>
+        <div className="flex rounded-[10px] bg-[#f4f4f5] p-0.5 text-[11.5px]">
+          {(["workflow", "leads", "calls"] as const).map((name) => (
+            <span key={name} className="relative px-2.5 py-1 capitalize">
+              {tab === name ? (
+                <motion.span
+                  layoutId="soon-tab"
+                  className="absolute inset-0 rounded-[8px] bg-white shadow-sm"
+                  transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                />
+              ) : null}
+              <span className={`relative ${tab === name ? "font-medium text-[#18181b]" : "text-[#71717a]"}`}>{name}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative min-h-0 flex-1">
+        {/* One tab at a time: the next waits until the last has left, so the two never overlap. */}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={tab}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.3, ease: EASE }}
+            className="absolute inset-0 overflow-hidden px-4 py-4"
+          >
+            {tab === "leads" ? <Leads step={step} /> : tab === "calls" ? <Call active={step === LAST} /> : <Flow step={step} />}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      <div className="flex items-center justify-between gap-3 border-t border-[#ececef] px-4 py-2.5 font-mono text-[11px] text-[#71717a]">
+        <span>run 1,284</span>
+        <span
+          className={`inline-flex items-center gap-1.5 rounded-full px-2 py-[1px] ${finished ? "bg-[#ecf8f2] text-[#16794c]" : "bg-[#f4f4f5] text-[#52525b]"}`}
+        >
+          {finished ? <Check className="size-3" /> : step >= 1 ? <Spinner /> : null}
+          {finished ? "done in 41 s · $0.06" : step >= 1 ? (step === 4 ? "waiting for Maya" : "running") : "waiting for a row"}
+        </span>
+      </div>
+    </div>
+  );
 }
 
-/** Work in review (#1925 workflows and tables, #2204 voice), shown as what is coming rather than what ships. */
+/**
+ * Work in review (#1925 workflows and tables, #2204 voice). A loop plays one
+ * lead going through a workflow, a person's approval and a table, then a call
+ * about it, and the promise beside it lights up as the window shows it.
+ */
 export function Soon() {
-  const ref = useRef<HTMLDivElement>(null);
-  const visible = useInView(ref, { amount: 0.3 });
-  const reduce = useReducedMotion();
   const [step, setStep] = useState(0);
-  const last = 6;
+  const stageRef = useRef<HTMLDivElement>(null);
+  const visible = useInView(stageRef, { amount: 0.4 });
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     if (reduce) {
-      setStep(last);
+      setStep(5);
       return;
     }
     if (!visible) return;
-    const timer = window.setTimeout(() => setStep((current) => (current >= last ? 0 : current + 1)), step === last ? STEP_MS * 3 : STEP_MS);
+    const timer = window.setTimeout(() => setStep((current) => (current >= LAST ? 0 : current + 1)), step === LAST ? STEP_MS * 3 : STEP_MS);
     return () => window.clearTimeout(timer);
   }, [step, visible, reduce]);
 
+  const lit = SPOTLIGHT[step] ?? 0;
+
   return (
-    <section id="soon" className="relative isolate overflow-hidden bg-[#16141f] px-5 py-24 md:px-8 md:py-32">
-      <img
-        src={asset("/images/night-3200.webp")}
-        srcSet={assetSet("/images/night-1600.webp 1600w, /images/night-3200.webp 3200w")}
-        sizes="100vw"
-        alt=""
-        loading="lazy"
-        className="absolute inset-0 -z-10 size-full object-cover opacity-80"
-      />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#16141f]/70 via-[#16141f]/30 to-[#16141f]/80" />
-      <div ref={ref} className="mx-auto max-w-[1240px]">
-        <Reveal className="flex flex-col items-center text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 font-mono text-[11.5px] font-medium uppercase tracking-[0.08em] text-blob">
-            <span className="size-1.5 animate-pulse rounded-full bg-[#fbbf24]" /> Coming soon
-          </span>
-          <h2 className="display-tight mt-5 max-w-[22ch] text-balance text-[clamp(2.1rem,4.6vw,3.6rem)] font-medium text-white">
-            Workflows, tables and voice. <span className="text-white/45">Already in review.</span>
-          </h2>
-          <p className="mt-5 max-w-[60ch] text-balance text-[17px] leading-relaxed text-white/65">
-            Work with fixed steps gets a visual editor: triggers, agents, approvals and tables, with durable runs and a history for every step. Voice
-            calls let you talk to any agent. Both are working code in open pull requests, open source like the rest: you can read them and run
-            them today.
-          </p>
+    <section id="soon" className="bg-paper px-5 py-24 md:px-8 md:py-32">
+      <div className="mx-auto max-w-[1240px]">
+        <SectionHeading
+          eyebrow="Coming soon"
+          title="Workflows, tables and voice."
+          muted="Already in review."
+          body="Work with fixed steps gets a visual editor: triggers, agents, approvals and tables, with a record of every run. Voice calls let you talk to any agent. Both are working code in open pull requests, open source like the rest: you can read them and run them today."
+        />
+
+        <Reveal delay={0.1} className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:items-stretch">
+          <div
+            ref={stageRef}
+            className="relative min-w-0 overflow-hidden rounded-[28px] bg-[#16141f] p-3 shadow-[0_40px_90px_-50px_rgba(43,37,71,0.55)] ring-1 ring-black/5 sm:p-8"
+          >
+            <img
+              src={asset("/images/night-3200.webp")}
+              srcSet={assetSet("/images/night-1600.webp 1600w, /images/night-3200.webp 3200w")}
+              sizes="(min-width: 1240px) 720px, 100vw"
+              alt=""
+              loading="lazy"
+              className="pointer-events-none absolute inset-0 size-full select-none object-cover"
+            />
+            <div className="relative mx-auto h-[520px] max-w-[640px] overflow-hidden rounded-[18px] bg-white/95 shadow-[0_30px_80px_-30px_rgba(10,8,30,0.7)] ring-1 ring-black/5 backdrop-blur sm:h-[580px]">
+              <Window step={step} />
+            </div>
+          </div>
+
+          <ul className="rail min-w-0 sm:grid sm:grid-cols-2 sm:gap-3 lg:grid-cols-1 lg:gap-1.5">
+            {DETAILS.map((detail, index) => {
+              const on = index === lit;
+              return (
+                <li
+                  key={detail.title}
+                  className={`flex gap-3.5 rounded-[18px] p-3.5 ring-1 transition-[background-color,box-shadow] duration-500 ${on ? "bg-card shadow-[0_18px_40px_-26px_rgba(43,37,71,0.5)] ring-line" : "bg-transparent ring-transparent"}`}
+                >
+                  <span
+                    className={`inline-flex size-9 shrink-0 items-center justify-center rounded-[11px] transition-colors duration-500 ${on ? "bg-violet text-blob" : "bg-card text-ink-soft ring-1 ring-line"}`}
+                  >
+                    <detail.icon className="size-[18px]" strokeWidth={1.9} />
+                  </span>
+                  <span>
+                    <span className="block text-[15.5px] font-semibold leading-snug text-ink">{detail.title}</span>
+                    <span className="mt-0.5 block text-[14px] leading-snug text-muted">{detail.body}</span>
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
         </Reveal>
 
-        <Reveal delay={0.1} className="mt-12 space-y-4">
-          <Glass>
-            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-              <p className="text-[13px] font-semibold text-white">
-                Lead routing <span className="font-normal text-white/50">· workflow, published v3</span>
-              </p>
-              <span className="font-mono text-[11px] text-white/55"><span className="sm:hidden">swipe → · </span>{step >= 4 ? "run 1,284 · done in 41 s · $0.06" : "run 1,284 · running"}</span>
-            </div>
-            <div className="-mx-4 overflow-x-auto px-4 [scrollbar-width:none] sm:-mx-5 sm:px-5">
-              <Workflow step={step} />
-            </div>
-          </Glass>
-          <div className="grid gap-4 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
-            <Glass>
-              <p className="mb-3 text-[13px] font-semibold text-white">
-                Leads <span className="font-normal text-white/50">· table, kanban view</span>
-              </p>
-              <Board moved={step >= 4} />
-            </Glass>
-            <Glass>
-              <Voice live={visible} />
-            </Glass>
-          </div>
-        </Reveal>
         <Reveal delay={0.12} className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <ButtonLink href={links.workflowsPr} tone="white">Follow workflows on GitHub <span aria-hidden>↗</span></ButtonLink>
-          <ButtonLink href={links.voicePr} tone="ghost-light">Follow voice <span aria-hidden>↗</span></ButtonLink>
+          <ButtonLink href={links.workflowsPr} tone="ink">
+            Follow workflows on GitHub <span aria-hidden>↗</span>
+          </ButtonLink>
+          <ButtonLink href={links.voicePr} tone="ghost-dark">
+            Follow voice <span aria-hidden>↗</span>
+          </ButtonLink>
         </Reveal>
       </div>
     </section>
