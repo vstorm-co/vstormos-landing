@@ -341,7 +341,8 @@ export function Draws() {
   const ref = useRef<HTMLDivElement>(null);
   const visible = useInView(ref, { amount: 0.4 });
   const reduce = useReducedMotion();
-  const [step, setStep] = useState(0);
+  // It opens on the calculator, then plays on in order and wraps to the flow.
+  const [step, setStep] = useState(() => Math.max(0, STEPS.findIndex((item) => KINDS[item.lit]?.title === "Calculators and simulators")));
   const [touched, setTouched] = useState(false);
   const [amount, setAmount] = useState(150);
 

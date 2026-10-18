@@ -272,7 +272,8 @@ function Pointer({ x, y, clickKey }: { x: number; y: number; clickKey: number })
 const NO_CAMERA = { x: 0, y: 0, scale: 1 };
 
 export function ProductMovie() {
-  const [sceneIndex, setSceneIndex] = useState(0);
+  // The movie opens on the chat, the scene a visitor recognises first; it then plays on and wraps to Build.
+  const [sceneIndex, setSceneIndex] = useState(() => Math.max(0, SCENES.findIndex((scene) => scene.label === "Chat")));
   const [step, setStep] = useState(0);
   const [pointer, setPointer] = useState({ x: DESKTOP.w * 0.6, y: DESKTOP.h * 0.7 });
   const [clickKey, setClickKey] = useState(0);

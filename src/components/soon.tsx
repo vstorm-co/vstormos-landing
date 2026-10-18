@@ -624,7 +624,8 @@ function Window({ step }: { step: number }) {
  * about it, and the promise beside it lights up as the window shows it.
  */
 export function Soon() {
-  const [step, setStep] = useState(0);
+  // It opens on the agent step, then plays on in order and wraps to the trigger.
+  const [step, setStep] = useState(() => Math.max(0, SPOTLIGHT.indexOf(DETAILS.findIndex((detail) => detail.title === "Agents as steps"))));
   const stageRef = useRef<HTMLDivElement>(null);
   const visible = useInView(stageRef, { amount: 0.4 });
   const reduce = useReducedMotion();

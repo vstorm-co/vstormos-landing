@@ -285,7 +285,8 @@ function Room({ step }: { step: number }) {
  * shows it.
  */
 export function Together() {
-  const [step, setStep] = useState(0);
+  // It opens on the project's shared memory, then plays on and wraps to the start of the story.
+  const [step, setStep] = useState(() => Math.max(0, SPOTLIGHT.indexOf(DETAILS.findIndex((detail) => detail.title === "One project, one memory"))));
   const stageRef = useRef<HTMLDivElement>(null);
   const visible = useInView(stageRef, { amount: 0.4 });
   const reduce = useReducedMotion();
