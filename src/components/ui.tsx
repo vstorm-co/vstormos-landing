@@ -148,3 +148,18 @@ export function ButtonLink({
     </a>
   );
 }
+
+/** The two ways out of a feature section: try it now, or read how it works. */
+export function SectionLinks({ docs, docsLabel = "How it works", tone = "light", className = "" }: { docs: string; docsLabel?: string; tone?: "light" | "dark"; className?: string }) {
+  const dark = tone === "dark";
+  return (
+    <Reveal delay={0.12} className={`mt-8 flex flex-wrap items-center justify-center gap-3 ${className}`}>
+      <ButtonLink href="#quickstart" tone={dark ? "white" : "ink"}>
+        Run it in 10 minutes
+      </ButtonLink>
+      <ButtonLink href={docs} tone={dark ? "ghost-light" : "ghost-dark"}>
+        {docsLabel} <span aria-hidden>↗</span>
+      </ButtonLink>
+    </Reveal>
+  );
+}

@@ -100,7 +100,7 @@ const STACK: readonly ({ name: string } & ({ logo: LogoName } | { glyph: "pydant
   { name: "FastAPI", logo: "fastapi" },
   { name: "PostgreSQL + pgvector", logo: "postgres" },
   { name: "Redis or Valkey", logo: "valkey" },
-  { name: "Prefect workers", text: "workers" },
+  { name: "Prefect workers", logo: "prefect" },
   { name: "Next.js", logo: "nextjs" },
   { name: "Docker Compose", logo: "docker" },
 ];

@@ -113,7 +113,7 @@ Copy, figures and links live in **`src/content.ts`**. Components only lay them o
 
 | To change | Where |
 | --- | --- |
-| Product figures (26 capabilities, 27 providers, 4,700+ MCP servers, 8 surfaces) and `RELEASE` | `src/content.ts`. Keep them in step with the AgenticOS README. The MCP count is the gallery's number and nothing else |
+| Product figures (29 capabilities, 28 providers, 4,700+ MCP servers, 8 surfaces) and `RELEASE` | `src/content.ts`. Keep them in step with the AgenticOS README. The MCP count is the gallery's number and nothing else |
 | FAQ (page and structured data) | `faq` in `src/content.ts` |
 | Pricing plans | `src/components/pricing.tsx` |
 | Vstorm offer, founders, case studies, awards, the conference talk | `vstorm` in `src/content.ts` |

@@ -2,7 +2,7 @@ import { AGENT_COLORS, Blob } from "@/components/blob";
 import { CapabilityArt } from "@/components/capability-art";
 import { CountUp } from "@/components/count-up";
 import { Reveal } from "@/components/ui";
-import { figures } from "@/content";
+import { figures, pilots } from "@/content";
 
 export function Statement() {
   return (
@@ -45,6 +45,21 @@ export function Statement() {
             </Reveal>
           ))}
         </dl>
+
+        <Reveal delay={0.1} className="mt-14 border-t border-line pt-8 md:mt-20">
+          <div className="grid gap-8 md:grid-cols-[minmax(0,0.8fr)_repeat(3,minmax(0,1fr))] md:gap-0">
+            <div className="md:pr-8">
+              <p className="text-[15px] font-semibold text-ink">In pilots today</p>
+              <p className="mt-1.5 text-pretty text-[13.5px] leading-snug text-muted">Their names stay theirs until they choose to share them.</p>
+            </div>
+            {pilots.map((pilot) => (
+              <div key={pilot.sector} className="md:border-l md:border-line md:px-8">
+                <p className="font-mono text-[11.5px] uppercase tracking-[0.08em] text-faint">{pilot.sector}</p>
+                <p className="mt-2 text-pretty text-[15px] leading-relaxed text-ink">{pilot.body}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

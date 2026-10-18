@@ -10,12 +10,16 @@ import { nav, vstorm } from "@/content";
 
 const SECTION_IDS = nav.flatMap((item) => (item.href.startsWith("#") ? [item.href.slice(1)] : []));
 
-/** Which in-page section the reader is in: the last one whose top has passed a line under the bar. */
+/**
+ * Which in-page section the reader is in: the last one whose top has passed a
+ * line a third of the way down the window. A link lands its section well under
+ * the bar, so a line just under the bar would still name the section before it.
+ */
 function useActiveSection(): string | null {
   const [active, setActive] = useState<string | null>(null);
   useEffect(() => {
     const update = () => {
-      const line = 140;
+      const line = window.innerHeight * 0.35;
       let current: string | null = null;
       for (const id of SECTION_IDS) {
         const element = document.getElementById(id);

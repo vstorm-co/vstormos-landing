@@ -116,7 +116,7 @@ export function BuildScene({ step }: { step: number }) {
 
       <div data-zoom="toolbox">
         <p className="mb-2 text-[12px] font-medium text-[#3f3f46]">
-          Toolbox <span className="font-normal text-[#a1a1aa]">· {capabilities.filter((c) => c.on).length} of 26 on</span>
+          Toolbox <span className="font-normal text-[#a1a1aa]">· {capabilities.filter((c) => c.on).length} of 29 on</span>
         </p>
         <div className="grid grid-cols-2 gap-3 @2xl:grid-cols-4">
           {capabilities.map((capability) => (
@@ -273,7 +273,7 @@ export function TeachScene({ step }: { step: number }) {
         <div data-zoom="kb-chat" className="flex-1 space-y-3 pt-3">
           {step >= 5 ? (
             <p data-cursor="kb-ask" className="ml-auto max-w-[90%] rounded-[12px] bg-[#f1f1f3] px-3 py-2 text-[12.5px] text-[#18181b]">
-              <Typed text="Who has to approve a €520 refund on day 3?" active={step === 5} done={step > 5} cps={36} />
+              <Typed text="Who has to approve a $520 refund on day 3?" active={step === 5} done={step > 5} cps={36} />
             </p>
           ) : (
             <p data-cursor="kb-ask" className="pt-6 text-center text-[12px] text-[#a1a1aa]">{uploaded ? "Indexing…" : "Add a document to ask about it"}</p>
@@ -281,7 +281,7 @@ export function TeachScene({ step }: { step: number }) {
           {step >= 6 ? (
             <motion.div {...appear} className="space-y-2">
               <p className="text-[12.5px] leading-relaxed text-[#27272a]">
-                The <b>support lead</b>. Refunds between €200 and €2,000 need their approval; up to €200 any agent can approve, and above €2,000 it goes to finance. Day 3 is inside the 14-day full-refund window.
+                The <b>support lead</b>. Refunds between $200 and $2,000 need their approval; up to $200 any agent can approve, and above $2,000 it goes to finance. Day 3 is inside the 14-day full-refund window.
               </p>
               <motion.span
                 initial={{ scale: 0.9, opacity: 0 }}
@@ -527,7 +527,7 @@ export function SlackScene({ step }: { step: number }) {
                       Revenue grew faster than costs: up 27% from July to September while costs rose 13%, so the margin widened every month.
                     </p>
                     <Panel className="max-w-[440px] p-3.5">
-                      <p className="text-[12px] font-semibold text-[#18181b]">Q3 revenue vs costs (€ thousands)</p>
+                      <p className="text-[12px] font-semibold text-[#18181b]">Q3 revenue vs costs ($ thousands)</p>
                       <div className="mt-2"><BarChart grow height={112} /></div>
                     </Panel>
                     <p className="text-[11.5px] text-[#71717a]">Worked for 12s · read the file, ran Python, drew a chart · <span className="text-[#1264a3]">Open in AgenticOS</span></p>
@@ -630,8 +630,8 @@ export function AutomateScene({ step }: { step: number }) {
 /** Share: the result is an app with a stable link and versions. */
 export function ShareScene({ step }: { step: number }) {
   const kpis = [
-    { label: "Revenue", value: "618", prefix: "€", suffix: "k", note: "▲ 14% vs Q2" },
-    { label: "Costs", value: "449", prefix: "€", suffix: "k", note: "Jul – Sep total" },
+    { label: "Revenue", value: "618", prefix: "$", suffix: "k", note: "▲ 14% vs Q2" },
+    { label: "Costs", value: "449", prefix: "$", suffix: "k", note: "Jul – Sep total" },
     { label: "Margin", value: "27.3%", note: "▲ 8.5 pts Jul to Sep" },
     { label: "Active customers", value: "1,284", note: "End of Q3" },
   ];
@@ -672,7 +672,7 @@ export function ShareScene({ step }: { step: number }) {
         <div className="grid gap-3 @2xl:grid-cols-[1.3fr_1fr]">
           <Panel className="p-4">
             <p className="text-[12.5px] font-semibold text-[#18181b]">Revenue vs costs</p>
-            <p className="text-[11px] text-[#71717a]">Monthly, €k</p>
+            <p className="text-[11px] text-[#71717a]">Monthly, $k</p>
             <div className="mt-2"><BarChart grow height={120} /></div>
           </Panel>
           <Panel className="p-4">
@@ -790,7 +790,7 @@ export function ChatScene({ step }: { step: number }) {
                 {step >= 6 ? (
                   <motion.div {...appear} className="space-y-2.5">
                     <Panel className="max-w-[480px] p-3.5">
-                      <p className="text-[12px] font-semibold text-[#18181b]">Q3 revenue vs costs (€ thousands)</p>
+                      <p className="text-[12px] font-semibold text-[#18181b]">Q3 revenue vs costs ($ thousands)</p>
                       <div className="mt-2"><BarChart grow height={104} /></div>
                     </Panel>
                     <p className="max-w-[560px] text-[13px] leading-relaxed text-[#27272a]">

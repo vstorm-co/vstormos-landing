@@ -357,3 +357,8 @@ details > summary::-webkit-details-marker {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* A dashed path that runs toward where it points, as the live branch of a drawn flow. */
+@keyframes flow {
+  to { stroke-dashoffset: -22; }
+}

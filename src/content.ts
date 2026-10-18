@@ -3,7 +3,7 @@
 import type { LogoName } from "@/components/brand-icon";
 
 /** The product release the page describes; update it with the figures below at each release. */
-export const RELEASE = "1.1.1";
+export const RELEASE = "1.5.0";
 
 export const DOCS = "https://vstorm-co.github.io/agenticos";
 export const REPO = "https://github.com/vstorm-co/agenticos";
@@ -30,6 +30,11 @@ export const links = {
   addCapability: `${DOCS}/howto/add-capability/`,
   architecture: `${DOCS}/architecture/`,
   api: `${DOCS}/api/`,
+  projects: `${DOCS}/projects/`,
+  codingAgent: `${DOCS}/reference/capabilities/#coding-agent`,
+  visuals: `${DOCS}/reference/capabilities/#visuals`,
+  workflowsPr: `${REPO}/pull/1925`,
+  voicePr: `${REPO}/pull/2204`,
   securityPolicy: `${REPO}/blob/main/SECURITY.md`,
   licence: `${REPO}/blob/main/LICENSE`,
   discussions: `${REPO}/discussions`,
@@ -62,9 +67,16 @@ export const heroModels: readonly { name: string; provider: string }[] = [
   { name: "Ollama", provider: "ollama" },
 ];
 
+/** Early teams, described without their names until they agree to be named. */
+export const pilots = [
+  { sector: "Manufacturing · Austria", body: "An industrial group is piloting it across its companies, with each company’s data kept apart." },
+  { sector: "Engineering · Norway", body: "A consultancy runs it on its own servers, for its own team and for a client." },
+  { sector: "Marketing", body: "An agency is planning its client work around a team of agents built on it." },
+] as const;
+
 export const figures = [
-  { value: "26", art: "tool_search", label: "built-in capabilities, switched on per agent" },
-  { value: "27", art: "thinking", label: "model providers, hosted or local" },
+  { value: "29", art: "tool_search", label: "built-in capabilities, switched on per agent" },
+  { value: "28", art: "thinking", label: "model providers, hosted, your plan or local" },
   { value: "8", art: "media", label: "places one agent answers" },
   { value: "4,700+", art: "web_research", label: "MCP servers in the gallery" },
 ] as const;
@@ -89,9 +101,9 @@ export const showcase: readonly Showcase[] = [
     title: "Agents that work as a team",
     body: "A lead agent hands parts of a task to colleagues and writes up what they found. You see who it asked, and what each one said.",
     image: "/screens/highlight-subagents.webp",
-    alt: "A Chief of Staff agent’s brief for a board call, written from what Support Desk and Sales Researcher answered, with the two agents named under it",
-    width: 1600,
-    height: 1000,
+    alt: "A Chief of Staff agent’s pricing review brief, written from what Sales Researcher and Finance Analyst answered: Ramp and Bill.com pricing in dollars and three bullets for the meeting",
+    width: 2400,
+    height: 1500,
     icon: "users",
     more: { label: "How subagents work", href: `${DOCS}/reference/capabilities/` },
   },
@@ -114,8 +126,8 @@ export const showcase: readonly Showcase[] = [
     body: "Switch tools on from illustrated cards, then give the draft a real job in the test chat beside them, before anyone else sees the agent.",
     image: "/screens/highlight-builder-test.webp",
     alt: "The Finance Analyst’s toolbox with isometric capability cards, and its test chat drawing a chart of Q3 revenue against costs",
-    width: 3200,
-    height: 2000,
+    width: 2400,
+    height: 1500,
     icon: "flask",
     more: { label: "Build your first agent", href: `${DOCS}/first-agent/` },
   },
@@ -123,17 +135,17 @@ export const showcase: readonly Showcase[] = [
     id: "apps",
     tab: "Apps",
     title: "Apps, not just answers",
-    body: "An agent publishes a dashboard or a report as a page with a stable link and versions. Choose who can open it; updates keep the link.",
+    body: "An agent publishes a dashboard, a calculator or a report as a page with a stable link and versions. Choose who can open it; updates keep the link.",
     image: "/screens/highlight-app.webp",
-    alt: "The Q3 2026 board dashboard a Finance Analyst published from chat as an app: KPI cards, revenue against costs, the margin trend",
-    width: 3200,
-    height: 2000,
+    alt: "An ROI calculator drawn in chat and saved as an app with its own link: sliders for invoices and hourly cost, $69,120 saved per year, monthly cost before and after",
+    width: 2400,
+    height: 1500,
     icon: "layout",
     more: { label: "Share an app", href: `${DOCS}/artifacts/` },
   },
 ];
 
-/** The README's six groups; the names add up to the 26 built-in capabilities. `art` keys the console's dioramas. */
+/** The README's six groups; the names add up to the 29 built-in capabilities. `art` keys the console's dioramas. */
 export const capabilityGroups = [
   {
     art: "knowledge",
@@ -150,14 +162,14 @@ export const capabilityGroups = [
   {
     art: "sandbox",
     title: "Files, code and output",
-    body: "Its own computer with files and a shell, and results people can open.",
-    names: ["Calculations", "Sandbox", "Charts", "Image generation", "Apps"],
+    body: "Its own computer with files and a shell, Claude Code or Codex for software work, and drawings and pages people can open.",
+    names: ["Calculations", "Sandbox", "Coding agent", "Charts", "Visuals", "Image generation", "Apps"],
   },
   {
     art: "subagents",
     title: "Reasoning and teamwork",
     body: "Plan, think, hand parts of a job to other agents, and ask you when it is unsure.",
-    names: ["Subagents", "Planning", "Thinking", "Tool search", "Date and time", "Instruction reminders", "Ask the user"],
+    names: ["Subagents", "Planning", "Thinking", "Work while tools run", "Tool search", "Date and time", "Instruction reminders", "Ask the user"],
   },
   {
     art: "guardrails",
@@ -186,31 +198,31 @@ export const surfaces = [
 
 export const connections = [
   {
-    title: "Business tools",
-    body: "4,700+ MCP servers in the gallery, and your own. Choose which tools each agent may call.",
-    brands: ["notion", "github", "linear", "jira", "hubspot", "stripe"] satisfies LogoName[],
+    title: "Google",
+    body: "Drive folders, Docs and Sheets synced into knowledge bases, a new Gmail message as a trigger, Analytics and Ads reports.",
+    brands: ["gdrive", "gdocs", "gsheets", "gmail", "ganalytics"] satisfies LogoName[],
   },
   {
-    title: "Documents",
-    body: "Sync Google Drive, S3 or MinIO, Git repositories, websites, SharePoint and OneDrive into knowledge bases.",
-    brands: ["gdrive", "s3", "github", "onedrive"] satisfies LogoName[],
+    title: "Microsoft 365",
+    body: "SharePoint and OneDrive synced as documents, and Outlook, Teams and Calendar through Microsoft's own servers.",
+    brands: ["microsoft", "onedrive", "teams"] satisfies LogoName[],
   },
   {
-    title: "Events",
-    body: "Start agents on a schedule, a new GitHub issue, a Gmail message or a signed webhook.",
-    brands: ["github", "gmail", "webhooks"] satisfies LogoName[],
+    title: "Notion, Atlassian and project tools",
+    body: "Notion pages, Jira and Confluence, Linear, Asana and GitHub, each person through their own account.",
+    brands: ["notion", "jira", "confluence", "linear", "asana", "github"] satisfies LogoName[],
   },
   {
-    title: "Chat tools",
-    body: "Publish an agent to Slack, Mattermost or Telegram, where an @mention runs as the person who sent it.",
-    brands: ["slack", "mattermost", "telegram"] satisfies LogoName[],
+    title: "Sales, support and commerce",
+    body: "HubSpot, Pipedrive, Intercom, Stripe and Shopify. Set any tool that writes to wait for a person.",
+    brands: ["hubspot", "intercom", "stripe", "shopify"] satisfies LogoName[],
   },
 ] as const;
 
 export const logoCloud: readonly LogoName[] = [
-  "notion", "github", "linear", "slack", "hubspot", "stripe",
-  "gdrive", "gmail", "figma", "jira", "postgres", "telegram",
-  "mattermost", "onedrive", "s3", "supabase", "confluence", "asana",
+  "notion", "gdrive", "slack", "microsoft", "hubspot", "github",
+  "gmail", "teams", "jira", "intercom", "figma", "linear",
+  "gsheets", "onedrive", "confluence", "stripe", "shopify", "airtable",
 ];
 
 export const controls = [
@@ -247,7 +259,7 @@ export const controls = [
 ] as const;
 
 export const comparison = [
-  { name: "AgenticOS", where: "Your infrastructure", source: "Apache-2.0", models: "27 providers, including local ones", own: true },
+  { name: "AgenticOS", where: "Your infrastructure", source: "Apache-2.0", models: "28 providers, including local ones and your ChatGPT plan", own: true },
   { name: "OpenAI dots", where: "OpenAI’s cloud", source: "Proprietary", models: "OpenAI only", own: false },
   { name: "Grok Bot", where: "xAI’s cloud", source: "Proprietary", models: "Grok only", own: false },
   { name: "Viktor", where: "Viktor’s cloud", source: "Proprietary", models: "OpenAI, Anthropic, Google, Kimi", own: false },
@@ -285,6 +297,14 @@ export const faq = [
     a: "Not to build agents: instructions, tools and knowledge are set up in the browser by the people who know the work. You need someone to operate the deployment, and engineers only when you want a capability that does not exist yet, which they add in typed Python.",
   },
   {
+    q: "Can several people work with the same agents at once?",
+    a: "Yes. A project gives a team the same files, instructions and sandbox, and its chats are shared: everyone sees who is in the room, watches an agent's answer as it is written, replies to any message and brings in another agent, tool or document with an @. Each message carries its author's name, and each person keeps their own permissions.",
+  },
+  {
+    q: "Can it use the AI subscription we already pay for?",
+    a: "Yes. A person can sign in with ChatGPT once and run agents on that plan through Codex instead of a metered API key, and the coding agent can run Claude Code or Codex on a subscription. Budgets still count every run. A subscription belongs to one person, so for agents the whole company uses, an organization API key is the better fit. If you would rather not depend on any vendor's plan, the same agents run on your own models through Ollama, vLLM or any OpenAI-compatible server, on infrastructure you own.",
+  },
+  {
     q: "Can it run with local models only?",
     a: "Yes. Configure Ollama, LiteLLM or an OpenAI-compatible server such as vLLM or LM Studio, use local embedding models through Ollama, and parse documents with PyMuPDF or LiteParse. Check each destination you configure: self-hosting the console alone does not make every model, parser or tool local.",
   },
@@ -298,11 +318,11 @@ export const faq = [
   },
   {
     q: "How is it different from ChatGPT Enterprise, Copilot Studio or n8n?",
-    a: "AgenticOS runs on your infrastructure with any of 27 model providers and has no seat or credit fee of its own. It builds agents for the organization, published to chat, websites and APIs, rather than assistant seats for individual employees. Compared with n8n it starts from the agent rather than a workflow canvas, and many teams use both.",
+    a: "AgenticOS runs on your infrastructure with any of 28 model providers and has no seat or credit fee of its own. It builds agents for the organization, published to chat, websites and APIs, rather than assistant seats for individual employees. Compared with n8n it starts from the agent rather than a workflow canvas, and many teams use both.",
   },
   {
     q: "What does it take to run?",
-    a: "A host with 4 vCPU and 8 GB of RAM, Docker Compose and access to a model provider. Plan for someone to operate the deployment and for subject experts who maintain the instructions and documents.",
+    a: "A host with 4 vCPU and 8 GB of RAM, Docker Compose and access to a model provider. A server that size typically costs $10 to $50 a month at a cloud provider, and the cost does not grow with the number of people. Models are billed by the provider you choose, or run on a subscription you already pay for. Plan for someone to operate the deployment and for subject experts who maintain the instructions and documents.",
   },
 ] as const;
 
@@ -319,7 +339,7 @@ export const teammates = [
     name: "Support Desk",
     color: "#f2b8c6",
     job: "Answers from the support handbook and says which page it used.",
-    ask: "Who has to approve a €520 refund on day 3 under our handbook?",
+    ask: "Who has to approve a $520 refund on day 3 under our handbook?",
     tools: ["Knowledge search", "Slack"],
   },
   {
