@@ -1,8 +1,8 @@
 "use client";
 
-import { Check, GitBranch, Hand, History, Mic, PhoneOff, Table2, Workflow as WorkflowIcon, Zap } from "lucide-react";
+import { Check, GitBranch, Hand, History, Maximize, Mic, Minus, PhoneOff, Plus, Split, Table2, TableProperties, Workflow as WorkflowIcon, Zap } from "lucide-react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { BlobAgent } from "@/components/blob";
 import { ServiceIcon } from "@/components/brand-icon";
@@ -58,57 +58,6 @@ const DETAILS = [
     icon: Mic,
     title: "Talk to any agent",
     body: "A voice call with the agent that knows the answer, from the console.",
-  },
-] as const;
-
-const STEPS = [
-  {
-    id: "trigger",
-    icon: <Zap className="size-4 text-[#e0a10b]" />,
-    title: "New row in Leads",
-    kind: "Trigger",
-    at: 1,
-    result: "Acme Corp",
-  },
-  {
-    id: "agent",
-    icon: <BlobAgent color={SALES} size={18} hop={false} />,
-    title: "Qualify the lead",
-    kind: "Agent · Sales Researcher",
-    at: 2,
-    result: "score 82 · mid-market",
-  },
-  {
-    id: "check",
-    icon: <GitBranch className="size-4 text-[#5b5bd6]" />,
-    title: "Score above 70?",
-    kind: "Condition",
-    at: 3,
-    result: "yes",
-  },
-  {
-    id: "approve",
-    icon: <Hand className="size-4 text-[#db2777]" />,
-    title: "Ask the sales lead",
-    kind: "Approval",
-    at: 5,
-    result: "Maya approved",
-  },
-  {
-    id: "slack",
-    icon: <ServiceIcon name="slack" className="size-4" />,
-    title: "Post to #sales",
-    kind: "Slack",
-    at: 5,
-    result: "posted",
-  },
-  {
-    id: "table",
-    icon: <Table2 className="size-4 text-[#16794c]" />,
-    title: "Move to Qualified",
-    kind: "Table",
-    at: 5,
-    result: "updated",
   },
 ] as const;
 
@@ -227,86 +176,329 @@ function Leads({ step }: { step: number }) {
   );
 }
 
-/** The workflow as the console draws it, read top to bottom, lighting up as the run reaches each step. */
-function Flow({ step }: { step: number }) {
+type NodeStatus = "pending" | "running" | "waiting" | "succeeded" | "skipped";
+
+const STATUS: Record<NodeStatus, { label: string; dot: string }> = {
+  pending: { label: "Pending", dot: "bg-[#a1a1aa]/50" },
+  running: { label: "Running", dot: "bg-[#5b5bd6] animate-pulse" },
+  waiting: { label: "Waiting for approval", dot: "bg-[#f59e0b]" },
+  succeeded: { label: "Succeeded", dot: "bg-[#22a06b]" },
+  skipped: { label: "Skipped", dot: "bg-[#a1a1aa]/30" },
+};
+
+/** Each step as the editor's card draws it: 240 wide, the run's status under it, labelled ports on a branch. */
+const NODE_W = 240;
+const NODE_H = 86;
+const BRANCH_H = 130;
+
+type CanvasNode = {
+  id: string;
+  x: number;
+  y: number;
+  icon: ReactNode;
+  name: string;
+  summary: string;
+  code?: boolean;
+  ports?: readonly string[];
+  status: (step: number) => NodeStatus;
+};
+
+const NODES: readonly CanvasNode[] = [
+  {
+    id: "trigger",
+    x: 0,
+    y: 150,
+    icon: <TableProperties className="size-4" />,
+    name: "New row in Leads",
+    summary: "Trigger",
+    status: (step) => (step >= 1 ? "succeeded" : "pending"),
+  },
+  {
+    id: "agent",
+    x: 320,
+    y: 150,
+    icon: <BlobAgent color={SALES} size={20} hop={false} />,
+    name: "Qualify the lead",
+    summary: "Sales Researcher",
+    status: (step) => (step >= 2 ? "succeeded" : step === 1 ? "running" : "pending"),
+  },
+  {
+    id: "if",
+    x: 640,
+    y: 128,
+    icon: <Split className="size-4" />,
+    name: "Score above 70?",
+    summary: "score ≥ 70",
+    code: true,
+    ports: ["true", "false"],
+    status: (step) => (step >= 3 ? "succeeded" : step === 2 ? "running" : "pending"),
+  },
+  {
+    id: "approve",
+    x: 960,
+    y: 40,
+    icon: <Hand className="size-4" />,
+    name: "Ask the sales lead",
+    summary: "Maya Chen · within 24 h",
+    status: (step) => (step >= 5 ? "succeeded" : step >= 3 ? "waiting" : "pending"),
+  },
+  {
+    id: "nurture",
+    x: 960,
+    y: 300,
+    icon: <TableProperties className="size-4" />,
+    name: "Add to nurture",
+    summary: "Leads · update row",
+    status: (step) => (step >= 3 ? "skipped" : "pending"),
+  },
+  {
+    id: "slack",
+    x: 1280,
+    y: -30,
+    icon: <ServiceIcon name="slack" className="size-4" />,
+    name: "Post to #sales",
+    summary: "Slack · send message",
+    status: (step) => (step >= 5 ? "succeeded" : "pending"),
+  },
+  {
+    id: "table",
+    x: 1280,
+    y: 110,
+    icon: <TableProperties className="size-4" />,
+    name: "Move to Qualified",
+    summary: "Leads · update row",
+    status: (step) => (step >= 5 ? "succeeded" : "pending"),
+  },
+];
+
+/** Wires, port to port: `port` picks a branch's labelled row, `at` is the step a run first crosses it. */
+const WIRES = [
+  { from: "trigger", to: "agent", at: 1 },
+  { from: "agent", to: "if", at: 2 },
+  { from: "if", port: 0, to: "approve", at: 3, branch: true },
+  { from: "if", port: 1, to: "nurture", at: 99, branch: true },
+  { from: "approve", to: "slack", at: 5 },
+  { from: "approve", to: "table", at: 5 },
+] as const;
+
+/** Where the camera looks at each step, in canvas pixels. */
+const CAMERA: readonly { x: number; y: number }[] = [
+  { x: 280, y: 193 },
+  { x: 280, y: 193 },
+  { x: 600, y: 193 },
+  { x: 900, y: 170 },
+  { x: 1080, y: 110 },
+  { x: 1240, y: 120 },
+  { x: 1240, y: 120 },
+  { x: 1240, y: 120 },
+  { x: 1240, y: 120 },
+];
+
+/** The run's own record of each step, the way the run page lists it. */
+const RECORD = [
+  { name: "New row in Leads", time: "0.1 s", cost: "" },
+  { name: "Qualify the lead", time: "18.4 s", cost: "$0.06" },
+  { name: "Score above 70?", time: "0.0 s", cost: "" },
+  { name: "Ask the sales lead", time: "12 s", cost: "" },
+  { name: "Post to #sales", time: "0.4 s", cost: "" },
+  { name: "Move to Qualified", time: "0.1 s", cost: "" },
+] as const;
+
+function nodeOf(id: string) {
+  const node = NODES.find((item) => item.id === id);
+  if (!node) throw new Error(`no node ${id}`);
+  return node;
+}
+
+/** The input handle sits at the card's middle, an output at its middle or on its labelled row. */
+function wirePath(wire: (typeof WIRES)[number]) {
+  const from = nodeOf(wire.from);
+  const to = nodeOf(wire.to);
+  const x1 = from.x + NODE_W;
+  const y1 = "port" in wire ? from.y + NODE_H + 15 + wire.port * 18 : from.y + NODE_H / 2;
+  const x2 = to.x;
+  const y2 = to.y + (to.ports ? BRANCH_H : NODE_H) / 2;
+  const bend = Math.max(40, (x2 - x1) / 2);
+  return `M${x1} ${y1} C ${x1 + bend} ${y1}, ${x2 - bend} ${y2}, ${x2} ${y2}`;
+}
+
+function CanvasCard({ node, step }: { node: CanvasNode; step: number }) {
+  const status = node.status(step);
+  const look = STATUS[status];
+  const live = status === "running" || status === "waiting";
   return (
-    <div className="relative">
-      <div className="space-y-2">
-        {STEPS.map((item, index) => {
-          const done = step >= item.at && !(item.id === "approve" && step < 5);
-          const branch = item.id === "slack" || item.id === "table";
-          // The branch after the approval waits without a spinner: nothing runs until Maya answers.
-          const running = !done && !branch && step === item.at - 1 && step >= 1 && index > 0;
-          return (
-            <div key={item.id} className={`relative ${branch ? "ml-6 sm:ml-8" : ""}`}>
-              {index > 0 ? (
-                <span
-                  className={`absolute -top-2 h-2 w-px ${branch ? "left-[-10px] sm:left-[-14px]" : "left-[22px]"} ${done ? "bg-[#a5b4fc]" : "bg-[#e4e4e7]"}`}
-                />
-              ) : null}
-              <motion.div
-                animate={{
-                  backgroundColor: done ? "#ffffff" : "#fafafa",
-                  boxShadow: done ? "0 0 0 1px #c7d2fe, 0 10px 24px -16px rgba(91,91,214,0.6)" : running ? "0 0 0 1px #d4d4d8" : "0 0 0 1px #ececef",
-                }}
-                transition={{ duration: 0.45, ease: EASE }}
-                className="flex items-center gap-2.5 rounded-[11px] px-2.5 py-2"
-              >
-                <span className="inline-flex size-[30px] shrink-0 items-center justify-center rounded-[8px] bg-[#f4f4f5]">{item.icon}</span>
-                <span className="min-w-0 flex-1">
-                  <span className={`block truncate text-[12.5px] font-semibold ${done || running ? "text-[#18181b]" : "text-[#a1a1aa]"}`}>{item.title}</span>
-                  <span className="block truncate text-[10.5px] text-[#a1a1aa]">{item.kind}</span>
-                </span>
-                {done ? (
-                  <motion.span
-                    initial={{ opacity: 0, x: 6 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="flex shrink-0 items-center gap-1 text-[11px] text-[#16794c]"
-                  >
-                    <Check className="size-3.5" /> <span className="hidden sm:inline">{item.result}</span>
-                  </motion.span>
-                ) : running ? (
-                  <Spinner />
-                ) : null}
-              </motion.div>
-              {/* The approval opens under its step, the way the person asked sees it. */}
-              {item.id === "approve" ? (
-                <AnimatePresence initial={false}>
-                  {step === 4 ? (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.4, ease: EASE }}
-                      className="overflow-hidden"
-                    >
-                      <div className="mt-2 rounded-[12px] border border-[#fbcfe8] bg-[#fdf2f8] p-2.5">
-                        <div className="flex items-start gap-2">
-                          <Maya />
-                          <p className="min-w-0 flex-1 text-[12px] leading-snug text-[#3f3f46]">
-                            <span className="font-semibold text-[#18181b]">Approve Acme Corp for sales?</span> Score 82, 240 people, demo requested.
-                          </p>
-                        </div>
-                        <div className="mt-2 flex items-center justify-end gap-2">
-                          <span className="rounded-[8px] border border-[#e4e4e7] bg-white px-2.5 py-1 text-[12px] text-[#52525b]">Reject</span>
-                          <motion.span
-                            animate={{ scale: [1, 0.92, 1] }}
-                            transition={{ delay: 1.2, duration: 0.3 }}
-                            className="rounded-[8px] bg-[#18181b] px-2.5 py-1 text-[12px] font-medium text-white"
-                          >
-                            Approve
-                          </motion.span>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ) : null}
-                </AnimatePresence>
-              ) : null}
-            </div>
-          );
-        })}
+    <motion.div
+      className="absolute rounded-[12px] border bg-white"
+      style={{ left: node.x, top: node.y, width: NODE_W, height: node.ports ? BRANCH_H : NODE_H }}
+      animate={{
+        opacity: status === "pending" || status === "skipped" ? 0.55 : 1,
+        borderColor: live ? "rgba(91,91,214,0.45)" : "#e4e4e7",
+        boxShadow: live ? "0 0 0 3px rgba(91,91,214,0.16), 0 10px 24px -14px rgba(16,24,40,0.35)" : "0 1px 2px rgba(16,24,40,0.06)",
+      }}
+      transition={{ duration: 0.45, ease: EASE }}
+    >
+      <span className="absolute top-1/2 -left-[6px] size-3 -translate-y-1/2 rounded-full border-2 border-white bg-[#a1a1aa]" />
+      {node.ports ? null : <span className="absolute top-1/2 -right-[6px] size-3 -translate-y-1/2 rounded-full border-2 border-white bg-[#a1a1aa]" />}
+      <div className="flex items-start gap-2.5 p-3">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-[8px] bg-[#f4f4f5] text-[#18181b]">{node.icon}</span>
+        <span className="min-w-0 flex-1">
+          <span className="block truncate text-[14px] leading-5 font-medium text-[#18181b]">{node.name}</span>
+          <span className={`block truncate text-[12px] text-[#71717a] ${node.code ? "font-mono" : ""}`}>{node.summary}</span>
+        </span>
       </div>
-      <p className="mt-2 pl-[50px] text-[10.5px] text-[#a1a1aa]">no → nurture list</p>
+      <div className="flex items-center gap-1.5 px-3 text-[12px] text-[#71717a]">
+        <span className={`size-2 rounded-full ${look.dot}`} />
+        {look.label}
+      </div>
+      {node.ports ? (
+        <ul className="mt-2 space-y-0.5 border-t border-[#ececef] py-1.5">
+          {node.ports.map((port) => (
+            <li key={port} className="relative flex h-4 items-center justify-end px-3 text-[12px] text-[#71717a]">
+              {port}
+              <span className="absolute -right-[6px] size-3 rounded-full border-2 border-white bg-[#5b5bd6]" />
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </motion.div>
+  );
+}
+
+/**
+ * The workflow on the editor's canvas: the dotted grid, the cards and their
+ * wires. The camera follows the run from card to card, then pulls back to the
+ * whole graph with every step's status on it.
+ */
+function Canvas({ step }: { step: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(640);
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    const observer = new ResizeObserver(([entry]) => entry && setWidth(entry.contentRect.width));
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  const camera = CAMERA[step] ?? CAMERA[0];
+  const scale = width < 480 ? 0.7 : 1;
+
+  return (
+    <div ref={ref} className="absolute inset-0 overflow-hidden bg-[#fafafa] [background-image:radial-gradient(#d4d4d8_1px,transparent_1.5px)] [background-size:20px_20px]">
+      <motion.div
+        className="absolute top-1/2 left-1/2 origin-top-left"
+        initial={false}
+        animate={{ x: -(camera?.x ?? 0) * scale, y: -(camera?.y ?? 0) * scale, scale }}
+        transition={{ duration: 1.1, ease: EASE }}
+      >
+        <svg className="absolute overflow-visible" style={{ left: 0, top: 0 }} width={1} height={1} aria-hidden>
+          {WIRES.map((wire) => {
+            const live = step >= wire.at;
+            const d = wirePath(wire);
+            return (
+              <g key={`${wire.from}-${wire.to}`}>
+                <path
+                  d={d}
+                  fill="none"
+                  stroke={live ? "#5b5bd6" : "#a1a1aa"}
+                  strokeOpacity={live ? 0.9 : 0.55}
+                  strokeWidth={live ? 2 : 1.5}
+                  strokeDasharray={wire.at === 99 ? "5 5" : undefined}
+                  className="transition-[stroke] duration-500"
+                />
+                {step === wire.at ? (
+                  <circle r="5" fill="#5b5bd6">
+                    <animateMotion dur="0.9s" repeatCount="1" fill="freeze" path={d} />
+                  </circle>
+                ) : null}
+              </g>
+            );
+          })}
+        </svg>
+        {NODES.map((node) => (
+          <CanvasCard key={node.id} node={node} step={step} />
+        ))}
+      </motion.div>
+
+      {/* The editor's zoom controls, bottom right, as on the real canvas. */}
+      <div className="absolute right-3 bottom-3 flex flex-col overflow-hidden rounded-[8px] border border-[#e4e4e7] bg-white text-[#52525b] shadow-sm">
+        <span className="flex size-7 items-center justify-center border-b border-[#ececef]"><Plus className="size-3.5" /></span>
+        <span className="flex size-7 items-center justify-center border-b border-[#ececef]"><Minus className="size-3.5" /></span>
+        <span className="flex size-7 items-center justify-center"><Maximize className="size-3.5" /></span>
+      </div>
+
+      {/* After the run, its record: every step's time and cost. */}
+      <AnimatePresence>
+        {step === 7 ? (
+          <motion.div
+            initial={{ opacity: 0, x: 16 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 10 }}
+            transition={{ duration: 0.4, ease: EASE }}
+            className="absolute top-3 right-3 bottom-3 w-[min(280px,calc(100%-24px))] overflow-hidden rounded-[12px] border border-[#ececef] bg-white shadow-[0_20px_40px_-18px_rgba(16,24,40,0.4)]"
+          >
+            <div className="border-b border-[#ececef] px-3 py-2.5">
+              <p className="text-[13px] font-semibold text-[#18181b]">Run 1,284</p>
+              <p className="text-[11.5px] text-[#71717a]">Succeeded · 41 s · $0.06 · started by a new row</p>
+            </div>
+            <ul className="divide-y divide-[#f4f4f5]">
+              {RECORD.map((item, index) => (
+                <motion.li
+                  key={item.name}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 + index * 0.08, duration: 0.3 }}
+                  className="flex items-center gap-2 px-3 py-2 text-[12px]"
+                >
+                  <span className="size-2 shrink-0 rounded-full bg-[#22a06b]" />
+                  <span className="min-w-0 flex-1 truncate text-[#18181b]">{item.name}</span>
+                  <span className="font-mono text-[11px] text-[#71717a]">{item.time}</span>
+                  {item.cost ? <span className="font-mono text-[11px] text-[#18181b]">{item.cost}</span> : null}
+                </motion.li>
+              ))}
+            </ul>
+            <p className="px-3 py-2 text-[11.5px] text-[#71717a]">Input and output of every step kept. Retry from any step.</p>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+
+      {/* The approval the run is waiting on, as Maya sees it. */}
+      <AnimatePresence>
+        {step === 4 || step === 5 ? (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.4, ease: EASE }}
+            className="absolute bottom-3 left-3 w-[min(320px,calc(100%-64px))] rounded-[12px] border border-[#ececef] bg-white p-3 shadow-[0_20px_40px_-18px_rgba(16,24,40,0.4)]"
+          >
+            <div className="flex items-start gap-2">
+              <Maya />
+              <p className="min-w-0 flex-1 text-[12px] leading-snug text-[#3f3f46]">
+                <span className="font-semibold text-[#18181b]">Approve Acme Corp for sales?</span> Score 82, 240 people, demo requested.
+              </p>
+            </div>
+            <div className="mt-2 flex items-center justify-end gap-2">
+              {step === 5 ? (
+                <span className="inline-flex items-center gap-1 text-[12px] font-medium text-[#16794c]">
+                  <Check className="size-3.5" /> Maya approved · 12 s
+                </span>
+              ) : (
+                <>
+                  <span className="rounded-[8px] border border-[#e4e4e7] px-2.5 py-1 text-[12px] text-[#52525b]">Reject</span>
+                  <motion.span
+                    animate={{ scale: [1, 0.92, 1] }}
+                    transition={{ delay: 1.2, duration: 0.3 }}
+                    className="rounded-[8px] bg-[#18181b] px-2.5 py-1 text-[12px] font-medium text-white"
+                  >
+                    Approve
+                  </motion.span>
+                </>
+              )}
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }
@@ -405,9 +597,9 @@ function Window({ step }: { step: number }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.3, ease: EASE }}
-            className="absolute inset-0 overflow-hidden px-4 py-4"
+            className={`absolute inset-0 overflow-hidden ${tab === "workflow" ? "" : "px-4 py-4"}`}
           >
-            {tab === "leads" ? <Leads step={step} /> : tab === "calls" ? <Call active={step === LAST} /> : <Flow step={step} />}
+            {tab === "leads" ? <Leads step={step} /> : tab === "calls" ? <Call active={step === LAST} /> : <Canvas step={step} />}
           </motion.div>
         </AnimatePresence>
       </div>
