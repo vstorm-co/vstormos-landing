@@ -8,9 +8,9 @@ import { vstorm } from "@/content";
 import { asset } from "@/lib/site";
 
 /**
- * A small "Book a demo" pill in the corner once the hero has scrolled away. It
- * steps aside where it would cover the product movie, and where the page
- * already asks the same thing: the pricing, the Vstorm section and the footer.
+ * A small "Book a demo" pill in the corner once the hero has scrolled away, on
+ * phones too. It steps aside where it would cover the product movie, and where
+ * the page already asks the same thing: the pricing, the Vstorm section and the footer.
  */
 export function FloatingCta() {
   const [shown, setShown] = useState(false);
@@ -48,7 +48,7 @@ export function FloatingCta() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 12, scale: 0.97 }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="shine group fixed bottom-5 right-5 z-40 hidden h-12 md:inline-flex items-center gap-3 rounded-full bg-ink py-1.5 pl-1.5 pr-5 text-[14.5px] font-medium text-white shadow-[0_20px_40px_-14px_rgba(22,20,31,0.6)] ring-1 ring-white/10 transition-colors hover:bg-violet md:bottom-7 md:right-7"
+          className="shine group fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-40 inline-flex h-12 items-center gap-2.5 rounded-full bg-ink py-1.5 pl-1.5 pr-4 text-[14px] font-medium text-white shadow-[0_20px_40px_-14px_rgba(22,20,31,0.6)] ring-1 ring-white/10 transition-colors hover:bg-violet md:bottom-7 md:right-7 md:gap-3 md:pr-5 md:text-[14.5px]"
         >
           <span className="flex -space-x-2">
             {vstorm.call.hosts.map((host) => (

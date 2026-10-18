@@ -174,19 +174,25 @@ export function Showcase() {
               <div className="rounded-[14px] bg-white/15 p-1 shadow-[0_30px_80px_-30px_rgba(15,10,40,0.85)] ring-1 ring-white/30 backdrop-blur-sm md:rounded-[18px] md:p-1.5">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[10px] bg-white sm:aspect-[16/10] md:rounded-[13px]">
                   {showcase.map((entry, index) => (
-                    <motion.img
+                    <motion.picture
                       key={entry.id}
-                      src={asset(entry.image)}
-                      alt={index === active ? entry.alt : ""}
                       aria-hidden={index !== active}
-                      width={entry.width}
-                      height={entry.height}
-                      loading={index === 0 ? "eager" : "lazy"}
                       initial={false}
                       animate={{ opacity: index === active ? 1 : 0, scale: index === active ? 1 : 1.015 }}
                       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                      className="absolute inset-0 size-full object-cover object-[58%_0%] sm:object-top"
-                    />
+                      className="absolute inset-0"
+                    >
+                      {/* A phone gets the console's own phone layout where there is one: a desktop capture shrunk to 390 px is unreadable. */}
+                      {entry.phoneImage ? <source media="(max-width: 639px)" srcSet={asset(entry.phoneImage)} /> : null}
+                      <img
+                        src={asset(entry.image)}
+                        alt={index === active ? entry.alt : ""}
+                        width={entry.width}
+                        height={entry.height}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        className={`size-full object-cover ${entry.phoneImage ? "object-top" : "object-[58%_0%]"} sm:object-top`}
+                      />
+                    </motion.picture>
                   ))}
                 </div>
               </div>
