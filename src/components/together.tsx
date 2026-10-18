@@ -7,6 +7,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BlobAgent } from "@/components/blob";
 import { BrandIcon, ServiceIcon } from "@/components/brand-icon";
 import { Typed } from "@/components/movie/parts";
+import { SpotlightList } from "@/components/spotlight-list";
 import { Reveal, SectionHeading, SectionLinks } from "@/components/ui";
 import { links } from "@/content";
 import { asset, assetSet } from "@/lib/site";
@@ -32,7 +33,7 @@ const DETAILS = [
   { icon: Code2, title: "Hand code to Claude Code or Codex", body: "They build in the project's computer while the whole room watches, step by step." },
 ] as const;
 
-const SPOTLIGHT = [0, 3, 1, 1, 2, 2, 2, 3, 3, 5, 5] as const;
+const SPOTLIGHT: readonly number[] = [0, 0, 1, 1, 2, 2, 2, 3, 3, 4, 5];
 
 function Avatar({ person, size = 28, ring = true }: { person: (typeof PEOPLE)[number]; size?: number; ring?: boolean }) {
   return (
@@ -326,25 +327,7 @@ export function Together() {
             </div>
           </div>
 
-          <ul className="rail min-w-0 sm:grid sm:grid-cols-2 sm:gap-3 lg:grid-cols-1 lg:gap-2">
-            {DETAILS.map((detail, index) => {
-              const on = index === lit;
-              return (
-                <li
-                  key={detail.title}
-                  className={`flex gap-3.5 rounded-[18px] p-4 ring-1 transition-[background-color,box-shadow] duration-500 ${on ? "bg-card shadow-[0_18px_40px_-26px_rgba(43,37,71,0.5)] ring-line" : "bg-transparent ring-transparent"}`}
-                >
-                  <span className={`inline-flex size-9 shrink-0 items-center justify-center rounded-[11px] transition-colors duration-500 ${on ? "bg-violet text-blob" : "bg-card text-ink-soft ring-1 ring-line"}`}>
-                    <detail.icon className="size-[18px]" strokeWidth={1.9} />
-                  </span>
-                  <span>
-                    <span className="block text-[15.5px] font-semibold leading-snug text-ink">{detail.title}</span>
-                    <span className="mt-0.5 block text-[14px] leading-snug text-muted">{detail.body}</span>
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
+          <SpotlightList items={DETAILS} lit={lit} onPick={(index) => setStep(Math.max(0, SPOTLIGHT.indexOf(index)))} />
         </Reveal>
 
         <SectionLinks docs={links.projects} docsLabel="How projects work" />

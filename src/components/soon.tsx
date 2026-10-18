@@ -7,6 +7,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BlobAgent } from "@/components/blob";
 import { ServiceIcon } from "@/components/brand-icon";
 import { Typed } from "@/components/movie/parts";
+import { SpotlightList } from "@/components/spotlight-list";
 import { ButtonLink, Reveal, SectionHeading } from "@/components/ui";
 import { links } from "@/content";
 import { asset, assetSet } from "@/lib/site";
@@ -21,7 +22,7 @@ type Tab = "leads" | "workflow" | "calls";
 
 /** Which tab of the window each step shows, and which promise beside it the step proves. */
 const TABS: readonly Tab[] = ["leads", "workflow", "workflow", "workflow", "workflow", "workflow", "leads", "workflow", "calls"];
-const SPOTLIGHT = [0, 0, 1, 2, 3, 3, 4, 5, 6] as const;
+const SPOTLIGHT: readonly number[] = [0, 0, 1, 2, 3, 3, 4, 5, 6];
 
 const DETAILS = [
   {
@@ -668,27 +669,7 @@ export function Soon() {
             </div>
           </div>
 
-          <ul className="rail min-w-0 sm:grid sm:grid-cols-2 sm:gap-3 lg:grid-cols-1 lg:gap-1.5">
-            {DETAILS.map((detail, index) => {
-              const on = index === lit;
-              return (
-                <li
-                  key={detail.title}
-                  className={`flex gap-3.5 rounded-[18px] p-3.5 ring-1 transition-[background-color,box-shadow] duration-500 ${on ? "bg-card shadow-[0_18px_40px_-26px_rgba(43,37,71,0.5)] ring-line" : "bg-transparent ring-transparent"}`}
-                >
-                  <span
-                    className={`inline-flex size-9 shrink-0 items-center justify-center rounded-[11px] transition-colors duration-500 ${on ? "bg-violet text-blob" : "bg-card text-ink-soft ring-1 ring-line"}`}
-                  >
-                    <detail.icon className="size-[18px]" strokeWidth={1.9} />
-                  </span>
-                  <span>
-                    <span className="block text-[15.5px] font-semibold leading-snug text-ink">{detail.title}</span>
-                    <span className="mt-0.5 block text-[14px] leading-snug text-muted">{detail.body}</span>
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
+          <SpotlightList items={DETAILS} lit={lit} onPick={(index) => setStep(Math.max(0, SPOTLIGHT.indexOf(index)))} />
         </Reveal>
 
         <Reveal delay={0.12} className="mt-8 flex flex-wrap items-center justify-center gap-3">
