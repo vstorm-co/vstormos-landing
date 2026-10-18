@@ -9,7 +9,7 @@ export function Faq() {
   return (
     <section id="faq" className="bg-paper px-5 pb-24 md:px-8 md:pb-32">
       <div className="mx-auto grid max-w-[1240px] gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
-        <div className="flex flex-col gap-8">
+        <div className="flex min-w-0 flex-col gap-8">
           <SectionHeading
             align="left"
             eyebrow="FAQ"
@@ -20,12 +20,12 @@ export function Faq() {
           <Reveal delay={0.08}>
             <div className="spotlight lift overflow-hidden rounded-[22px] bg-card ring-1 ring-line">
               <div className="flex items-center gap-4 border-b border-line bg-paper/60 px-6 py-5">
-                <div className="flex -space-x-2.5">
+                <div className="flex shrink-0 -space-x-2.5">
                   {vstorm.call.hosts.map((host) => (
-                    <img key={host.name} src={asset(host.photo)} alt={host.name} width={48} height={48} loading="lazy" className="size-12 rounded-full object-cover ring-[3px] ring-card" />
+                    <img key={host.name} src={asset(host.photo)} alt={host.name} width={48} height={48} loading="lazy" className="size-12 shrink-0 rounded-full object-cover ring-[3px] ring-card" />
                   ))}
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-[15.5px] font-semibold text-ink">Something we did not answer?</p>
                   <p className="text-[13.5px] text-muted">Ask the founders. {vstorm.call.length}.</p>
                 </div>
@@ -44,7 +44,7 @@ export function Faq() {
             </div>
           </Reveal>
         </div>
-        <Reveal delay={0.06}>
+        <Reveal delay={0.06} className="min-w-0">
           <div className="divide-y divide-line rounded-[22px] bg-card ring-1 ring-line">
             {faq.map((item) => (
               <details key={item.q} className="group px-6 md:px-7">
