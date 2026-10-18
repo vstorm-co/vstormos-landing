@@ -333,11 +333,10 @@ export function Together() {
 
         <SectionLinks docs={links.projects} docsLabel="How projects work" />
 
-        <Reveal delay={0.15} className="mt-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[14px] text-muted">
-          <span className="inline-flex items-center gap-2">
-            <ServiceIcon name="ycombinator" className="size-5 rounded-[4px]" />
-            Y Combinator put “multiplayer AI” in its Fall 2026 Requests for Startups.
-          </span>
+        {/* One centred paragraph, the mark inline with the first word, so it wraps as text on a phone. */}
+        <Reveal delay={0.15} className="mx-auto mt-6 max-w-[640px] text-balance text-center text-[14px] leading-relaxed text-muted">
+          <ServiceIcon name="ycombinator" className="mr-1.5 inline-block size-[18px] -translate-y-[2px] rounded-[4px] align-middle" />
+          Y Combinator put “multiplayer AI” in its Fall 2026 Requests for Startups.{" "}
           <a href="https://www.ycombinator.com/rfs" target="_blank" rel="noreferrer" className="font-medium text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink">
             In AgenticOS it ships today, open source.
           </a>
