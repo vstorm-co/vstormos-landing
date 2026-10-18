@@ -311,11 +311,11 @@ export const faq = [
   },
   {
     q: "How is it different from ChatGPT Enterprise, Copilot Studio or n8n?",
-    a: "AgenticOS runs on your infrastructure with any of 27 model providers and has no seat or credit fee of its own. It builds agents for the organization, published to chat, websites and APIs, rather than assistant seats for individual employees. Compared with n8n it starts from the agent rather than a workflow canvas, and many teams use both.",
+    a: "AgenticOS runs on your infrastructure with any of 28 model providers and has no seat or credit fee of its own. It builds agents for the organization, published to chat, websites and APIs, rather than assistant seats for individual employees. Compared with n8n it starts from the agent rather than a workflow canvas, and many teams use both.",
   },
   {
     q: "What does it take to run?",
-    a: "A host with 4 vCPU and 8 GB of RAM, Docker Compose and access to a model provider. Plan for someone to operate the deployment and for subject experts who maintain the instructions and documents.",
+    a: "A host with 4 vCPU and 8 GB of RAM, Docker Compose and access to a model provider. A server that size typically costs $10 to $50 a month at a cloud provider, and the cost does not grow with the number of people. Models are billed by the provider you choose, or run on a subscription you already pay for. Plan for someone to operate the deployment and for subject experts who maintain the instructions and documents.",
   },
 ] as const;
 

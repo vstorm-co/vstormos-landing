@@ -228,7 +228,8 @@ export function Soon() {
           </h2>
           <p className="mt-5 max-w-[60ch] text-balance text-[17px] leading-relaxed text-white/65">
             Work with fixed steps gets a visual editor: triggers, agents, approvals and tables, with durable runs and a history for every step. Voice
-            calls let you talk to any agent. Both are open source like the rest, and you can follow them on GitHub.
+            calls let you talk to any agent. Both are working code in open pull requests, open source like the rest: you can read them and run
+            them today.
           </p>
         </Reveal>
 

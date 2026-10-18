@@ -27,7 +27,7 @@ const PLANS: readonly Plan[] = [
     name: "Run it yourself",
     price: "$0",
     priceNote: "Apache-2.0 licence",
-    body: "The whole product, on your own servers. You pay for the infrastructure and the model usage you choose.",
+    body: "The whole product on your own servers, running in about 10 minutes. No seat fee: the 200th person costs what the fifth did. You pay for the server and the models you choose.",
     points: [
       "Every capability, surface and integration",
       "Company sign-in, roles, budgets, approvals and audit in every deployment",
