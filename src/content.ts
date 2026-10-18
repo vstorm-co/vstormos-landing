@@ -319,7 +319,7 @@ export const teammates = [
     name: "Support Desk",
     color: "#f2b8c6",
     job: "Answers from the support handbook and says which page it used.",
-    ask: "Who has to approve a €520 refund on day 3 under our handbook?",
+    ask: "Who has to approve a $520 refund on day 3 under our handbook?",
     tools: ["Knowledge search", "Slack"],
   },
   {

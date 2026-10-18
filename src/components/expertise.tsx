@@ -23,9 +23,9 @@ const ROLES = [
     },
     context: {
       file: "context/procurement-thresholds.md",
-      lines: ["Disputes up to €10,000: procurement decides.", "Above €10,000: the CFO signs off.", "Preferred suppliers: see the 2026 list."],
+      lines: ["Disputes up to $10,000: procurement decides.", "Above $10,000: the CFO signs off.", "Preferred suppliers: see the 2026 list."],
     },
-    rule: "A dispute above €10,000 waits for the CFO",
+    rule: "A dispute above $10,000 waits for the CFO",
   },
   {
     role: "Customer service lead",
@@ -37,9 +37,9 @@ const ROLES = [
     },
     context: {
       file: "context/refund-policy.md",
-      lines: ["Full refund within 14 days of purchase.", "€200 to €2,000: the support lead approves.", "Above €2,000: finance approves."],
+      lines: ["Full refund within 14 days of purchase.", "$200 to $2,000: the support lead approves.", "Above $2,000: finance approves."],
     },
-    rule: "A refund above €200 waits for the support lead",
+    rule: "A refund above $200 waits for the support lead",
   },
   {
     role: "Finance controller",
@@ -51,9 +51,9 @@ const ROLES = [
     },
     context: {
       file: "context/spend-limits.md",
-      lines: ["Monthly agent budget: €100.", "Team spend cap: €3,500 a month.", "Payments above €10,000 need two approvers."],
+      lines: ["Monthly agent budget: $100.", "Team spend cap: $3,500 a month.", "Payments above $10,000 need two approvers."],
     },
-    rule: "A payment above €10,000 waits for two approvers",
+    rule: "A payment above $10,000 waits for two approvers",
   },
 ] as const;
 

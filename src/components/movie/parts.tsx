@@ -62,7 +62,7 @@ export function Pill({ children, tone = "neutral" }: { children: ReactNode; tone
   );
 }
 
-/** Q3 revenue against costs, € thousands - the demo organization's figures from the README screenshots. */
+/** Q3 revenue against costs, $ thousands - the demo organization's figures from the README screenshots. */
 export const Q3 = [
   { month: "Jul", revenue: 182, costs: 140 },
   { month: "Aug", revenue: 205, costs: 151 },

@@ -15,6 +15,10 @@ import { Spotlights } from "@/components/spotlights";
 import { FloatingCta } from "@/components/floating-cta";
 import { Statement } from "@/components/statement";
 import { Teammates } from "@/components/teammates";
+import { Together } from "@/components/together";
+import { Coding } from "@/components/coding";
+import { Draws } from "@/components/draws";
+import { Soon } from "@/components/soon";
 import { UseCases } from "@/components/use-cases";
 import { Engineers } from "@/components/engineers";
 import { Expertise } from "@/components/expertise";
@@ -32,12 +36,16 @@ export default function Home() {
         <Hero />
         <Statement />
         <Teammates />
+        <Together />
+        <Coding />
         <Expertise />
         <HowItWorks />
         <Showcase />
+        <Draws />
         <Capabilities />
         <UseCases />
         <Integrations />
+        <Soon />
         <Control />
         <Ownership />
         <Engineers />
