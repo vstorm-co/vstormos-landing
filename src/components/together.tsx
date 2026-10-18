@@ -311,7 +311,7 @@ export function Together() {
         />
 
         <Reveal delay={0.1} className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:items-stretch">
-          <div ref={stageRef} className="relative overflow-hidden rounded-[28px] bg-[#dfe7ef] p-3 shadow-[0_40px_90px_-50px_rgba(43,37,71,0.55)] ring-1 ring-black/5 sm:p-8">
+          <div ref={stageRef} className="relative min-w-0 overflow-hidden rounded-[28px] bg-[#dfe7ef] p-3 shadow-[0_40px_90px_-50px_rgba(43,37,71,0.55)] ring-1 ring-black/5 sm:p-8">
             <img
               src={asset("/images/cta-2800.webp")}
               srcSet={assetSet("/images/cta-1400.webp 1400w, /images/cta-2800.webp 2800w")}
@@ -320,12 +320,12 @@ export function Together() {
               loading="lazy"
               className="pointer-events-none absolute inset-0 size-full select-none object-cover"
             />
-            <div className="relative mx-auto h-[560px] max-w-[640px] overflow-hidden rounded-[18px] bg-white/95 shadow-[0_30px_80px_-30px_rgba(16,24,40,0.55)] ring-1 ring-black/5 backdrop-blur sm:h-[580px]">
+            <div className="relative mx-auto h-[500px] max-w-[640px] overflow-hidden rounded-[18px] bg-white/95 shadow-[0_30px_80px_-30px_rgba(16,24,40,0.55)] ring-1 ring-black/5 backdrop-blur sm:h-[580px]">
               <Room step={step} />
             </div>
           </div>
 
-          <ul className="rail sm:grid sm:grid-cols-2 sm:gap-3 lg:grid-cols-1 lg:gap-2">
+          <ul className="rail min-w-0 sm:grid sm:grid-cols-2 sm:gap-3 lg:grid-cols-1 lg:gap-2">
             {DETAILS.map((detail, index) => {
               const on = index === lit;
               return (

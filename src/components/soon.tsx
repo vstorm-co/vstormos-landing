@@ -237,7 +237,7 @@ export function Soon() {
               <p className="text-[13px] font-semibold text-white">
                 Lead routing <span className="font-normal text-white/50">· workflow, published v3</span>
               </p>
-              <span className="font-mono text-[11px] text-white/55">{step >= 4 ? "run 1,284 · done in 41 s · $0.06" : "run 1,284 · running"}</span>
+              <span className="font-mono text-[11px] text-white/55"><span className="sm:hidden">swipe → · </span>{step >= 4 ? "run 1,284 · done in 41 s · $0.06" : "run 1,284 · running"}</span>
             </div>
             <div className="-mx-4 overflow-x-auto px-4 [scrollbar-width:none] sm:-mx-5 sm:px-5">
               <Workflow step={step} />

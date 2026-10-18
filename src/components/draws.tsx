@@ -112,6 +112,13 @@ export function Draws() {
   const reduce = useReducedMotion();
   const [amount, setAmount] = useState(150);
   const [touched, setTouched] = useState(false);
+  const canvasRef = useRef<HTMLDivElement>(null);
+
+  // On a narrow screen the flow scrolls; start at its right end, where the amount decides who approves.
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (canvas) canvas.scrollLeft = canvas.scrollWidth;
+  }, []);
 
   // Until somebody moves the slider, it walks through the three branches on its own.
   useEffect(() => {
@@ -135,7 +142,7 @@ export function Draws() {
           body="An agent draws while it writes: a flow from your policy, a calculator with sliders, a 3D scene. It runs in a sandbox, and one click saves it as an app your team opens by link. Try the one below."
         />
         <Reveal delay={0.1} className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-center">
-          <div ref={ref} className="rounded-[28px] bg-gradient-to-b from-[#efeaf8] to-[#e8e2f6] p-3 ring-1 ring-[#ddd6f5] sm:p-5">
+          <div ref={ref} className="min-w-0 rounded-[28px] bg-gradient-to-b from-[#efeaf8] to-[#e8e2f6] p-3 ring-1 ring-[#ddd6f5] sm:p-5">
             <div className="overflow-hidden rounded-[20px] bg-white shadow-[0_30px_70px_-40px_rgba(43,37,71,0.6)] ring-1 ring-black/5">
               <div className="space-y-3 p-4 sm:p-5">
                 <p className="ml-auto w-fit max-w-[90%] rounded-[16px] rounded-br-[6px] bg-[#f4f4f5] px-3.5 py-2 text-[13px] text-[#27272a]">
@@ -155,13 +162,15 @@ export function Draws() {
                         <Icon className="size-3.5" />
                       </span>
                     ))}
-                    <span className="ml-1 inline-flex h-6 items-center gap-1 rounded-full bg-[#18181b] px-2.5 text-[11px] font-medium text-white">
-                      <AppWindow className="size-3" /> Save to Apps
+                    <span className="ml-1 inline-flex h-6 shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-[#18181b] px-2.5 text-[11px] font-medium text-white">
+                      <AppWindow className="size-3" /> <span className="hidden sm:inline">Save to Apps</span><span className="sm:hidden">Save</span>
                     </span>
                   </span>
                 </div>
-                <div className="px-3 pt-4 sm:px-5">
-                  <RefundFlow amount={amount} drawn={visible || !!reduce} />
+                <div ref={canvasRef} className="overflow-x-auto px-3 pt-4 [scrollbar-width:none] sm:px-5">
+                  <div className="min-w-[520px]">
+                    <RefundFlow amount={amount} drawn={visible || !!reduce} />
+                  </div>
                 </div>
                 <label className="flex items-center gap-3 px-4 pb-4 pt-2 text-[12px] text-[#52525b] sm:px-6">
                   Amount
@@ -184,7 +193,7 @@ export function Draws() {
             </div>
           </div>
 
-          <ul className="space-y-2">
+          <ul className="min-w-0 space-y-2">
             {KINDS.map((kind) => (
               <li key={kind.title} className="flex gap-3.5 rounded-[18px] p-3.5">
                 <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-[11px] bg-card text-ink-soft ring-1 ring-line">
