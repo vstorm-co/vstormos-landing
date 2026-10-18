@@ -198,31 +198,31 @@ export const surfaces = [
 
 export const connections = [
   {
-    title: "Business tools",
-    body: "4,700+ MCP servers in the gallery, and your own. Choose which tools each agent may call.",
-    brands: ["notion", "github", "linear", "jira", "hubspot", "stripe"] satisfies LogoName[],
+    title: "Google",
+    body: "Drive folders, Docs and Sheets synced into knowledge bases, a new Gmail message as a trigger, Analytics and Ads reports.",
+    brands: ["gdrive", "gdocs", "gsheets", "gmail", "ganalytics"] satisfies LogoName[],
   },
   {
-    title: "Documents",
-    body: "Sync Google Drive, S3 or MinIO, Git repositories, websites, SharePoint and OneDrive into knowledge bases.",
-    brands: ["gdrive", "s3", "github", "onedrive"] satisfies LogoName[],
+    title: "Microsoft 365",
+    body: "SharePoint and OneDrive synced as documents, and Outlook, Teams and Calendar through Microsoft's own servers.",
+    brands: ["microsoft", "onedrive", "teams"] satisfies LogoName[],
   },
   {
-    title: "Events",
-    body: "Start agents on a schedule, a new GitHub issue, a Gmail message or a signed webhook.",
-    brands: ["github", "gmail", "webhooks"] satisfies LogoName[],
+    title: "Notion, Atlassian and project tools",
+    body: "Notion pages, Jira and Confluence, Linear, Asana and GitHub, each person through their own account.",
+    brands: ["notion", "jira", "confluence", "linear", "asana", "github"] satisfies LogoName[],
   },
   {
-    title: "Chat tools",
-    body: "Publish an agent to Slack, Mattermost or Telegram, where an @mention runs as the person who sent it.",
-    brands: ["slack", "mattermost", "telegram"] satisfies LogoName[],
+    title: "Sales, support and commerce",
+    body: "HubSpot, Pipedrive, Intercom, Stripe and Shopify. Set any tool that writes to wait for a person.",
+    brands: ["hubspot", "intercom", "stripe", "shopify"] satisfies LogoName[],
   },
 ] as const;
 
 export const logoCloud: readonly LogoName[] = [
-  "notion", "github", "linear", "slack", "hubspot", "stripe",
-  "gdrive", "gmail", "figma", "jira", "postgres", "telegram",
-  "mattermost", "onedrive", "s3", "supabase", "confluence", "asana",
+  "notion", "gdrive", "slack", "microsoft", "hubspot", "github",
+  "gmail", "teams", "jira", "intercom", "figma", "linear",
+  "gsheets", "onedrive", "confluence", "stripe", "shopify", "airtable",
 ];
 
 export const controls = [

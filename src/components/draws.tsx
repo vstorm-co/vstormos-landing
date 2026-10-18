@@ -1,6 +1,6 @@
 "use client";
 
-import { AppWindow, Box, Check, Code2, Download, GitBranch, Maximize2, SlidersHorizontal, Wrench } from "lucide-react";
+import { AppWindow, Box, Check, Code2, Download, GitBranch, Maximize2, SlidersHorizontal } from "lucide-react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
@@ -23,9 +23,9 @@ const STEPS: readonly { drawing: Drawing; amount?: number; lit: number }[] = [
   { drawing: "flow", amount: 3400, lit: 0 },
   { drawing: "calculator", lit: 1 },
   { drawing: "calculator", lit: 1 },
-  { drawing: "calculator", lit: 2 },
+  { drawing: "scene", lit: 2 },
+  { drawing: "scene", lit: 2 },
   { drawing: "scene", lit: 3 },
-  { drawing: "scene", lit: 4 },
 ];
 
 const ASKS: Record<Drawing, { prompt: string; agent: string; color: string; source: string; title: string }> = {
@@ -55,7 +55,6 @@ const ASKS: Record<Drawing, { prompt: string; agent: string; color: string; sour
 const KINDS = [
   { icon: GitBranch, title: "Diagrams and flows", body: "From your documents, in SVG or Mermaid." },
   { icon: SlidersHorizontal, title: "Calculators and simulators", body: "A whole HTML page with sliders and a canvas." },
-  { icon: Wrench, title: "Fixed in the same turn", body: "If your browser breaks it, the agent hears and repairs it." },
   { icon: Box, title: "3D scenes", body: "three.js, rotated and zoomed in the chat." },
   { icon: AppWindow, title: "Saved as an app", body: "One click, versions included, opened by link." },
 ] as const;
@@ -80,7 +79,7 @@ function elbow(y: number) {
   const x1 = 412;
   const y1 = 142;
   const turn = 438;
-  const x2 = 466;
+  const x2 = 458;
   if (Math.abs(y - y1) < 2) return `M${x1} ${y1} H ${x2}`;
   const down = y > y1 ? 1 : -1;
   return `M${x1} ${y1} H ${turn - 10} Q ${turn} ${y1} ${turn} ${y1 + 10 * down} V ${y - 10 * down} Q ${turn} ${y} ${turn + 10} ${y} H ${x2}`;
@@ -136,23 +135,23 @@ function RefundFlow({ amount }: { amount: number }) {
                   className={on ? "[animation:flow_0.8s_linear_infinite]" : ""}
                 />
                 <motion.rect
-                  x="470"
+                  x="462"
                   y={outcome.y}
-                  width="160"
+                  width="174"
                   height="52"
                   rx="12"
                   animate={{ fill: on ? "#eef0ff" : "#ffffff", stroke: on ? INK : "#e4e4e7" }}
                   transition={{ duration: 0.35 }}
                   strokeWidth={on ? 1.5 : 1}
                 />
-                <circle cx="494" cy={outcome.y + 26} r="11" fill={outcome.color} />
-                <text x="494" y={outcome.y + 30} textAnchor="middle" fontSize="9" fontWeight="700" fill="#fff">
+                <circle cx="484" cy={outcome.y + 26} r="11" fill={outcome.color} />
+                <text x="484" y={outcome.y + 30} textAnchor="middle" fontSize="9" fontWeight="700" fill="#fff">
                   {outcome.who || "SD"}
                 </text>
-                <text x="512" y={outcome.y + 23} fontSize="12" fontWeight="600" fill={on ? "#3b3fb8" : "#3f3f46"}>
+                <text x="502" y={outcome.y + 23} fontSize="11.5" fontWeight="600" fill={on ? "#3b3fb8" : "#3f3f46"}>
                   {outcome.label}
                 </text>
-                <text x="512" y={outcome.y + 39} fontSize="11" fill="#a1a1aa">
+                <text x="502" y={outcome.y + 39} fontSize="10.5" fill="#a1a1aa">
                   {outcome.note}
                 </text>
               </g>
@@ -359,7 +358,6 @@ export function Draws() {
   const lit = touched ? 0 : (current?.lit ?? 0);
   const ask = ASKS[drawing];
   const saved = !touched && step === STEPS.length - 1;
-  const fixed = !touched && step === 5;
 
   return (
     <section id="draws" className="bg-paper px-5 pb-24 md:px-8 md:pb-32">
@@ -432,20 +430,6 @@ export function Draws() {
                     </motion.div>
                   </AnimatePresence>
 
-                  {/* The browser's error goes back to the agent, and the fix lands in the same turn. */}
-                  <AnimatePresence>
-                    {fixed ? (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        className="absolute right-3 bottom-3 left-3 flex items-center gap-2 rounded-[10px] bg-[#18181b] px-3 py-2 text-[12px] text-white shadow-lg sm:left-auto"
-                      >
-                        <Wrench className="size-3.5 text-[#fbbf24]" />
-                        Your browser reported a chart error. <span className="text-[#86efac]">Fixed in this turn.</span>
-                      </motion.div>
-                    ) : null}
-                  </AnimatePresence>
                 </div>
 
                 {drawing === "flow" ? (

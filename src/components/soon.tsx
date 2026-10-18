@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, GitBranch, Hand, History, Maximize, Mic, Minus, PhoneOff, Plus, Split, Table2, TableProperties, Workflow as WorkflowIcon, Zap } from "lucide-react";
+import { CalendarClock, Check, GitBranch, Hand, History, Maximize, Mic, Minus, PhoneOff, Plus, Split, Table2, TableProperties, Webhook, Workflow as WorkflowIcon, Zap } from "lucide-react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
@@ -21,14 +21,14 @@ const MAYA = { initials: "MC", color: "#f0a77f" };
 type Tab = "leads" | "workflow" | "calls";
 
 /** Which tab of the window each step shows, and which promise beside it the step proves. */
-const TABS: readonly Tab[] = ["leads", "workflow", "workflow", "workflow", "workflow", "workflow", "leads", "workflow", "calls"];
+const TABS: readonly Tab[] = ["workflow", "workflow", "workflow", "workflow", "workflow", "workflow", "leads", "workflow", "calls"];
 const SPOTLIGHT: readonly number[] = [0, 0, 1, 2, 3, 3, 4, 5, 6];
 
 const DETAILS = [
   {
     icon: Zap,
-    title: "Start on any event",
-    body: "A new row, a schedule, a webhook or an email starts the run.",
+    title: "Starts on its own",
+    body: "A new row, a schedule, a webhook, an email or a Slack message. Nobody presses run.",
   },
   {
     icon: WorkflowIcon,
@@ -82,97 +82,112 @@ function Maya({ size = 22 }: { size?: number }) {
   );
 }
 
-/** The Leads table: Acme arrives as a new row, and the run later fills in its score and stage. */
+/** The Leads table: Acme arrives as a new row, and the run later fills in its score, owner and stage. */
+const OWNERS = { MC: "#f0a77f", TB: "#7fb4f0" } as const;
+
+function Owner({ who }: { who: keyof typeof OWNERS }) {
+  return (
+    <span className="inline-flex size-[22px] items-center justify-center rounded-full text-[9px] font-semibold text-white" style={{ background: OWNERS[who] }}>
+      {who}
+    </span>
+  );
+}
+
+function Score({ value }: { value: number | null }) {
+  return (
+    <span className="flex items-center gap-2">
+      <span className="relative h-1.5 w-12 overflow-hidden rounded-full bg-[#ececef]">
+        <motion.span
+          className="absolute inset-y-0 left-0 rounded-full"
+          style={{ background: value !== null && value >= 70 ? "#22a06b" : "#f59e0b" }}
+          initial={false}
+          animate={{ width: `${value ?? 0}%` }}
+          transition={{ duration: 0.8, ease: EASE }}
+        />
+      </span>
+      <span className="w-5 font-mono text-[11.5px] text-[#18181b]">{value ?? "–"}</span>
+    </span>
+  );
+}
+
+function Stage({ name }: { name: "New" | "Qualified" | "Nurture" }) {
+  const tone = { New: "bg-[#eef2ff] text-[#3b3fb8]", Qualified: "bg-[#dcfce7] text-[#166534]", Nurture: "bg-[#fef3c7] text-[#92400e]" }[name];
+  return <span className={`inline-flex rounded-[6px] px-1.5 py-[1px] text-[11px] font-medium ${tone}`}>{name}</span>;
+}
+
+const COLS = "grid-cols-[24px_minmax(0,1.5fr)_minmax(0,0.6fr)_minmax(0,1fr)_minmax(0,0.9fr)_34px]";
+
 function Leads({ step }: { step: number }) {
   const scored = step >= 6;
   const rows = [
-    {
-      name: "Orbit Freight",
-      size: "1,200",
-      score: "91",
-      stage: "Qualified",
-      tone: "green",
-    },
-    {
-      name: "Lumen Health",
-      size: "85",
-      score: "64",
-      stage: "Nurture",
-      tone: "grey",
-    },
+    { id: 2, name: "Orbit Freight", site: "orbitfreight.com", size: "1,200", score: 91, stage: "Qualified", owner: "TB" },
+    { id: 3, name: "Lumen Health", site: "lumen.health", size: "85", score: 64, stage: "Nurture", owner: "MC" },
+    { id: 4, name: "Brightline Labs", site: "brightline.io", size: "310", score: 77, stage: "Qualified", owner: "TB" },
   ] as const;
+  const head = ["", "Company", "People", "Score", "Stage", ""];
   return (
     <div className="text-[12.5px]">
-      <div className="mb-3 flex items-center justify-between">
-        <p className="font-semibold text-[#18181b]">
-          Leads <span className="font-normal text-[#a1a1aa]">· 3 rows</span>
-        </p>
-        <span className="rounded-[7px] bg-[#f4f4f5] px-2 py-0.5 text-[11px] text-[#52525b]">Grid</span>
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <span className="inline-flex size-6 items-center justify-center rounded-[6px] bg-[#ecfdf5] text-[#16794c]">
+            <Table2 className="size-3.5" />
+          </span>
+          <p className="font-semibold text-[#18181b]">
+            Leads <span className="font-normal text-[#a1a1aa]">· 4 records</span>
+          </p>
+        </div>
+        <div className="flex rounded-[8px] bg-[#f4f4f5] p-0.5 text-[11px]">
+          <span className="rounded-[6px] bg-white px-2 py-0.5 font-medium text-[#18181b] shadow-sm">Grid</span>
+          <span className="px-2 py-0.5 text-[#71717a]">Kanban</span>
+        </div>
       </div>
-      <div className="overflow-hidden rounded-[12px] border border-[#ececef]">
-        <div className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,0.6fr)_minmax(0,0.5fr)_minmax(0,0.9fr)] gap-2 border-b border-[#ececef] bg-[#fafafa] px-3 py-2 text-[10.5px] font-medium uppercase tracking-[0.05em] text-[#a1a1aa]">
-          <span>Company</span>
-          <span>People</span>
-          <span>Score</span>
-          <span>Stage</span>
+      <div className="overflow-hidden rounded-[12px] border border-[#ececef] bg-white">
+        <div className={`grid ${COLS} items-center gap-2 border-b border-[#ececef] bg-[#fafafa] px-3 py-2 text-[10.5px] font-medium text-[#71717a]`}>
+          {head.map((label, index) => (
+            <span key={index} className="truncate">{label}</span>
+          ))}
         </div>
         <motion.div
-          initial={{ opacity: 0, height: 0, backgroundColor: "#eef2ff" }}
-          animate={{
-            opacity: 1,
-            height: "auto",
-            backgroundColor: scored ? "#f2fbf6" : "#eef2ff",
-          }}
+          initial={{ backgroundColor: "#eef2ff" }}
+          animate={{ backgroundColor: scored ? "#f2fbf6" : "#eef2ff" }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,0.6fr)_minmax(0,0.5fr)_minmax(0,0.9fr)] items-center gap-2 border-b border-[#ececef] px-3 py-2.5"
+          className={`grid ${COLS} items-center gap-2 border-b border-[#ececef] px-3 py-2`}
         >
-          <span className="flex min-w-0 items-center gap-1.5 truncate font-medium text-[#18181b]">
-            Acme Corp {scored ? null : <span className="hidden rounded-full bg-[#5b5bd6] px-1.5 text-[9.5px] font-semibold text-white sm:inline">NEW</span>}
+          <span className="font-mono text-[10.5px] text-[#a1a1aa]">1</span>
+          <span className="min-w-0">
+            <span className="flex items-center gap-1.5 truncate font-medium text-[#18181b]">
+              Acme Corp {scored ? null : <span className="hidden rounded-[5px] bg-[#5b5bd6] px-1 text-[9px] font-semibold text-white sm:inline">NEW</span>}
+            </span>
+            <span className="block truncate text-[10.5px] text-[#a1a1aa]">acme.com</span>
           </span>
           <span className="text-[#52525b]">240</span>
-          <span className="font-medium text-[#18181b]">
-            {scored ? (
-              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                82
-              </motion.span>
-            ) : (
-              <span className="text-[#d4d4d8]">—</span>
-            )}
-          </span>
-          <span>
-            {scored ? (
-              <motion.span
-                initial={{ scale: 0.6, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 420, damping: 20 }}
-                className="inline-flex rounded-full bg-[#dcfce7] px-2 py-[1px] text-[11px] font-medium text-[#166534]"
-              >
-                Qualified
-              </motion.span>
-            ) : (
-              <span className="inline-flex rounded-full bg-[#f4f4f5] px-2 py-[1px] text-[11px] text-[#71717a]">New</span>
-            )}
-          </span>
+          <Score value={scored ? 82 : null} />
+          <span>{scored ? <Stage name="Qualified" /> : <Stage name="New" />}</span>
+          <span>{scored ? <Owner who="TB" /> : null}</span>
         </motion.div>
         {rows.map((row) => (
-          <div
-            key={row.name}
-            className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,0.6fr)_minmax(0,0.5fr)_minmax(0,0.9fr)] items-center gap-2 border-b border-[#f4f4f5] px-3 py-2.5 last:border-b-0"
-          >
-            <span className="truncate font-medium text-[#18181b]">{row.name}</span>
-            <span className="text-[#52525b]">{row.size}</span>
-            <span className="font-medium text-[#18181b]">{row.score}</span>
-            <span>
-              <span
-                className={`inline-flex rounded-full px-2 py-[1px] text-[11px] font-medium ${row.tone === "green" ? "bg-[#dcfce7] text-[#166534]" : "bg-[#f4f4f5] text-[#71717a]"}`}
-              >
-                {row.stage}
-              </span>
+          <div key={row.name} className={`grid ${COLS} items-center gap-2 border-b border-[#f4f4f5] px-3 py-2 last:border-b-0`}>
+            <span className="font-mono text-[10.5px] text-[#a1a1aa]">{row.id}</span>
+            <span className="min-w-0">
+              <span className="block truncate font-medium text-[#18181b]">{row.name}</span>
+              <span className="block truncate text-[10.5px] text-[#a1a1aa]">{row.site}</span>
             </span>
+            <span className="text-[#52525b]">{row.size}</span>
+            <Score value={row.score} />
+            <span><Stage name={row.stage} /></span>
+            <span><Owner who={row.owner} /></span>
           </div>
         ))}
       </div>
-      <p className="mt-3 text-[11.5px] text-[#a1a1aa]">{scored ? "Updated by Lead routing, run 1,284" : "Acme Corp added from the website form, 11:42"}</p>
+      <p className="mt-3 flex items-center gap-1.5 text-[11.5px] text-[#a1a1aa]">
+        {scored ? (
+          <>
+            <Check className="size-3.5 text-[#22a06b]" /> Score, stage and owner written by Lead routing, run 1,284
+          </>
+        ) : (
+          "Acme Corp added from the website form, 11:42"
+        )}
+      </p>
     </div>
   );
 }
@@ -284,7 +299,7 @@ const WIRES = [
 
 /** Where the camera looks at each step, in canvas pixels. */
 const CAMERA: readonly { x: number; y: number }[] = [
-  { x: 280, y: 193 },
+  { x: 200, y: 193 },
   { x: 280, y: 193 },
   { x: 600, y: 193 },
   { x: 900, y: 170 },
@@ -365,6 +380,49 @@ function CanvasCard({ node, step }: { node: CanvasNode; step: number }) {
   );
 }
 
+const TRIGGERS = [
+  { icon: <CalendarClock className="size-4 text-[#5b5bd6]" />, name: "Every Monday, 9:00", kind: "Schedule" },
+  { icon: <Webhook className="size-4 text-[#db2777]" />, name: "POST /hooks/lead", kind: "Webhook" },
+  { icon: <ServiceIcon name="gmail" className="size-4" />, name: "Email to leads@", kind: "Gmail" },
+  { icon: <ServiceIcon name="slack" className="size-4" />, name: "Message in #sales", kind: "Slack" },
+  { icon: <TableProperties className="size-4 text-[#16794c]" />, name: "New row in Leads", kind: "Table" },
+] as const;
+
+/** What can start a workflow: the choices light in turn and the last one, a new row, fires. */
+function Triggers() {
+  const [lit, setLit] = useState(0);
+  useEffect(() => {
+    if (lit >= TRIGGERS.length - 1) return;
+    const timer = window.setTimeout(() => setLit((current) => current + 1), 320);
+    return () => window.clearTimeout(timer);
+  }, [lit]);
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 14 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 10 }}
+      transition={{ duration: 0.35, ease: EASE }}
+      className="absolute top-3 right-3 w-[min(250px,calc(100%-24px))] rounded-[12px] border border-[#ececef] bg-white p-2 shadow-[0_20px_40px_-18px_rgba(16,24,40,0.4)]"
+    >
+      <p className="px-1.5 pb-1.5 text-[11px] font-medium text-[#71717a]">Starts on</p>
+      {TRIGGERS.map((trigger, index) => {
+        const on = index === lit;
+        const fired = on && index === TRIGGERS.length - 1;
+        return (
+          <div key={trigger.name} className={`flex items-center gap-2 rounded-[8px] px-1.5 py-1.5 transition-colors duration-200 ${on ? "bg-[#f4f4f5]" : ""}`}>
+            <span className="flex size-7 shrink-0 items-center justify-center rounded-[7px] bg-[#fafafa] ring-1 ring-[#ececef]">{trigger.icon}</span>
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-[12px] font-medium text-[#18181b]">{trigger.name}</span>
+              <span className="block text-[10.5px] text-[#a1a1aa]">{trigger.kind}</span>
+            </span>
+            {fired ? <span className="rounded-full bg-[#ecf8f2] px-1.5 text-[10px] font-medium text-[#16794c]">fired</span> : null}
+          </div>
+        );
+      })}
+    </motion.div>
+  );
+}
+
 /**
  * The workflow on the editor's canvas: the dotted grid, the cards and their
  * wires. The camera follows the run from card to card, then pulls back to the
@@ -420,6 +478,9 @@ function Canvas({ step }: { step: number }) {
           <CanvasCard key={node.id} node={node} step={step} />
         ))}
       </motion.div>
+
+      {/* Step 0: the trigger's choices, cycling until a new row in Leads starts the run. */}
+      <AnimatePresence>{step === 0 ? <Triggers /> : null}</AnimatePresence>
 
       {/* The editor's zoom controls, bottom right, as on the real canvas. */}
       <div className="absolute right-3 bottom-3 flex flex-col overflow-hidden rounded-[8px] border border-[#e4e4e7] bg-white text-[#52525b] shadow-sm">
@@ -636,7 +697,7 @@ export function Soon() {
       return;
     }
     if (!visible) return;
-    const timer = window.setTimeout(() => setStep((current) => (current >= LAST ? 0 : current + 1)), step === LAST ? STEP_MS * 3 : STEP_MS);
+    const timer = window.setTimeout(() => setStep((current) => (current >= LAST ? 0 : current + 1)), step === LAST ? STEP_MS * 3 : step === 0 ? STEP_MS * 1.6 : STEP_MS);
     return () => window.clearTimeout(timer);
   }, [step, visible, reduce]);
 

@@ -334,7 +334,10 @@ export function Together() {
         <SectionLinks docs={links.projects} docsLabel="How projects work" />
 
         <Reveal delay={0.15} className="mt-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[14px] text-muted">
-          <span>Y Combinator put “multiplayer AI” in its Fall 2026 Requests for Startups.</span>
+          <span className="inline-flex items-center gap-2">
+            <ServiceIcon name="ycombinator" className="size-5 rounded-[4px]" />
+            Y Combinator put “multiplayer AI” in its Fall 2026 Requests for Startups.
+          </span>
           <a href="https://www.ycombinator.com/rfs" target="_blank" rel="noreferrer" className="font-medium text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink">
             In AgenticOS it ships today, open source.
           </a>
