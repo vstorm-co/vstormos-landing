@@ -302,7 +302,7 @@ export const faq = [
   },
   {
     q: "Can it use the AI subscription we already pay for?",
-    a: "Yes. A person can sign in with ChatGPT once and run agents on that plan through Codex instead of a metered API key, and the coding agent can run Claude Code or Codex on a subscription. Budgets still count every run. A subscription belongs to one person, so for agents the whole company uses, an organization API key is the better fit.",
+    a: "Yes. A person can sign in with ChatGPT once and run agents on that plan through Codex instead of a metered API key, and the coding agent can run Claude Code or Codex on a subscription. Budgets still count every run. A subscription belongs to one person, so for agents the whole company uses, an organization API key is the better fit. If you would rather not depend on any vendor's plan, the same agents run on your own models through Ollama, vLLM or any OpenAI-compatible server, on infrastructure you own.",
   },
   {
     q: "Can it run with local models only?",

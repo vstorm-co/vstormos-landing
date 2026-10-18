@@ -189,7 +189,7 @@ export function Coding() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
             <Card
               title="Already paying for ChatGPT? Put it to work."
-              body="Sign in with ChatGPT once and your agents run on your plan. No API key, and budgets still count every run."
+              body="Sign in with ChatGPT once and your agents run on your plan, no API key. Or run them on your own models, on your own servers: it is open source."
             >
               <Subscription />
             </Card>
