@@ -91,6 +91,8 @@ export interface Showcase {
   width: number;
   height: number;
   icon: "users" | "globe" | "flask" | "layout";
+  /** A capture from the console's phone layout, shown instead of `image` on narrow screens. */
+  phoneImage?: string;
   more: { label: string; href: string };
 }
 
@@ -101,6 +103,7 @@ export const showcase: readonly Showcase[] = [
     title: "Agents that work as a team",
     body: "A lead agent hands parts of a task to colleagues and writes up what they found. You see who it asked, and what each one said.",
     image: "/screens/highlight-subagents.webp",
+    phoneImage: "/screens/phone-team.webp",
     alt: "A Chief of Staff agent’s pricing review brief, written from what Sales Researcher and Finance Analyst answered: Ramp and Bill.com pricing in dollars and three bullets for the meeting",
     width: 2400,
     height: 1500,
@@ -137,6 +140,7 @@ export const showcase: readonly Showcase[] = [
     title: "Apps, not just answers",
     body: "An agent publishes a dashboard, a calculator or a report as a page with a stable link and versions. Choose who can open it; updates keep the link.",
     image: "/screens/highlight-app.webp",
+    phoneImage: "/screens/phone-app.webp",
     alt: "An ROI calculator drawn in chat and saved as an app with its own link: sliders for invoices and hourly cost, $69,120 saved per year, monthly cost before and after",
     width: 2400,
     height: 1500,

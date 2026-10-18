@@ -76,7 +76,7 @@ export function McpClients() {
           </span>
           <CopyButton text={snippet} label={`Copy the ${MCP_CLIENT_NAME[client]} configuration`} />
         </div>
-        <pre className="mt-3 h-[150px] overflow-auto whitespace-pre-wrap break-all sm:whitespace-pre sm:break-normal rounded-[12px] bg-white/[0.04] p-4 font-mono text-[13px] leading-relaxed text-white/90 ring-1 ring-white/[0.06] [scrollbar-width:thin]">
+        <pre className="mt-3 min-h-[72px] overflow-auto whitespace-pre sm:h-[150px] rounded-[12px] bg-white/[0.04] p-4 font-mono text-[13px] leading-relaxed text-white/90 ring-1 ring-white/[0.06] [scrollbar-width:thin]">
           <code>{snippet}</code>
         </pre>
         <p className="mt-3 text-[13px] leading-relaxed text-white/50">
