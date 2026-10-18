@@ -67,6 +67,13 @@ export const heroModels: readonly { name: string; provider: string }[] = [
   { name: "Ollama", provider: "ollama" },
 ];
 
+/** Early teams, described without their names until they agree to be named. */
+export const pilots = [
+  { sector: "Manufacturing · Austria", body: "An industrial group is piloting it across its companies, with each company’s data kept apart." },
+  { sector: "Engineering · Norway", body: "A consultancy runs it on its own servers, for its own team and for a client." },
+  { sector: "Marketing", body: "An agency is planning its client work around a team of agents built on it." },
+] as const;
+
 export const figures = [
   { value: "29", art: "tool_search", label: "built-in capabilities, switched on per agent" },
   { value: "28", art: "thinking", label: "model providers, hosted, your plan or local" },
