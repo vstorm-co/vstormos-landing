@@ -25,7 +25,7 @@ const COLUMNS = [
       { label: "Introduction deck", href: links.deck },
       { label: "Product tour", href: links.tour },
       { label: "29 tutorials", href: links.useCases },
-      { label: "Comparisons", href: links.comparison },
+      { label: "Comparisons", href: asset("/compare/") },
       { label: "Release notes", href: links.releaseNotes },
     ],
   },
@@ -58,8 +58,9 @@ const SOCIAL = [
   { label: "Built on Pydantic AI", href: links.pydanticAi, icon: <BrandIcon name="pydantic" mono className="size-[18px]" /> },
 ] as const;
 
-/** The engraving's sky is the footer colour, so the illustration rises out of it with no edge. */
-export function Footer() {
+/** The engraving's sky is the footer colour, so the illustration rises out of it with no edge.
+ * `home` sends the in-page links back to the home page from any other page. */
+export function Footer({ home = "" }: { home?: string }) {
   return (
     <footer className="relative overflow-hidden bg-violet text-white">
       <div className="relative z-10 mx-auto max-w-[1240px] px-5 pt-16 md:px-8 md:pt-20">
@@ -136,7 +137,7 @@ export function Footer() {
                 {column.items.map((item) => (
                   <li key={item.label}>
                     <a
-                      href={item.href}
+                      href={item.href.startsWith("#") ? `${home}${item.href}` : item.href}
                       {...(item.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
                       className="text-[14.5px] text-white/60 transition-colors hover:text-white"
                     >

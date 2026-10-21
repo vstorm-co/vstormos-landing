@@ -3,6 +3,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { CapabilityArt } from "@/components/capability-art";
 import { Reveal, SplitHeading } from "@/components/ui";
 import { links, vstorm } from "@/content";
+import { asset } from "@/lib/site";
 
 interface Plan {
   art: string;
@@ -125,7 +126,7 @@ export function Pricing() {
               No seat fees and no credits: AgenticOS is Apache-2.0 software. Run it yourself, or have the team that
               builds it put it into production for you. Model usage is billed by your own provider, under your own
               contract.{" "}
-              <a href={links.comparison} target="_blank" rel="noreferrer" className="font-medium text-ink-soft underline decoration-line-strong underline-offset-4 hover:text-ink hover:decoration-ink">
+              <a href={asset("/compare/")} className="font-medium text-ink-soft underline decoration-line-strong underline-offset-4 hover:text-ink hover:decoration-ink">
                 Compare with per-seat products
               </a>
             </>

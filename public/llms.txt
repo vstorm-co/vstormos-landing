@@ -30,6 +30,12 @@ Product or service: both. AgenticOS is open-source software anyone can run; Vsto
 - [Capability reference](https://vstorm-co.github.io/agenticos/reference/capabilities/): every capability, its tools and settings
 - [Security and data flows](https://vstorm-co.github.io/agenticos/security/): threat model, controls, what leaves the deployment
 - [Comparisons](https://vstorm-co.github.io/agenticos/about/comparison/): AgenticOS against Claude, ChatGPT, Copilot Studio, Dify, n8n and others
+- [AgenticOS vs ChatGPT Enterprise](https://vstorm-co.github.io/vstormos-landing/compare/chatgpt-enterprise/)
+- [AgenticOS vs Claude Enterprise](https://vstorm-co.github.io/vstormos-landing/compare/claude-enterprise/)
+- [AgenticOS vs Copilot Studio](https://vstorm-co.github.io/vstormos-landing/compare/copilot-studio/)
+- [AgenticOS vs n8n](https://vstorm-co.github.io/vstormos-landing/compare/n8n/)
+- [AgenticOS vs Dify](https://vstorm-co.github.io/vstormos-landing/compare/dify/)
+- [AgenticOS vs Sauna](https://vstorm-co.github.io/vstormos-landing/compare/sauna/)
 - [Tutorials](https://vstorm-co.github.io/agenticos/use-cases/): 29 tutorials, each with a check you can run
 
 ## Source
