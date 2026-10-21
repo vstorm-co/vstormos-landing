@@ -38,8 +38,13 @@ function useActiveSection(): string | null {
   return active;
 }
 
-/** Transparent over the hero's sky; a paper bar once the page scrolls past it. */
-export function Nav() {
+/**
+ * Transparent over the hero's sky; a paper bar once the page scrolls past it.
+ * `home` is prefixed to the in-page links, so a page other than the home page
+ * (`asset("/")`) sends them back to the home page's sections. `solid` keeps the
+ * paper bar from the start, for a page whose top band is light.
+ */
+export function Nav({ home = "", solid: alwaysSolid = false }: { home?: string; solid?: boolean }) {
   const { talk } = vstorm.credentials;
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
@@ -65,7 +70,7 @@ export function Nav() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const light = !solid && !open;
+  const light = !alwaysSolid && !solid && !open;
 
   return (
     <header
@@ -109,7 +114,7 @@ export function Nav() {
         ) : null}
       </AnimatePresence>
       <nav aria-label="Main" className="mx-auto flex h-[68px] max-w-[1240px] items-center justify-between px-5 md:h-[72px] md:px-8">
-        <a href="#top" aria-label="AgenticOS home" onClick={() => setOpen(false)}>
+        <a href={`${home}#top`} aria-label="AgenticOS home" onClick={() => setOpen(false)}>
           <Logo tone={light ? "light" : "dark"} />
         </a>
 
@@ -120,7 +125,7 @@ export function Nav() {
             return (
               <li key={item.label}>
                 <a
-                  href={item.href}
+                  href={item.href.startsWith("#") ? `${home}${item.href}` : item.href}
                   aria-current={current ? "true" : undefined}
                   {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
                   className={`relative rounded-full px-3.5 py-2 text-[14.5px] font-medium transition-colors ${
@@ -184,7 +189,7 @@ export function Nav() {
                 {nav.map((item) => (
                   <li key={item.label}>
                     <a
-                      href={item.href}
+                      href={item.href.startsWith("#") ? `${home}${item.href}` : item.href}
                       onClick={() => setOpen(false)}
                       {...(item.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
                       className="flex items-center justify-between border-b border-line py-4 text-[17px] font-medium text-ink"

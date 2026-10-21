@@ -2,6 +2,7 @@ import { Capabilities } from "@/components/capabilities";
 import { Control } from "@/components/control";
 import { Cta } from "@/components/cta";
 import { Faq } from "@/components/faq";
+import { JsonLd } from "@/components/json-ld";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { HowItWorks } from "@/components/how-it-works";
@@ -24,10 +25,20 @@ import { Engineers } from "@/components/engineers";
 import { Expertise } from "@/components/expertise";
 import { Pricing } from "@/components/pricing";
 import { Vstorm } from "@/components/vstorm";
+import { faq } from "@/content";
+import { PAGE_URL } from "@/lib/site";
+
+const faqData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${PAGE_URL}/#faq`,
+  mainEntity: faq.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })),
+};
 
 export default function Home() {
   return (
     <>
+      <JsonLd data={faqData} />
       <SmoothScroll />
       <Spotlights />
       <FloatingCta />

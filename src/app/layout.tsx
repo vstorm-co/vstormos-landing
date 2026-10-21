@@ -5,7 +5,7 @@ import "./globals.css";
 import "./capability-art.css";
 
 import { ArrowCursor } from "@/components/arrow-cursor";
-import { faq, links, RELEASE, vstorm } from "@/content";
+import { links, RELEASE, vstorm } from "@/content";
 import { PAGE_URL } from "@/lib/site";
 
 // Vendored from the AgenticOS console (OFL 1.1), so the build never fetches a font.
@@ -79,8 +79,8 @@ export const metadata: Metadata = {
 
 /*
  * Structured data for search engines and answer engines: who makes it, what it
- * is, what it costs, and the FAQ the page answers. Every value is a fact the
- * page itself states.
+ * is and what it costs. Every value is a fact the page itself states; each page
+ * adds its own FAQ.
  */
 const structuredData = {
   "@context": "https://schema.org",
@@ -130,11 +130,6 @@ const structuredData = {
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "Apache-2.0 licence; implementation by Vstorm on request" },
       author: { "@id": "https://vstorm.co/#organization" },
       sameAs: [links.repo, vstorm.agenticos],
-    },
-    {
-      "@type": "FAQPage",
-      "@id": `${PAGE_URL}/#faq`,
-      mainEntity: faq.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })),
     },
   ],
 };

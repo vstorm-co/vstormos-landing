@@ -266,7 +266,7 @@ export const comparison = [
   { name: "AgenticOS", where: "Your infrastructure", source: "Apache-2.0", models: "28 providers, including local ones and your ChatGPT plan", own: true },
   { name: "OpenAI dots", where: "OpenAI’s cloud", source: "Proprietary", models: "OpenAI only", own: false },
   { name: "Grok Bot", where: "xAI’s cloud", source: "Proprietary", models: "Grok only", own: false },
-  { name: "Viktor", where: "Viktor’s cloud", source: "Proprietary", models: "OpenAI, Anthropic, Google, Kimi", own: false },
+  { name: "Viktor", where: "Viktor’s cloud", source: "Proprietary", models: "OpenAI, Anthropic, Google, xAI", own: false },
   { name: "n8n", where: "Self-hosted or n8n Cloud", source: "Sustainable Use License", models: "Many, including Ollama", own: false },
 ] as const;
 
