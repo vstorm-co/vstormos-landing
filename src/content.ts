@@ -278,7 +278,7 @@ export const setups = [
   },
   {
     title: "Fully local",
-    body: "The same layer with open models through Ollama or vLLM on your hardware, local embeddings and local document parsers. Nothing leaves your network.",
+    body: "The same layer with open models through Ollama or vLLM on your hardware, local embeddings and local document parsers. Your prompts and documents stay on your network, and you can switch off the only outbound report.",
     tags: ["Ollama", "vLLM", "Local parsers"],
   },
 ] as const;
@@ -409,13 +409,6 @@ export const vstorm = {
       { title: "Technology Fast 50", by: "Deloitte, 2024" },
       { title: "Top AI company", by: "The Manifest, 2024", href: "https://themanifest.com/" },
     ],
-    /** Remove after the date: the page says "speaking", not "spoke". */
-    talk: {
-      title: "Speaking at AGNTCon + MCPCon",
-      when: "San Jose, Oct 23, 2026",
-      href: "https://events.linuxfoundation.org/agntcon-mcpcon-north-america/program/schedule/?id=1348542",
-      drinks: "https://luma.com/egivjdb6",
-    },
   },
   /** Agents Vstorm has put in production, with the figures its case studies publish. Not AgenticOS deployments. */
   cases: [

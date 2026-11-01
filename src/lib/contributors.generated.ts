@@ -12,7 +12,7 @@ export const CONTRIBUTORS: readonly Contributor[] = [
   {
     "login": "DEENUU1",
     "name": "Kacper Włodarczyk",
-    "contributions": 956,
+    "contributions": 1068,
     "url": "https://github.com/DEENUU1",
     "avatar": "/contributors/DEENUU1.png"
   },
@@ -26,14 +26,14 @@ export const CONTRIBUTORS: readonly Contributor[] = [
   {
     "login": "MichalZelasko",
     "name": "Michał Żelasko",
-    "contributions": 15,
+    "contributions": 26,
     "url": "https://github.com/MichalZelasko",
     "avatar": "/contributors/MichalZelasko.png"
   },
   {
     "login": "galaxai",
     "name": "Szymon Hawryluk",
-    "contributions": 8,
+    "contributions": 10,
     "url": "https://github.com/galaxai",
     "avatar": "/contributors/galaxai.png"
   },
@@ -52,11 +52,25 @@ export const CONTRIBUTORS: readonly Contributor[] = [
     "avatar": "/contributors/michalsikorski-zen.png"
   },
   {
+    "login": "rahul05ranjan",
+    "name": "Rahul",
+    "contributions": 2,
+    "url": "https://github.com/rahul05ranjan",
+    "avatar": "/contributors/rahul05ranjan.png"
+  },
+  {
     "login": "Woleek",
     "name": "Dawid Wolkiewicz",
     "contributions": 1,
     "url": "https://github.com/Woleek",
     "avatar": "/contributors/Woleek.png"
+  },
+  {
+    "login": "LovingCivilian",
+    "name": "LovingCivilian",
+    "contributions": 1,
+    "url": "https://github.com/LovingCivilian",
+    "avatar": "/contributors/LovingCivilian.png"
   },
   {
     "login": "breezeFur",
@@ -71,8 +85,15 @@ export const CONTRIBUTORS: readonly Contributor[] = [
     "contributions": 1,
     "url": "https://github.com/labmimors",
     "avatar": "/contributors/labmimors.png"
+  },
+  {
+    "login": "mcauthorn",
+    "name": "mcauth",
+    "contributions": 1,
+    "url": "https://github.com/mcauthorn",
+    "avatar": "/contributors/mcauthorn.png"
   }
 ];
 
 /** The star count when this file was generated; the page refreshes it in the browser. */
-export const STARS_AT_BUILD = 107;
+export const STARS_AT_BUILD = 140;
