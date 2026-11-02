@@ -51,3 +51,7 @@ Product or service: both. AgenticOS is open-source software anyone can run; Vsto
 
 - [AgenticOS vs Muse](https://vstorm-co.github.io/vstormos-landing/compare/muse/)
 - [AgenticOS vs Claude Duet](https://vstorm-co.github.io/vstormos-landing/compare/claude-duet/)
+
+- [AgenticOS vs Grok Bot](https://vstorm-co.github.io/vstormos-landing/compare/grok-bot/)
+- [AgenticOS vs OpenBot](https://vstorm-co.github.io/vstormos-landing/compare/openbot/)
+- [AgenticOS vs OpenAI dots](https://vstorm-co.github.io/vstormos-landing/compare/openai-dots/)

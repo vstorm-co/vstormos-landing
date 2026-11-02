@@ -562,6 +562,141 @@ export const comparisons = [
   "scene": "lake",
   "screens": [SCREENS.builder, SCREENS.approvals]
 },
+{
+  "slug": "grok-bot",
+  "name": "Grok Bot",
+  "checkedDate": "2 November 2026",
+  "metaTitle": "AgenticOS vs Grok Bot",
+  "description": "Compare Grok Bot and AgenticOS: deployment, team work, operation and the scope of a self-hosted AI agent platform.",
+  "lead": "Grok Bot provides managed AI teammates on persistent cloud computers. Its official documentation includes Enterprise audit logs and other admin controls. AgenticOS provides a company agent platform you operate yourself, with the models, tools and approval policies you choose.",
+  "glance": [
+    {
+      "area": "Deployment",
+      "them": "Vendor cloud; bots in an account share a computer",
+      "us": "Your infrastructure and selected model providers"
+    },
+    {
+      "area": "Scope to check",
+      "them": "Enterprise audit logs, SCIM and MCP allowlist; plan conditions apply",
+      "us": "Apache-2.0; infrastructure and model costs are separate"
+    },
+    {
+      "area": "Work",
+      "them": "Persistent bots with app access, shared computers and routines",
+      "us": "Versioned agents, shared Projects, visual workflows, virtual tables and routines"
+    }
+  ],
+  "further": [
+    {
+      "title": "Choose the operating model",
+      "body": "Configure the team’s agents, knowledge and tools, set approval policies and budgets, and inspect runs. Self-hosting also means your team owns deployment and maintenance."
+    }
+  ],
+  "enough": [
+    "You want a managed teammate service with its desktop and mobile apps.",
+    "Choose on the exact task, tool support and operating requirements; no answer-quality advantage is claimed."
+  ],
+  "together": "Treat migration as a small manual experiment: recreate permitted instructions, reconnect tools and verify a read and a rejected write. No automatic importer, transferred login session or direct interoperability is promised.",
+  "faq": [
+    {
+      "q": "Were both products tested together?",
+      "a": "No. These pages compare documented capabilities. The linked guide names its own baseline; assess the current vendor conditions and test your task before changing systems."
+    }
+  ],
+  "guide": "https://vstorm-co.github.io/agenticos/about/grok-bot/",
+  "scene": "meadow",
+  "screens": [SCREENS.builder, SCREENS.approvals]
+},
+{
+  "slug": "openbot",
+  "name": "OpenBot",
+  "checkedDate": "2 November 2026",
+  "metaTitle": "AgenticOS vs OpenBot",
+  "description": "Compare OpenBot and AgenticOS: deployment, team work, operation and the scope of a self-hosted AI agent platform.",
+  "lead": "OpenBot is the local-first teammate workspace at openbot.run, with desktop, team server and hosting options. It supports several agent providers. AgenticOS is an Apache-2.0 company agent platform with shared Projects, visual workflows and governance controls. Compare the actual deployment and license terms you need.",
+  "glance": [
+    {
+      "area": "Deployment",
+      "them": "Local computer, team server or hosted option",
+      "us": "Your infrastructure and selected model providers"
+    },
+    {
+      "area": "Scope to check",
+      "them": "Source-available; repository license: PolyForm Noncommercial 1.0.0",
+      "us": "Apache-2.0; infrastructure and model costs are separate"
+    },
+    {
+      "area": "Work",
+      "them": "Shared team workspace, files and agent handoffs, using connected providers",
+      "us": "Versioned agents, shared Projects, visual workflows, virtual tables and routines"
+    }
+  ],
+  "further": [
+    {
+      "title": "Choose the operating model",
+      "body": "Configure the team’s agents, knowledge and tools, set approval policies and budgets, and inspect runs. Self-hosting also means your team owns deployment and maintenance."
+    }
+  ],
+  "enough": [
+    "Its desktop workspace and provider integrations fit your task and licensing requirements.",
+    "Choose on the exact task, tool support and operating requirements; no answer-quality advantage is claimed."
+  ],
+  "together": "Treat migration as a small manual experiment: recreate permitted instructions, reconnect tools and verify a read and a rejected write. No automatic importer, transferred login session or direct interoperability is promised.",
+  "faq": [
+    {
+      "q": "Were both products tested together?",
+      "a": "No. These pages compare documented capabilities. The linked guide names its own baseline; assess the current vendor conditions and test your task before changing systems."
+    }
+  ],
+  "guide": "https://vstorm-co.github.io/agenticos/about/openbot/",
+  "scene": "meadow",
+  "screens": [SCREENS.builder, SCREENS.approvals]
+},
+{
+  "slug": "openai-dots",
+  "name": "OpenAI dots",
+  "checkedDate": "2 November 2026",
+  "metaTitle": "AgenticOS vs OpenAI dots",
+  "description": "Compare OpenAI dots and AgenticOS: deployment, team work, operation and the scope of a self-hosted AI agent platform.",
+  "lead": "A dot is an always-on personal agent in ChatGPT. It works on its own cloud computer, uses permitted connected apps and can delegate work while you keep talking. AgenticOS is a self-hosted company platform for configuring, sharing and governing agents. This is a documentation comparison, not a tested account benchmark.",
+  "glance": [
+    {
+      "area": "Deployment",
+      "them": "OpenAI cloud; optional connected local computer has separate availability requirements",
+      "us": "Your infrastructure and selected model providers"
+    },
+    {
+      "area": "Scope to check",
+      "them": "Gradual rollout to eligible accounts; plan, region and workspace conditions apply",
+      "us": "Apache-2.0; infrastructure and model costs are separate"
+    },
+    {
+      "area": "Work",
+      "them": "Ongoing personal responsibilities, permitted connected apps and delegated cloud threads",
+      "us": "Versioned agents, shared Projects, visual workflows, virtual tables and routines"
+    }
+  ],
+  "further": [
+    {
+      "title": "Choose the operating model",
+      "body": "Configure the team’s agents, knowledge and tools, set approval policies and budgets, and inspect runs. Self-hosting also means your team owns deployment and maintenance."
+    }
+  ],
+  "enough": [
+    "You want an ongoing personal agent in ChatGPT without operating an agent platform.",
+    "Choose on the exact task, tool support and operating requirements; no answer-quality advantage is claimed."
+  ],
+  "together": "Treat migration as a small manual experiment: recreate permitted instructions, reconnect tools and verify a read and a rejected write. No automatic importer, transferred login session or direct interoperability is promised.",
+  "faq": [
+    {
+      "q": "Were both products tested together?",
+      "a": "No. These pages compare documented capabilities. The linked guide names its own baseline; assess the current vendor conditions and test your task before changing systems."
+    }
+  ],
+  "guide": "https://vstorm-co.github.io/agenticos/about/openai-dots/",
+  "scene": "meadow",
+  "screens": [SCREENS.builder, SCREENS.approvals]
+},
 ] as const satisfies readonly Comparison[];
 
 export function findComparison(slug: string): Comparison | undefined {
