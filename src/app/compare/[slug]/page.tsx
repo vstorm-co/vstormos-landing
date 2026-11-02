@@ -69,6 +69,7 @@ export default async function ComparisonPage({ params }: Props) {
       <main id="content">
         <CompareHero
           scene={item.scene}
+          checkedDate={item.checkedDate}
           crumb={
             <Crumb>
               <a href={asset("/compare/")} className="hover:text-ink">Compare</a>

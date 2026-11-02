@@ -24,7 +24,7 @@ const COLUMNS = [
       { label: "Documentation", href: links.docs },
       { label: "Introduction deck", href: links.deck },
       { label: "Product tour", href: links.tour },
-      { label: "29 tutorials", href: links.useCases },
+      { label: "Tutorials", href: links.useCases },
       { label: "Comparisons", href: asset("/compare/") },
       { label: "Release notes", href: links.releaseNotes },
     ],
@@ -106,7 +106,7 @@ export function Footer({ home = "" }: { home?: string }) {
           <div className="col-span-2 lg:col-span-1">
             <Logo tone="light" />
             <p className="mt-5 max-w-[34ch] text-[15px] leading-relaxed text-white/60">
-              Open-source AI teammates for your company. The self-hosted agent layer, built and maintained by{" "}
+              An open-source, self-hosted AI agent platform for your company’s AI teammates, built and maintained by{" "}
               <a href={vstorm.site} target="_blank" rel="noreferrer" className="text-white/85 underline decoration-white/25 underline-offset-4 hover:decoration-white">
                 Vstorm
               </a>

@@ -43,7 +43,7 @@ const DETAILS = [
   {
     icon: Hand,
     title: "A person signs off",
-    body: "The run waits for an approval before anything leaves the company.",
+    body: "A configured approval pauses a sensitive action until an authorized person decides.",
   },
   {
     icon: Table2,
@@ -58,7 +58,7 @@ const DETAILS = [
   {
     icon: Mic,
     title: "Talk to any agent",
-    body: "A voice call with the agent that knows the answer, from the console.",
+    body: "Talk to a published agent with voice configured, from the console.",
   },
 ] as const;
 
@@ -680,7 +680,7 @@ function Window({ step }: { step: number }) {
 }
 
 /**
- * Work in review (#1925 workflows and tables, #2204 voice). A loop plays one
+ * Released workflows, tables and voice. An illustrative loop plays one
  * lead going through a workflow, a person's approval and a table, then a call
  * about it, and the promise beside it lights up as the window shows it.
  */
@@ -707,10 +707,10 @@ export function Soon() {
     <section id="soon" className="bg-paper px-5 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-[1240px]">
         <SectionHeading
-          eyebrow="Coming soon"
+          eyebrow="Available now"
           title="Workflows, tables and voice."
-          muted="Already in review."
-          body="Work with fixed steps gets a visual editor: triggers, agents, approvals and tables, with a record of every run. Voice calls let you talk to any agent. Both are working code in open pull requests, open source like the rest: you can read them and run them today."
+          muted="Build the whole process."
+          body="Connect triggers, agents, approvals and tables in a visual workflow, then inspect each run. Talk to a published agent with voice calls. These features ship in AgenticOS. The sequence below uses illustrative data and timings."
         />
 
         <Reveal delay={0.1} className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:items-stretch">
@@ -735,11 +735,11 @@ export function Soon() {
         </Reveal>
 
         <Reveal delay={0.12} className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <ButtonLink href={links.workflowsPr} tone="ink">
-            Follow workflows on GitHub <span aria-hidden>↗</span>
+          <ButtonLink href={links.workflows} tone="ink">
+            Read the workflows guide <span aria-hidden>↗</span>
           </ButtonLink>
-          <ButtonLink href={links.voicePr} tone="ghost-dark">
-            Follow voice <span aria-hidden>↗</span>
+          <ButtonLink href={links.voice} tone="ghost-dark">
+            Set up voice calls <span aria-hidden>↗</span>
           </ButtonLink>
         </Reveal>
       </div>

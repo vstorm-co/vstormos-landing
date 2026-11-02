@@ -122,8 +122,8 @@ export function Hero() {
           {...rise(0.32)}
           className="mt-6 max-w-[54ch] text-pretty text-[clamp(1.02rem,1.5vw,1.2rem)] leading-relaxed text-white/80"
         >
-          The open-source agent layer for shared agents, company knowledge and automation, on
-          infrastructure you control.
+          An open-source, self-hosted AI agent platform for your company's AI teammates.
+          Build, run and govern agents on your own servers and models.
         </motion.p>
 
         <motion.div {...rise(0.44)} className="mt-9 flex flex-wrap items-center justify-center gap-3">

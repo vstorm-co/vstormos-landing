@@ -1,9 +1,9 @@
-// Every figure here is the one the AgenticOS README publishes (release 1.1.1).
+// Product statements checked against AgenticOS v1.35.0 (2 November 2026).
 // The MCP count is the gallery's number and nothing else.
 import type { LogoName } from "@/components/brand-icon";
 
 /** The product release the page describes; update it with the figures below at each release. */
-export const RELEASE = "1.5.0";
+export const RELEASE = "1.35.0";
 
 export const DOCS = "https://vstorm-co.github.io/agenticos";
 export const REPO = "https://github.com/vstorm-co/agenticos";
@@ -33,8 +33,10 @@ export const links = {
   projects: `${DOCS}/projects/`,
   codingAgent: `${DOCS}/reference/capabilities/#coding-agent`,
   visuals: `${DOCS}/reference/capabilities/#visuals`,
-  workflowsPr: `${REPO}/pull/1925`,
-  voicePr: `${REPO}/pull/2204`,
+  workflows: `${DOCS}/workflows/`,
+  tables: `${DOCS}/virtual-tables/`,
+  voice: `${DOCS}/voice/`,
+  desktop: `${DOCS}/desktop/`,
   securityPolicy: `${REPO}/blob/main/SECURITY.md`,
   licence: `${REPO}/blob/main/LICENSE`,
   discussions: `${REPO}/discussions`,
@@ -77,7 +79,7 @@ export const pilots = [
 export const figures = [
   { value: "29", art: "tool_search", label: "built-in capabilities, switched on per agent" },
   { value: "28", art: "thinking", label: "model providers, hosted, your plan or local" },
-  { value: "8", art: "media", label: "places one agent answers" },
+  { value: "Web + apps", art: "media", label: "chat, desktop, voice, channels and API" },
   { value: "4,700+", art: "web_research", label: "MCP servers in the gallery" },
 ] as const;
 
@@ -322,7 +324,7 @@ export const faq = [
   },
   {
     q: "How is it different from ChatGPT Enterprise, Copilot Studio or n8n?",
-    a: "AgenticOS runs on your infrastructure with any of 28 model providers and has no seat or credit fee of its own. It builds agents for the organization, published to chat, websites and APIs, rather than assistant seats for individual employees. Compared with n8n it starts from the agent rather than a workflow canvas, and many teams use both.",
+    a: "AgenticOS runs on your infrastructure with any of 28 model providers and has no seat or credit fee of its own. It builds agents for the organization, published to chat, websites and APIs, rather than assistant seats for individual employees. It also includes a visual workflow canvas, virtual tables and routines; compare the nodes and integrations your task requires with n8n’s ecosystem.",
   },
   {
     q: "What does it take to run?",

@@ -35,7 +35,7 @@ const geistMono = localFont({
 
 const title = "AgenticOS: open-source AI teammates for your company";
 const description =
-  "The self-hosted agent layer: build, run and govern AI agents on your own infrastructure. Chat, apps, a real browser, 4,700+ MCP servers and an API, with budgets, approvals and a recorded run. Apache-2.0, built on Pydantic AI by Vstorm.";
+  "Open-source, self-hosted AI agent platform for your company’s AI teammates. Build, run and govern agents on your own servers and models. Apache-2.0.";
 const ogImage = { url: "/images/og.jpg", width: 1200, height: 630, alt: "AgenticOS: put AI to work across your company" };
 
 export const metadata: Metadata = {
@@ -121,9 +121,10 @@ const structuredData = {
       featureList: [
         "29 built-in capabilities: knowledge search with citations, a real web browser, a code sandbox, a coding agent (Claude Code or Codex), drawings, charts, apps, subagents, guardrails",
         "4,700+ MCP servers in the gallery",
+        "Visual workflows, virtual tables, routines and voice calls",
         "28 model providers, including a ChatGPT subscription and local models through Ollama and vLLM",
         "Projects: shared files, instructions and a sandbox, with several people and agents in one live chat",
-        "8 surfaces: web chat, website widget, hosted page, HTTP API, WebSocket, Slack, Mattermost, Telegram",
+        "Web chat, website widget, hosted page, HTTP API, WebSocket, Slack, Mattermost, Telegram, Teams, desktop and browser voice",
         "Budgets checked before each model call, approvals, roles and groups, a hash-chained audit log",
         "Company sign-in through OIDC, LDAP and Kerberos",
       ],

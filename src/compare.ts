@@ -16,6 +16,8 @@ export type Scene = "meadow" | "lake";
 
 export type Comparison = {
   slug: string;
+  /** Vendor sources were actually inspected on this date; older guides keep their own baseline. */
+  checkedDate?: string;
   /** The product compared, as its vendor writes it. */
   name: string;
   /** The page's `<title>`, before the site's " · AgenticOS" suffix. */
@@ -246,7 +248,7 @@ export const comparisons = [
     ],
     enough: [
       "Your agents belong in Teams and Microsoft 365 Copilot, and your users already hold Microsoft 365 Copilot licences.",
-      "You need Power Platform connectors, agent flows, voice or WhatsApp. AgenticOS has no Teams, voice or WhatsApp channel.",
+      "You need Power Platform connectors, agent flows, voice or WhatsApp. AgenticOS supports Teams and browser voice calls; telephone and WhatsApp channels are not included.",
       "Purview, Sentinel and Power Platform data policies are how your organization governs everything else.",
     ],
     together:
@@ -312,7 +314,7 @@ export const comparisons = [
     ],
     enough: [
       "The job is moving data between many systems, with branches, retries and schedules.",
-      "You want its large integration library and visual canvas. AgenticOS has no workflow canvas.",
+      "You want its large integration library and visual canvas. AgenticOS also has a visual workflow canvas; node libraries and execution semantics differ.",
       "You need review channels such as Microsoft Teams, WhatsApp or Gmail, or its evaluation metrics.",
     ],
     together:
@@ -347,7 +349,7 @@ export const comparisons = [
       "Dify is a visual LLM app builder whose licence limits multi-tenant use. AgenticOS is Apache-2.0, with SSO, budgets and an audit log in every deployment.",
     lead: "Dify builds LLM apps and workflows on a visual canvas, self-hosted or in Dify Cloud. AgenticOS builds agents from instructions, capabilities, knowledge and a budget, and ships the controls a company asks for in the open-source product.",
     glance: [
-      { area: "How you build", them: "A visual canvas of workflow, chatflow and agent nodes", us: "Instructions, a model profile, capabilities, collections and a budget, published as a version" },
+      { area: "How you build", them: "A visual canvas of workflow, chatflow and agent nodes", us: "Versioned agents plus visual workflows with typed steps, branches and loops" },
       { area: "Licence", them: "Apache 2.0 with added conditions on multi-tenant use and the logo", us: "Apache-2.0" },
       { area: "Tenancy", them: "One workspace; several workspaces are Enterprise", us: "Many organizations in one deployment" },
       { area: "Roles", them: "Four built-in roles; custom roles are Enterprise", us: "Six roles, 33 permissions and per-resource grants" },
@@ -393,7 +395,7 @@ export const comparisons = [
       },
       {
         q: "Does AgenticOS have a visual workflow builder like Dify?",
-        a: "No. AgenticOS builds agents from instructions, capabilities, knowledge and a budget, and handles multi-step work with delegation, planning and triggers. If a node canvas is how your team works, Dify fits better.",
+        a: "Yes. AgenticOS includes a visual workflow builder with typed steps, branches, loops and published versions. Compare the nodes and integrations your task requires with Dify’s ecosystem.",
       },
       {
         q: "Which one costs less to run?",
@@ -470,6 +472,96 @@ export const comparisons = [
     scene: "lake",
     screens: [SCREENS.subagents, SCREENS.app],
   },
+{
+  "slug": "muse",
+  "name": "Muse",
+  "checkedDate": "2 November 2026",
+  "metaTitle": "AgenticOS vs Muse",
+  "description": "Compare Muse with AgenticOS: a managed personal cloud agent or a self-hosted platform for a company’s AI teammates.",
+  "lead": "Muse is Meta’s personal AI agent, announced on 8 September 2026. It uses a dedicated cloud VM and browser, continues work while the user is away, and asks before sensitive actions. The announcement describes an initial US rollout. Muse the agent and Muse Spark the model are different things.",
+  "glance": [
+    {
+      "area": "Where it runs",
+      "them": "Meta’s cloud; initial US rollout described in announcement",
+      "us": "Your infrastructure, with model providers you select"
+    },
+    {
+      "area": "Reader’s task",
+      "them": "A managed personal proactive agent",
+      "us": "Build, share and govern agents across a company"
+    },
+    {
+      "area": "Operation",
+      "them": "Vendor-operated service; availability and plan conditions apply",
+      "us": "Apache-2.0 software; your team operates it and pays for infrastructure and models"
+    }
+  ],
+  "further": [
+    {
+      "title": "A platform for the team",
+      "body": "Shared Projects, visual workflows and virtual tables connect people, agents and structured work. Configure budgets and tool approval policies, then inspect runs."
+    }
+  ],
+  "enough": [
+    "You want a managed personal assistant without running an agent platform.",
+    "You meet the vendor’s availability and plan requirements."
+  ],
+  "together": "No direct interoperability is asserted. Compare the same task with synthetic inputs before choosing; these pages do not report a hands-on account test.",
+  "faq": [
+    {
+      "q": "Is this a benchmark?",
+      "a": "No. This compares vendor documentation with AgenticOS v1.35.0. It does not establish answer quality, feature parity or comparative security."
+    }
+  ],
+  "guide": "https://vstorm-co.github.io/agenticos/about/muse/",
+  "scene": "lake",
+  "screens": [SCREENS.builder, SCREENS.approvals]
+},
+{
+  "slug": "claude-duet",
+  "name": "Claude Duet",
+  "checkedDate": "2 November 2026",
+  "metaTitle": "AgenticOS vs Claude Duet",
+  "description": "Compare Claude Duet with AgenticOS: a managed personal cloud agent or a self-hosted platform for a company’s AI teammates.",
+  "lead": "Claude Duet is Anthropic’s proactive cloud agent, announced on 21 October 2026. Its research preview starts with a waitlist for US Pro, Max and Ultra subscribers. It works across connected apps and keeps working while the user is away. Access and usage follow the preview’s plan conditions.",
+  "glance": [
+    {
+      "area": "Where it runs",
+      "them": "Anthropic’s cloud; US waitlisted research preview",
+      "us": "Your infrastructure, with model providers you select"
+    },
+    {
+      "area": "Reader’s task",
+      "them": "A managed personal proactive agent",
+      "us": "Build, share and govern agents across a company"
+    },
+    {
+      "area": "Operation",
+      "them": "Vendor-operated service; availability and plan conditions apply",
+      "us": "Apache-2.0 software; your team operates it and pays for infrastructure and models"
+    }
+  ],
+  "further": [
+    {
+      "title": "A platform for the team",
+      "body": "Shared Projects, visual workflows and virtual tables connect people, agents and structured work. Configure budgets and tool approval policies, then inspect runs."
+    }
+  ],
+  "enough": [
+    "You want a managed personal assistant without running an agent platform.",
+    "You meet the vendor’s availability and plan requirements."
+  ],
+  "together": "No direct interoperability is asserted. Compare the same task with synthetic inputs before choosing; these pages do not report a hands-on account test.",
+  "faq": [
+    {
+      "q": "Is this a benchmark?",
+      "a": "No. This compares vendor documentation with AgenticOS v1.35.0. It does not establish answer quality, feature parity or comparative security."
+    }
+  ],
+  "guide": "https://vstorm-co.github.io/agenticos/about/claude-duet/",
+  "scene": "lake",
+  "screens": [SCREENS.builder, SCREENS.approvals]
+},
 ] as const satisfies readonly Comparison[];
 
 export function findComparison(slug: string): Comparison | undefined {

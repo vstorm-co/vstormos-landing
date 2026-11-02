@@ -24,12 +24,14 @@ export function CompareHero({
   title,
   lead,
   actions,
+  checkedDate = CHECKED,
 }: {
   scene: Scene;
   crumb: ReactNode;
   title: ReactNode;
   lead: string;
   actions: ReactNode;
+  checkedDate?: string;
 }) {
   const image = SCENES[scene];
   return (
@@ -51,7 +53,7 @@ export function CompareHero({
           <p className="max-w-[60ch] text-pretty text-[17.5px] leading-relaxed text-ink-soft">{lead}</p>
           <div className="mt-2 flex flex-wrap gap-3">{actions}</div>
           <p className="rounded-full bg-white/70 px-3 py-1 text-[13px] text-muted ring-1 ring-white backdrop-blur-md">
-            Vendor sources checked {CHECKED}. Each cell comes from the vendor’s own pages.
+            Vendor sources checked {checkedDate}. See the linked guide for its AgenticOS baseline and review scope.
           </p>
         </div>
       </div>
