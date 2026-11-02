@@ -27,6 +27,7 @@ import { Pricing } from "@/components/pricing";
 import { Vstorm } from "@/components/vstorm";
 import { Recognition } from "@/components/recognition";
 import { PlatformChoice } from "@/components/platform-choice";
+import { WorkflowBridge, WorkflowMotion } from "@/components/workflow-motion";
 import { faq } from "@/content";
 import { PAGE_URL } from "@/lib/site";
 
@@ -55,9 +56,11 @@ export default function Home() {
         <Recognition />
         <Teammates />
         <Together />
+        <WorkflowBridge />
         <Coding />
         <Expertise />
         <HowItWorks />
+        <WorkflowMotion />
         <Showcase />
         <Draws />
         <Capabilities />

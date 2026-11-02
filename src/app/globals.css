@@ -362,3 +362,70 @@ details > summary::-webkit-details-marker {
 @keyframes flow {
   to { stroke-dashoffset: -22; }
 }
+
+/* Illustrative workflow threads: motion stays inside the visible section. */
+.workflow-scene {
+  background: radial-gradient(ellipse at 50% 65%, color-mix(in srgb, var(--color-blob) 22%, transparent), transparent 65%), var(--color-paper);
+}
+.workflow-canvas { position: relative; aspect-ratio: 1200 / 440; }
+.workflow-lines { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; overflow: visible; }
+.workflow-lines--mobile { display: none; }
+.workflow-track { stroke: var(--color-line-strong); stroke-width: 1.5; }
+.workflow-pulse {
+  stroke: var(--color-violet); stroke-width: 2.5; stroke-linecap: round;
+  stroke-dasharray: 28 972;
+  animation: workflow-travel 12s linear infinite;
+  animation-play-state: paused;
+}
+.workflow-thread--1 .workflow-pulse { stroke: #8580b6; }
+.workflow-thread--2 .workflow-pulse { stroke: #8a9ebd; }
+.workflow-scene[data-running="true"] .workflow-pulse { animation-play-state: running; }
+@keyframes workflow-travel { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+.workflow-node {
+  position: absolute; inset-inline-start: var(--x); inset-block-start: var(--y);
+  transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center;
+  inline-size: 10rem; text-align: center;
+}
+.workflow-node-mark {
+  display: grid; place-items: center; inline-size: 3.5rem; block-size: 3.5rem;
+  border: 1px solid var(--color-line); border-radius: 1rem; background: var(--color-card);
+  box-shadow: 0 5px 15px -8px color-mix(in srgb, var(--color-violet) 24%, transparent);
+}
+.workflow-node-mark > svg { inline-size: 1.5rem; block-size: 1.5rem; }
+.workflow-node-label { margin-block-start: .6rem; font-size: .875rem; font-weight: 600; background: var(--color-paper); padding-inline: .3rem; }
+.workflow-node-detail { margin-block-start: .2rem; font-size: .72rem; color: var(--color-muted); background: var(--color-paper); padding-inline: .3rem; }
+.workflow-node--agent .workflow-node-mark { inline-size: 5.5rem; block-size: 5.5rem; border-radius: 1.8rem; background: var(--color-violet); border-color: var(--color-violet); box-shadow: 0 12px 45px -16px color-mix(in srgb, var(--color-violet) 55%, transparent); }
+.workflow-node--agent .workflow-node-mark > svg { inline-size: 3rem; block-size: 3rem; }
+.workflow-node--agent .workflow-node-label { font-size: 1rem; }
+.workflow-motion-toggle { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid var(--color-line-strong); border-radius: 999px; padding: .6rem .9rem; background: var(--color-paper); color: var(--color-ink-soft); font-size: .75rem; }
+.workflow-motion-toggle:hover { background: var(--color-card); }
+.workflow-bridge { margin-inline: auto; max-inline-size: 1240px; block-size: 100px; overflow: hidden; }
+.workflow-bridge svg { inline-size: 100%; block-size: 100%; }
+.workflow-bridge path { stroke: var(--color-line-strong); stroke-width: 1; }
+.workflow-bridge path:nth-child(2) { stroke: color-mix(in srgb, var(--color-violet) 25%, transparent); }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .workflow-node { inline-size: 6rem; }
+  .workflow-node-mark { inline-size: 2.75rem; block-size: 2.75rem; }
+  .workflow-node-detail { display: none; }
+  .workflow-node--agent .workflow-node-mark { inline-size: 4rem; block-size: 4rem; border-radius: 1.25rem; }
+  .workflow-node--agent .workflow-node-mark > svg { inline-size: 2.5rem; block-size: 2.5rem; }
+}
+@media (max-width: 767px) {
+  .workflow-canvas { aspect-ratio: 400 / 780; max-inline-size: 500px; margin-inline: auto; }
+  .workflow-lines--desktop { display: none; }
+  .workflow-lines--mobile { display: block; }
+  .workflow-node { inset-inline-start: var(--mobile-x); inset-block-start: var(--mobile-y); inline-size: 6.25rem; }
+  .workflow-node-mark { inline-size: 2.75rem; block-size: 2.75rem; border-radius: .85rem; }
+  .workflow-node-mark > svg { inline-size: 1.25rem; block-size: 1.25rem; }
+  .workflow-node-label { font-size: .75rem; }
+  .workflow-node-detail { font-size: .625rem; max-inline-size: 6rem; }
+  .workflow-node--agent .workflow-node-mark { inline-size: 4.5rem; block-size: 4.5rem; border-radius: 1.5rem; }
+  .workflow-bridge { block-size: 65px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workflow-pulse { animation: none; stroke-dasharray: none; opacity: .3; }
+  .workflow-motion-toggle { display: none; }
+}
+@media (max-width: 360px) {
+  .workflow-node:not(.workflow-node--agent) .workflow-node-detail { display: none; }
+}

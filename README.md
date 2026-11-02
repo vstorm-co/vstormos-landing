@@ -168,3 +168,23 @@ scripts/              logo and contributor generators
 
 `examples/` holds reference screenshots used while designing. It is not part of the site and
 is ignored by git.
+
+## Workflow motion check
+
+The homepage's connected-work diagram is illustrative, separate from product
+screenshots. Its traces pause outside the viewport and have a keyboard-operable
+pause control. Reduced motion keeps the diagram static. Mobile uses a vertical
+layout; tablets keep a compact horizontal one.
+
+After building and serving the export, run the browser check with an existing
+Playwright installation (no model or external service calls):
+
+```bash
+PLAYWRIGHT_PACKAGE=/path/to/node_modules/@playwright/test \
+  node scripts/check-workflow-motion.mjs
+```
+
+`PREVIEW_URL` overrides the local preview URL, `CHECK_OUTPUT` selects a capture
+directory, and `BROWSER_CHANNEL` defaults to `chrome`. The check covers five widths,
+actual trace movement, pause/resume with keyboard, offscreen suspension and reduced
+motion. It writes screenshots and a compact JSON result.
