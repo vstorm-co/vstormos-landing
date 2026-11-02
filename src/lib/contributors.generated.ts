@@ -96,4 +96,4 @@ export const CONTRIBUTORS: readonly Contributor[] = [
 ];
 
 /** The star count when this file was generated; the page refreshes it in the browser. */
-export const STARS_AT_BUILD = 140;
+export const STARS_AT_BUILD = 161;
