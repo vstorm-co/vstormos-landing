@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check, FileText, GitBranch, ShieldCheck } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { useRef } from "react";
@@ -233,12 +233,12 @@ export function Hero() {
                   animate: { opacity: 1, y: 0 },
                   transition: { duration: 1.6, delay: 0.5, ease: EASE },
                 })}
-            className="relative mt-16 w-full max-w-[1120px] md:mt-20"
+            className="relative mt-24 w-full max-w-[1120px] md:mt-28"
           >
             {/* Three agents sitting on the window's top edge, one with something to say. */}
             <div
               aria-hidden
-              className="absolute -top-[42px] right-[7%] z-10 flex items-end gap-1 md:-top-[54px]"
+              className="absolute -top-[42px] right-[7%] z-10 flex items-end gap-1 md:-top-[54px] xl:right-[20%] 2xl:right-[11%]"
             >
               <motion.span
                 initial={reduce ? false : { opacity: 0, y: 8, scale: 0.9 }}
@@ -261,11 +261,32 @@ export function Hero() {
               </span>
             </div>
 
+            {/* Feature previews sit beside the complete application window. */}
+            <motion.div data-hero-callout="sales" aria-hidden initial={reduce ? false : { opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 1.6, ease: EASE }} className="pointer-events-none absolute -left-[60px] top-[10%] z-10 hidden w-[180px] xl:block 2xl:-left-[152px]">
+              <div className="animate-[bob_7s_ease-in-out_infinite] overflow-hidden rounded-[16px] bg-white text-left text-ink shadow-[0_20px_50px_-18px_rgba(20,14,48,.6)] ring-1 ring-white/70 motion-reduce:animate-none">
+                <div className="flex items-center gap-2 border-b border-line px-3.5 py-3 text-[11px] font-medium"><ShieldCheck className="size-3.5 text-violet" />Human approval</div>
+                <div className="p-3.5"><span className="rounded bg-violet/10 px-1.5 py-1 font-mono text-[9px] text-violet">AWAITING YOUR REVIEW</span><p className="mt-3 text-[13px] font-semibold leading-snug">Send the supplier update?</p><div className="mt-2 rounded-lg border border-line bg-paper p-2 text-[10px] leading-relaxed text-ink-soft"><span className="font-medium text-ink">Finance Analyst</span><br />Email · delivery summary</div><div className="mt-3 flex gap-1.5 text-[10px]"><span className="flex flex-1 items-center justify-center gap-1 rounded-md bg-violet py-1.5 text-white"><Check className="size-3" />Approve</span><span className="rounded-md border border-line px-2 py-1.5">Reject</span></div><p className="mt-2 text-[9px] text-muted">You decide before it acts.</p></div>
+              </div>
+            </motion.div>
+            <motion.div data-hero-callout="motor" aria-hidden initial={reduce ? false : { opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 1.9, ease: EASE }} className="pointer-events-none absolute -right-[60px] top-[29%] z-10 hidden w-[180px] xl:block 2xl:-right-[152px]">
+              <div className="animate-[bob_8s_ease-in-out_-2s_infinite] overflow-hidden rounded-[16px] bg-white text-left text-ink shadow-[0_20px_50px_-18px_rgba(20,14,48,.6)] ring-1 ring-white/70 motion-reduce:animate-none">
+                <div className="flex items-center gap-2 border-b border-line px-3.5 py-3 text-[11px] font-medium"><GitBranch className="size-3.5 text-violet" />A team of agents</div>
+                <div className="space-y-2 p-3.5">{[{name:"Researcher",task:"Find the sources",color:"#bbd1ff"},{name:"Analyst",task:"Check the numbers",color:"#f7bfd7"},{name:"Writer",task:"Draft the brief",color:"#c6b7f1"}].map((agent,index)=><div key={agent.name} className="relative flex items-center gap-2.5 rounded-lg bg-paper px-2 py-2"><span className="flex size-7 shrink-0 items-center justify-center gap-[3px] rounded-[11px]" style={{background:agent.color}}><i className="h-[6px] w-[2px] rounded bg-[#292343]" /><i className="h-[6px] w-[2px] rounded bg-[#292343]" /></span><span><span className="block text-[11px] font-semibold">{agent.name}</span><span className="block text-[9px] text-muted">{agent.task}</span></span>{index<2?<span className="absolute -bottom-2 left-[22px] z-10 h-2 border-l border-dashed border-violet/40" />:null}</div>)}<p className="pt-1 text-[9px] leading-relaxed text-muted">One conversation. Shared context.</p></div>
+              </div>
+            </motion.div>
+            <motion.div data-hero-callout="supply" aria-hidden initial={reduce ? false : { opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 2.1, ease: EASE }} className="pointer-events-none absolute -left-[60px] top-[66%] z-10 hidden w-[180px] xl:block 2xl:-left-[152px]">
+              <div className="animate-[bob_9s_ease-in-out_-3s_infinite] overflow-hidden rounded-[16px] bg-white text-left text-ink shadow-[0_20px_50px_-18px_rgba(20,14,48,.6)] ring-1 ring-white/70 motion-reduce:animate-none">
+                <div className="flex items-center gap-2 border-b border-line px-3.5 py-3 text-[11px] font-medium"><FileText className="size-3.5 text-violet" />From chat to App</div>
+                <div className="p-3.5"><div className="flex items-center justify-between rounded-lg border border-line bg-paper p-2.5"><span className="text-[11px] font-semibold">Supplier portal</span><span className="rounded bg-white px-1.5 py-0.5 font-mono text-[9px] text-violet">v3</span></div><div className="mt-3 flex items-center justify-between text-[10px]"><span className="flex items-center gap-1 text-ink-soft"><Check className="size-3 text-violet" />Saved to Apps</span><span className="rounded-md bg-violet px-2 py-1 text-white">Share ↗</span></div><p className="mt-3 text-[9px] leading-relaxed text-muted">Interactive output your team can open again.</p></div>
+              </div>
+            </motion.div>
+
             <div
               aria-hidden
               className="pointer-events-none absolute -inset-x-10 -top-16 h-56 rounded-full bg-blob/30 blur-[70px]"
             />
-            <div className="relative rounded-[16px] bg-white/15 p-1 shadow-[0_40px_120px_-30px_rgba(18,14,40,0.75),0_0_0_1px_rgba(255,255,255,0.08)_inset] ring-1 ring-white/25 backdrop-blur-sm md:rounded-[20px] md:p-2">
+            <div data-hero-window
+              className="relative mx-auto w-full rounded-[16px] bg-white/15 p-1 shadow-[0_40px_120px_-30px_rgba(18,14,40,0.75),0_0_0_1px_rgba(255,255,255,0.08)_inset] ring-1 ring-white/25 backdrop-blur-sm md:rounded-[20px] md:p-2 xl:max-w-[860px] 2xl:max-w-[1040px]">
               {reduce ? null : (
                 <span
                   aria-hidden
@@ -296,7 +317,7 @@ export function Hero() {
         {/* Room for the forest to climb over the window's lower edge, and for the model row under it. */}
         <div
           aria-hidden
-          className="h-[calc(max(100vw,var(--scene-min))*0.11)] md:h-[calc(max(100vw,var(--scene-min))*0.085)]"
+          className="min-h-[170px] h-[calc(max(100vw,var(--scene-min))*0.11)] md:h-[calc(max(100vw,var(--scene-min))*0.085)]"
         />
       </div>
 
@@ -355,7 +376,7 @@ export function Hero() {
         className="absolute inset-x-0 bottom-0 z-30 pb-12 md:pb-14"
       >
             <p className="mx-auto mb-5 max-w-[900px] px-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] text-white/75 md:text-[12px]">
-              <span>Prepared demo · fictional catalog · real product UI</span>
+              <span>Console screenshot · fictional catalog. Floating cards illustrate product features.</span>
               <a href={asset("/use-cases/ai-shopping-assistant/")} className="inline-flex items-center gap-1 rounded text-white underline decoration-white/40 underline-offset-4 hover:decoration-white focus-visible:outline-white">Explore this use case <ArrowRight className="size-3" /></a>
             </p>
         <p className="sr-only">Works with the models you already use:</p>
