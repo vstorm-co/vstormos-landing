@@ -80,7 +80,7 @@ export function WorkflowMotion() {
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>
             <p className="font-mono text-[12px] uppercase tracking-[0.12em] text-muted">Connected work</p>
-            <h2 id="workflow-motion-title" className="display-tight mt-4 max-w-[760px] text-[clamp(2rem,4.6vw,4rem)] font-medium">Different starting points.<br /><span className="text-muted">One connected workflow.</span></h2>
+            <h2 id="workflow-motion-title" className="display-tight mt-4 max-w-[760px] text-[clamp(2rem,4.6vw,4rem)] font-medium">Different starting points.<br /><span className="text-ink-soft">One connected workflow.</span></h2>
           </div>
           <button type="button" className="workflow-motion-toggle" aria-pressed={paused} onClick={() => setPaused(!paused)}>
             {paused ? <Play size={14} /> : <Pause size={14} />}{paused ? "Resume motion" : "Pause motion"}
