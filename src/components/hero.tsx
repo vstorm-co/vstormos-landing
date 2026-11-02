@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Check, LayoutGrid } from "lucide-react";
+import { ArrowRight, LayoutGrid } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { useRef } from "react";
@@ -246,7 +246,7 @@ export function Hero() {
                 transition={{ duration: 0.5, delay: 2.1, ease: EASE }}
                 className="absolute -top-10 right-0 hidden whitespace-nowrap rounded-[12px] rounded-br-[4px] bg-white px-3 py-1.5 text-[12.5px] font-medium text-ink shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] sm:block"
               >
-                Your team’s agents, at a glance
+                From a conversation to an app
               </motion.span>
               {/* BlobAgent is inline-flex itself, so the breakpoint switch lives on a wrapper. */}
               <span className="flex items-end gap-1 md:hidden">
@@ -261,7 +261,7 @@ export function Hero() {
               </span>
             </div>
 
-            {/* What the agents are doing right now, from the demo organization: an approval and a published app. */}
+            {/* Editorial callouts from the prepared Trail Supply demo, not live run status. */}
             <motion.div
               aria-hidden
               initial={reduce ? false : { opacity: 0, x: -24 }}
@@ -274,19 +274,19 @@ export function Hero() {
                   <BlobAgent color="#f5cdb6" size={26} hop={false} />
                   <div className="min-w-0">
                     <p className="text-[12.5px] font-semibold leading-snug text-ink">
-                      Sales Researcher wants to send email
+                      A brief in the shared chat
                     </p>
-                    <p className="truncate text-[11.5px] text-muted">
-                      ops@baltic-logistics.example
+                    <p className="text-[11.5px] leading-relaxed text-muted">
+                      Build a shopping assistant for Trail Supply.
                     </p>
                   </div>
                 </div>
                 <div className="mt-3 flex gap-1.5">
                   <span className="inline-flex h-7 items-center gap-1 rounded-full bg-ink px-3 text-[11.5px] font-medium text-white">
-                    <Check className="size-3" /> Approve
+                    Shared context
                   </span>
                   <span className="inline-flex h-7 items-center rounded-full px-3 text-[11.5px] font-medium text-ink-soft ring-1 ring-line">
-                    Reject
+                    Visuals
                   </span>
                 </div>
               </div>
@@ -296,7 +296,7 @@ export function Hero() {
               initial={reduce ? false : { opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 1.85, ease: EASE }}
-              className="absolute -right-[56px] top-[46%] z-10 hidden w-[256px] xl:block"
+              className="absolute -right-[170px] top-[42%] z-10 hidden w-[156px] 2xl:block"
             >
               <div className="animate-[bob_7s_ease-in-out_-2s_infinite] rounded-[16px] bg-white/90 p-3.5 text-left shadow-[0_24px_60px_-20px_rgba(20,14,48,0.65)] ring-1 ring-white backdrop-blur-md">
                 <div className="flex items-center gap-2.5">
@@ -305,21 +305,16 @@ export function Hero() {
                   </span>
                   <div className="min-w-0">
                     <p className="text-[12.5px] font-semibold leading-snug text-ink">
-                      Q3 2026 Board Dashboard
+                      Trail Supply · Kit Studio
                     </p>
                     <p className="text-[11.5px] text-muted">
-                      Published by Finance Analyst · v2
+                      Prepared demo app · saved from chat
                     </p>
                   </div>
                 </div>
-                <div className="mt-3 flex items-end gap-1" aria-hidden>
-                  {/* Jul, Aug, Sep: revenue against costs, the same pairs the dashboard shows. */}
-                  {[46, 35, 51, 38, 58, 40].map((height, index) => (
-                    <span
-                      key={index}
-                      className={`w-full rounded-t-[3px] ${index % 2 === 0 ? "bg-[#5b5bd6]" : "bg-[#a5b4fc]"}`}
-                      style={{ height }}
-                    />
+                <div className="mt-3 grid grid-cols-3 gap-1.5" aria-hidden>
+                  {["backpack", "basket", "bottle"].map((product) => (
+                    <img key={product} src={asset(`/screens/trail-supply/assets/${product}.webp`)} alt="" width={64} height={64} className="aspect-square w-full rounded-lg object-cover" loading="lazy" />
                   ))}
                 </div>
               </div>
@@ -347,16 +342,16 @@ export function Hero() {
               <picture>
                 <source
                   media="(max-width: 639px)"
-                  srcSet={assetSet("/screens/hero-mobile.webp")}
-                  width={2442}
-                  height={1700}
+                  srcSet={assetSet("/screens/hero-chat-mobile.webp")}
+                  width={1060}
+                  height={900}
                 />
                 <img
-                  src={asset("/screens/highlight-dashboard.webp")}
-                  alt="The AgenticOS organization dashboard with runs, completion, spend, active people and outcomes from a demo organization"
-                  width={2922}
-                  height={1758}
-                  className="w-full rounded-[12px] bg-white md:rounded-[14px]"
+                  src={asset("/screens/hero-chat.webp")}
+                  alt="AgenticOS chat with a populated list of specialist agents and an interactive Trail Supply kit planner. Prepared conversation and fictional catalog, shown in the real Visuals renderer."
+                  width={1600}
+                  height={1000}
+                  className="w-full rounded-[12px] bg-violet-deep md:rounded-[14px]"
                 />
               </picture>
             </div>
@@ -424,6 +419,10 @@ export function Hero() {
             })}
         className="absolute inset-x-0 bottom-0 z-30 pb-12 md:pb-14"
       >
+            <p className="mx-auto mb-5 max-w-[900px] px-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] text-white/75 md:text-[12px]">
+              <span>Prepared demo · fictional catalog · real product UI</span>
+              <a href={asset("/use-cases/ai-shopping-assistant/")} className="inline-flex items-center gap-1 rounded text-white underline decoration-white/40 underline-offset-4 hover:decoration-white focus-visible:outline-white">Explore this use case <ArrowRight className="size-3" /></a>
+            </p>
         <p className="sr-only">Works with the models you already use:</p>
         {/* Phones: one moving line instead of three wrapped ones over the screenshot. */}
         <div

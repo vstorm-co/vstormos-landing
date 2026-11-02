@@ -163,7 +163,10 @@ scripts/              logo and contributor generators
   (Simple Icons CC0, Font Awesome Free CC BY 4.0, @lobehub/icons MIT). The marks are their owners'
   trademarks; the footer states they identify connection options and imply no partnership.
 - **Capability illustrations** and **console screenshots:** from the AgenticOS repository.
-- **Photography and the engraving:** generated images, layered and recoloured for the page.
+- **Photography and the engraving:** generated landscape images, layered and recoloured for the page.
+  Trail Supply product photos are illustrative Unsplash images; source URLs, license and
+  hashes are recorded in `public/screens/trail-supply/images.json`. Products and policies
+  in the prepared demo are fictional.
 - **Founder photos:** published by Vstorm on vstorm.co.
 
 `examples/` holds reference screenshots used while designing. It is not part of the site and
@@ -188,3 +191,13 @@ PLAYWRIGHT_PACKAGE=/path/to/node_modules/@playwright/test \
 directory, and `BROWSER_CHANNEL` defaults to `chrome`. The check covers five widths,
 actual trace movement, finite playback, absence of a pause control, offscreen
 suspension and reduced motion. It writes screenshots and a compact JSON result.
+
+
+### Hero product capture
+
+The hero now uses a raw chat capture from the AgenticOS Northwind Labs demo, not
+a framed dashboard image. `public/screens/hero-chat.webp` preserves the full
+1600 × 1000 console; the mobile variant crops the conversation at x=540, y=100,
+width=1060, height=900. The prepared conversation and fictional Trail Supply
+catalog are disclosed beside the image. Editorial callouts describe the brief
+and saved Kit Studio App; they are not live status or interactive product controls.
