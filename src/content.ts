@@ -41,6 +41,7 @@ export const links = {
   licence: `${REPO}/blob/main/LICENSE`,
   discussions: `${REPO}/discussions`,
   vstorm: "https://vstorm.co",
+  oss: "https://oss.vstorm.co/",
   pydanticAi: "https://ai.pydantic.dev",
 } as const;
 

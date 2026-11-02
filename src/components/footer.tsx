@@ -44,12 +44,20 @@ const COLUMNS = [
     title: "Vstorm",
     items: [
       { label: "About Vstorm", href: vstorm.site },
+      { label: "Open-source projects", href: links.oss },
       { label: "AgenticOS rollouts", href: vstorm.agenticos },
       { label: "Case studies", href: vstorm.caseStudies },
       { label: "Schedule a meeting", href: vstorm.meeting },
       { label: "Contact", href: vstorm.contact },
     ],
   },
+] as const;
+
+const RESOURCES = [
+  { label: "Documentation", detail: "Guides and reference", href: links.docs },
+  { label: "GitHub", detail: "Source and contributions", href: links.repo },
+  { label: "oss.vstorm.co", detail: "Explore our open-source tools", href: links.oss },
+  { label: "vstorm.co", detail: "The team behind AgenticOS", href: vstorm.site },
 ] as const;
 
 const SOCIAL = [
@@ -138,6 +146,18 @@ export function Footer({ home = "" }: { home?: string }) {
             </div>
           </div>
         </div>
+
+        <nav id="resources" aria-label="Resources and ecosystem" className="scroll-mt-24 mt-12 grid grid-cols-1 gap-x-8 gap-y-5 border-y border-white/15 py-7 sm:grid-cols-2 lg:grid-cols-4">
+          {RESOURCES.map((resource) => (
+            <a key={resource.label} href={resource.href} target="_blank" rel="noreferrer" className="group flex items-start justify-between gap-3 rounded-md text-white/90 transition-colors hover:text-blob focus-visible:outline-blob">
+              <span>
+                <span className="block text-[15px] font-medium">{resource.label}</span>
+                <span className="mt-1 block text-[12.5px] leading-relaxed text-white/65">{resource.detail}</span>
+              </span>
+              <ArrowRight aria-hidden className="mt-1 size-4 shrink-0 -rotate-45 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          ))}
+        </nav>
 
         <div className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 md:mt-20 lg:grid-cols-[minmax(0,1.35fr)_repeat(4,minmax(0,1fr))]">
           <div className="col-span-2 lg:col-span-1">
