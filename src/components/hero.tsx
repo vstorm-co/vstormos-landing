@@ -261,14 +261,14 @@ export function Hero() {
               </span>
             </div>
 
-            {/* Illustrative approval and App previews in the original lightweight composition. */}
+            {/* Lightweight feature previews overlap the outer edges of the full application screenshot. */}
             <motion.div
               data-hero-callout="approval"
               aria-hidden
               initial={reduce ? false : { opacity: 0, x: -24 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 1.6, ease: EASE }}
-              className="pointer-events-none absolute -left-[140px] top-[18%] z-10 hidden w-[280px] min-[1440px]:block 2xl:-left-[220px]"
+              className="pointer-events-none absolute -left-[140px] top-[18%] z-10 hidden w-[280px] min-[1440px]:block 2xl:-left-[200px]"
             >
               <div className="animate-[bob_6s_ease-in-out_infinite] rounded-[16px] bg-white/90 p-3.5 text-left shadow-[0_24px_60px_-20px_rgba(20,14,48,0.65)] ring-1 ring-white backdrop-blur-md motion-reduce:animate-none">
                 <div className="flex items-start gap-2.5">
@@ -298,7 +298,7 @@ export function Hero() {
               initial={reduce ? false : { opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 1.85, ease: EASE }}
-              className="pointer-events-none absolute -right-[140px] top-[50%] z-10 hidden w-[256px] min-[1440px]:block 2xl:-right-[220px]"
+              className="pointer-events-none absolute -right-[140px] top-[50%] z-10 hidden w-[256px] min-[1440px]:block 2xl:-right-[200px]"
             >
               <div className="animate-[bob_7s_ease-in-out_-2s_infinite] rounded-[16px] bg-white/90 p-3.5 text-left shadow-[0_24px_60px_-20px_rgba(20,14,48,0.65)] ring-1 ring-white backdrop-blur-md motion-reduce:animate-none">
                 <div className="flex items-center gap-2.5">
@@ -332,7 +332,7 @@ export function Hero() {
               className="pointer-events-none absolute -inset-x-10 -top-16 h-56 rounded-full bg-blob/30 blur-[70px]"
             />
             <div data-hero-window
-              className="relative mx-auto w-full rounded-[16px] bg-white/15 p-1 shadow-[0_40px_120px_-30px_rgba(18,14,40,0.75),0_0_0_1px_rgba(255,255,255,0.08)_inset] ring-1 ring-white/25 backdrop-blur-sm md:rounded-[20px] md:p-2 min-[1440px]:max-w-[800px] 2xl:max-w-[900px]">
+              className="relative mx-auto w-full rounded-[16px] bg-white/15 p-1 shadow-[0_40px_120px_-30px_rgba(18,14,40,0.75),0_0_0_1px_rgba(255,255,255,0.08)_inset] ring-1 ring-white/25 backdrop-blur-sm md:rounded-[20px] md:p-2 min-[1440px]:max-w-[1040px] 2xl:max-w-[1120px]">
               {reduce ? null : (
                 <span
                   aria-hidden
