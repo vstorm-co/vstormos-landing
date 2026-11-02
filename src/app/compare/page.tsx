@@ -5,7 +5,6 @@ import { comparisons } from "@/compare";
 import { CompareHero, Crumb, TryActions } from "@/components/compare";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
-import { Reveal } from "@/components/ui";
 import { links } from "@/content";
 import { asset } from "@/lib/site";
 
@@ -111,25 +110,23 @@ export default function CompareIndex() {
                 <ul className="divide-y divide-line border-y border-line">
                   {comparisons
                     .filter((item) => group.slugs.includes(item.slug))
-                    .map((item, index) => (
+                    .map((item) => (
                       <li key={item.slug}>
-                        <Reveal delay={index * 0.04}>
-                          <a
-                            href={asset(`/compare/${item.slug}/`)}
-                            className="group grid gap-3 py-7 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)_auto] md:items-center md:gap-10"
-                          >
-                            <span className="display-tight text-[clamp(1.4rem,2.6vw,2rem)] font-medium text-ink transition-colors group-hover:text-violet">
-                              AgenticOS vs {item.name}
-                            </span>
-                            <span className="text-pretty text-[15px] leading-relaxed text-muted">
-                              {item.description}
-                            </span>
-                            <ArrowRight
-                              aria-hidden
-                              className="hidden size-5 text-faint transition-[transform,color] group-hover:translate-x-1 group-hover:text-ink md:block"
-                            />
-                          </a>
-                        </Reveal>
+                        <a
+                          href={asset(`/compare/${item.slug}/`)}
+                          className="group grid gap-3 py-7 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)_auto] md:items-center md:gap-10"
+                        >
+                          <span className="display-tight text-[clamp(1.4rem,2.6vw,2rem)] font-medium text-ink transition-colors group-hover:text-violet">
+                            AgenticOS vs {item.name}
+                          </span>
+                          <span className="text-pretty text-[15px] leading-relaxed text-muted">
+                            {item.description}
+                          </span>
+                          <ArrowRight
+                            aria-hidden
+                            className="hidden size-5 text-faint transition-[transform,color] group-hover:translate-x-1 group-hover:text-ink md:block"
+                          />
+                        </a>
                       </li>
                     ))}
                 </ul>
