@@ -365,7 +365,10 @@ details > summary::-webkit-details-marker {
 
 /* Illustrative workflow threads: motion stays inside the visible section. */
 .workflow-scene {
-  background: radial-gradient(ellipse at 50% 65%, color-mix(in srgb, var(--color-blob) 22%, transparent), transparent 65%), var(--color-paper);
+  background:
+    linear-gradient(180deg, var(--color-paper) 0%, transparent 24%, transparent 62%, var(--color-paper) 100%),
+    radial-gradient(ellipse at 50% 65%, color-mix(in srgb, var(--color-blob) 22%, transparent), transparent 65%),
+    var(--color-paper);
 }
 .workflow-canvas { position: relative; aspect-ratio: 1200 / 440; }
 .workflow-lines { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; overflow: visible; }
