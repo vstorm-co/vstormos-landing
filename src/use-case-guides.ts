@@ -89,10 +89,10 @@ export const useCaseGuides: readonly UseCaseGuide[] = [
     emphasis: "from your catalog.",
     description:
       "Plan an AI shopping assistant for your website: catalog-based recommendations, a published agent widget and explicit boundaries for cart and order actions.",
-    image: "/screens/highlight-shopping.webp",
-    alt: "Trail Supply demo storefront with a trip selector, budget controls and a recommended backpack",
+    image: "/screens/highlight-widget.webp",
+    alt: "Fictional Trail Supply store with the actual AgenticOS widget recommending a daypack",
     caption:
-      "Trail Supply is a fictional store app. Recommendations are deterministic, its bag is a demo and it contains no live agent widget, checkout or real orders.",
+      "Trail Supply is a fictional store. Its actual AgenticOS widget answered from a seeded catalog in a recorded local model run. The separate storefront App and Kit Studio use deterministic calculations; no real inventory, orders or payments are connected.",
     input:
       "A maintained product catalog, a shopper's needs and constraints, and a clear policy for unavailable information.",
     result:
@@ -114,7 +114,7 @@ export const useCaseGuides: readonly UseCaseGuide[] = [
       },
       {
         title: "Keep a recommendation separate from an order",
-        body: "First verify read-only recommendations. Adding to a real cart or placing an order needs store-specific tools, permissions and user confirmation appropriate to the action. The Trail Supply preview demonstrates the proposed interaction, not those integrations.",
+        body: "First verify read-only recommendations. Adding to a real cart or placing an order needs store-specific tools, permissions and user confirmation appropriate to the action. The recorded Trail Supply widget answers from catalog facts in its published instructions. Its storefront bag is a local demo, without real inventory or order tools.",
       },
     ],
     questions: [
