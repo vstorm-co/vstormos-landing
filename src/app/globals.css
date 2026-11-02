@@ -374,13 +374,16 @@ details > summary::-webkit-details-marker {
 .workflow-pulse {
   stroke: var(--color-violet); stroke-width: 2.5; stroke-linecap: round;
   stroke-dasharray: 28 972;
-  animation: workflow-travel 12s linear infinite;
-  animation-play-state: paused;
+  opacity: 0;
 }
 .workflow-thread--1 .workflow-pulse { stroke: #8580b6; }
 .workflow-thread--2 .workflow-pulse { stroke: #8a9ebd; }
-.workflow-scene[data-running="true"] .workflow-pulse { animation-play-state: running; }
-@keyframes workflow-travel { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+.workflow-scene[data-running="true"] .workflow-pulse { animation: workflow-travel 3.8s linear 1 both; }
+@keyframes workflow-travel {
+  from { stroke-dashoffset: 1000; opacity: 0; }
+  8%, 88% { opacity: 1; }
+  to { stroke-dashoffset: 0; opacity: 0; }
+}
 .workflow-node {
   position: absolute; inset-inline-start: var(--x); inset-block-start: var(--y);
   transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center;
@@ -397,8 +400,6 @@ details > summary::-webkit-details-marker {
 .workflow-node--agent .workflow-node-mark { inline-size: 5.5rem; block-size: 5.5rem; border-radius: 1.8rem; background: var(--color-violet); border-color: var(--color-violet); box-shadow: 0 12px 45px -16px color-mix(in srgb, var(--color-violet) 55%, transparent); }
 .workflow-node--agent .workflow-node-mark > svg { inline-size: 3rem; block-size: 3rem; }
 .workflow-node--agent .workflow-node-label { font-size: 1rem; }
-.workflow-motion-toggle { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid var(--color-line-strong); border-radius: 999px; padding: .6rem .9rem; background: var(--color-paper); color: var(--color-ink-soft); font-size: .75rem; }
-.workflow-motion-toggle:hover { background: var(--color-card); }
 .workflow-bridge { margin-inline: auto; max-inline-size: 1240px; block-size: 100px; overflow: hidden; }
 .workflow-bridge svg { inline-size: 100%; block-size: 100%; }
 .workflow-bridge path { stroke: var(--color-line-strong); stroke-width: 1; }
@@ -423,8 +424,7 @@ details > summary::-webkit-details-marker {
   .workflow-bridge { block-size: 65px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .workflow-pulse { animation: none; stroke-dasharray: none; opacity: .3; }
-  .workflow-motion-toggle { display: none; }
+  .workflow-scene[data-running] .workflow-pulse { animation: none; stroke-dasharray: none; opacity: .3; }
 }
 @media (max-width: 360px) {
   .workflow-node:not(.workflow-node--agent) .workflow-node-detail { display: none; }

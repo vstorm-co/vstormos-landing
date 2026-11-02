@@ -172,8 +172,8 @@ is ignored by git.
 ## Workflow motion check
 
 The homepage's connected-work diagram is illustrative, separate from product
-screenshots. Its traces pause outside the viewport and have a keyboard-operable
-pause control. Reduced motion keeps the diagram static. Mobile uses a vertical
+screenshots. Its traces play once on entry, finishing within 4.3 seconds, and stop outside
+the viewport. There is no playback button. Reduced motion keeps the diagram static. Mobile uses a vertical
 layout; tablets keep a compact horizontal one.
 
 After building and serving the export, run the browser check with an existing
@@ -186,5 +186,5 @@ PLAYWRIGHT_PACKAGE=/path/to/node_modules/@playwright/test \
 
 `PREVIEW_URL` overrides the local preview URL, `CHECK_OUTPUT` selects a capture
 directory, and `BROWSER_CHANNEL` defaults to `chrome`. The check covers five widths,
-actual trace movement, pause/resume with keyboard, offscreen suspension and reduced
-motion. It writes screenshots and a compact JSON result.
+actual trace movement, finite playback, absence of a pause control, offscreen
+suspension and reduced motion. It writes screenshots and a compact JSON result.

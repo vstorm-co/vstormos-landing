@@ -28,17 +28,12 @@ try {
     const before = await pulse.evaluate((element) => getComputedStyle(element).strokeDashoffset);
     await page.waitForTimeout(350);
     assert.notEqual(await pulse.evaluate((element) => getComputedStyle(element).strokeDashoffset), before);
-    await scene.getByRole("button", { name: "Pause motion" }).click();
-    await expect(scene).toHaveAttribute("data-running", "false");
-    await expect(pulse).toHaveCSS("animation-play-state", "paused");
-    // Read the held position after the browser has committed the paused frame.
-    await page.waitForTimeout(100);
-    const paused = await pulse.evaluate((element) => getComputedStyle(element).strokeDashoffset);
-    await page.waitForTimeout(250);
-    assert.equal(await pulse.evaluate((element) => getComputedStyle(element).strokeDashoffset), paused);
-    await scene.getByRole("button", { name: "Resume motion" }).focus();
-    await page.keyboard.press("Enter");
-    await expect(scene).toHaveAttribute("data-running", "true");
+    await expect(scene.getByRole("button", { name: /motion/i })).toHaveCount(0);
+    await expect(pulse).toHaveCSS("animation-iteration-count", "1");
+    if (width === 1440) {
+      await expect.poll(() => pulse.evaluate((element) => element.getAnimations().every((animation) => animation.playState === "finished")), { timeout: 5500 }).toBe(true);
+      await expect(pulse).toHaveCSS("opacity", "0");
+    }
     await expect(page.locator("a.fixed").filter({ hasText: "Book a demo" })).toBeHidden();
     await page.mouse.move(0, 0);
     await scene.screenshot({ path: join(output, `flow-${width}.png`) });
@@ -50,7 +45,7 @@ try {
   await expect(page.locator(".workflow-pulse").first()).toHaveCSS("animation-name", "none");
   await expect(page.getByRole("button", { name: "Pause motion" })).toBeHidden();
   assert.deepEqual(errors, []);
-  writeFileSync(join(output, "results.json"), JSON.stringify({ widths: [1440, 1024, 768, 390, 320], pauseResume: "click and keyboard", offscreen: "paused", reducedMotion: "static", errors }, null, 2));
+  writeFileSync(join(output, "results.json"), JSON.stringify({ widths: [1440, 1024, 768, 390, 320], playback: "one finite pass under five seconds", control: "no pause button", offscreen: "stopped", reducedMotion: "static", errors }, null, 2));
   console.log(`Workflow motion checks passed. Captures: ${output}`);
 } finally {
   await browser.close();

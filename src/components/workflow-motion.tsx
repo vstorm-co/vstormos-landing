@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { CalendarClock, CheckCheck, FileText, Pause, Play, Table2 } from "lucide-react";
+import { CalendarClock, CheckCheck, FileText, Table2 } from "lucide-react";
 
 import { Blob } from "@/components/blob";
 import { ServiceIcon } from "@/components/brand-icon";
@@ -54,7 +54,7 @@ function Threads({ mobile = false }: { mobile?: boolean }) {
       {paths.map((path, index) => (
         <g key={path} className={`workflow-thread workflow-thread--${index}`}>
           <path d={path} className="workflow-track" />
-          <path d={path} pathLength="1000" className="workflow-pulse" style={{ animationDelay: `${-index * 3.4}s` }} />
+          <path d={path} pathLength="1000" className="workflow-pulse" style={{ animationDelay: `${index * 0.25}s` }} />
         </g>
       ))}
     </svg>
@@ -65,7 +65,6 @@ function Threads({ mobile = false }: { mobile?: boolean }) {
 export function WorkflowMotion() {
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
-  const [paused, setPaused] = useState(false);
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
@@ -75,16 +74,13 @@ export function WorkflowMotion() {
   }, []);
 
   return (
-    <section ref={ref} id="workflow-motion" className="workflow-scene px-5 py-16 md:px-8 md:py-24" data-running={visible && !paused} aria-labelledby="workflow-motion-title">
+    <section ref={ref} id="workflow-motion" className="workflow-scene px-5 py-16 md:px-8 md:py-24" data-running={visible} aria-labelledby="workflow-motion-title">
       <div className="mx-auto max-w-[1240px]">
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>
             <p className="font-mono text-[12px] uppercase tracking-[0.12em] text-muted">Connected work</p>
             <h2 id="workflow-motion-title" className="display-tight mt-4 max-w-[760px] text-[clamp(2rem,4.6vw,4rem)] font-medium">Different starting points.<br /><span className="text-ink-soft">One connected workflow.</span></h2>
           </div>
-          <button type="button" className="workflow-motion-toggle" aria-pressed={paused} onClick={() => setPaused(!paused)}>
-            {paused ? <Play size={14} /> : <Pause size={14} />}{paused ? "Resume motion" : "Pause motion"}
-          </button>
         </div>
         <figure className="mt-10 md:mt-14">
           <div className="workflow-canvas">
