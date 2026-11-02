@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useInView } from "motion/react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 import { BlobAgent } from "@/components/blob";
@@ -26,7 +27,8 @@ const SPOTS = [
 ] as const;
 
 /** Both meadow layers share one box, so the cut-out grass lands on the grass it was cut from. */
-const LAYER = "pointer-events-none absolute inset-0 size-full select-none object-cover object-[50%_100%]";
+const LAYER =
+  "pointer-events-none absolute inset-0 size-full select-none object-cover object-[50%_100%]";
 
 export function Teammates() {
   const [active, setActive] = useState(0);
@@ -38,7 +40,10 @@ export function Teammates() {
 
   useEffect(() => {
     if (!running) return;
-    const timer = window.setTimeout(() => setActive((index) => (index + 1) % teammates.length), DWELL_MS);
+    const timer = window.setTimeout(
+      () => setActive((index) => (index + 1) % teammates.length),
+      DWELL_MS,
+    );
     return () => window.clearTimeout(timer);
   }, [active, running]);
 
@@ -62,16 +67,25 @@ export function Teammates() {
           >
             <img
               src={asset("/images/meadow-bg-3200.webp")}
-              srcSet={assetSet("/images/meadow-bg-1600.webp 1600w, /images/meadow-bg-3200.webp 3200w")}
+              srcSet={assetSet(
+                "/images/meadow-bg-1600.webp 1600w, /images/meadow-bg-3200.webp 3200w",
+              )}
               sizes="(min-width: 1240px) 1240px, 100vw"
               alt=""
               loading="lazy"
               className={LAYER}
             />
             {/* Late sun from the right, warming the meadow the agents stand in. */}
-            <div aria-hidden className="pointer-events-none absolute -right-24 top-[28%] size-[420px] rounded-full bg-[#ffe7b8]/40 blur-[90px]" />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -right-24 top-[28%] size-[420px] rounded-full bg-[#ffe7b8]/40 blur-[90px]"
+            />
 
-            <div role="tablist" aria-label="Agents in the demo organization" className="absolute inset-0">
+            <div
+              role="tablist"
+              aria-label="Agents in the demo organization"
+              className="absolute inset-0"
+            >
               {teammates.map((teammate, index) => {
                 const spot = SPOTS[index] ?? SPOTS[0];
                 const selected = index === active;
@@ -99,14 +113,20 @@ export function Teammates() {
                   >
                     <span
                       className={`whitespace-nowrap rounded-full px-2.5 py-1 text-[12px] font-medium shadow-[0_6px_16px_-8px_rgba(43,37,71,0.5)] transition-colors duration-300 md:text-[13px] ${
-                        selected ? "bg-ink text-white" : "invisible bg-white/85 text-ink-soft backdrop-blur group-hover:bg-white sm:visible"
+                        selected
+                          ? "bg-ink text-white"
+                          : "invisible bg-white/85 text-ink-soft backdrop-blur group-hover:bg-white sm:visible"
                       }`}
                     >
                       {teammate.name}
                     </span>
                     <motion.span
                       animate={{ y: selected ? -12 : 0 }}
-                      transition={{ type: "spring", stiffness: 360, damping: 16 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 360,
+                        damping: 16,
+                      }}
                       className="relative origin-bottom scale-[var(--ms)] lg:scale-[var(--s)]"
                     >
                       {selected ? (
@@ -114,10 +134,19 @@ export function Teammates() {
                           layoutId="teammate-light"
                           aria-hidden
                           className="absolute -bottom-3 left-1/2 h-8 w-[150%] -translate-x-1/2 rounded-[50%] bg-white/70 blur-md"
-                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 30,
+                          }}
                         />
                       ) : null}
-                      <BlobAgent color={teammate.color} size={66} delay={index * 0.55} className="relative transition-transform duration-300 group-hover:-translate-y-1" />
+                      <BlobAgent
+                        color={teammate.color}
+                        size={66}
+                        delay={index * 0.55}
+                        className="relative transition-transform duration-300 group-hover:-translate-y-1"
+                      />
                     </motion.span>
                   </button>
                 );
@@ -126,7 +155,9 @@ export function Teammates() {
 
             <img
               src={asset("/images/meadow-fg-3200.webp")}
-              srcSet={assetSet("/images/meadow-fg-1600.webp 1600w, /images/meadow-fg-3200.webp 3200w")}
+              srcSet={assetSet(
+                "/images/meadow-fg-1600.webp 1600w, /images/meadow-fg-3200.webp 3200w",
+              )}
               sizes="(min-width: 1240px) 1240px, 100vw"
               alt=""
               loading="lazy"
@@ -150,7 +181,12 @@ export function Teammates() {
                   className="flex flex-col gap-4"
                 >
                   <p className="ml-auto min-h-[46px] max-w-[88%] rounded-[16px] rounded-br-[5px] bg-[#f1f1f3] px-4 py-2.5 text-[14px] leading-relaxed text-ink">
-                    <Typed text={agent.ask} active={!reduce} done={Boolean(reduce)} cps={55} />
+                    <Typed
+                      text={agent.ask}
+                      active={!reduce}
+                      done={Boolean(reduce)}
+                      cps={55}
+                    />
                   </p>
                   <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div className="flex items-start gap-3.5">
@@ -158,13 +194,20 @@ export function Teammates() {
                         <BlobAgent color={agent.color} size={30} hop={false} />
                       </span>
                       <div>
-                        <p className="font-display text-[18px] font-medium tracking-[-0.01em] text-ink">{agent.name}</p>
-                        <p className="mt-0.5 text-pretty text-[14.5px] leading-relaxed text-muted">{agent.job}</p>
+                        <p className="font-display text-[18px] font-medium tracking-[-0.01em] text-ink">
+                          {agent.name}
+                        </p>
+                        <p className="mt-0.5 text-pretty text-[14.5px] leading-relaxed text-muted">
+                          {agent.job}
+                        </p>
                       </div>
                     </div>
                     <ul className="flex shrink-0 flex-wrap gap-1.5 md:justify-end">
                       {agent.tools.map((tool) => (
-                        <li key={tool} className="rounded-full bg-paper px-2.5 py-1 text-[12.5px] font-medium text-ink-soft ring-1 ring-line">
+                        <li
+                          key={tool}
+                          className="rounded-full bg-paper px-2.5 py-1 text-[12.5px] font-medium text-ink-soft ring-1 ring-line"
+                        >
                           {tool}
                         </li>
                       ))}

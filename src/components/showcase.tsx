@@ -1,7 +1,15 @@
 "use client";
 
-import { ArrowUpRight, FlaskConical, Globe, LayoutDashboard, Users, type LucideIcon } from "lucide-react";
-import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
+import {
+  ArrowUpRight,
+  FlaskConical,
+  Globe,
+  LayoutDashboard,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
+import { AnimatePresence, motion, useInView } from "motion/react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 
 import { Reveal, SectionHeading } from "@/components/ui";
@@ -34,7 +42,10 @@ export function Showcase() {
 
   useEffect(() => {
     if (!running) return;
-    const timer = window.setTimeout(() => setActive((index) => (index + 1) % showcase.length), DWELL_MS);
+    const timer = window.setTimeout(
+      () => setActive((index) => (index + 1) % showcase.length),
+      DWELL_MS,
+    );
     return () => window.clearTimeout(timer);
   }, [active, running]);
 
@@ -48,11 +59,19 @@ export function Showcase() {
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     const last = showcase.length - 1;
     const next =
-      event.key === "ArrowRight" ? (active === last ? 0 : active + 1)
-      : event.key === "ArrowLeft" ? (active === 0 ? last : active - 1)
-      : event.key === "Home" ? 0
-      : event.key === "End" ? last
-      : null;
+      event.key === "ArrowRight"
+        ? active === last
+          ? 0
+          : active + 1
+        : event.key === "ArrowLeft"
+          ? active === 0
+            ? last
+            : active - 1
+          : event.key === "Home"
+            ? 0
+            : event.key === "End"
+              ? last
+              : null;
     if (next === null) return;
     event.preventDefault();
     choose(next, true);
@@ -68,7 +87,7 @@ export function Showcase() {
           eyebrow="Product"
           title="One place for the agents"
           muted="your teams actually use."
-          body="Chat with them, hand them a task, watch them work, and keep what they make. Real screens from a demo organization, not mock-ups."
+          body="Chat with them, hand them a task, watch them work, and keep what they make. Real product screens with demonstration data; illustrative drafts are labelled."
         />
 
         <Reveal className="mt-12 flex justify-center" delay={0.1}>
@@ -96,14 +115,20 @@ export function Showcase() {
                     tabIndex={selected ? 0 : -1}
                     onClick={() => choose(index)}
                     className={`relative inline-flex shrink-0 items-center gap-2 overflow-hidden rounded-full px-4 py-2.5 text-[14px] font-medium transition-colors duration-300 ${
-                      selected ? "text-white" : "text-ink-soft hover:bg-ink/[0.04] hover:text-ink"
+                      selected
+                        ? "text-white"
+                        : "text-ink-soft hover:bg-ink/[0.04] hover:text-ink"
                     }`}
                   >
                     {selected ? (
                       <motion.span
                         layoutId="showcase-pill"
                         className="absolute inset-0 rounded-full bg-ink"
-                        transition={{ type: "spring", stiffness: 420, damping: 36 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 420,
+                          damping: 36,
+                        }}
                       />
                     ) : null}
                     <Icon className="relative size-4" strokeWidth={1.9} />
@@ -114,7 +139,10 @@ export function Showcase() {
                         className="absolute inset-x-4 bottom-[5px] h-[2px] origin-left rounded-full bg-blob/80"
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
-                        transition={{ duration: DWELL_MS / 1000, ease: "linear" }}
+                        transition={{
+                          duration: DWELL_MS / 1000,
+                          ease: "linear",
+                        }}
                       />
                     ) : null}
                   </button>
@@ -153,12 +181,17 @@ export function Showcase() {
                   >
                     <p className="font-mono text-[12px] uppercase tracking-[0.1em] text-blob">
                       {String(active + 1).padStart(2, "0")}
-                      <span className="text-white/40"> / {String(showcase.length).padStart(2, "0")}</span>
+                      <span className="text-white/40">
+                        {" "}
+                        / {String(showcase.length).padStart(2, "0")}
+                      </span>
                     </p>
                     <h3 className="display-tight mt-4 text-balance text-[clamp(1.6rem,2.6vw,2.35rem)] font-medium">
                       {item.title}
                     </h3>
-                    <p className="mt-4 text-pretty text-[15.5px] leading-relaxed text-white/75">{item.body}</p>
+                    <p className="mt-4 text-pretty text-[15.5px] leading-relaxed text-white/75">
+                      {item.body}
+                    </p>
                     <a
                       href={item.more.href}
                       target="_blank"
@@ -178,12 +211,20 @@ export function Showcase() {
                       key={entry.id}
                       aria-hidden={index !== active}
                       initial={false}
-                      animate={{ opacity: index === active ? 1 : 0, scale: index === active ? 1 : 1.015 }}
+                      animate={{
+                        opacity: index === active ? 1 : 0,
+                        scale: index === active ? 1 : 1.015,
+                      }}
                       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                       className="absolute inset-0"
                     >
                       {/* A phone gets the console's own phone layout where there is one: a desktop capture shrunk to 390 px is unreadable. */}
-                      {entry.phoneImage ? <source media="(max-width: 639px)" srcSet={asset(entry.phoneImage)} /> : null}
+                      {entry.phoneImage ? (
+                        <source
+                          media="(max-width: 639px)"
+                          srcSet={asset(entry.phoneImage)}
+                        />
+                      ) : null}
                       <img
                         src={asset(entry.image)}
                         alt={index === active ? entry.alt : ""}

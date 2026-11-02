@@ -1,7 +1,25 @@
 "use client";
 
-import { CalendarClock, Check, GitBranch, Hand, History, Maximize, Mic, Minus, PhoneOff, Plus, Split, Table2, TableProperties, Webhook, Workflow as WorkflowIcon, Zap } from "lucide-react";
-import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
+import {
+  CalendarClock,
+  Check,
+  GitBranch,
+  Hand,
+  History,
+  Maximize,
+  Mic,
+  Minus,
+  PhoneOff,
+  Plus,
+  Split,
+  Table2,
+  TableProperties,
+  Webhook,
+  Workflow as WorkflowIcon,
+  Zap,
+} from "lucide-react";
+import { AnimatePresence, motion, useInView } from "motion/react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { BlobAgent } from "@/components/blob";
@@ -21,7 +39,17 @@ const MAYA = { initials: "MC", color: "#f0a77f" };
 type Tab = "leads" | "workflow" | "calls";
 
 /** Which tab of the window each step shows, and which promise beside it the step proves. */
-const TABS: readonly Tab[] = ["workflow", "workflow", "workflow", "workflow", "workflow", "workflow", "leads", "workflow", "calls"];
+const TABS: readonly Tab[] = [
+  "workflow",
+  "workflow",
+  "workflow",
+  "workflow",
+  "workflow",
+  "workflow",
+  "leads",
+  "workflow",
+  "calls",
+];
 const SPOTLIGHT: readonly number[] = [0, 0, 1, 2, 3, 3, 4, 5, 6];
 
 const DETAILS = [
@@ -63,7 +91,9 @@ const DETAILS = [
 ] as const;
 
 function Spinner() {
-  return <span className="size-3 shrink-0 animate-spin rounded-full border-[1.5px] border-[#d4d4d8] border-t-[#18181b]" />;
+  return (
+    <span className="size-3 shrink-0 animate-spin rounded-full border-[1.5px] border-[#d4d4d8] border-t-[#18181b]" />
+  );
 }
 
 function Maya({ size = 22 }: { size?: number }) {
@@ -87,7 +117,10 @@ const OWNERS = { MC: "#f0a77f", TB: "#7fb4f0" } as const;
 
 function Owner({ who }: { who: keyof typeof OWNERS }) {
   return (
-    <span className="inline-flex size-[22px] items-center justify-center rounded-full text-[9px] font-semibold text-white" style={{ background: OWNERS[who] }}>
+    <span
+      className="inline-flex size-[22px] items-center justify-center rounded-full text-[9px] font-semibold text-white"
+      style={{ background: OWNERS[who] }}
+    >
       {who}
     </span>
   );
@@ -99,30 +132,69 @@ function Score({ value }: { value: number | null }) {
       <span className="relative h-1.5 w-12 overflow-hidden rounded-full bg-[#ececef]">
         <motion.span
           className="absolute inset-y-0 left-0 rounded-full"
-          style={{ background: value !== null && value >= 70 ? "#22a06b" : "#f59e0b" }}
+          style={{
+            background: value !== null && value >= 70 ? "#22a06b" : "#f59e0b",
+          }}
           initial={false}
           animate={{ width: `${value ?? 0}%` }}
           transition={{ duration: 0.8, ease: EASE }}
         />
       </span>
-      <span className="w-5 font-mono text-[11.5px] text-[#18181b]">{value ?? "–"}</span>
+      <span className="w-5 font-mono text-[11.5px] text-[#18181b]">
+        {value ?? "–"}
+      </span>
     </span>
   );
 }
 
 function Stage({ name }: { name: "New" | "Qualified" | "Nurture" }) {
-  const tone = { New: "bg-[#eef2ff] text-[#3b3fb8]", Qualified: "bg-[#dcfce7] text-[#166534]", Nurture: "bg-[#fef3c7] text-[#92400e]" }[name];
-  return <span className={`inline-flex rounded-[6px] px-1.5 py-[1px] text-[11px] font-medium ${tone}`}>{name}</span>;
+  const tone = {
+    New: "bg-[#eef2ff] text-[#3b3fb8]",
+    Qualified: "bg-[#dcfce7] text-[#166534]",
+    Nurture: "bg-[#fef3c7] text-[#92400e]",
+  }[name];
+  return (
+    <span
+      className={`inline-flex rounded-[6px] px-1.5 py-[1px] text-[11px] font-medium ${tone}`}
+    >
+      {name}
+    </span>
+  );
 }
 
-const COLS = "grid-cols-[24px_minmax(0,1.5fr)_minmax(0,0.6fr)_minmax(0,1fr)_minmax(0,0.9fr)_34px]";
+const COLS =
+  "grid-cols-[24px_minmax(0,1.5fr)_minmax(0,0.6fr)_minmax(0,1fr)_minmax(0,0.9fr)_34px]";
 
 function Leads({ step }: { step: number }) {
   const scored = step >= 6;
   const rows = [
-    { id: 2, name: "Orbit Freight", site: "orbitfreight.com", size: "1,200", score: 91, stage: "Qualified", owner: "TB" },
-    { id: 3, name: "Lumen Health", site: "lumen.health", size: "85", score: 64, stage: "Nurture", owner: "MC" },
-    { id: 4, name: "Brightline Labs", site: "brightline.io", size: "310", score: 77, stage: "Qualified", owner: "TB" },
+    {
+      id: 2,
+      name: "Orbit Freight",
+      site: "orbitfreight.com",
+      size: "1,200",
+      score: 91,
+      stage: "Qualified",
+      owner: "TB",
+    },
+    {
+      id: 3,
+      name: "Lumen Health",
+      site: "lumen.health",
+      size: "85",
+      score: 64,
+      stage: "Nurture",
+      owner: "MC",
+    },
+    {
+      id: 4,
+      name: "Brightline Labs",
+      site: "brightline.io",
+      size: "310",
+      score: 77,
+      stage: "Qualified",
+      owner: "TB",
+    },
   ] as const;
   const head = ["", "Company", "People", "Score", "Stage", ""];
   return (
@@ -133,18 +205,25 @@ function Leads({ step }: { step: number }) {
             <Table2 className="size-3.5" />
           </span>
           <p className="font-semibold text-[#18181b]">
-            Leads <span className="font-normal text-[#a1a1aa]">· 4 records</span>
+            Leads{" "}
+            <span className="font-normal text-[#a1a1aa]">· 4 records</span>
           </p>
         </div>
         <div className="flex rounded-[8px] bg-[#f4f4f5] p-0.5 text-[11px]">
-          <span className="rounded-[6px] bg-white px-2 py-0.5 font-medium text-[#18181b] shadow-sm">Grid</span>
+          <span className="rounded-[6px] bg-white px-2 py-0.5 font-medium text-[#18181b] shadow-sm">
+            Grid
+          </span>
           <span className="px-2 py-0.5 text-[#71717a]">Kanban</span>
         </div>
       </div>
       <div className="overflow-hidden rounded-[12px] border border-[#ececef] bg-white">
-        <div className={`grid ${COLS} items-center gap-2 border-b border-[#ececef] bg-[#fafafa] px-3 py-2 text-[10.5px] font-medium text-[#71717a]`}>
+        <div
+          className={`grid ${COLS} items-center gap-2 border-b border-[#ececef] bg-[#fafafa] px-3 py-2 text-[10.5px] font-medium text-[#71717a]`}
+        >
           {head.map((label, index) => (
-            <span key={index} className="truncate">{label}</span>
+            <span key={index} className="truncate">
+              {label}
+            </span>
           ))}
         </div>
         <motion.div
@@ -156,33 +235,56 @@ function Leads({ step }: { step: number }) {
           <span className="font-mono text-[10.5px] text-[#a1a1aa]">1</span>
           <span className="min-w-0">
             <span className="flex items-center gap-1.5 truncate font-medium text-[#18181b]">
-              Acme Corp {scored ? null : <span className="hidden rounded-[5px] bg-[#5b5bd6] px-1 text-[9px] font-semibold text-white sm:inline">NEW</span>}
+              Acme Corp{" "}
+              {scored ? null : (
+                <span className="hidden rounded-[5px] bg-[#5b5bd6] px-1 text-[9px] font-semibold text-white sm:inline">
+                  NEW
+                </span>
+              )}
             </span>
-            <span className="block truncate text-[10.5px] text-[#a1a1aa]">acme.com</span>
+            <span className="block truncate text-[10.5px] text-[#a1a1aa]">
+              acme.com
+            </span>
           </span>
           <span className="text-[#52525b]">240</span>
           <Score value={scored ? 82 : null} />
-          <span>{scored ? <Stage name="Qualified" /> : <Stage name="New" />}</span>
+          <span>
+            {scored ? <Stage name="Qualified" /> : <Stage name="New" />}
+          </span>
           <span>{scored ? <Owner who="TB" /> : null}</span>
         </motion.div>
         {rows.map((row) => (
-          <div key={row.name} className={`grid ${COLS} items-center gap-2 border-b border-[#f4f4f5] px-3 py-2 last:border-b-0`}>
-            <span className="font-mono text-[10.5px] text-[#a1a1aa]">{row.id}</span>
+          <div
+            key={row.name}
+            className={`grid ${COLS} items-center gap-2 border-b border-[#f4f4f5] px-3 py-2 last:border-b-0`}
+          >
+            <span className="font-mono text-[10.5px] text-[#a1a1aa]">
+              {row.id}
+            </span>
             <span className="min-w-0">
-              <span className="block truncate font-medium text-[#18181b]">{row.name}</span>
-              <span className="block truncate text-[10.5px] text-[#a1a1aa]">{row.site}</span>
+              <span className="block truncate font-medium text-[#18181b]">
+                {row.name}
+              </span>
+              <span className="block truncate text-[10.5px] text-[#a1a1aa]">
+                {row.site}
+              </span>
             </span>
             <span className="text-[#52525b]">{row.size}</span>
             <Score value={row.score} />
-            <span><Stage name={row.stage} /></span>
-            <span><Owner who={row.owner} /></span>
+            <span>
+              <Stage name={row.stage} />
+            </span>
+            <span>
+              <Owner who={row.owner} />
+            </span>
           </div>
         ))}
       </div>
       <p className="mt-3 flex items-center gap-1.5 text-[11.5px] text-[#a1a1aa]">
         {scored ? (
           <>
-            <Check className="size-3.5 text-[#22a06b]" /> Score, stage and owner written by Lead routing, run 1,284
+            <Check className="size-3.5 text-[#22a06b]" /> Score, stage and owner
+            written by Lead routing, run 1,284
           </>
         ) : (
           "Acme Corp added from the website form, 11:42"
@@ -236,7 +338,8 @@ const NODES: readonly CanvasNode[] = [
     icon: <BlobAgent color={SALES} size={20} hop={false} />,
     name: "Qualify the lead",
     summary: "Sales Researcher",
-    status: (step) => (step >= 2 ? "succeeded" : step === 1 ? "running" : "pending"),
+    status: (step) =>
+      step >= 2 ? "succeeded" : step === 1 ? "running" : "pending",
   },
   {
     id: "if",
@@ -247,7 +350,8 @@ const NODES: readonly CanvasNode[] = [
     summary: "score ≥ 70",
     code: true,
     ports: ["true", "false"],
-    status: (step) => (step >= 3 ? "succeeded" : step === 2 ? "running" : "pending"),
+    status: (step) =>
+      step >= 3 ? "succeeded" : step === 2 ? "running" : "pending",
   },
   {
     id: "approve",
@@ -256,7 +360,8 @@ const NODES: readonly CanvasNode[] = [
     icon: <Hand className="size-4" />,
     name: "Ask the sales lead",
     summary: "Maya Chen · within 24 h",
-    status: (step) => (step >= 5 ? "succeeded" : step >= 3 ? "waiting" : "pending"),
+    status: (step) =>
+      step >= 5 ? "succeeded" : step >= 3 ? "waiting" : "pending",
   },
   {
     id: "nurture",
@@ -331,7 +436,10 @@ function wirePath(wire: (typeof WIRES)[number]) {
   const from = nodeOf(wire.from);
   const to = nodeOf(wire.to);
   const x1 = from.x + NODE_W;
-  const y1 = "port" in wire ? from.y + NODE_H + 15 + wire.port * 18 : from.y + NODE_H / 2;
+  const y1 =
+    "port" in wire
+      ? from.y + NODE_H + 15 + wire.port * 18
+      : from.y + NODE_H / 2;
   const x2 = to.x;
   const y2 = to.y + (to.ports ? BRANCH_H : NODE_H) / 2;
   const bend = Math.max(40, (x2 - x1) / 2);
@@ -345,21 +453,38 @@ function CanvasCard({ node, step }: { node: CanvasNode; step: number }) {
   return (
     <motion.div
       className="absolute rounded-[12px] border bg-white"
-      style={{ left: node.x, top: node.y, width: NODE_W, height: node.ports ? BRANCH_H : NODE_H }}
+      style={{
+        left: node.x,
+        top: node.y,
+        width: NODE_W,
+        height: node.ports ? BRANCH_H : NODE_H,
+      }}
       animate={{
         opacity: status === "pending" || status === "skipped" ? 0.55 : 1,
         borderColor: live ? "rgba(91,91,214,0.45)" : "#e4e4e7",
-        boxShadow: live ? "0 0 0 3px rgba(91,91,214,0.16), 0 10px 24px -14px rgba(16,24,40,0.35)" : "0 1px 2px rgba(16,24,40,0.06)",
+        boxShadow: live
+          ? "0 0 0 3px rgba(91,91,214,0.16), 0 10px 24px -14px rgba(16,24,40,0.35)"
+          : "0 1px 2px rgba(16,24,40,0.06)",
       }}
       transition={{ duration: 0.45, ease: EASE }}
     >
       <span className="absolute top-1/2 -left-[6px] size-3 -translate-y-1/2 rounded-full border-2 border-white bg-[#a1a1aa]" />
-      {node.ports ? null : <span className="absolute top-1/2 -right-[6px] size-3 -translate-y-1/2 rounded-full border-2 border-white bg-[#a1a1aa]" />}
+      {node.ports ? null : (
+        <span className="absolute top-1/2 -right-[6px] size-3 -translate-y-1/2 rounded-full border-2 border-white bg-[#a1a1aa]" />
+      )}
       <div className="flex items-start gap-2.5 p-3">
-        <span className="flex size-8 shrink-0 items-center justify-center rounded-[8px] bg-[#f4f4f5] text-[#18181b]">{node.icon}</span>
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-[8px] bg-[#f4f4f5] text-[#18181b]">
+          {node.icon}
+        </span>
         <span className="min-w-0 flex-1">
-          <span className="block truncate text-[14px] leading-5 font-medium text-[#18181b]">{node.name}</span>
-          <span className={`block truncate text-[12px] text-[#71717a] ${node.code ? "font-mono" : ""}`}>{node.summary}</span>
+          <span className="block truncate text-[14px] leading-5 font-medium text-[#18181b]">
+            {node.name}
+          </span>
+          <span
+            className={`block truncate text-[12px] text-[#71717a] ${node.code ? "font-mono" : ""}`}
+          >
+            {node.summary}
+          </span>
         </span>
       </div>
       <div className="flex items-center gap-1.5 px-3 text-[12px] text-[#71717a]">
@@ -369,7 +494,10 @@ function CanvasCard({ node, step }: { node: CanvasNode; step: number }) {
       {node.ports ? (
         <ul className="mt-2 space-y-0.5 border-t border-[#ececef] py-1.5">
           {node.ports.map((port) => (
-            <li key={port} className="relative flex h-4 items-center justify-end px-3 text-[12px] text-[#71717a]">
+            <li
+              key={port}
+              className="relative flex h-4 items-center justify-end px-3 text-[12px] text-[#71717a]"
+            >
               {port}
               <span className="absolute -right-[6px] size-3 rounded-full border-2 border-white bg-[#5b5bd6]" />
             </li>
@@ -381,11 +509,31 @@ function CanvasCard({ node, step }: { node: CanvasNode; step: number }) {
 }
 
 const TRIGGERS = [
-  { icon: <CalendarClock className="size-4 text-[#5b5bd6]" />, name: "Every Monday, 9:00", kind: "Schedule" },
-  { icon: <Webhook className="size-4 text-[#db2777]" />, name: "POST /hooks/lead", kind: "Webhook" },
-  { icon: <ServiceIcon name="gmail" className="size-4" />, name: "Email to leads@", kind: "Gmail" },
-  { icon: <ServiceIcon name="slack" className="size-4" />, name: "Message in #sales", kind: "Slack" },
-  { icon: <TableProperties className="size-4 text-[#16794c]" />, name: "New row in Leads", kind: "Table" },
+  {
+    icon: <CalendarClock className="size-4 text-[#5b5bd6]" />,
+    name: "Every Monday, 9:00",
+    kind: "Schedule",
+  },
+  {
+    icon: <Webhook className="size-4 text-[#db2777]" />,
+    name: "POST /hooks/lead",
+    kind: "Webhook",
+  },
+  {
+    icon: <ServiceIcon name="gmail" className="size-4" />,
+    name: "Email to leads@",
+    kind: "Gmail",
+  },
+  {
+    icon: <ServiceIcon name="slack" className="size-4" />,
+    name: "Message in #sales",
+    kind: "Slack",
+  },
+  {
+    icon: <TableProperties className="size-4 text-[#16794c]" />,
+    name: "New row in Leads",
+    kind: "Table",
+  },
 ] as const;
 
 /** What can start a workflow: the choices light in turn and the last one, a new row, fires. */
@@ -393,7 +541,10 @@ function Triggers() {
   const [lit, setLit] = useState(0);
   useEffect(() => {
     if (lit >= TRIGGERS.length - 1) return;
-    const timer = window.setTimeout(() => setLit((current) => current + 1), 320);
+    const timer = window.setTimeout(
+      () => setLit((current) => current + 1),
+      320,
+    );
     return () => window.clearTimeout(timer);
   }, [lit]);
   return (
@@ -404,18 +555,33 @@ function Triggers() {
       transition={{ duration: 0.35, ease: EASE }}
       className="absolute top-3 right-3 w-[min(250px,calc(100%-24px))] rounded-[12px] border border-[#ececef] bg-white p-2 shadow-[0_20px_40px_-18px_rgba(16,24,40,0.4)]"
     >
-      <p className="px-1.5 pb-1.5 text-[11px] font-medium text-[#71717a]">Starts on</p>
+      <p className="px-1.5 pb-1.5 text-[11px] font-medium text-[#71717a]">
+        Starts on
+      </p>
       {TRIGGERS.map((trigger, index) => {
         const on = index === lit;
         const fired = on && index === TRIGGERS.length - 1;
         return (
-          <div key={trigger.name} className={`flex items-center gap-2 rounded-[8px] px-1.5 py-1.5 transition-colors duration-200 ${on ? "bg-[#f4f4f5]" : ""}`}>
-            <span className="flex size-7 shrink-0 items-center justify-center rounded-[7px] bg-[#fafafa] ring-1 ring-[#ececef]">{trigger.icon}</span>
-            <span className="min-w-0 flex-1">
-              <span className="block truncate text-[12px] font-medium text-[#18181b]">{trigger.name}</span>
-              <span className="block text-[10.5px] text-[#a1a1aa]">{trigger.kind}</span>
+          <div
+            key={trigger.name}
+            className={`flex items-center gap-2 rounded-[8px] px-1.5 py-1.5 transition-colors duration-200 ${on ? "bg-[#f4f4f5]" : ""}`}
+          >
+            <span className="flex size-7 shrink-0 items-center justify-center rounded-[7px] bg-[#fafafa] ring-1 ring-[#ececef]">
+              {trigger.icon}
             </span>
-            {fired ? <span className="rounded-full bg-[#ecf8f2] px-1.5 text-[10px] font-medium text-[#16794c]">fired</span> : null}
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-[12px] font-medium text-[#18181b]">
+                {trigger.name}
+              </span>
+              <span className="block text-[10.5px] text-[#a1a1aa]">
+                {trigger.kind}
+              </span>
+            </span>
+            {fired ? (
+              <span className="rounded-full bg-[#ecf8f2] px-1.5 text-[10px] font-medium text-[#16794c]">
+                fired
+              </span>
+            ) : null}
           </div>
         );
       })}
@@ -434,7 +600,9 @@ function Canvas({ step }: { step: number }) {
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
-    const observer = new ResizeObserver(([entry]) => entry && setWidth(entry.contentRect.width));
+    const observer = new ResizeObserver(
+      ([entry]) => entry && setWidth(entry.contentRect.width),
+    );
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
@@ -443,14 +611,27 @@ function Canvas({ step }: { step: number }) {
   const scale = width < 480 ? 0.7 : 1;
 
   return (
-    <div ref={ref} className="absolute inset-0 overflow-hidden bg-[#fafafa] [background-image:radial-gradient(#d4d4d8_1px,transparent_1.5px)] [background-size:20px_20px]">
+    <div
+      ref={ref}
+      className="absolute inset-0 overflow-hidden bg-[#fafafa] [background-image:radial-gradient(#d4d4d8_1px,transparent_1.5px)] [background-size:20px_20px]"
+    >
       <motion.div
         className="absolute top-1/2 left-1/2 origin-top-left"
         initial={false}
-        animate={{ x: -(camera?.x ?? 0) * scale, y: -(camera?.y ?? 0) * scale, scale }}
+        animate={{
+          x: -(camera?.x ?? 0) * scale,
+          y: -(camera?.y ?? 0) * scale,
+          scale,
+        }}
         transition={{ duration: 1.1, ease: EASE }}
       >
-        <svg className="absolute overflow-visible" style={{ left: 0, top: 0 }} width={1} height={1} aria-hidden>
+        <svg
+          className="absolute overflow-visible"
+          style={{ left: 0, top: 0 }}
+          width={1}
+          height={1}
+          aria-hidden
+        >
           {WIRES.map((wire) => {
             const live = step >= wire.at;
             const d = wirePath(wire);
@@ -467,7 +648,12 @@ function Canvas({ step }: { step: number }) {
                 />
                 {step === wire.at ? (
                   <circle r="5" fill="#5b5bd6">
-                    <animateMotion dur="0.9s" repeatCount="1" fill="freeze" path={d} />
+                    <animateMotion
+                      dur="0.9s"
+                      repeatCount="1"
+                      fill="freeze"
+                      path={d}
+                    />
                   </circle>
                 ) : null}
               </g>
@@ -484,9 +670,15 @@ function Canvas({ step }: { step: number }) {
 
       {/* The editor's zoom controls, bottom right, as on the real canvas. */}
       <div className="absolute right-3 bottom-3 flex flex-col overflow-hidden rounded-[8px] border border-[#e4e4e7] bg-white text-[#52525b] shadow-sm">
-        <span className="flex size-7 items-center justify-center border-b border-[#ececef]"><Plus className="size-3.5" /></span>
-        <span className="flex size-7 items-center justify-center border-b border-[#ececef]"><Minus className="size-3.5" /></span>
-        <span className="flex size-7 items-center justify-center"><Maximize className="size-3.5" /></span>
+        <span className="flex size-7 items-center justify-center border-b border-[#ececef]">
+          <Plus className="size-3.5" />
+        </span>
+        <span className="flex size-7 items-center justify-center border-b border-[#ececef]">
+          <Minus className="size-3.5" />
+        </span>
+        <span className="flex size-7 items-center justify-center">
+          <Maximize className="size-3.5" />
+        </span>
       </div>
 
       {/* After the run, its record: every step's time and cost. */}
@@ -500,8 +692,12 @@ function Canvas({ step }: { step: number }) {
             className="absolute top-3 right-3 bottom-3 w-[min(280px,calc(100%-24px))] overflow-hidden rounded-[12px] border border-[#ececef] bg-white shadow-[0_20px_40px_-18px_rgba(16,24,40,0.4)]"
           >
             <div className="border-b border-[#ececef] px-3 py-2.5">
-              <p className="text-[13px] font-semibold text-[#18181b]">Run 1,284</p>
-              <p className="text-[11.5px] text-[#71717a]">Succeeded · 41 s · $0.06 · started by a new row</p>
+              <p className="text-[13px] font-semibold text-[#18181b]">
+                Run 1,284
+              </p>
+              <p className="text-[11.5px] text-[#71717a]">
+                Succeeded · 41 s · $0.06 · started by a new row
+              </p>
             </div>
             <ul className="divide-y divide-[#f4f4f5]">
               {RECORD.map((item, index) => (
@@ -513,13 +709,23 @@ function Canvas({ step }: { step: number }) {
                   className="flex items-center gap-2 px-3 py-2 text-[12px]"
                 >
                   <span className="size-2 shrink-0 rounded-full bg-[#22a06b]" />
-                  <span className="min-w-0 flex-1 truncate text-[#18181b]">{item.name}</span>
-                  <span className="font-mono text-[11px] text-[#71717a]">{item.time}</span>
-                  {item.cost ? <span className="font-mono text-[11px] text-[#18181b]">{item.cost}</span> : null}
+                  <span className="min-w-0 flex-1 truncate text-[#18181b]">
+                    {item.name}
+                  </span>
+                  <span className="font-mono text-[11px] text-[#71717a]">
+                    {item.time}
+                  </span>
+                  {item.cost ? (
+                    <span className="font-mono text-[11px] text-[#18181b]">
+                      {item.cost}
+                    </span>
+                  ) : null}
                 </motion.li>
               ))}
             </ul>
-            <p className="px-3 py-2 text-[11.5px] text-[#71717a]">Input and output of every step kept. Retry from any step.</p>
+            <p className="px-3 py-2 text-[11.5px] text-[#71717a]">
+              Input and output of every step kept. Retry from any step.
+            </p>
           </motion.div>
         ) : null}
       </AnimatePresence>
@@ -537,7 +743,10 @@ function Canvas({ step }: { step: number }) {
             <div className="flex items-start gap-2">
               <Maya />
               <p className="min-w-0 flex-1 text-[12px] leading-snug text-[#3f3f46]">
-                <span className="font-semibold text-[#18181b]">Approve Acme Corp for sales?</span> Score 82, 240 people, demo requested.
+                <span className="font-semibold text-[#18181b]">
+                  Approve Acme Corp for sales?
+                </span>{" "}
+                Score 82, 240 people, demo requested.
               </p>
             </div>
             <div className="mt-2 flex items-center justify-end gap-2">
@@ -547,7 +756,9 @@ function Canvas({ step }: { step: number }) {
                 </span>
               ) : (
                 <>
-                  <span className="rounded-[8px] border border-[#e4e4e7] px-2.5 py-1 text-[12px] text-[#52525b]">Reject</span>
+                  <span className="rounded-[8px] border border-[#e4e4e7] px-2.5 py-1 text-[12px] text-[#52525b]">
+                    Reject
+                  </span>
                   <motion.span
                     animate={{ scale: [1, 0.92, 1] }}
                     transition={{ delay: 1.2, duration: 0.3 }}
@@ -571,14 +782,18 @@ function Call({ active }: { active: boolean }) {
   return (
     <div className="flex h-full flex-col items-center text-center">
       <BlobAgent color={SALES} size={64} />
-      <p className="mt-3 text-[15px] font-semibold text-[#18181b]">Sales Researcher</p>
+      <p className="mt-3 text-[15px] font-semibold text-[#18181b]">
+        Sales Researcher
+      </p>
       <p className="text-[11.5px] text-[#a1a1aa]">Voice call · 00:18</p>
       <div className="mt-4 flex h-10 items-center gap-[3px]">
         {bars.map((bar) => (
           <motion.span
             key={bar}
             className="w-[4px] rounded-full bg-[#a5b4fc]"
-            animate={active ? { height: [5, 8 + ((bar * 37) % 26), 5] } : { height: 5 }}
+            animate={
+              active ? { height: [5, 8 + ((bar * 37) % 26), 5] } : { height: 5 }
+            }
             transition={{
               duration: 0.9 + (bar % 5) * 0.12,
               repeat: Infinity,
@@ -591,7 +806,9 @@ function Call({ active }: { active: boolean }) {
       <div className="mt-4 w-full space-y-2 text-left text-[12.5px] leading-snug">
         <div className="flex gap-2">
           <Maya />
-          <p className="rounded-[12px] bg-[#f4f4f5] px-3 py-2 text-[#27272a]">What happened with Acme?</p>
+          <p className="rounded-[12px] bg-[#f4f4f5] px-3 py-2 text-[#27272a]">
+            What happened with Acme?
+          </p>
         </div>
         <div className="flex gap-2">
           <span className="mt-0.5">
@@ -630,8 +847,12 @@ function Window({ step }: { step: number }) {
             <WorkflowIcon className="size-4" />
           </span>
           <div className="min-w-0">
-            <p className="truncate text-[13.5px] font-semibold text-[#18181b]">Lead routing</p>
-            <p className="hidden text-[11px] text-[#a1a1aa] sm:block">Workflow · published v3</p>
+            <p className="truncate text-[13.5px] font-semibold text-[#18181b]">
+              Lead routing
+            </p>
+            <p className="hidden text-[11px] text-[#a1a1aa] sm:block">
+              Workflow · published v3
+            </p>
           </div>
         </div>
         <div className="flex rounded-[10px] bg-[#f4f4f5] p-0.5 text-[11.5px]">
@@ -644,7 +865,11 @@ function Window({ step }: { step: number }) {
                   transition={{ type: "spring", stiffness: 420, damping: 34 }}
                 />
               ) : null}
-              <span className={`relative ${tab === name ? "font-medium text-[#18181b]" : "text-[#71717a]"}`}>{name}</span>
+              <span
+                className={`relative ${tab === name ? "font-medium text-[#18181b]" : "text-[#71717a]"}`}
+              >
+                {name}
+              </span>
             </span>
           ))}
         </div>
@@ -661,7 +886,13 @@ function Window({ step }: { step: number }) {
             transition={{ duration: 0.3, ease: EASE }}
             className={`absolute inset-0 overflow-hidden ${tab === "workflow" ? "" : "px-4 py-4"}`}
           >
-            {tab === "leads" ? <Leads step={step} /> : tab === "calls" ? <Call active={step === LAST} /> : <Canvas step={step} />}
+            {tab === "leads" ? (
+              <Leads step={step} />
+            ) : tab === "calls" ? (
+              <Call active={step === LAST} />
+            ) : (
+              <Canvas step={step} />
+            )}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -671,8 +902,18 @@ function Window({ step }: { step: number }) {
         <span
           className={`inline-flex items-center gap-1.5 rounded-full px-2 py-[1px] ${finished ? "bg-[#ecf8f2] text-[#16794c]" : "bg-[#f4f4f5] text-[#52525b]"}`}
         >
-          {finished ? <Check className="size-3" /> : step >= 1 ? <Spinner /> : null}
-          {finished ? "done in 41 s · $0.06" : step >= 1 ? (step === 4 ? "waiting for Maya" : "running") : "waiting for a row"}
+          {finished ? (
+            <Check className="size-3" />
+          ) : step >= 1 ? (
+            <Spinner />
+          ) : null}
+          {finished
+            ? "done in 41 s · $0.06"
+            : step >= 1
+              ? step === 4
+                ? "waiting for Maya"
+                : "running"
+              : "waiting for a row"}
         </span>
       </div>
     </div>
@@ -686,7 +927,14 @@ function Window({ step }: { step: number }) {
  */
 export function Soon() {
   // It opens on the agent step, then plays on in order and wraps to the trigger.
-  const [step, setStep] = useState(() => Math.max(0, SPOTLIGHT.indexOf(DETAILS.findIndex((detail) => detail.title === "Agents as steps"))));
+  const [step, setStep] = useState(() =>
+    Math.max(
+      0,
+      SPOTLIGHT.indexOf(
+        DETAILS.findIndex((detail) => detail.title === "Agents as steps"),
+      ),
+    ),
+  );
   const stageRef = useRef<HTMLDivElement>(null);
   const visible = useInView(stageRef, { amount: 0.4 });
   const reduce = useReducedMotion();
@@ -697,7 +945,10 @@ export function Soon() {
       return;
     }
     if (!visible) return;
-    const timer = window.setTimeout(() => setStep((current) => (current >= LAST ? 0 : current + 1)), step === LAST ? STEP_MS * 3 : step === 0 ? STEP_MS * 1.6 : STEP_MS);
+    const timer = window.setTimeout(
+      () => setStep((current) => (current >= LAST ? 0 : current + 1)),
+      step === LAST ? STEP_MS * 3 : step === 0 ? STEP_MS * 1.6 : STEP_MS,
+    );
     return () => window.clearTimeout(timer);
   }, [step, visible, reduce]);
 
@@ -713,14 +964,19 @@ export function Soon() {
           body="Connect triggers, agents, approvals and tables in a visual workflow, then inspect each run. Talk to a published agent with voice calls. These features ship in AgenticOS. The sequence below uses illustrative data and timings."
         />
 
-        <Reveal delay={0.1} className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:items-stretch">
+        <Reveal
+          delay={0.1}
+          className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:items-stretch"
+        >
           <div
             ref={stageRef}
             className="relative min-w-0 overflow-hidden rounded-[28px] bg-[#16141f] p-3 shadow-[0_40px_90px_-50px_rgba(43,37,71,0.55)] ring-1 ring-black/5 sm:p-8"
           >
             <img
               src={asset("/images/night-3200.webp")}
-              srcSet={assetSet("/images/night-1600.webp 1600w, /images/night-3200.webp 3200w")}
+              srcSet={assetSet(
+                "/images/night-1600.webp 1600w, /images/night-3200.webp 3200w",
+              )}
               sizes="(min-width: 1240px) 720px, 100vw"
               alt=""
               loading="lazy"
@@ -731,10 +987,17 @@ export function Soon() {
             </div>
           </div>
 
-          <SpotlightList items={DETAILS} lit={lit} onPick={(index) => setStep(Math.max(0, SPOTLIGHT.indexOf(index)))} />
+          <SpotlightList
+            items={DETAILS}
+            lit={lit}
+            onPick={(index) => setStep(Math.max(0, SPOTLIGHT.indexOf(index)))}
+          />
         </Reveal>
 
-        <Reveal delay={0.12} className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <Reveal
+          delay={0.12}
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
+        >
           <ButtonLink href={links.workflows} tone="ink">
             Read the workflows guide <span aria-hidden>↗</span>
           </ButtonLink>

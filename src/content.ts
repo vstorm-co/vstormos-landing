@@ -71,15 +71,36 @@ export const heroModels: readonly { name: string; provider: string }[] = [
 
 /** Early teams, described without their names until they agree to be named. */
 export const pilots = [
-  { sector: "Manufacturing · Austria", body: "An industrial group is piloting it across its companies, with each company’s data kept apart." },
-  { sector: "Engineering · Norway", body: "A consultancy runs it on its own servers, for its own team and for a client." },
-  { sector: "Marketing", body: "An agency is planning its client work around a team of agents built on it." },
+  {
+    sector: "Manufacturing · Austria",
+    body: "An industrial group is piloting it across its companies, with each company’s data kept apart.",
+  },
+  {
+    sector: "Engineering · Norway",
+    body: "A consultancy runs it on its own servers, for its own team and for a client.",
+  },
+  {
+    sector: "Marketing",
+    body: "An agency is planning its client work around a team of agents built on it.",
+  },
 ] as const;
 
 export const figures = [
-  { value: "29", art: "tool_search", label: "built-in capabilities, switched on per agent" },
-  { value: "28", art: "thinking", label: "model providers, hosted, your plan or local" },
-  { value: "Web + apps", art: "media", label: "chat, desktop, voice, channels and API" },
+  {
+    value: "29",
+    art: "tool_search",
+    label: "built-in capabilities, switched on per agent",
+  },
+  {
+    value: "28",
+    art: "thinking",
+    label: "model providers, hosted, your plan or local",
+  },
+  {
+    value: "Web + apps",
+    art: "media",
+    label: "chat, desktop, voice, channels and API",
+  },
   { value: "4,700+", art: "web_research", label: "MCP servers in the gallery" },
 ] as const;
 
@@ -110,7 +131,10 @@ export const showcase: readonly Showcase[] = [
     width: 2400,
     height: 1500,
     icon: "users",
-    more: { label: "How subagents work", href: `${DOCS}/reference/capabilities/` },
+    more: {
+      label: "How subagents work",
+      href: `${DOCS}/reference/capabilities/`,
+    },
   },
   {
     id: "browser",
@@ -118,11 +142,14 @@ export const showcase: readonly Showcase[] = [
     title: "A real browser, right in the chat",
     body: "Watch it click through sites, take over when a sign-in needs you, and point at a spot to comment.",
     image: "/screens/highlight-browser.webp",
-    alt: "A Sales Researcher’s live browser under its message in the chat, open on NASA’s Artemis III mission page",
+    alt: "The Sales Researcher’s recorded browser navigation steps and sourced answer about Ramp pricing",
     width: 3200,
     height: 2000,
     icon: "globe",
-    more: { label: "The browser capability", href: `${DOCS}/reference/capabilities/` },
+    more: {
+      label: "The browser capability",
+      href: `${DOCS}/reference/capabilities/`,
+    },
   },
   {
     id: "builder",
@@ -130,7 +157,7 @@ export const showcase: readonly Showcase[] = [
     title: "Build, equip and test in one window",
     body: "Switch tools on from illustrated cards, then give the draft a real job in the test chat beside them, before anyone else sees the agent.",
     image: "/screens/highlight-builder-test.webp",
-    alt: "The Finance Analyst’s toolbox with isometric capability cards, and its test chat drawing a chart of Q3 revenue against costs",
+    alt: "The Finance Analyst’s capability cards beside the draft test panel, with starter questions before a test is sent",
     width: 2400,
     height: 1500,
     icon: "flask",
@@ -140,14 +167,38 @@ export const showcase: readonly Showcase[] = [
     id: "apps",
     tab: "Apps",
     title: "Apps, not just answers",
-    body: "An agent publishes a dashboard, a calculator or a report as a page with a stable link and versions. Choose who can open it; updates keep the link.",
+    body: "Keep a dashboard, calculator or knowledge map as an app with a stable link and versions. This seeded LLM wiki example lets you explore fictional source notes; it is not a live RAG query.",
     image: "/screens/highlight-app.webp",
     phoneImage: "/screens/phone-app.webp",
-    alt: "An ROI calculator drawn in chat and saved as an app with its own link: sliders for invoices and hourly cost, $69,120 saved per year, monthly cost before and after",
+    alt: "Company Brain, a seeded LLM wiki example saved as an app: an interactive map of six fictional source notes and a source preview",
     width: 2400,
     height: 1500,
     icon: "layout",
     more: { label: "Share an app", href: `${DOCS}/artifacts/` },
+  },
+  {
+    id: "workflows",
+    tab: "Workflows",
+    title: "From a lead to a reviewed handoff",
+    body: "Connect agents, MCP tools, data steps and approvals on one canvas. The 30-step sales example is an illustrative draft with placeholder connections, not a running CRM integration.",
+    image: "/screens/highlight-workflows.webp",
+    alt: "A 30-step draft sales workflow with Google Workspace, Microsoft 365, HubSpot, Salesforce, Notion, Slack and human approvals; connections are demo placeholders",
+    width: 2400,
+    height: 1500,
+    icon: "layout",
+    more: { label: "Explore Workflows", href: `${DOCS}/workflows/` },
+  },
+  {
+    id: "tables",
+    tab: "Tables",
+    title: "Give the work a shared structure",
+    body: "Typed records give people, agents and workflows somewhere to read and write structured work. This fictional pipeline shows stages, fit scores and next actions, with table and kanban views.",
+    image: "/screens/highlight-tables.webp",
+    alt: "Virtual Tables displaying a fictional sales pipeline with typed fields, coloured stages and next actions",
+    width: 2400,
+    height: 1500,
+    icon: "layout",
+    more: { label: "Explore Virtual Tables", href: `${DOCS}/virtual-tables/` },
   },
 ];
 
@@ -157,7 +208,14 @@ export const capabilityGroups = [
     art: "knowledge",
     title: "Knowledge and memory",
     body: "Answers from your documents with citations, and what the agent should remember.",
-    names: ["Knowledge search", "Skills", "Context", "Memory", "Memory (mem0)", "Past conversations"],
+    names: [
+      "Knowledge search",
+      "Skills",
+      "Context",
+      "Memory",
+      "Memory (mem0)",
+      "Past conversations",
+    ],
   },
   {
     art: "browser_use",
@@ -169,19 +227,41 @@ export const capabilityGroups = [
     art: "sandbox",
     title: "Files, code and output",
     body: "Its own computer with files and a shell, Claude Code or Codex for software work, and drawings and pages people can open.",
-    names: ["Calculations", "Sandbox", "Coding agent", "Charts", "Visuals", "Image generation", "Apps"],
+    names: [
+      "Calculations",
+      "Sandbox",
+      "Coding agent",
+      "Charts",
+      "Visuals",
+      "Image generation",
+      "Apps",
+    ],
   },
   {
     art: "subagents",
     title: "Reasoning and teamwork",
     body: "Plan, think, hand parts of a job to other agents, and ask you when it is unsure.",
-    names: ["Subagents", "Planning", "Thinking", "Work while tools run", "Tool search", "Date and time", "Instruction reminders", "Ask the user"],
+    names: [
+      "Subagents",
+      "Planning",
+      "Thinking",
+      "Work while tools run",
+      "Tool search",
+      "Date and time",
+      "Instruction reminders",
+      "Ask the user",
+    ],
   },
   {
     art: "guardrails",
     title: "Safety and limits",
     body: "Redact secrets and personal data, and keep long runs inside their limits.",
-    names: ["Guardrails", "Long conversations", "Media offload", "Tool output limits"],
+    names: [
+      "Guardrails",
+      "Long conversations",
+      "Media offload",
+      "Tool output limits",
+    ],
   },
   {
     art: "channel_tools",
@@ -206,7 +286,13 @@ export const connections = [
   {
     title: "Google",
     body: "Drive folders, Docs and Sheets synced into knowledge bases, a new Gmail message as a trigger, Analytics and Ads reports.",
-    brands: ["gdrive", "gdocs", "gsheets", "gmail", "ganalytics"] satisfies LogoName[],
+    brands: [
+      "gdrive",
+      "gdocs",
+      "gsheets",
+      "gmail",
+      "ganalytics",
+    ] satisfies LogoName[],
   },
   {
     title: "Microsoft 365",
@@ -216,7 +302,14 @@ export const connections = [
   {
     title: "Notion, Atlassian and project tools",
     body: "Notion pages, Jira and Confluence, Linear, Asana and GitHub, each person through their own account.",
-    brands: ["notion", "jira", "confluence", "linear", "asana", "github"] satisfies LogoName[],
+    brands: [
+      "notion",
+      "jira",
+      "confluence",
+      "linear",
+      "asana",
+      "github",
+    ] satisfies LogoName[],
   },
   {
     title: "Sales, support and commerce",
@@ -226,9 +319,24 @@ export const connections = [
 ] as const;
 
 export const logoCloud: readonly LogoName[] = [
-  "notion", "gdrive", "slack", "microsoft", "hubspot", "github",
-  "gmail", "teams", "jira", "intercom", "figma", "linear",
-  "gsheets", "onedrive", "confluence", "stripe", "shopify", "airtable",
+  "notion",
+  "gdrive",
+  "slack",
+  "microsoft",
+  "hubspot",
+  "github",
+  "gmail",
+  "teams",
+  "jira",
+  "intercom",
+  "figma",
+  "linear",
+  "gsheets",
+  "onedrive",
+  "confluence",
+  "stripe",
+  "shopify",
+  "airtable",
 ];
 
 export const controls = [
@@ -265,11 +373,41 @@ export const controls = [
 ] as const;
 
 export const comparison = [
-  { name: "AgenticOS", where: "Your infrastructure", source: "Apache-2.0", models: "28 providers, including local ones and your ChatGPT plan", own: true },
-  { name: "OpenAI dots", where: "OpenAI’s cloud", source: "Proprietary", models: "OpenAI only", own: false },
-  { name: "Grok Bot", where: "xAI’s cloud", source: "Proprietary", models: "Grok only", own: false },
-  { name: "Viktor", where: "Viktor’s cloud", source: "Proprietary", models: "OpenAI, Anthropic, Google, xAI", own: false },
-  { name: "n8n", where: "Self-hosted or n8n Cloud", source: "Sustainable Use License", models: "Many, including Ollama", own: false },
+  {
+    name: "AgenticOS",
+    where: "Your infrastructure",
+    source: "Apache-2.0",
+    models: "28 providers, including local ones and your ChatGPT plan",
+    own: true,
+  },
+  {
+    name: "OpenAI dots",
+    where: "OpenAI’s cloud",
+    source: "Proprietary",
+    models: "OpenAI only",
+    own: false,
+  },
+  {
+    name: "Grok Bot",
+    where: "xAI’s cloud",
+    source: "Proprietary",
+    models: "Grok only",
+    own: false,
+  },
+  {
+    name: "Viktor",
+    where: "Viktor’s cloud",
+    source: "Proprietary",
+    models: "OpenAI, Anthropic, Google, xAI",
+    own: false,
+  },
+  {
+    name: "n8n",
+    where: "Self-hosted or n8n Cloud",
+    source: "Sustainable Use License",
+    models: "Many, including Ollama",
+    own: false,
+  },
 ] as const;
 
 export const setups = [
@@ -397,27 +535,79 @@ export const vstorm = {
       "One concrete, high-value process from your business mapped to an agentic AI solution.",
     ],
     hosts: [
-      { name: "Antoni Kozelski", role: "CEO and co-founder", photo: "/people/antoni-kozelski.webp" },
-      { name: "Bartosz Adam Gonczarek", role: "Co-founder and CTO", photo: "/people/bartosz-gonczarek.webp" },
+      {
+        name: "Antoni Kozelski",
+        role: "CEO and co-founder",
+        photo: "/people/antoni-kozelski.webp",
+      },
+      {
+        name: "Bartosz Adam Gonczarek",
+        role: "Co-founder and CTO",
+        photo: "/people/bartosz-gonczarek.webp",
+      },
     ],
     reply: "Reply within 48 hours, from a founder or principal engineer.",
   },
   /** Credentials as vstorm.co states them, word for word where it can be. */
   credentials: {
-    pydantic: { title: "Official Pydantic implementation partner", body: "Typed, testable agents on Pydantic AI, the framework AgenticOS runs on.", href: "https://vstorm.co/pydantic-ai-development-services/" },
-    aaif: { title: "Agentic AI Foundation member", body: "The first agentic AI engineering company to join, to contribute and help set where the field goes.", href: "https://aaif.io/" },
+    pydantic: {
+      title: "Official Pydantic implementation partner",
+      body: "Typed, testable agents on Pydantic AI, the framework AgenticOS runs on.",
+      href: "https://vstorm.co/pydantic-ai-development-services/",
+    },
+    aaif: {
+      title: "Agentic AI Foundation member",
+      body: "The first agentic AI engineering company to join, to contribute and help set where the field goes.",
+      href: "https://aaif.io/",
+    },
     awards: [
-      { title: "Top AI company", by: "Clutch, 2023", href: "https://clutch.co/profile/vstorm-leading-ai-agent-company" },
+      {
+        title: "Top AI company",
+        by: "Clutch, 2023",
+        href: "https://clutch.co/profile/vstorm-leading-ai-agent-company",
+      },
       { title: "Technology Fast 50", by: "Deloitte, 2024" },
-      { title: "Top AI company", by: "The Manifest, 2024", href: "https://themanifest.com/" },
+      {
+        title: "Top AI company",
+        by: "The Manifest, 2024",
+        href: "https://themanifest.com/",
+      },
     ],
   },
   /** Agents Vstorm has put in production, with the figures its case studies publish. Not AgenticOS deployments. */
   cases: [
-    { client: "Schmitt-Thompson", what: "Medical triage with guideline-executing LLMs", from: "44%", to: "98%", unit: "accuracy", href: "https://vstorm.co/case-study/reaching-expert-level-medical-triage-with-guideline-executing-llms/" },
-    { client: "Synera", what: "Text to engineering workflow", from: "2 hrs", to: "3 min", unit: "to generate a workflow", href: "https://vstorm.co/case-study/text-to-workflow-cuts-engineers-tedious-task-time-to-seconds-with-agentic-ai-platform/" },
-    { client: "ARIJ Network", what: "Multilingual assistant for journalist training", from: "1%", to: "100%", unit: "of inquiries answered", href: "https://vstorm.co/case-study/multilingual-ai-agent-powered-chatbot-supporting-journalist-training/" },
-    { client: "Mixam", what: "Order recommendation and completion", from: "~20%", to: "~40%", unit: "conversion to a final sale", href: "https://vstorm.co/case-study/ai-agent-for-order-recommendation-and-completion/" },
+    {
+      client: "Schmitt-Thompson",
+      what: "Medical triage with guideline-executing LLMs",
+      from: "44%",
+      to: "98%",
+      unit: "accuracy",
+      href: "https://vstorm.co/case-study/reaching-expert-level-medical-triage-with-guideline-executing-llms/",
+    },
+    {
+      client: "Synera",
+      what: "Text to engineering workflow",
+      from: "2 hrs",
+      to: "3 min",
+      unit: "to generate a workflow",
+      href: "https://vstorm.co/case-study/text-to-workflow-cuts-engineers-tedious-task-time-to-seconds-with-agentic-ai-platform/",
+    },
+    {
+      client: "ARIJ Network",
+      what: "Multilingual assistant for journalist training",
+      from: "1%",
+      to: "100%",
+      unit: "of inquiries answered",
+      href: "https://vstorm.co/case-study/multilingual-ai-agent-powered-chatbot-supporting-journalist-training/",
+    },
+    {
+      client: "Mixam",
+      what: "Order recommendation and completion",
+      from: "~20%",
+      to: "~40%",
+      unit: "conversion to a final sale",
+      href: "https://vstorm.co/case-study/ai-agent-for-order-recommendation-and-completion/",
+    },
   ],
   phases: [
     {
@@ -425,21 +615,30 @@ export const vstorm = {
       title: "Foundation",
       who: "Vstorm engineers lead",
       body: "The open-source base, already built and running in production, set up in your environment.",
-      gets: ["The layer running in your environment", "Your first workflow mapped"],
+      gets: [
+        "The layer running in your environment",
+        "Your first workflow mapped",
+      ],
     },
     {
       n: "02",
       title: "Engineering",
       who: "Built together with your team",
       body: "Forward-deployed engineers map your processes, redesign them for agents, then build and tailor the system in production.",
-      gets: ["Processes redesigned for agents", "Agents live on your processes"],
+      gets: [
+        "Processes redesigned for agents",
+        "Agents live on your processes",
+      ],
     },
     {
       n: "03",
       title: "Handover",
       who: "Your team runs it",
       body: "Upskilling, runbooks, documentation and pairing, so your team runs and evolves the system when we step back.",
-      gets: ["Your people trained to work with agents", "A team that runs it without Vstorm"],
+      gets: [
+        "Your people trained to work with agents",
+        "A team that runs it without Vstorm",
+      ],
     },
   ],
   figures: [
@@ -459,9 +658,21 @@ export const useCases = [
     color: "#bbd1ff",
     count: 6,
     items: [
-      { title: "Build your first document agent", body: "Answers you can check against the document", href: tutorial("first-document-agent") },
-      { title: "Review a contract against your checklist", body: "A checklist skill applied to an agreement", href: tutorial("contract-review") },
-      { title: "Extract invoice data into a spreadsheet", body: "Invoice PDFs read in a sandbox, written to CSV", href: tutorial("document-extraction") },
+      {
+        title: "Build your first document agent",
+        body: "Answers you can check against the document",
+        href: tutorial("first-document-agent"),
+      },
+      {
+        title: "Review a contract against your checklist",
+        body: "A checklist skill applied to an agreement",
+        href: tutorial("contract-review"),
+      },
+      {
+        title: "Extract invoice data into a spreadsheet",
+        body: "Invoice PDFs read in a sandbox, written to CSV",
+        href: tutorial("document-extraction"),
+      },
     ],
   },
   {
@@ -469,9 +680,21 @@ export const useCases = [
     color: "#f2b8c6",
     count: 5,
     items: [
-      { title: "Put a support assistant on your website", body: "A knowledge-backed widget on a public site", href: tutorial("support-widget") },
-      { title: "Answer a handbook question in Slack", body: "The document agent in a Slack thread", href: tutorial("slack-handbook-assistant") },
-      { title: "Triage your inbox and draft replies", body: "New mail read by a Gmail trigger", href: tutorial("email-triage") },
+      {
+        title: "Put a support assistant on your website",
+        body: "A knowledge-backed widget on a public site",
+        href: tutorial("support-widget"),
+      },
+      {
+        title: "Answer a handbook question in Slack",
+        body: "The document agent in a Slack thread",
+        href: tutorial("slack-handbook-assistant"),
+      },
+      {
+        title: "Triage your inbox and draft replies",
+        body: "New mail read by a Gmail trigger",
+        href: tutorial("email-triage"),
+      },
     ],
   },
   {
@@ -479,9 +702,21 @@ export const useCases = [
     color: "#f5cdb6",
     count: 6,
     items: [
-      { title: "Research a question with subagents", body: "Sub-questions in parallel, a sourced report", href: tutorial("deep-research-subagents") },
-      { title: "Brief yourself on a company before a call", body: "A dated, sourced one-page brief", href: tutorial("account-research") },
-      { title: "Turn a CSV into a chart you can check", body: "Totals, a chart and the script behind it", href: tutorial("csv-chart") },
+      {
+        title: "Research a question with subagents",
+        body: "Sub-questions in parallel, a sourced report",
+        href: tutorial("deep-research-subagents"),
+      },
+      {
+        title: "Brief yourself on a company before a call",
+        body: "A dated, sourced one-page brief",
+        href: tutorial("account-research"),
+      },
+      {
+        title: "Turn a CSV into a chart you can check",
+        body: "Totals, a chart and the script behind it",
+        href: tutorial("csv-chart"),
+      },
     ],
   },
   {
@@ -489,9 +724,21 @@ export const useCases = [
     color: "#1fb58f",
     count: 5,
     items: [
-      { title: "Schedule a weekly report", body: "Republished as an app every week", href: tutorial("scheduled-report") },
-      { title: "Triage new GitHub issues automatically", body: "Triaged the moment GitHub delivers them", href: tutorial("github-issue-triage") },
-      { title: "Route requests to a team of specialists", body: "A front desk that delegates", href: tutorial("specialist-team") },
+      {
+        title: "Schedule a weekly report",
+        body: "Republished as an app every week",
+        href: tutorial("scheduled-report"),
+      },
+      {
+        title: "Triage new GitHub issues automatically",
+        body: "Triaged the moment GitHub delivers them",
+        href: tutorial("github-issue-triage"),
+      },
+      {
+        title: "Route requests to a team of specialists",
+        body: "A front desk that delegates",
+        href: tutorial("specialist-team"),
+      },
     ],
   },
   {
@@ -499,9 +746,21 @@ export const useCases = [
     color: "#d8c84a",
     count: 3,
     items: [
-      { title: "Turn one article into social posts", body: "Channel posts in your brand voice", href: tutorial("content-repurposing") },
-      { title: "Write product descriptions from a catalogue", body: "Listings without invented facts", href: tutorial("product-descriptions") },
-      { title: "Translate documents with your terminology", body: "Translation that follows a glossary skill", href: tutorial("translation-glossary") },
+      {
+        title: "Turn one article into social posts",
+        body: "Channel posts in your brand voice",
+        href: tutorial("content-repurposing"),
+      },
+      {
+        title: "Write product descriptions from a catalogue",
+        body: "Listings without invented facts",
+        href: tutorial("product-descriptions"),
+      },
+      {
+        title: "Translate documents with your terminology",
+        body: "Translation that follows a glossary skill",
+        href: tutorial("translation-glossary"),
+      },
     ],
   },
   {
@@ -509,9 +768,21 @@ export const useCases = [
     color: "#a99cf2",
     count: 2,
     items: [
-      { title: "Review a change in a repository", body: "A diff reviewed in a sandbox", href: tutorial("code-review") },
-      { title: "Keep personal data out of prompts", body: "Redacted before the model reads it", href: tutorial("pii-guardrails") },
-      { title: "Call an agent from your own application", body: "Any published agent over HTTP", href: tutorial("agent-api") },
+      {
+        title: "Review a change in a repository",
+        body: "A diff reviewed in a sandbox",
+        href: tutorial("code-review"),
+      },
+      {
+        title: "Keep personal data out of prompts",
+        body: "Redacted before the model reads it",
+        href: tutorial("pii-guardrails"),
+      },
+      {
+        title: "Call an agent from your own application",
+        body: "Any published agent over HTTP",
+        href: tutorial("agent-api"),
+      },
     ],
   },
 ] as const;

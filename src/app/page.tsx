@@ -25,6 +25,8 @@ import { Engineers } from "@/components/engineers";
 import { Expertise } from "@/components/expertise";
 import { Pricing } from "@/components/pricing";
 import { Vstorm } from "@/components/vstorm";
+import { Recognition } from "@/components/recognition";
+import { PlatformChoice } from "@/components/platform-choice";
 import { faq } from "@/content";
 import { PAGE_URL } from "@/lib/site";
 
@@ -32,7 +34,11 @@ const faqData = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "@id": `${PAGE_URL}/#faq`,
-  mainEntity: faq.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })),
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 
 export default function Home() {
@@ -46,6 +52,7 @@ export default function Home() {
       <main id="content">
         <Hero />
         <Statement />
+        <Recognition />
         <Teammates />
         <Together />
         <Coding />
@@ -55,6 +62,7 @@ export default function Home() {
         <Draws />
         <Capabilities />
         <UseCases />
+        <PlatformChoice />
         <Integrations />
         <Soon />
         <Control />

@@ -10,7 +10,13 @@ export type GlanceRow = { area: string; them: string; us: string };
 export type Point = { title: string; body: string };
 export type Question = { q: string; a: string };
 /** A real console capture from `public/screens`, described as it is. */
-export type Screen = { src: string; width: number; height: number; alt: string; caption: string };
+export type Screen = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption: string;
+};
 /** The nature photograph behind the page's top band. */
 export type Scene = "meadow" | "lake";
 
@@ -39,13 +45,14 @@ export type Comparison = {
 
 const guide = (name: string) => `${DOCS}/about/${name}/`;
 
-const SCREENS = {
+export const SCREENS = {
   approvals: {
     src: "/screens/crop-approvals.webp",
     width: 1336,
     height: 760,
-    alt: "The Approvals tab of the Activity page: a Sales Researcher waits to send an email and update a CRM deal, a Finance Analyst to create an invoice, each with Approve and Reject.",
-    caption: "Approvals wait in one queue, for the people allowed to decide them.",
+    alt: "The Approvals tab of the Activity page, with approved, rejected and expired example requests and their decision history.",
+    caption:
+      "Approval requests and their recorded decisions stay in one place.",
   },
   spend: {
     src: "/screens/crop-spend.webp",
@@ -58,8 +65,9 @@ const SCREENS = {
     src: "/screens/highlight-builder-test.webp",
     width: 2400,
     height: 1500,
-    alt: "A Finance Analyst agent in the builder: its toolbox of capabilities, switched on one by one, and a test chat beside it drawing a revenue chart.",
-    caption: "An agent is built in the browser: capabilities switched on, tested in the chat beside them.",
+    alt: "The Finance Analyst’s capability cards beside its draft test panel, ready for a sample question.",
+    caption:
+      "Configure capabilities and open the draft test panel before publishing.",
   },
   subagents: {
     src: "/screens/highlight-subagents.webp",
@@ -72,8 +80,9 @@ const SCREENS = {
     src: "/screens/highlight-app.webp",
     width: 2400,
     height: 1500,
-    alt: "An ROI calculator an agent drew in the chat and saved as an app, with sliders for invoices, minutes per invoice and hourly cost.",
-    caption: "What an agent builds can be saved as an app with its own link.",
+    alt: "Company Brain, a seeded LLM wiki app with six fictional source notes, a knowledge map and source preview.",
+    caption:
+      "A seeded interactive knowledge map saved as an app. It illustrates the interface, not a live RAG query.",
   },
 } as const satisfies Record<string, Screen>;
 
@@ -86,15 +95,47 @@ export const comparisons = [
       "ChatGPT Enterprise gives each employee OpenAI's assistant in OpenAI's cloud. AgenticOS runs your company's own agents on your servers, on any model.",
     lead: "ChatGPT Business and Enterprise give every employee OpenAI's assistant, plus workspace agents for shared tasks, in OpenAI's cloud. AgenticOS is for the agents your company owns: it runs on your infrastructure, uses the model you choose and answers on your website, in your chat tools and through your API.",
     glance: [
-      { area: "Where it runs", them: "OpenAI's cloud; storage residency in ten regions on Enterprise", us: "Your infrastructure" },
+      {
+        area: "Where it runs",
+        them: "OpenAI's cloud; storage residency in ten regions on Enterprise",
+        us: "Your infrastructure",
+      },
       { area: "Source", them: "Proprietary", us: "Apache-2.0" },
-      { area: "Models", them: "OpenAI only", us: "28 providers, OpenAI included, and local models" },
-      { area: "Building agents", them: "Workspace agents, in research preview, with versions and sharing", us: "Published agents with versions, environments and YAML export" },
-      { area: "Surfaces for an agent", them: "ChatGPT, Slack, schedules, an API trigger", us: "Web chat, widget, hosted page, HTTP API, WebSocket, Slack, Telegram, Mattermost" },
-      { area: "API", them: "The trigger queues a run; the answer cannot be retrieved through the API", us: "The run API returns the run and its answer" },
-      { area: "Spend control", them: "Credit pools and overage limits", us: "A budget per agent and per organization, checked before each model request" },
-      { area: "Identity and audit", them: "SAML SSO on Business; SCIM, role-based access and the Compliance API on Enterprise", us: "OIDC SSO, LDAP and Kerberos, roles with per-resource grants and a tamper-evident audit log, in every deployment" },
-      { area: "Pricing", them: "Business from $20 per seat a month, billed annually; Enterprise custom; agent work paid in credits", us: "No licence fee; model usage at your provider's rates" },
+      {
+        area: "Models",
+        them: "OpenAI only",
+        us: "28 providers, OpenAI included, and local models",
+      },
+      {
+        area: "Building agents",
+        them: "Workspace agents, in research preview, with versions and sharing",
+        us: "Published agents with versions, environments and YAML export",
+      },
+      {
+        area: "Surfaces for an agent",
+        them: "ChatGPT, Slack, schedules, an API trigger",
+        us: "Web chat, widget, hosted page, API, WebSocket, Slack, Teams, Telegram, Mattermost and browser voice",
+      },
+      {
+        area: "API",
+        them: "The trigger queues a run; the answer cannot be retrieved through the API",
+        us: "The run API returns the run and its answer",
+      },
+      {
+        area: "Spend control",
+        them: "Credit pools and overage limits",
+        us: "A budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Identity and audit",
+        them: "SAML SSO on Business; SCIM, role-based access and the Compliance API on Enterprise",
+        us: "OIDC SSO, LDAP and Kerberos, roles with per-resource grants and a tamper-evident audit log, in every deployment",
+      },
+      {
+        area: "Pricing",
+        them: "Business from $20 per seat a month, billed annually; Enterprise custom; agent work paid in credits",
+        us: "No licence fee; model usage at your provider's rates",
+      },
     ],
     further: [
       {
@@ -124,7 +165,7 @@ export const comparisons = [
     faq: [
       {
         q: "Is AgenticOS a self-hosted alternative to ChatGPT Enterprise?",
-        a: "For agents your organization owns, yes. It runs on your infrastructure, uses OpenAI or any other provider, and publishes each agent to eight surfaces with its own budget and run history. It does not replace ChatGPT as an assistant for every employee.",
+        a: "For agents your organization owns, yes. It runs on your infrastructure, uses OpenAI or any other provider, and publishes each agent to configured surfaces with its own budget and run history. It does not replace ChatGPT as an assistant for every employee.",
       },
       {
         q: "Can AgenticOS use OpenAI models?",
@@ -151,17 +192,57 @@ export const comparisons = [
       "Claude Team and Enterprise give each employee Anthropic's assistant. AgenticOS runs your company's agents on your servers, on Claude or any other model.",
     lead: "Claude Team and Enterprise give each employee Anthropic's assistant: chat, Projects, Cowork, connectors and skills, on Claude models in Anthropic's cloud. AgenticOS builds agents for your organization rather than seats for your employees, and it can run them on Claude through the Anthropic API or Amazon Bedrock.",
     glance: [
-      { area: "Unit of purchase", them: "A seat per employee", us: "A deployment; no seat fee" },
-      { area: "Where it runs", them: "Anthropic's cloud", us: "Your infrastructure" },
+      {
+        area: "Unit of purchase",
+        them: "A seat per employee",
+        us: "A deployment; no seat fee",
+      },
+      {
+        area: "Where it runs",
+        them: "Anthropic's cloud",
+        us: "Your infrastructure",
+      },
       { area: "Source", them: "Proprietary", us: "Apache-2.0" },
-      { area: "Models", them: "Claude only", us: "28 providers, Claude included, and local models" },
-      { area: "What you build", them: "Projects, skills and plugins for people who chat", us: "Published agents, each a versioned spec" },
-      { area: "Surfaces", them: "Web, desktop, mobile, Chrome, Microsoft 365, Slack through Claude Tag in beta", us: "Web chat, widget, hosted page, HTTP API, WebSocket, Slack, Telegram, Mattermost" },
-      { area: "Who uses it", them: "Employees with a seat", us: "Employees, customers and systems, on eight surfaces" },
-      { area: "Spend control", them: "Organization and user spend caps", us: "A budget per agent and per organization, checked before each model request" },
-      { area: "Approvals", them: "The person running the task, or an automatic mode the organization may allow", us: "A run waits until a person allowed to decide approvals decides" },
-      { area: "Audit log", them: "Enterprise only; 180 days of events", us: "Every deployment; tamper-evident, exported as CSV or JSONL" },
-      { area: "Pricing", them: "Team from $20 per seat a month, billed annually; Enterprise $20 per seat plus usage at API rates, from 20 seats", us: "Model usage at your provider's rates, plus infrastructure" },
+      {
+        area: "Models",
+        them: "Claude only",
+        us: "28 providers, Claude included, and local models",
+      },
+      {
+        area: "What you build",
+        them: "Projects, skills and plugins for people who chat",
+        us: "Published agents, each a versioned spec",
+      },
+      {
+        area: "Surfaces",
+        them: "Web, desktop, mobile, Chrome, Microsoft 365, Slack through Claude Tag in beta",
+        us: "Web chat, widget, hosted page, API, WebSocket, Slack, Teams, Telegram, Mattermost and browser voice",
+      },
+      {
+        area: "Who uses it",
+        them: "Employees with a seat",
+        us: "Employees, customers and systems, on configured surfaces",
+      },
+      {
+        area: "Spend control",
+        them: "Organization and user spend caps",
+        us: "A budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Approvals",
+        them: "The person running the task, or an automatic mode the organization may allow",
+        us: "A run waits until a person allowed to decide approvals decides",
+      },
+      {
+        area: "Audit log",
+        them: "Enterprise only; 180 days of events",
+        us: "Every deployment; tamper-evident, exported as CSV or JSONL",
+      },
+      {
+        area: "Pricing",
+        them: "Team from $20 per seat a month, billed annually; Enterprise $20 per seat plus usage at API rates, from 20 seats",
+        us: "Model usage at your provider's rates, plus infrastructure",
+      },
     ],
     further: [
       {
@@ -218,28 +299,60 @@ export const comparisons = [
       "Copilot Studio builds agents in Microsoft's cloud, billed in credits. AgenticOS builds them on your servers, with any model and no fee of its own.",
     lead: "Microsoft Copilot Studio builds agents inside Power Platform, publishes them to Teams and Microsoft 365, and bills them in Copilot Credits. AgenticOS builds agents on your own infrastructure, with any model provider, and charges nothing of its own: you pay for the model.",
     glance: [
-      { area: "Where it runs", them: "Microsoft's cloud, in Power Platform environments", us: "Your infrastructure" },
+      {
+        area: "Where it runs",
+        them: "Microsoft's cloud, in Power Platform environments",
+        us: "Your infrastructure",
+      },
       { area: "Source", them: "Proprietary", us: "Apache-2.0" },
-      { area: "Models", them: "GPT and Claude models; Azure Foundry models billed separately", us: "28 providers, including local" },
-      { area: "Billing", them: "$0.01 per Copilot Credit pay-as-you-go, or prepaid commit units at up to 20% off", us: "No licence fee; model usage at your provider's rates" },
-      { area: "How usage is counted", them: "Credits per feature: a generative answer is 2, an agent action 5", us: "Model tokens, priced per provider" },
-      { area: "Spend enforcement", them: "Monthly limits per agent; agents are disabled at 125% of prepaid capacity", us: "A budget per agent and per organization, checked before each model request" },
-      { area: "Surfaces", them: "Teams, Microsoft 365, SharePoint, web, WhatsApp, voice", us: "Web chat, widget, hosted page, HTTP API, WebSocket, Slack, Telegram, Mattermost" },
-      { area: "Identity", them: "Microsoft Entra ID", us: "OIDC SSO including Entra, LDAP and Kerberos" },
-      { area: "Governance", them: "Power Platform data policies, Purview audit, Entra Agent ID", us: "Permission catalog, grants, approvals and a tamper-evident audit log" },
+      {
+        area: "Models",
+        them: "GPT and Claude models; Azure Foundry models billed separately",
+        us: "28 providers, including local",
+      },
+      {
+        area: "Billing",
+        them: "$0.01 per Copilot Credit pay-as-you-go, or prepaid commit units at up to 20% off",
+        us: "No licence fee; model usage at your provider's rates",
+      },
+      {
+        area: "How usage is counted",
+        them: "Credits per feature: a generative answer is 2, an agent action 5",
+        us: "Model tokens, priced per provider",
+      },
+      {
+        area: "Spend enforcement",
+        them: "Monthly limits per agent; agents are disabled at 125% of prepaid capacity",
+        us: "A budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Surfaces",
+        them: "Teams, Microsoft 365, SharePoint, web, WhatsApp, voice",
+        us: "Web chat, widget, hosted page, API, WebSocket, Slack, Teams, Telegram, Mattermost and browser voice",
+      },
+      {
+        area: "Identity",
+        them: "Microsoft Entra ID",
+        us: "OIDC SSO including Entra, LDAP and Kerberos",
+      },
+      {
+        area: "Governance",
+        them: "Power Platform data policies, Purview audit, Entra Agent ID",
+        us: "Permission catalog, grants, approvals and a tamper-evident audit log",
+      },
     ],
     further: [
       {
-        title: "A bill you can predict from the model price",
-        body: "Copilot Studio meters each feature in credits and adds a premium rate for reasoning models. AgenticOS records each run's model cost from a bundled price snapshot and checks the agent's budget before each model request.",
+        title: "See the model cost behind a run",
+        body: "AgenticOS records model spend from its price snapshot and checks recorded spend before each model request. Missing prices can leave a run partially priced, and concurrent work can cross a budget. Hosting, tools and operation are separate costs.",
       },
       {
         title: "Any cloud, or none",
-        body: "Microsoft notes that Anthropic models in its offerings are outside the EU Data Boundary. AgenticOS runs wherever you deploy it, on a provider in the region you need or on a model you run yourself, so prompts never leave your network.",
+        body: "Microsoft notes that Anthropic models in its offerings are outside the EU Data Boundary. AgenticOS runs wherever you deploy it, with the provider and region you configure, or with local inference. Check embeddings, parsers, tools, traces and diagnostics separately; local inference alone does not mean zero egress.",
       },
       {
         title: "Microsoft identity without Microsoft hosting",
-        body: "People sign in with Entra ID over OIDC, directory groups map to roles, collections sync from SharePoint and OneDrive, and agents work in Outlook, Teams and Word through Microsoft's own Work IQ MCP servers.",
+        body: "People sign in with Entra ID over OIDC, directory groups map to roles, and collections can sync from SharePoint and OneDrive. Configure and verify the specific MCP integrations your task needs.",
       },
       {
         title: "Open where it matters to an auditor",
@@ -247,7 +360,7 @@ export const comparisons = [
       },
     ],
     enough: [
-      "Your agents belong in Teams and Microsoft 365 Copilot, and your users already hold Microsoft 365 Copilot licences.",
+      "You want agents embedded in Microsoft 365 Copilot and the Power Platform ecosystem, and your users already hold the relevant licences.",
       "You need Power Platform connectors, agent flows, voice or WhatsApp. AgenticOS supports Teams and browser voice calls; telephone and WhatsApp channels are not included.",
       "Purview, Sentinel and Power Platform data policies are how your organization governs everything else.",
     ],
@@ -256,7 +369,7 @@ export const comparisons = [
     faq: [
       {
         q: "Is AgenticOS an alternative to Microsoft Copilot Studio?",
-        a: "Yes, if you want to own the platform. AgenticOS runs on your infrastructure with any model provider and no credit meter. Copilot Studio fits better when agents live in Teams and Microsoft 365.",
+        a: "Yes, if you want to own the platform. AgenticOS runs on your infrastructure with any model provider and no credit meter. Copilot Studio fits particularly well when you need its Microsoft 365 Copilot and Power Platform integration. AgenticOS also supports a Teams channel.",
       },
       {
         q: "Does AgenticOS work with Microsoft Entra ID and SharePoint?",
@@ -264,7 +377,7 @@ export const comparisons = [
       },
       {
         q: "Can AgenticOS publish agents to Microsoft Teams?",
-        a: "Not yet. It publishes to web chat, a widget, a hosted page, the HTTP API, a WebSocket, Slack, Telegram and Mattermost.",
+        a: "Yes. Configure a Teams bot and the published agent’s availability, then verify identity linking and access for your deployment. This is distinct from native integration inside Microsoft 365 Copilot.",
       },
       {
         q: "How much does Copilot Studio cost compared with AgenticOS?",
@@ -283,16 +396,56 @@ export const comparisons = [
       "n8n automates workflows with AI nodes under a Sustainable Use License. AgenticOS starts from the agent, under Apache-2.0, with budgets and approvals.",
     lead: "n8n is a workflow automation tool: you connect triggers, integrations and code steps on a canvas, and AI Agent nodes add models and tools. AgenticOS starts from the agent instead, with instructions, a model, capabilities, knowledge and a budget, published as a version and governed on the server.",
     glance: [
-      { area: "Unit of work", them: "A workflow of nodes", us: "An agent, published as a versioned spec" },
-      { area: "Licence", them: "Sustainable Use License; .ee files need an Enterprise licence", us: "Apache-2.0" },
-      { area: "Where it runs", them: "Self-hosted or n8n Cloud in Frankfurt", us: "Your infrastructure" },
-      { area: "Sign-in", them: "SSO on self-hosted Business and Enterprise, and Cloud Enterprise", us: "OIDC SSO, LDAP and Kerberos in every deployment" },
-      { area: "Roles", them: "Projects and roles on paid plans", us: "Six roles and per-resource grants in every deployment" },
-      { area: "Environments and version control", them: "Business and above", us: "Environments and YAML export in every deployment" },
-      { area: "Spend control", them: "Execution quotas per plan", us: "A budget per agent and per organization, checked before each model request" },
-      { area: "Audit", them: "Log streaming on Enterprise", us: "Tamper-evident audit log in every deployment" },
-      { area: "Human approval", them: "Per tool, through nine review channels", us: "Per capability, per tool and per MCP connection, through a shared queue" },
-      { area: "Pricing", them: "Community free; Cloud from €20 a month for 2,500 executions, billed annually; Business €667 a month, self-hosted", us: "No licence fee; model usage and infrastructure" },
+      {
+        area: "Unit of work",
+        them: "A workflow of nodes",
+        us: "An agent, published as a versioned spec",
+      },
+      {
+        area: "Licence",
+        them: "Sustainable Use License; .ee files need an Enterprise licence",
+        us: "Apache-2.0",
+      },
+      {
+        area: "Where it runs",
+        them: "Self-hosted or n8n Cloud in Frankfurt",
+        us: "Your infrastructure",
+      },
+      {
+        area: "Sign-in",
+        them: "SSO on self-hosted Business and Enterprise, and Cloud Enterprise",
+        us: "OIDC SSO, LDAP and Kerberos in every deployment",
+      },
+      {
+        area: "Roles",
+        them: "Projects and roles on paid plans",
+        us: "Six roles and per-resource grants in every deployment",
+      },
+      {
+        area: "Environments and version control",
+        them: "Business and above",
+        us: "Environments and YAML export in every deployment",
+      },
+      {
+        area: "Spend control",
+        them: "Execution quotas per plan",
+        us: "A budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Audit",
+        them: "Log streaming on Enterprise",
+        us: "Tamper-evident audit log in every deployment",
+      },
+      {
+        area: "Human approval",
+        them: "Per tool, through nine review channels",
+        us: "Per capability, per tool and per MCP connection, through a shared queue",
+      },
+      {
+        area: "Pricing",
+        them: "Community free; Cloud from €20 a month for 2,500 executions, billed annually; Business €667 a month, self-hosted",
+        us: "No licence fee; model usage and infrastructure",
+      },
     ],
     further: [
       {
@@ -349,15 +502,51 @@ export const comparisons = [
       "Dify is a visual LLM app builder whose licence limits multi-tenant use. AgenticOS is Apache-2.0, with SSO, budgets and an audit log in every deployment.",
     lead: "Dify builds LLM apps and workflows on a visual canvas, self-hosted or in Dify Cloud. AgenticOS builds agents from instructions, capabilities, knowledge and a budget, and ships the controls a company asks for in the open-source product.",
     glance: [
-      { area: "How you build", them: "A visual canvas of workflow, chatflow and agent nodes", us: "Versioned agents plus visual workflows with typed steps, branches and loops" },
-      { area: "Licence", them: "Apache 2.0 with added conditions on multi-tenant use and the logo", us: "Apache-2.0" },
-      { area: "Tenancy", them: "One workspace; several workspaces are Enterprise", us: "Many organizations in one deployment" },
-      { area: "Roles", them: "Four built-in roles; custom roles are Enterprise", us: "Six roles, 33 permissions and per-resource grants" },
-      { area: "Sign-in", them: "Email; SSO is Enterprise", us: "Email, Google, OIDC SSO, LDAP and Kerberos" },
-      { area: "Audit", them: "Enterprise", us: "Tamper-evident audit log with CSV and JSONL export" },
-      { area: "Spend control", them: "Provider billing, or Cloud message credits", us: "A monthly budget per agent and per organization, checked before each model request" },
-      { area: "Human approval", them: "A Human Input node in a workflow", us: "Per capability, per tool and per MCP connection; the run waits until someone decides" },
-      { area: "Kubernetes", them: "Community Helm charts; official high availability is Enterprise", us: "Docker Compose on one host, with an external Postgres and more hosts documented; no Kubernetes manifests" },
+      {
+        area: "How you build",
+        them: "A visual canvas of workflow, chatflow and agent nodes",
+        us: "Versioned agents plus visual workflows with typed steps, branches and loops",
+      },
+      {
+        area: "Licence",
+        them: "Apache 2.0 with added conditions on multi-tenant use and the logo",
+        us: "Apache-2.0",
+      },
+      {
+        area: "Tenancy",
+        them: "One workspace; several workspaces are Enterprise",
+        us: "Many organizations in one deployment",
+      },
+      {
+        area: "Roles",
+        them: "Four built-in roles; custom roles are Enterprise",
+        us: "Six roles, 33 permissions and per-resource grants",
+      },
+      {
+        area: "Sign-in",
+        them: "Email; SSO is Enterprise",
+        us: "Email, Google, OIDC SSO, LDAP and Kerberos",
+      },
+      {
+        area: "Audit",
+        them: "Enterprise",
+        us: "Tamper-evident audit log with CSV and JSONL export",
+      },
+      {
+        area: "Spend control",
+        them: "Provider billing, or Cloud message credits",
+        us: "A monthly budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Human approval",
+        them: "A Human Input node in a workflow",
+        us: "Per capability, per tool and per MCP connection; the run waits until someone decides",
+      },
+      {
+        area: "Kubernetes",
+        them: "Community Helm charts; official high availability is Enterprise",
+        us: "Docker Compose on one host, with an external Postgres and more hosts documented; no Kubernetes manifests",
+      },
     ],
     further: [
       {
@@ -414,16 +603,52 @@ export const comparisons = [
       "Sauna is a proactive AI assistant per person, run in its cloud. AgenticOS runs your company's agents on your servers, with any model and per-agent budgets.",
     lead: "Sauna is a proactive AI assistant for each person: it reads the inbox, calendar, documents and tools you connect, remembers what it learns, and suggests or does work on your behalf. AgenticOS gives a company as many agents as it needs, each with its own instructions, model, tools, knowledge, budget and access rules, on infrastructure the company controls.",
     glance: [
-      { area: "What you get", them: "One proactive assistant per person, with memory", us: "Any number of agents, each a versioned spec" },
-      { area: "Where it runs", them: "Sauna's cloud; US infrastructure for US customers, and data may be processed in the US", us: "Your infrastructure" },
+      {
+        area: "What you get",
+        them: "One proactive assistant per person, with memory",
+        us: "Any number of agents, each a versioned spec",
+      },
+      {
+        area: "Where it runs",
+        them: "Sauna's cloud; US infrastructure for US customers, and data may be processed in the US",
+        us: "Your infrastructure",
+      },
       { area: "Source", them: "Proprietary", us: "Apache-2.0" },
-      { area: "Models", them: "Its own Lite model on Lite; all models from Basic", us: "28 providers, including local models" },
-      { area: "Knowledge", them: "Files you drop in, memory it learns and the tools you connect", us: "Document collections in your Postgres, with parsing and chunking you choose" },
-      { area: "Surfaces", them: "Web app, iOS app, iMessage, Slack, Gmail, Superhuman, email", us: "Web chat, widget, hosted page, HTTP API, WebSocket, Slack, Telegram, Mattermost" },
-      { area: "Sharing", them: "Private by default; a company-wide shared brain on Team", us: "Six roles, 33 permissions and per-resource grants" },
-      { area: "Autonomy", them: "Configurable, from suggesting actions to acting on its own", us: "Approvals per capability, per tool and per MCP connection" },
-      { area: "Compliance evidence", them: "SOC 2 Type II, CASA", us: "Your controls on your infrastructure" },
-      { area: "Pricing", them: "Free with 10 credits a day; Lite $29, Basic $99, Pro $299 and Team $999 a month, monthly only", us: "No licence fee; model usage and infrastructure" },
+      {
+        area: "Models",
+        them: "Its own Lite model on Lite; all models from Basic",
+        us: "28 providers, including local models",
+      },
+      {
+        area: "Knowledge",
+        them: "Files you drop in, memory it learns and the tools you connect",
+        us: "Document collections in your Postgres, with parsing and chunking you choose",
+      },
+      {
+        area: "Surfaces",
+        them: "Web app, iOS app, iMessage, Slack, Gmail, Superhuman, email",
+        us: "Web chat, widget, hosted page, API, WebSocket, Slack, Teams, Telegram, Mattermost and browser voice",
+      },
+      {
+        area: "Sharing",
+        them: "Private by default; a company-wide shared brain on Team",
+        us: "Six roles, 33 permissions and per-resource grants",
+      },
+      {
+        area: "Autonomy",
+        them: "Configurable, from suggesting actions to acting on its own",
+        us: "Approvals per capability, per tool and per MCP connection",
+      },
+      {
+        area: "Compliance evidence",
+        them: "SOC 2 Type II, CASA",
+        us: "Your controls on your infrastructure",
+      },
+      {
+        area: "Pricing",
+        them: "Free with 10 credits a day; Lite $29, Basic $99, Pro $299 and Team $999 a month, monthly only",
+        us: "No licence fee; model usage and infrastructure",
+      },
     ],
     further: [
       {
@@ -472,231 +697,281 @@ export const comparisons = [
     scene: "lake",
     screens: [SCREENS.subagents, SCREENS.app],
   },
-{
-  "slug": "muse",
-  "name": "Muse",
-  "checkedDate": "2 November 2026",
-  "metaTitle": "AgenticOS vs Muse",
-  "description": "Compare Muse with AgenticOS: a managed personal cloud agent or a self-hosted platform for a company’s AI teammates.",
-  "lead": "Muse is Meta’s personal AI agent, announced on 8 September 2026. It uses a dedicated cloud VM and browser, continues work while the user is away, and asks before sensitive actions. The announcement describes an initial US rollout. Muse the agent and Muse Spark the model are different things.",
-  "glance": [
-    {
-      "area": "Where it runs",
-      "them": "Meta’s cloud; initial US rollout described in announcement",
-      "us": "Your infrastructure, with model providers you select"
-    },
-    {
-      "area": "Reader’s task",
-      "them": "A managed personal proactive agent",
-      "us": "Build, share and govern agents across a company"
-    },
-    {
-      "area": "Operation",
-      "them": "Vendor-operated service; availability and plan conditions apply",
-      "us": "Apache-2.0 software; your team operates it and pays for infrastructure and models"
-    }
-  ],
-  "further": [
-    {
-      "title": "A platform for the team",
-      "body": "Shared Projects, visual workflows and virtual tables connect people, agents and structured work. Configure budgets and tool approval policies, then inspect runs."
-    }
-  ],
-  "enough": [
-    "You want a managed personal assistant without running an agent platform.",
-    "You meet the vendor’s availability and plan requirements."
-  ],
-  "together": "No direct interoperability is asserted. Compare the same task with synthetic inputs before choosing; these pages do not report a hands-on account test.",
-  "faq": [
-    {
-      "q": "Is this a benchmark?",
-      "a": "No. This compares vendor documentation with AgenticOS v1.35.0. It does not establish answer quality, feature parity or comparative security."
-    }
-  ],
-  "guide": "https://vstorm-co.github.io/agenticos/about/muse/",
-  "scene": "lake",
-  "screens": [SCREENS.builder, SCREENS.approvals]
-},
-{
-  "slug": "claude-duet",
-  "name": "Claude Duet",
-  "checkedDate": "2 November 2026",
-  "metaTitle": "AgenticOS vs Claude Duet",
-  "description": "Compare Claude Duet with AgenticOS: a managed personal cloud agent or a self-hosted platform for a company’s AI teammates.",
-  "lead": "Claude Duet is Anthropic’s proactive cloud agent, announced on 21 October 2026. Its research preview starts with a waitlist for US Pro, Max and Ultra subscribers. It works across connected apps and keeps working while the user is away. Access and usage follow the preview’s plan conditions.",
-  "glance": [
-    {
-      "area": "Where it runs",
-      "them": "Anthropic’s cloud; US waitlisted research preview",
-      "us": "Your infrastructure, with model providers you select"
-    },
-    {
-      "area": "Reader’s task",
-      "them": "A managed personal proactive agent",
-      "us": "Build, share and govern agents across a company"
-    },
-    {
-      "area": "Operation",
-      "them": "Vendor-operated service; availability and plan conditions apply",
-      "us": "Apache-2.0 software; your team operates it and pays for infrastructure and models"
-    }
-  ],
-  "further": [
-    {
-      "title": "A platform for the team",
-      "body": "Shared Projects, visual workflows and virtual tables connect people, agents and structured work. Configure budgets and tool approval policies, then inspect runs."
-    }
-  ],
-  "enough": [
-    "You want a managed personal assistant without running an agent platform.",
-    "You meet the vendor’s availability and plan requirements."
-  ],
-  "together": "No direct interoperability is asserted. Compare the same task with synthetic inputs before choosing; these pages do not report a hands-on account test.",
-  "faq": [
-    {
-      "q": "Is this a benchmark?",
-      "a": "No. This compares vendor documentation with AgenticOS v1.35.0. It does not establish answer quality, feature parity or comparative security."
-    }
-  ],
-  "guide": "https://vstorm-co.github.io/agenticos/about/claude-duet/",
-  "scene": "lake",
-  "screens": [SCREENS.builder, SCREENS.approvals]
-},
-{
-  "slug": "grok-bot",
-  "name": "Grok Bot",
-  "checkedDate": "2 November 2026",
-  "metaTitle": "AgenticOS vs Grok Bot",
-  "description": "Compare Grok Bot and AgenticOS: deployment, team work, operation and the scope of a self-hosted AI agent platform.",
-  "lead": "Grok Bot provides managed AI teammates on persistent cloud computers. Its official documentation includes Enterprise audit logs and other admin controls. AgenticOS provides a company agent platform you operate yourself, with the models, tools and approval policies you choose.",
-  "glance": [
-    {
-      "area": "Deployment",
-      "them": "Vendor cloud; bots in an account share a computer",
-      "us": "Your infrastructure and selected model providers"
-    },
-    {
-      "area": "Scope to check",
-      "them": "Enterprise audit logs, SCIM and MCP allowlist; plan conditions apply",
-      "us": "Apache-2.0; infrastructure and model costs are separate"
-    },
-    {
-      "area": "Work",
-      "them": "Persistent bots with app access, shared computers and routines",
-      "us": "Versioned agents, shared Projects, visual workflows, virtual tables and routines"
-    }
-  ],
-  "further": [
-    {
-      "title": "Choose the operating model",
-      "body": "Configure the team’s agents, knowledge and tools, set approval policies and budgets, and inspect runs. Self-hosting also means your team owns deployment and maintenance."
-    }
-  ],
-  "enough": [
-    "You want a managed teammate service with its desktop and mobile apps.",
-    "Choose on the exact task, tool support and operating requirements; no answer-quality advantage is claimed."
-  ],
-  "together": "Treat migration as a small manual experiment: recreate permitted instructions, reconnect tools and verify a read and a rejected write. No automatic importer, transferred login session or direct interoperability is promised.",
-  "faq": [
-    {
-      "q": "Were both products tested together?",
-      "a": "No. These pages compare documented capabilities. The linked guide names its own baseline; assess the current vendor conditions and test your task before changing systems."
-    }
-  ],
-  "guide": "https://vstorm-co.github.io/agenticos/about/grok-bot/",
-  "scene": "meadow",
-  "screens": [SCREENS.builder, SCREENS.approvals]
-},
-{
-  "slug": "openbot",
-  "name": "OpenBot",
-  "checkedDate": "2 November 2026",
-  "metaTitle": "AgenticOS vs OpenBot",
-  "description": "Compare OpenBot and AgenticOS: deployment, team work, operation and the scope of a self-hosted AI agent platform.",
-  "lead": "OpenBot is the local-first teammate workspace at openbot.run, with desktop, team server and hosting options. It supports several agent providers. AgenticOS is an Apache-2.0 company agent platform with shared Projects, visual workflows and governance controls. Compare the actual deployment and license terms you need.",
-  "glance": [
-    {
-      "area": "Deployment",
-      "them": "Local computer, team server or hosted option",
-      "us": "Your infrastructure and selected model providers"
-    },
-    {
-      "area": "Scope to check",
-      "them": "Source-available; repository license: PolyForm Noncommercial 1.0.0",
-      "us": "Apache-2.0; infrastructure and model costs are separate"
-    },
-    {
-      "area": "Work",
-      "them": "Shared team workspace, files and agent handoffs, using connected providers",
-      "us": "Versioned agents, shared Projects, visual workflows, virtual tables and routines"
-    }
-  ],
-  "further": [
-    {
-      "title": "Choose the operating model",
-      "body": "Configure the team’s agents, knowledge and tools, set approval policies and budgets, and inspect runs. Self-hosting also means your team owns deployment and maintenance."
-    }
-  ],
-  "enough": [
-    "Its desktop workspace and provider integrations fit your task and licensing requirements.",
-    "Choose on the exact task, tool support and operating requirements; no answer-quality advantage is claimed."
-  ],
-  "together": "Treat migration as a small manual experiment: recreate permitted instructions, reconnect tools and verify a read and a rejected write. No automatic importer, transferred login session or direct interoperability is promised.",
-  "faq": [
-    {
-      "q": "Were both products tested together?",
-      "a": "No. These pages compare documented capabilities. The linked guide names its own baseline; assess the current vendor conditions and test your task before changing systems."
-    }
-  ],
-  "guide": "https://vstorm-co.github.io/agenticos/about/openbot/",
-  "scene": "meadow",
-  "screens": [SCREENS.builder, SCREENS.approvals]
-},
-{
-  "slug": "openai-dots",
-  "name": "OpenAI dots",
-  "checkedDate": "2 November 2026",
-  "metaTitle": "AgenticOS vs OpenAI dots",
-  "description": "Compare OpenAI dots and AgenticOS: deployment, team work, operation and the scope of a self-hosted AI agent platform.",
-  "lead": "A dot is an always-on personal agent in ChatGPT. It works on its own cloud computer, uses permitted connected apps and can delegate work while you keep talking. AgenticOS is a self-hosted company platform for configuring, sharing and governing agents. This is a documentation comparison, not a tested account benchmark.",
-  "glance": [
-    {
-      "area": "Deployment",
-      "them": "OpenAI cloud; optional connected local computer has separate availability requirements",
-      "us": "Your infrastructure and selected model providers"
-    },
-    {
-      "area": "Scope to check",
-      "them": "Gradual rollout to eligible accounts; plan, region and workspace conditions apply",
-      "us": "Apache-2.0; infrastructure and model costs are separate"
-    },
-    {
-      "area": "Work",
-      "them": "Ongoing personal responsibilities, permitted connected apps and delegated cloud threads",
-      "us": "Versioned agents, shared Projects, visual workflows, virtual tables and routines"
-    }
-  ],
-  "further": [
-    {
-      "title": "Choose the operating model",
-      "body": "Configure the team’s agents, knowledge and tools, set approval policies and budgets, and inspect runs. Self-hosting also means your team owns deployment and maintenance."
-    }
-  ],
-  "enough": [
-    "You want an ongoing personal agent in ChatGPT without operating an agent platform.",
-    "Choose on the exact task, tool support and operating requirements; no answer-quality advantage is claimed."
-  ],
-  "together": "Treat migration as a small manual experiment: recreate permitted instructions, reconnect tools and verify a read and a rejected write. No automatic importer, transferred login session or direct interoperability is promised.",
-  "faq": [
-    {
-      "q": "Were both products tested together?",
-      "a": "No. These pages compare documented capabilities. The linked guide names its own baseline; assess the current vendor conditions and test your task before changing systems."
-    }
-  ],
-  "guide": "https://vstorm-co.github.io/agenticos/about/openai-dots/",
-  "scene": "meadow",
-  "screens": [SCREENS.builder, SCREENS.approvals]
-},
+  {
+    slug: "muse",
+    name: "Muse",
+    checkedDate: "2 November 2026",
+    metaTitle: "AgenticOS vs Muse",
+    description:
+      "Compare Muse with AgenticOS: a managed personal cloud agent or a self-hosted platform for a company’s AI teammates.",
+    lead: "Muse is Meta’s personal AI agent, announced on 8 September 2026. It uses a dedicated cloud VM and browser, continues work while the user is away, and asks before sensitive actions. The announcement describes an initial US rollout. Muse the agent and Muse Spark the model are different things.",
+    glance: [
+      {
+        area: "Where it runs",
+        them: "Meta’s cloud; initial US rollout described in announcement",
+        us: "Your infrastructure, with model providers you select",
+      },
+      {
+        area: "Reader’s task",
+        them: "A managed personal proactive agent",
+        us: "Build, share and govern agents across a company",
+      },
+      {
+        area: "Operation",
+        them: "Vendor-operated service; availability and plan conditions apply",
+        us: "Apache-2.0 software; your team operates it and pays for infrastructure and models",
+      },
+    ],
+    further: [
+      {
+        title: "A platform for the team",
+        body: "Shared Projects, visual workflows and virtual tables connect people, agents and structured work. Configure budgets and tool approval policies, then inspect runs.",
+      },
+    ],
+    enough: [
+      "You want a managed personal assistant without running an agent platform.",
+      "You meet the vendor’s availability and plan requirements.",
+    ],
+    together:
+      "No direct interoperability is asserted. Compare the same task with synthetic inputs before choosing; these pages do not report a hands-on account test.",
+    faq: [
+      {
+        q: "Is this a benchmark?",
+        a: "No. This compares vendor documentation with AgenticOS v1.35.0. It does not establish answer quality, feature parity or comparative security.",
+      },
+    ],
+    guide: "https://vstorm-co.github.io/agenticos/about/muse/",
+    scene: "lake",
+    screens: [SCREENS.builder, SCREENS.approvals],
+  },
+  {
+    slug: "claude-duet",
+    name: "Claude Duet",
+    checkedDate: "2 November 2026",
+    metaTitle: "AgenticOS vs Claude Duet",
+    description:
+      "Compare Claude Duet with AgenticOS: a managed personal cloud agent or a self-hosted platform for a company’s AI teammates.",
+    lead: "Claude Duet is Anthropic’s proactive cloud agent, announced on 21 October 2026. Its research preview starts with a waitlist for US Pro, Max and Ultra subscribers. It works across connected apps and keeps working while the user is away. Access and usage follow the preview’s plan conditions.",
+    glance: [
+      {
+        area: "Where it runs",
+        them: "Anthropic’s cloud; US waitlisted research preview",
+        us: "Your infrastructure, with model providers you select",
+      },
+      {
+        area: "Reader’s task",
+        them: "A managed personal proactive agent",
+        us: "Build, share and govern agents across a company",
+      },
+      {
+        area: "Operation",
+        them: "Vendor-operated service; availability and plan conditions apply",
+        us: "Apache-2.0 software; your team operates it and pays for infrastructure and models",
+      },
+    ],
+    further: [
+      {
+        title: "A platform for the team",
+        body: "Shared Projects, visual workflows and virtual tables connect people, agents and structured work. Configure budgets and tool approval policies, then inspect runs.",
+      },
+    ],
+    enough: [
+      "You want a managed personal assistant without running an agent platform.",
+      "You meet the vendor’s availability and plan requirements.",
+    ],
+    together:
+      "No direct interoperability is asserted. Compare the same task with synthetic inputs before choosing; these pages do not report a hands-on account test.",
+    faq: [
+      {
+        q: "Is this a benchmark?",
+        a: "No. This compares vendor documentation with AgenticOS v1.35.0. It does not establish answer quality, feature parity or comparative security.",
+      },
+    ],
+    guide: "https://vstorm-co.github.io/agenticos/about/claude-duet/",
+    scene: "lake",
+    screens: [SCREENS.builder, SCREENS.approvals],
+  },
+  {
+    slug: "grok-bot",
+    name: "Grok Bot",
+    checkedDate: "2 November 2026",
+    metaTitle: "AgenticOS vs Grok Bot: choose your AI teammate platform",
+    description:
+      "Grok Bot or AgenticOS? Compare managed cloud bots with a self-hosted company agent platform. Explore real screens, use cases and operating tradeoffs.",
+    lead: "Grok Bot gives you managed AI teammates on persistent cloud computers. AgenticOS gives your team a self-hosted platform to build, share and operate its own agents. The important choice is who runs the workspace, how you configure it and what your task needs.",
+    glance: [
+      {
+        area: "Who runs it",
+        them: "Managed service on vendor-hosted bot computers",
+        us: "Your team operates the deployment on infrastructure it chooses",
+      },
+      {
+        area: "Working with agents",
+        them: "Message persistent bots; connected apps, skills and routines",
+        us: "Configure agents, shared Projects, visual workflows, tables and routines",
+      },
+      {
+        area: "Models",
+        them: "Models available through the vendor service and plan",
+        us: "Configure model-provider profiles, including local-model endpoints",
+      },
+      {
+        area: "Controls",
+        them: "Approvals; audit logs, SCIM and MCP allowlist documented for Enterprise",
+        us: "Roles, configured tool approvals, budgets and recorded runs in the open-source platform",
+      },
+      {
+        area: "Operating cost",
+        them: "Subscription entitlement and usage conditions depend on the plan",
+        us: "Apache-2.0 software, with infrastructure, models and operation paid separately",
+      },
+      {
+        area: "What to verify",
+        them: "Your plan’s tools, admin controls and data-handling conditions",
+        us: "Your resource grants, model and tool destinations, diagnostics and maintenance plan",
+      },
+    ],
+    further: [
+      {
+        title: "Build around the team’s job",
+        body: "Configure specialist agents with the knowledge, skills and tools a task needs. Bring people and agents into shared Projects, with project files and instructions that support the work.",
+      },
+      {
+        title: "Draw the steps you already know",
+        body: "Use visual workflows for explicit sequences, call an agent where interpretation is useful, and keep structured results in Virtual Tables. A repeatable process can sit beside a conversation.",
+      },
+      {
+        title: "Choose the runtime, then inspect the work",
+        body: "Select model-provider profiles, configure tool approvals and budgets, and inspect the resulting runs. Your team owns the configuration and needs to test its policies and failure paths.",
+      },
+    ],
+    enough: [
+      "You prefer a vendor-operated bot service to managing a deployment and its updates.",
+      "Its available apps, routines and desktop/mobile experience fit your task.",
+      "You need its documented Enterprise administration features and have verified the relevant plan conditions.",
+    ],
+    together:
+      "Try one bounded task before moving a setup. Recreate permitted instructions, reconnect tools, check an answer and test a rejected write. No automatic bot importer, transferred login session or direct Grok Bot integration is claimed.",
+    faq: [
+      {
+        q: "Is AgenticOS a free version of Grok Bot?",
+        a: "It is a different operating model. AgenticOS is Apache-2.0 software you host and operate. There is no software licence fee, but servers, model usage and maintenance still cost money. Grok Bot is a managed service with its own plan and usage conditions.",
+      },
+      {
+        q: "Does Grok Bot have enterprise controls?",
+        a: "Yes. Its current documentation includes Enterprise audit logs, OpenTelemetry export, SCIM and an MCP allowlist. Compare the policies your organization actually needs; this is not a claim that only AgenticOS offers controls.",
+      },
+      {
+        q: "Can I choose models in AgenticOS?",
+        a: "You configure model-provider profiles and connect agents to them, including supported local-model endpoints. Model availability, capability support and running costs depend on that configuration.",
+      },
+      {
+        q: "Can I move my existing bots automatically?",
+        a: "No automatic Grok Bot importer or login-session transfer is claimed. Start with a small manual task migration and verify tools, permissions and outputs before expanding it.",
+      },
+      {
+        q: "Were both products benchmarked?",
+        a: "No. Vendor claims are based on the documentation linked in the full guide. The AgenticOS images are product captures with illustrative data, not measured customer outcomes or evidence of a head-to-head quality advantage.",
+      },
+    ],
+    guide: "https://vstorm-co.github.io/agenticos/about/grok-bot/",
+    scene: "meadow",
+    screens: [SCREENS.builder, SCREENS.approvals],
+  },
+  {
+    slug: "openbot",
+    name: "OpenBot",
+    checkedDate: "2 November 2026",
+    metaTitle: "AgenticOS vs OpenBot",
+    description:
+      "Compare OpenBot and AgenticOS: deployment, team work, operation and the scope of a self-hosted AI agent platform.",
+    lead: "OpenBot is the local-first teammate workspace at openbot.run, with desktop, team server and hosting options. It supports several agent providers. AgenticOS is an Apache-2.0 company agent platform with shared Projects, visual workflows and governance controls. Compare the actual deployment and license terms you need.",
+    glance: [
+      {
+        area: "Deployment",
+        them: "Local computer, team server or hosted option",
+        us: "Your infrastructure and selected model providers",
+      },
+      {
+        area: "Scope to check",
+        them: "Source-available; repository license: PolyForm Noncommercial 1.0.0",
+        us: "Apache-2.0; infrastructure and model costs are separate",
+      },
+      {
+        area: "Work",
+        them: "Shared team workspace, files and agent handoffs, using connected providers",
+        us: "Versioned agents, shared Projects, visual workflows, virtual tables and routines",
+      },
+    ],
+    further: [
+      {
+        title: "Choose the operating model",
+        body: "Configure the team’s agents, knowledge and tools, set approval policies and budgets, and inspect runs. Self-hosting also means your team owns deployment and maintenance.",
+      },
+    ],
+    enough: [
+      "Its desktop workspace and provider integrations fit your task and licensing requirements.",
+      "Choose on the exact task, tool support and operating requirements; no answer-quality advantage is claimed.",
+    ],
+    together:
+      "Treat migration as a small manual experiment: recreate permitted instructions, reconnect tools and verify a read and a rejected write. No automatic importer, transferred login session or direct interoperability is promised.",
+    faq: [
+      {
+        q: "Were both products tested together?",
+        a: "No. These pages compare documented capabilities. The linked guide names its own baseline; assess the current vendor conditions and test your task before changing systems.",
+      },
+    ],
+    guide: "https://vstorm-co.github.io/agenticos/about/openbot/",
+    scene: "meadow",
+    screens: [SCREENS.builder, SCREENS.approvals],
+  },
+  {
+    slug: "openai-dots",
+    name: "OpenAI dots",
+    checkedDate: "2 November 2026",
+    metaTitle: "AgenticOS vs OpenAI dots",
+    description:
+      "Compare OpenAI dots and AgenticOS: deployment, team work, operation and the scope of a self-hosted AI agent platform.",
+    lead: "A dot is an always-on personal agent in ChatGPT. It works on its own cloud computer, uses permitted connected apps and can delegate work while you keep talking. AgenticOS is a self-hosted company platform for configuring, sharing and governing agents. This is a documentation comparison, not a tested account benchmark.",
+    glance: [
+      {
+        area: "Deployment",
+        them: "OpenAI cloud; optional connected local computer has separate availability requirements",
+        us: "Your infrastructure and selected model providers",
+      },
+      {
+        area: "Scope to check",
+        them: "Gradual rollout to eligible accounts; plan, region and workspace conditions apply",
+        us: "Apache-2.0; infrastructure and model costs are separate",
+      },
+      {
+        area: "Work",
+        them: "Ongoing personal responsibilities, permitted connected apps and delegated cloud threads",
+        us: "Versioned agents, shared Projects, visual workflows, virtual tables and routines",
+      },
+    ],
+    further: [
+      {
+        title: "Choose the operating model",
+        body: "Configure the team’s agents, knowledge and tools, set approval policies and budgets, and inspect runs. Self-hosting also means your team owns deployment and maintenance.",
+      },
+    ],
+    enough: [
+      "You want an ongoing personal agent in ChatGPT without operating an agent platform.",
+      "Choose on the exact task, tool support and operating requirements; no answer-quality advantage is claimed.",
+    ],
+    together:
+      "Treat migration as a small manual experiment: recreate permitted instructions, reconnect tools and verify a read and a rejected write. No automatic importer, transferred login session or direct interoperability is promised.",
+    faq: [
+      {
+        q: "Were both products tested together?",
+        a: "No. These pages compare documented capabilities. The linked guide names its own baseline; assess the current vendor conditions and test your task before changing systems.",
+      },
+    ],
+    guide: "https://vstorm-co.github.io/agenticos/about/openai-dots/",
+    scene: "meadow",
+    screens: [SCREENS.builder, SCREENS.approvals],
+  },
 ] as const satisfies readonly Comparison[];
 
 export function findComparison(slug: string): Comparison | undefined {

@@ -33,10 +33,15 @@ const geistMono = localFont({
   display: "swap",
 });
 
-const title = "AgenticOS: open-source AI teammates for your company";
+const title = "AgenticOS: open-source, self-hosted AI agent platform";
 const description =
   "Open-source, self-hosted AI agent platform for your company’s AI teammates. Build, run and govern agents on your own servers and models. Apache-2.0.";
-const ogImage = { url: "/images/og.jpg", width: 1200, height: 630, alt: "AgenticOS: put AI to work across your company" };
+const ogImage = {
+  url: "/images/og.jpg",
+  width: 1200,
+  height: 630,
+  alt: "AgenticOS: put AI to work across your company",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${PAGE_URL}/`),
@@ -73,8 +78,23 @@ export const metadata: Metadata = {
     description,
     images: [ogImage],
   },
-  twitter: { card: "summary_large_image", site: "@VstormCommunity", title, description, images: [ogImage] },
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  twitter: {
+    card: "summary_large_image",
+    site: "@VstormCommunity",
+    title,
+    description,
+    images: [ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 /*
@@ -93,7 +113,16 @@ const structuredData = {
       logo: `${PAGE_URL}/vstorm-logo.svg`,
       email: vstorm.email,
       sameAs: [vstorm.linkedin, vstorm.x, vstorm.github],
-      memberOf: { "@type": "Organization", name: "Agentic AI Foundation", url: "https://aaif.io/" },
+      award: "Open Agentic AI Innovation Award 2026 — Agentic AI Foundation",
+      subjectOf: {
+        "@type": "Article",
+        url: "https://aaif.io/blog/winners-of-the-first-aaif-annual-technical-excellence-awards",
+      },
+      memberOf: {
+        "@type": "Organization",
+        name: "Agentic AI Foundation",
+        url: "https://aaif.io/",
+      },
     },
     {
       "@type": "WebSite",
@@ -128,7 +157,12 @@ const structuredData = {
         "Budgets checked before each model call, approvals, roles and groups, a hash-chained audit log",
         "Company sign-in through OIDC, LDAP and Kerberos",
       ],
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "Apache-2.0 licence; implementation by Vstorm on request" },
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+        description: "Apache-2.0 licence; implementation by Vstorm on request",
+      },
       author: { "@id": "https://vstorm.co/#organization" },
       sameAs: [links.repo, vstorm.agenticos],
     },
@@ -139,9 +173,14 @@ export const viewport: Viewport = {
   themeColor: "#2b2547",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${bricolage.variable} ${geistMono.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${bricolage.variable} ${geistMono.variable}`}
+    >
       <body>
         <script
           type="application/ld+json"

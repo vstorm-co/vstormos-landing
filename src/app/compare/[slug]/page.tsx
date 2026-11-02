@@ -2,7 +2,20 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { comparisons, findComparison } from "@/compare";
-import { CompareFaq, CompareHero, Crumb, FitAndTogether, Further, GlanceTable, OtherComparisons, Screens, TryActions, TryBand } from "@/components/compare";
+import {
+  CompareFaq,
+  FitAndTogether,
+  GlanceTable,
+  OtherComparisons,
+} from "@/components/compare";
+import { ComparisonExamples } from "@/components/comparison-examples";
+import {
+  ComparisonContext,
+  ComparisonDetails,
+  ComparisonTrial,
+  ProductComparisonHero,
+} from "@/components/comparison-story";
+import { Recognition } from "@/components/recognition";
 import { Footer } from "@/components/footer";
 import { JsonLd } from "@/components/json-ld";
 import { Nav } from "@/components/nav";
@@ -32,9 +45,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "AgenticOS",
       title: `AgenticOS vs ${item.name}`,
       description: item.description,
-      images: [{ url: "/images/og.jpg", width: 1200, height: 630, alt: `AgenticOS vs ${item.name}` }],
+      images: [
+        {
+          url: "/images/og.jpg",
+          width: 1200,
+          height: 630,
+          alt: `AgenticOS vs ${item.name}`,
+        },
+      ],
     },
-    twitter: { card: "summary_large_image", title: `AgenticOS vs ${item.name}`, description: item.description },
+    twitter: {
+      card: "summary_large_image",
+      title: `AgenticOS vs ${item.name}`,
+      description: item.description,
+    },
   };
 }
 
@@ -49,15 +73,34 @@ export default async function ComparisonPage({ params }: Props) {
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "AgenticOS", item: `${PAGE_URL}/` },
-          { "@type": "ListItem", position: 2, name: "Compare", item: `${PAGE_URL}/compare/` },
-          { "@type": "ListItem", position: 3, name: `AgenticOS vs ${item.name}`, item: url },
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "AgenticOS",
+            item: `${PAGE_URL}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Compare",
+            item: `${PAGE_URL}/compare/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: `AgenticOS vs ${item.name}`,
+            item: url,
+          },
         ],
       },
       {
         "@type": "FAQPage",
         "@id": `${url}#faq`,
-        mainEntity: item.faq.map((entry) => ({ "@type": "Question", name: entry.q, acceptedAnswer: { "@type": "Answer", text: entry.a } })),
+        mainEntity: item.faq.map((entry) => ({
+          "@type": "Question",
+          name: entry.q,
+          acceptedAnswer: { "@type": "Answer", text: entry.a },
+        })),
       },
     ],
   };
@@ -65,29 +108,25 @@ export default async function ComparisonPage({ params }: Props) {
   return (
     <>
       <JsonLd data={data} />
-      <Nav home={asset("/")} solid />
+      <Nav home={asset("/")} />
       <main id="content">
-        <CompareHero
-          scene={item.scene}
-          checkedDate={item.checkedDate}
-          crumb={
-            <Crumb>
-              <a href={asset("/compare/")} className="hover:text-ink">Compare</a>
-              <span aria-hidden className="text-faint">/</span>
-              <span aria-current="page">{item.name}</span>
-            </Crumb>
-          }
-          title={`AgenticOS vs ${item.name}`}
-          lead={item.lead}
-          actions={<TryActions guide={item.guide} />}
-        />
+        <ProductComparisonHero item={item} />
+        <Recognition />
+        <ComparisonContext item={item} />
+        <ComparisonExamples />
+        <ComparisonDetails item={item} />
         <GlanceTable name={item.name} rows={item.glance} />
-        <Further points={item.further} />
-        <Screens screens={item.screens} />
-        <FitAndTogether name={item.name} enough={item.enough} together={item.together} />
+        <FitAndTogether
+          name={item.name}
+          enough={item.enough}
+          together={item.together}
+        />
         <CompareFaq items={item.faq} />
-        <TryBand guide={item.guide} />
-        <OtherComparisons items={comparisons.filter((other) => other.slug !== item.slug)} hub={links.comparison} />
+        <ComparisonTrial item={item} />
+        <OtherComparisons
+          items={comparisons.filter((other) => other.slug !== item.slug)}
+          hub={links.comparison}
+        />
       </main>
       <Footer home={asset("/")} />
     </>
