@@ -116,7 +116,6 @@ export interface Showcase {
   height: number;
   icon: "users" | "globe" | "flask" | "layout";
   /** A capture from the console's phone layout, shown instead of `image` on narrow screens. */
-  phoneImage?: string;
   more: { label: string; href: string };
 }
 
@@ -127,7 +126,6 @@ export const showcase: readonly Showcase[] = [
     title: "Agents that work as a team",
     body: "A lead agent hands parts of a task to colleagues and writes up what they found. You see who it asked, and what each one said.",
     image: "/screens/highlight-subagents.webp",
-    phoneImage: "/screens/phone-team.webp",
     alt: "A Chief of Staff agent’s pricing review brief, written from what Sales Researcher and Finance Analyst answered: Ramp and Bill.com pricing in dollars and three bullets for the meeting",
     width: 2400,
     height: 1500,
@@ -168,10 +166,9 @@ export const showcase: readonly Showcase[] = [
     id: "apps",
     tab: "Apps",
     title: "Apps, not just answers",
-    body: "Keep a dashboard, calculator or knowledge map as an app with a stable link and versions. This seeded LLM wiki example lets you explore fictional source notes; it is not a live RAG query.",
+    body: "Keep useful tools as Apps with stable links and versions. Northline combines a supplier map, delivery exceptions and assembly windows; its delay simulation uses fictional data without an ERP or carrier connection.",
     image: "/screens/highlight-app.webp",
-    phoneImage: "/screens/phone-app.webp",
-    alt: "Company Brain, a seeded LLM wiki example saved as an app: an interactive map of six fictional source notes and a source preview",
+    alt: "Northline supply and production App with a European supplier map, delivery exceptions and assembly windows",
     width: 2400,
     height: 1500,
     icon: "layout",
@@ -195,7 +192,7 @@ export const showcase: readonly Showcase[] = [
     title: "Give the work a shared structure",
     body: "Typed records give people, agents and workflows somewhere to read and write structured work. This fictional pipeline shows stages, fit scores and next actions, with table and kanban views.",
     image: "/screens/highlight-tables.webp",
-    alt: "Virtual Tables displaying a fictional sales pipeline with typed fields, coloured stages and next actions",
+    alt: "The complete AgenticOS window showing a fictional sales pipeline as a Kanban board",
     width: 2400,
     height: 1500,
     icon: "layout",

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, LayoutGrid } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { useRef } from "react";
@@ -123,7 +123,7 @@ export function Hero() {
         />
       </motion.div>
 
-      <div className="relative z-10 mx-auto flex max-w-[1240px] flex-col items-center px-5 pt-[128px] text-center md:px-8 md:pt-[184px]">
+      <div className="relative z-30 mx-auto flex max-w-[1240px] flex-col items-center px-5 pt-[128px] text-center md:px-8 md:pt-[184px]">
         <motion.div
           style={{ opacity: copyOpacity, y: copyY }}
           className="flex flex-col items-center"
@@ -261,65 +261,6 @@ export function Hero() {
               </span>
             </div>
 
-            {/* Editorial callouts from the prepared Trail Supply demo, not live run status. */}
-            <motion.div
-              aria-hidden
-              initial={reduce ? false : { opacity: 0, x: -24 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 1.6, ease: EASE }}
-              className="absolute -left-[72px] top-[18%] z-10 hidden w-[300px] xl:block"
-            >
-              <div className="animate-[bob_6s_ease-in-out_infinite] rounded-[16px] bg-white/90 p-3.5 text-left shadow-[0_24px_60px_-20px_rgba(20,14,48,0.65)] ring-1 ring-white backdrop-blur-md">
-                <div className="flex items-start gap-2.5">
-                  <BlobAgent color="#f5cdb6" size={26} hop={false} />
-                  <div className="min-w-0">
-                    <p className="text-[12.5px] font-semibold leading-snug text-ink">
-                      A brief in the shared chat
-                    </p>
-                    <p className="text-[11.5px] leading-relaxed text-muted">
-                      Build a shopping assistant for Trail Supply.
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-3 flex gap-1.5">
-                  <span className="inline-flex h-7 items-center gap-1 rounded-full bg-ink px-3 text-[11.5px] font-medium text-white">
-                    Shared context
-                  </span>
-                  <span className="inline-flex h-7 items-center rounded-full px-3 text-[11.5px] font-medium text-ink-soft ring-1 ring-line">
-                    Visuals
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-            <motion.div
-              aria-hidden
-              initial={reduce ? false : { opacity: 0, x: 24 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 1.85, ease: EASE }}
-              className="absolute -right-[170px] top-[42%] z-10 hidden w-[156px] 2xl:block"
-            >
-              <div className="animate-[bob_7s_ease-in-out_-2s_infinite] rounded-[16px] bg-white/90 p-3.5 text-left shadow-[0_24px_60px_-20px_rgba(20,14,48,0.65)] ring-1 ring-white backdrop-blur-md">
-                <div className="flex items-center gap-2.5">
-                  <span className="inline-flex size-8 items-center justify-center rounded-[10px] bg-[#eef0ff] text-[#5b5bd6]">
-                    <LayoutGrid className="size-4" />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-[12.5px] font-semibold leading-snug text-ink">
-                      Trail Supply · Kit Studio
-                    </p>
-                    <p className="text-[11.5px] text-muted">
-                      Prepared demo app · saved from chat
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-3 grid grid-cols-3 gap-1.5" aria-hidden>
-                  {["backpack", "basket", "bottle"].map((product) => (
-                    <img key={product} src={asset(`/screens/trail-supply/assets/${product}.webp`)} alt="" width={64} height={64} className="aspect-square w-full rounded-lg object-cover" loading="lazy" />
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
             <div
               aria-hidden
               className="pointer-events-none absolute -inset-x-10 -top-16 h-56 rounded-full bg-blob/30 blur-[70px]"
@@ -340,12 +281,6 @@ export function Hero() {
                 </span>
               )}
               <picture>
-                <source
-                  media="(max-width: 639px)"
-                  srcSet={assetSet("/screens/hero-chat-mobile.webp")}
-                  width={1060}
-                  height={900}
-                />
                 <img
                   src={asset("/screens/hero-chat.webp")}
                   alt="AgenticOS chat with a populated list of specialist agents and an interactive Trail Supply kit planner. Prepared conversation and fictional catalog, shown in the real Visuals renderer."

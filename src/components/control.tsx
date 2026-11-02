@@ -27,15 +27,15 @@ function ScreenCard({
           {body}
         </p>
       </div>
-      {/* The screen runs off the card's right and bottom edges: a window into the console, not a thumbnail. */}
-      <div className="ml-7 mt-7 flex-1 overflow-hidden rounded-tl-[14px] bg-[#f3f4f6] shadow-[0_0_0_1px_var(--color-line),0_20px_50px_-24px_rgba(22,20,31,0.35)] [mask-composite:intersect] [mask-image:linear-gradient(90deg,#000_72%,transparent),linear-gradient(180deg,#000_70%,transparent)] md:ml-8">
+      {/* Preserve the entire console window, without edge fades or enlarged crops. */}
+      <div className="mx-7 mb-7 mt-7 overflow-hidden rounded-[14px] bg-[#f3f4f6] ring-1 ring-line md:mx-8 md:mb-8">
         <img
           src={asset(src)}
           alt={alt}
           loading="lazy"
-          width={1336}
-          height={760}
-          className="aspect-[1336/640] w-[118%] max-w-none object-cover object-left-top"
+          width={1600}
+          height={1000}
+          className="aspect-[16/10] w-full object-contain"
         />
       </div>
     </article>
@@ -56,7 +56,7 @@ export function Control() {
         <div className="rail sm:grid mt-14 gap-4 lg:grid-cols-2 lg:gap-5">
           <Reveal>
             <ScreenCard
-              src="/screens/crop-approvals.webp"
+              src="/screens/approvals.webp"
               alt="Approval decisions and history, showing which requests were approved, rejected or expired in a demo organization"
               title="A person decides what matters"
               body="Sensitive tools wait for approval. The run pauses, the request lands here, and the decision is recorded with who made it."
@@ -64,7 +64,7 @@ export function Control() {
           </Reveal>
           <Reveal delay={0.08}>
             <ScreenCard
-              src="/screens/crop-spend.webp"
+              src="/screens/spend.webp"
               alt="Spend over time and where the money went, by agent, with each agent’s share of the monthly budget"
               title="Spend you can see before it happens"
               body="Monthly budgets per agent and organization are checked before each model request, and every run records its tokens and cost."

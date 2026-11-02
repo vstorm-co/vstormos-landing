@@ -195,9 +195,8 @@ suspension and reduced motion. It writes screenshots and a compact JSON result.
 
 ### Hero product capture
 
-The hero now uses a raw chat capture from the AgenticOS Northwind Labs demo, not
-a framed dashboard image. `public/screens/hero-chat.webp` preserves the full
-1600 × 1000 console; the mobile variant crops the conversation at x=540, y=100,
-width=1060, height=900. The prepared conversation and fictional Trail Supply
-catalog are disclosed beside the image. Editorial callouts describe the brief
-and saved Kit Studio App; they are not live status or interactive product controls.
+The hero uses the complete current-console chat capture, including navigation.
+The same complete image is used on mobile; it is never replaced with a cropped
+conversation. Foreground scenery and callouts do not cover the application window.
+The caption identifies the prepared conversation and fictional data. Product
+screens in the shared showcase and control sections also use contain sizing.

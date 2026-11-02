@@ -29,10 +29,10 @@ export const useCaseGuides: readonly UseCaseGuide[] = [
     emphasis: "a useful answer.",
     description:
       "Build a company knowledge assistant with AgenticOS. Use RAG for document retrieval and a Project for maintained wiki notes, sources and shared instructions.",
-    image: "/screens/highlight-app.webp",
-    alt: "Company Brain demo app showing linked knowledge notes and a source preview",
+    image: "/screens/knowledge-collection.webp",
+    alt: "The complete AgenticOS knowledge collection screen with fictional Northwind documents",
     caption:
-      "Company Brain is an interactive app with fictional notes and prepared answers. This preview does not perform retrieval or demonstrate a successful RAG run.",
+      "The current knowledge collection screen uses fictional Northwind documents. It shows where sources are managed; it does not establish retrieval quality or a successful model answer.",
     input:
       "A small handbook or research collection, a question it answers and a question it cannot answer.",
     result:

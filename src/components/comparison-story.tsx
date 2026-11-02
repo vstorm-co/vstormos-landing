@@ -97,7 +97,7 @@ export function ProductComparisonHero({ item }: { item: Comparison }) {
               Apache-2.0 · self-hosted · built on Pydantic AI
             </p>
           </div>
-          <figure className="relative min-w-0 lg:-mr-36">
+          <figure className="relative min-w-0">
             <div className="overflow-hidden rounded-[18px] bg-white shadow-[0_40px_100px_-25px_rgba(0,0,0,0.45)] ring-[6px] ring-white/20 md:rounded-[22px]">
               <div className="flex items-center gap-2 border-b border-line bg-white px-4 py-3">
                 <LogoMark className="size-5" />

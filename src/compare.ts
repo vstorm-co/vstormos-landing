@@ -47,17 +47,17 @@ const guide = (name: string) => `${DOCS}/about/${name}/`;
 
 export const SCREENS = {
   approvals: {
-    src: "/screens/crop-approvals.webp",
-    width: 1336,
-    height: 760,
+    src: "/screens/approvals.webp",
+    width: 1600,
+    height: 1000,
     alt: "The Approvals tab of the Activity page, with approved, rejected and expired example requests and their decision history.",
     caption:
       "Approval requests and their recorded decisions stay in one place.",
   },
   spend: {
-    src: "/screens/crop-spend.webp",
-    width: 1336,
-    height: 760,
+    src: "/screens/spend.webp",
+    width: 1600,
+    height: 1000,
     alt: "The Spend tab of the Activity page: spend in the window, month to date, cost per run, the agent spending the most and a bar chart of spend per day.",
     caption: "What every agent spent, in your provider's currency, day by day.",
   },
@@ -80,9 +80,9 @@ export const SCREENS = {
     src: "/screens/highlight-app.webp",
     width: 2400,
     height: 1500,
-    alt: "Company Brain, a seeded LLM wiki app with six fictional source notes, a knowledge map and source preview.",
+    alt: "Northline supply and production App with a European supplier map, delivery exceptions and assembly windows.",
     caption:
-      "A seeded interactive knowledge map saved as an app. It illustrates the interface, not a live RAG query.",
+      "A prepared supply and production planning App with fictional shipments; no ERP or carrier is connected.",
   },
 } as const satisfies Record<string, Screen>;
 
