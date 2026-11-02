@@ -61,3 +61,11 @@ Product or service: both. AgenticOS is open-source software anyone can run; Vsto
 Vstorm, the company building AgenticOS, is a 2026 recipient of the Agentic AI Foundation Open Agentic AI Innovation Award. The award recognizes standards contributions; it is not a product security certification or a ranking of agent platforms.
 - Organizer announcement: https://aaif.io/blog/winners-of-the-first-aaif-annual-technical-excellence-awards
 - Vstorm account: https://vstorm.co/agentic-ai/open-agentic-ai-standards-aaif-award/
+
+## Concrete product examples
+
+- [Use cases](https://vstorm-co.github.io/vstormos-landing/use-cases/): task-led examples and setup paths, with labelled synthetic previews.
+- [Company knowledge assistant](https://vstorm-co.github.io/vstormos-landing/use-cases/company-knowledge-assistant/): RAG collections and maintained LLM wiki Projects.
+- [AI shopping assistant](https://vstorm-co.github.io/vstormos-landing/use-cases/ai-shopping-assistant/): catalog recommendations, widget deployment and commerce integration boundaries.
+- [AI workspace for teams](https://vstorm-co.github.io/vstormos-landing/use-cases/ai-workspace-for-teams/): shared files, instructions and reusable artifacts.
+- [AI workflow automation](https://vstorm-co.github.io/vstormos-landing/use-cases/ai-workflow-automation/): explicit steps, agents and Virtual Tables.

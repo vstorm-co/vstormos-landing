@@ -1,7 +1,6 @@
 import { ArrowRight } from "lucide-react";
 
 import { Reveal } from "@/components/ui";
-import { links } from "@/content";
 import { asset } from "@/lib/site";
 
 const choices = [
@@ -10,8 +9,8 @@ const choices = [
     question: "Which AI agent platform is best for a team?",
     answer:
       "Start with the task, the people who need access and who will operate it. AgenticOS combines shared Projects, configurable agents, workflows and tools on your infrastructure. A managed service may fit better if you do not want to run a platform.",
-    href: "/compare/",
-    action: "Compare the platforms",
+    href: "/use-cases/ai-workspace-for-teams/",
+    action: "Explore a shared workspace",
     local: true,
   },
   {
@@ -28,9 +27,9 @@ const choices = [
     question: "What makes a RAG app useful for your documents?",
     answer:
       "Check extraction, cited answers, source refresh and access before choosing. AgenticOS provides document ingestion and knowledge search, including PyMuPDF, LiteParse and LlamaParse options. Your document set and deployment determine the right configuration.",
-    href: `${links.docs}howto/first-document-agent/`,
-    action: "Try a document assistant",
-    local: false,
+    href: "/use-cases/company-knowledge-assistant/",
+    action: "Explore knowledge and wiki",
+    local: true,
   },
 ] as const;
 

@@ -27,8 +27,8 @@ export const comparisonStories = {
       "Choose the workspace around the agent: shared Projects, explicit workflows, reusable knowledge and work people can inspect.",
   },
   n8n: {
-    headline: "Keep the flow.",
-    emphasis: "Add teammates.",
+    headline: "Agents and workflows.",
+    emphasis: "Compare the controls.",
     intro:
       "Use explicit automation where you know the steps, and give agents the tasks that need interpretation. Choose where the two meet.",
   },

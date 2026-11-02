@@ -11,6 +11,7 @@ const COLUMNS = [
     title: "Product",
     items: [
       { label: "Highlights", href: "#product" },
+      { label: "Use cases", href: asset("/use-cases/") },
       { label: "How it works", href: "#how" },
       { label: "Capabilities", href: "#capabilities" },
       { label: "Integrations", href: "#integrations" },
@@ -52,10 +53,31 @@ const COLUMNS = [
 ] as const;
 
 const SOCIAL = [
-  { label: "AgenticOS on GitHub", href: links.repo, icon: <BrandIcon name="github" mono className="size-[18px]" /> },
-  { label: "Vstorm on LinkedIn", href: vstorm.linkedin, icon: <ServiceIcon name="linkedin" className="size-[17px] brightness-0 invert" /> },
-  { label: "Vstorm on X", href: vstorm.x, icon: <ServiceIcon name="x" className="size-[15px] brightness-0 invert" /> },
-  { label: "Built on Pydantic AI", href: links.pydanticAi, icon: <BrandIcon name="pydantic" mono className="size-[18px]" /> },
+  {
+    label: "AgenticOS on GitHub",
+    href: links.repo,
+    icon: <BrandIcon name="github" mono className="size-[18px]" />,
+  },
+  {
+    label: "Vstorm on LinkedIn",
+    href: vstorm.linkedin,
+    icon: (
+      <ServiceIcon
+        name="linkedin"
+        className="size-[17px] brightness-0 invert"
+      />
+    ),
+  },
+  {
+    label: "Vstorm on X",
+    href: vstorm.x,
+    icon: <ServiceIcon name="x" className="size-[15px] brightness-0 invert" />,
+  },
+  {
+    label: "Built on Pydantic AI",
+    href: links.pydanticAi,
+    icon: <BrandIcon name="pydantic" mono className="size-[18px]" />,
+  },
 ] as const;
 
 /** The engraving's sky is the footer colour, so the illustration rises out of it with no edge.
@@ -66,17 +88,31 @@ export function Footer({ home = "" }: { home?: string }) {
       <div className="relative z-10 mx-auto max-w-[1240px] px-5 pt-16 md:px-8 md:pt-20">
         {/* The last ask on the page: a call or a mail, with the reply time Vstorm promises. */}
         <div className="beam grain relative overflow-hidden rounded-[26px] bg-gradient-to-br from-white/[0.09] to-white/[0.03] p-6 ring-1 ring-white/10 md:p-9">
-          <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-blob/25 blur-[90px]" />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-blob/25 blur-[90px]"
+          />
           <div className="relative flex flex-col gap-7 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-start gap-5">
               <div className="hidden shrink-0 -space-x-3 sm:flex">
                 {vstorm.call.hosts.map((host) => (
-                  <img key={host.name} src={asset(host.photo)} alt={host.name} width={56} height={56} loading="lazy" className="size-14 rounded-full object-cover ring-[3px] ring-violet" />
+                  <img
+                    key={host.name}
+                    src={asset(host.photo)}
+                    alt={host.name}
+                    width={56}
+                    height={56}
+                    loading="lazy"
+                    className="size-14 rounded-full object-cover ring-[3px] ring-violet"
+                  />
                 ))}
               </div>
               <div>
                 <p className="display-tight text-balance text-[clamp(1.6rem,2.8vw,2.3rem)] font-medium">
-                  Thinking about a rollout? <span className="text-white/50">Let’s map your first workflow.</span>
+                  Thinking about a rollout?{" "}
+                  <span className="text-white/50">
+                    Let’s map your first workflow.
+                  </span>
                 </p>
                 <p className="mt-2 text-[14.5px] text-white/60">
                   {vstorm.call.length}, with the founders. {vstorm.call.reply}
@@ -90,7 +126,8 @@ export function Footer({ home = "" }: { home?: string }) {
                 rel="noreferrer"
                 className="shine group inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 text-[15px] font-medium text-ink shadow-[0_14px_30px_-12px_rgba(0,0,0,0.5)] transition-colors hover:bg-blob"
               >
-                Talk to Vstorm <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                Talk to Vstorm{" "}
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
                 href={`mailto:${vstorm.email}?subject=${encodeURIComponent("AgenticOS")}`}
@@ -106,8 +143,14 @@ export function Footer({ home = "" }: { home?: string }) {
           <div className="col-span-2 lg:col-span-1">
             <Logo tone="light" />
             <p className="mt-5 max-w-[34ch] text-[15px] leading-relaxed text-white/60">
-              An open-source, self-hosted AI agent platform for your company’s AI teammates, built and maintained by{" "}
-              <a href={vstorm.site} target="_blank" rel="noreferrer" className="text-white/85 underline decoration-white/25 underline-offset-4 hover:decoration-white">
+              An open-source, self-hosted AI agent platform for your company’s
+              AI teammates, built and maintained by{" "}
+              <a
+                href={vstorm.site}
+                target="_blank"
+                rel="noreferrer"
+                className="text-white/85 underline decoration-white/25 underline-offset-4 hover:decoration-white"
+              >
                 Vstorm
               </a>
               .
@@ -132,13 +175,21 @@ export function Footer({ home = "" }: { home?: string }) {
 
           {COLUMNS.map((column) => (
             <nav key={column.title} aria-label={column.title}>
-              <h2 className="font-display text-[16px] font-medium tracking-[-0.01em]">{column.title}</h2>
+              <h2 className="font-display text-[16px] font-medium tracking-[-0.01em]">
+                {column.title}
+              </h2>
               <ul className="mt-5 space-y-3">
                 {column.items.map((item) => (
                   <li key={item.label}>
                     <a
-                      href={item.href.startsWith("#") ? `${home}${item.href}` : item.href}
-                      {...(item.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+                      href={
+                        item.href.startsWith("#")
+                          ? `${home}${item.href}`
+                          : item.href
+                      }
+                      {...(item.href.startsWith("http")
+                        ? { target: "_blank", rel: "noreferrer" }
+                        : {})}
                       className="text-[14.5px] text-white/60 transition-colors hover:text-white"
                     >
                       {item.label}
@@ -151,9 +202,16 @@ export function Footer({ home = "" }: { home?: string }) {
         </div>
 
         <div className="mt-16 flex flex-col gap-3 border-t border-white/10 pt-6 text-[13px] text-white/45 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 Vstorm Sp. z o.o. AgenticOS is open source under Apache-2.0.</p>
           <p>
-            <a href={links.licence} target="_blank" rel="noreferrer" className="hover:text-white">
+            © 2026 Vstorm Sp. z o.o. AgenticOS is open source under Apache-2.0.
+          </p>
+          <p>
+            <a
+              href={links.licence}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-white"
+            >
               Licence
             </a>
             <span className="px-2">·</span>
@@ -172,14 +230,19 @@ export function Footer({ home = "" }: { home?: string }) {
         </p>
         <img
           src={asset("/images/footer-3200.webp")}
-          srcSet={assetSet("/images/footer-1600.webp 1600w, /images/footer-3200.webp 3200w")}
+          srcSet={assetSet(
+            "/images/footer-1600.webp 1600w, /images/footer-3200.webp 3200w",
+          )}
           sizes="100vw"
           alt="An engraving of a pine valley: a cabin beside a mountain lake under high peaks"
           loading="lazy"
           className="relative left-1/2 z-10 block w-full min-w-[900px] -translate-x-1/2"
         />
         {/* One agent taking the long way home along the meadow. */}
-        <div aria-hidden className="pointer-events-none absolute bottom-[3.5%] left-0 z-20 w-full overflow-hidden">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute bottom-[3.5%] left-0 z-20 w-full overflow-hidden"
+        >
           <div className="w-max animate-[walk_38s_linear_infinite]">
             <div className="animate-[walk-step_0.6s_ease-in-out_infinite]">
               <BlobAgent color="#bbd1ff" size={34} hop={false} />

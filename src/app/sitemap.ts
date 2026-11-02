@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { comparisons } from "@/compare";
+import { useCaseGuides } from "@/use-case-guides";
 import { PAGE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -28,6 +29,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: `${PAGE_URL}/use-cases/`,
+      lastModified: CONTENT_UPDATED,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    ...useCaseGuides.map((item) => ({
+      url: `${PAGE_URL}/use-cases/${item.slug}/`,
+      lastModified: CONTENT_UPDATED,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     ...comparisons.map((item) => ({
       url: `${PAGE_URL}/compare/${item.slug}/`,
       lastModified: CONTENT_UPDATED,

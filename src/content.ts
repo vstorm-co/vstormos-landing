@@ -1,9 +1,9 @@
-// Product statements checked against AgenticOS v1.35.0 (2 November 2026).
+// Product statements checked against AgenticOS v1.35.3 (2 November 2026).
 // The MCP count is the gallery's number and nothing else.
 import type { LogoName } from "@/components/brand-icon";
 
 /** The product release the page describes; update it with the figures below at each release. */
-export const RELEASE = "1.35.0";
+export const RELEASE = "1.35.3";
 
 export const DOCS = "https://vstorm-co.github.io/agenticos";
 export const REPO = "https://github.com/vstorm-co/agenticos";

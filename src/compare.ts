@@ -393,12 +393,12 @@ export const comparisons = [
     name: "n8n",
     metaTitle: "n8n alternative for AI agents, under Apache-2.0",
     description:
-      "n8n automates workflows with AI nodes under a Sustainable Use License. AgenticOS starts from the agent, under Apache-2.0, with budgets and approvals.",
-    lead: "n8n is a workflow automation tool: you connect triggers, integrations and code steps on a canvas, and AI Agent nodes add models and tools. AgenticOS starts from the agent instead, with instructions, a model, capabilities, knowledge and a budget, published as a version and governed on the server.",
+      "Compare AgenticOS and n8n for workflows and AI agents: self-hosting, native agents in preview, knowledge, licensing and model-spend controls.",
+    lead: "n8n combines a workflow canvas with AI Agent nodes and native agents in preview, including tools, skills, knowledge and schedules. AgenticOS also offers agents and workflows. Compare the operating model, licence, access controls and model-spend policies for the task you actually need.",
     glance: [
       {
         area: "Unit of work",
-        them: "A workflow of nodes",
+        them: "Workflows, AI Agent nodes and native agents in preview",
         us: "An agent, published as a versioned spec",
       },
       {
@@ -458,11 +458,11 @@ export const comparisons = [
       },
       {
         title: "An agent a business owner can change",
-        body: "Changing an n8n workflow means editing nodes on a canvas. An AgenticOS agent changes when its owner edits the instructions and publishes, and every version stays readable.",
+        body: "Both products let you configure agents as well as workflows. n8n’s native agents are currently in preview. AgenticOS publishes agent instructions, model and capabilities as a versioned specification; compare the configuration and review process your team needs.",
       },
       {
         title: "Knowledge as a managed collection",
-        body: "n8n builds retrieval from nodes: loaders, embeddings and a vector store you choose. AgenticOS keeps collections in your Postgres, with a choice of parser, OCR and image description, and sync connectors that remove what the source deleted.",
+        body: "n8n supports retrieval workflows and knowledge bases for its native agents; self-hosted knowledge is in preview and needs a configured sandbox. AgenticOS manages collections in your Postgres, with parser choices, OCR, image description and source-sync controls.",
       },
     ],
     enough: [
@@ -476,6 +476,10 @@ export const comparisons = [
       {
         q: "Is AgenticOS an open-source alternative to n8n?",
         a: "For AI agents, yes. AgenticOS is Apache-2.0, while n8n uses the Sustainable Use License. For moving data between many systems on a visual canvas, n8n fits better, and the two work well together.",
+      },
+      {
+        q: "Does n8n have native AI agents?",
+        a: "Yes. Its official documentation describes native agents in preview on Cloud and self-hosted plans from n8n 2.32.3, alongside the AI Agent workflow node. Compare both products on your actual task rather than treating n8n as a workflow-only tool.",
       },
       {
         q: "Is n8n open source?",
