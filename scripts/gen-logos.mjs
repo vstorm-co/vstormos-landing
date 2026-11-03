@@ -7,6 +7,13 @@
 import { readFile, writeFile } from "node:fs/promises";
 
 const LOGOS = {
+  apple: "apple",
+  windows: "microsoft-windows-icon",
+  linux: "linux-tux",
+  android: "android-icon",
+  chrome: "chrome",
+  firefox: "firefox",
+  safari: "safari",
   slack: "slack-icon",
   gmail: "google-gmail",
   gdrive: "google-drive",

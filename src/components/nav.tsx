@@ -45,7 +45,6 @@ function useActiveSection(): string | null {
  * paper bar from the start, for a page whose top band is light.
  */
 export function Nav({ home = "", solid: alwaysSolid = false }: { home?: string; solid?: boolean }) {
-  const { talk } = vstorm.credentials;
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
   const active = useActiveSection();
@@ -86,33 +85,6 @@ export function Nav({ home = "", solid: alwaysSolid = false }: { home?: string; 
       >
         Skip to content
       </a>
-      {/* The talk, while it is still ahead; the bar folds away once the page scrolls past the hero. */}
-      <AnimatePresence initial={false}>
-        {light ? (
-          <motion.div
-            key="announce"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden bg-[#1d1931] text-white"
-          >
-            <p className="mx-auto flex max-w-[1240px] items-center justify-center gap-x-3 gap-y-1 px-5 py-2.5 text-center text-[13px] md:px-8">
-              <span className="hidden size-1.5 shrink-0 animate-pulse rounded-full bg-blob sm:inline-block" aria-hidden />
-              <span className="text-white/80">
-                <span className="font-medium text-white">Meet us at AGNTCon + MCPCon</span>
-                <span className="hidden sm:inline"> · San Jose · Oct 23. We’re speaking, then hosting drinks.</span>
-              </span>
-              <a href={talk.href} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center gap-1 font-medium text-blob underline decoration-blob/40 underline-offset-4 hover:decoration-blob">
-                Our talk <ArrowRight className="size-3.5" />
-              </a>
-              <a href={talk.drinks} target="_blank" rel="noreferrer" className="hidden shrink-0 items-center gap-1 font-medium text-white/80 underline decoration-white/30 underline-offset-4 hover:text-white md:inline-flex">
-                Join the drinks
-              </a>
-            </p>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
       <nav aria-label="Main" className="mx-auto flex h-[68px] max-w-[1240px] items-center justify-between px-5 md:h-[72px] md:px-8">
         <a href={`${home}#top`} aria-label="AgenticOS home" onClick={() => setOpen(false)}>
           <Logo tone={light ? "light" : "dark"} />

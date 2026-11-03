@@ -1,104 +1,39 @@
-import { ArrowUpRight } from "lucide-react";
-import { Fragment } from "react";
-
-import { ArtCard } from "@/components/art-card";
+import { ArrowUpRight, Check, Server } from "lucide-react";
+import { ServiceIcon } from "@/components/brand-icon";
 import { CopyButton } from "@/components/copy-button";
-import { Reveal, SplitHeading } from "@/components/ui";
-import { installCommand, links } from "@/content";
+import { DesktopInstall } from "@/components/desktop-install";
+import { SplitHeading } from "@/components/ui";
+import { installCommand, links, RELEASE, REPO } from "@/content";
 
-/** The URL may wrap only after a slash or a space, never inside a word, and the pipe stays with `bash`. */
-function Breakable({ text }: { text: string }) {
-  return (
-    <>
-      {text
-        .replace("| bash", "| bash")
-        .split(/(?<=[/ ])/)
-        .map((part, index) => (
-          <Fragment key={index}>
-            {part}
-            <wbr />
-          </Fragment>
-        ))}
-    </>
-  );
-}
-
-const STEPS = [
-  {
-    art: "sandbox",
-    title: "Run one command",
-    body: "On macOS or Linux, or inside WSL2 on Windows. It checks Docker first and changes nothing else on the machine.",
-  },
-  {
-    art: "ask_user",
-    title: "Answer four questions",
-    body: "A model provider and its key, your login and an organization name. The key is stored encrypted in your own database.",
-  },
-  {
-    art: "artifacts",
-    title: "Open the console",
-    body: "A working agent is already there. Ask it something, drop a PDF into a knowledge base, connect a tool.",
-  },
-] as const;
-
-const FACTS = [
-  { label: "Host", value: "4 vCPU · 8 GB RAM" },
-  { label: "Needs", value: "Docker Compose" },
-  { label: "Then open", value: "localhost:3000" },
-] as const;
+const serverStart = `git clone --branch v${RELEASE} --depth 1 ${REPO}.git\ncd agenticos\nbash scripts/server-init.sh`;
+const setupBrief = "Please set up an AgenticOS workspace for our team. Deployment guide: https://vstorm-co.github.io/agenticos/deploy/. Start with a Linux server (4 vCPU, 8 GB RAM), Docker Engine 24+, Compose 2.24+ and make. Configure app and API hostnames, HTTPS, backups and the first owner account. Then share the workspace URL and arrange access to our chosen model provider.";
 
 export function Quickstart() {
   return (
     <section id="quickstart" className="bg-paper px-5 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-[1240px]">
-        <SplitHeading
-          eyebrow="Quick start"
-          title="Running in"
-          muted="one command."
-          body="The installer pulls the published images and starts a deployment with a working agent in it. Everything stays on the machine you run it on."
-        />
-
-        <Reveal delay={0.06} className="mt-12">
-          <div className="rounded-[24px] bg-card p-2 shadow-[0_30px_60px_-40px_rgba(43,37,71,0.45)] ring-1 ring-line">
-            <div className="flex flex-col gap-4 rounded-[18px] bg-paper p-5 md:flex-row md:items-center md:gap-6 md:p-6">
-              <code className="min-w-0 flex-1 font-mono text-[14px] leading-relaxed text-ink md:text-[15px]">
-                <span className="select-none text-faint">$ </span>
-                <Breakable text={installCommand} />
-              </code>
-              <CopyButton text={installCommand} label="Copy the install command" tone="light" />
-            </div>
-            <dl className="grid px-2 pb-1 pt-3 sm:grid-cols-3">
-              {FACTS.map((fact) => (
-                <div key={fact.label} className="flex items-baseline justify-between gap-3 px-3 py-2 sm:block">
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-faint">{fact.label}</dt>
-                  <dd className="text-[14px] font-medium text-ink sm:mt-0.5">{fact.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </Reveal>
-
-        <ol className="rail sm:grid mt-5 gap-4 md:grid-cols-3">
-          {STEPS.map((step, index) => (
-            <Reveal key={step.title} delay={index * 0.07} className="h-full">
-              <li className="h-full">
-                <ArtCard art={step.art} badge={`Step ${index + 1}`} title={step.title} body={step.body} />
-              </li>
-            </Reveal>
-          ))}
-        </ol>
-
-        <Reveal className="mt-8 flex flex-wrap justify-center gap-x-7 gap-y-2 text-[14.5px] font-medium">
-          {[
-            { label: "Installation guide", href: links.install },
-            { label: "Your first agent", href: links.firstAgent },
-            { label: "29 tutorials", href: links.useCases },
-          ].map((link) => (
-            <a key={link.label} href={link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-ink-soft hover:text-ink">
-              {link.label} <ArrowUpRight className="size-3.5" />
-            </a>
-          ))}
-        </Reveal>
+        <SplitHeading eyebrow="Get started" title="Set it up once." muted="Bring your team." body="Set up a workspace once. Then everyone joins from a browser or the desktop app. Already have a company workspace? Go straight to the app download." />
+        <div className="install-paths mt-12">
+          <article id="server-setup" className="install-panel install-server">
+            <p className="install-kicker">01 / For your company</p>
+            <h3>A workspace<br />on your server.</h3>
+            <p className="install-description">Your IT team sets it up once. Colleagues get a web address and a login, with shared agents, knowledge and access controls.</p>
+            <div className="install-server-visual" aria-hidden><Server size={28} /><span>YOUR COMPANY WORKSPACE</span><div><span>Browser</span><span>Desktop</span><span>Phone</span></div></div>
+            <ul className="install-requirements">
+              <li><Check size={15} aria-hidden />Linux server · 4 vCPU · 8 GB RAM to start</li>
+              <li><Check size={15} aria-hidden />Docker Compose · app + API hostnames · HTTPS</li>
+              <li><Check size={15} aria-hidden />Your own models or provider · hosting and usage costs apply</li>
+            </ul>
+            <a className="install-primary-link" href={links.deploy}>Open the server setup guide<ArrowUpRight size={16} aria-hidden /></a>
+            <div className="install-handoff"><p>Want your IT team to handle it?</p><CopyButton text={setupBrief} label="Copy server setup brief for your IT team" tone="light" /></div>
+            <details className="install-developer"><summary>For developers · start the server setup</summary><p>Run on a prepared Linux host with Git, Docker Compose and make. This prepares configuration; continue through the guide to configure HTTPS, start services and create the first account.</p><div className="install-command"><pre><code>{serverStart}</code></pre><CopyButton text={serverStart} label="Copy server configuration commands" tone="light" /></div><a href={links.deploy}>Continue with the deployment guide →</a></details>
+            <p className="install-help">Prefer help with the rollout? <a href="https://vstorm.co/contact-us/">Talk to Vstorm<ArrowUpRight size={13} aria-hidden /></a></p>
+          </article>
+          <DesktopInstall />
+        </div>
+        <div className="install-connect"><span className="install-connect-number">3</span><p><strong>Open your workspace and sign in.</strong> Ask your team for its HTTPS address. The desktop app connects to that server; installing the app does not deploy a company workspace.</p><a href={links.desktop}>First launch<ArrowUpRight size={15} aria-hidden /></a></div>
+        <aside className="install-mobile"><div><ServiceIcon name="apple" className="size-[18px]" /><ServiceIcon name="android" className="size-[20px]" /></div><p><strong>iPhone or Android?</strong> Open your workspace address in your phone’s browser. Add it to your home screen for quicker access.</p><a href={links.mobile}>Mobile setup<ArrowUpRight size={14} aria-hidden /></a></aside>
+        <details className="install-local"><summary>Just exploring? Run a workspace on your own computer.</summary><p>For developers: install Docker Compose, then run this on macOS or Linux, or in WSL2 on Windows. It asks for your model provider, login and organization. Open <code>http://localhost:3000</code> when setup finishes. The desktop wizard can also guide you through creating a local instance.</p><div className="install-command"><pre><code>{installCommand}</code></pre><CopyButton text={installCommand} label="Copy local quickstart command" tone="light" /></div><a href={links.install}>Local installation guide →</a></details>
       </div>
     </section>
   );

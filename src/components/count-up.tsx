@@ -1,6 +1,7 @@
 "use client";
 
-import { animate, useInView, useReducedMotion } from "motion/react";
+import { animate, useInView } from "motion/react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -10,7 +11,8 @@ import { useEffect, useRef, useState } from "react";
  */
 export function CountUp({ value }: { value: string }) {
   const match = /^([\d,]+)(.*)$/.exec(value);
-  const target = match?.[1] === undefined ? null : Number(match[1].replaceAll(",", ""));
+  const target =
+    match?.[1] === undefined ? null : Number(match[1].replaceAll(",", ""));
   const suffix = match?.[2] ?? "";
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -15% 0px" });
@@ -22,7 +24,8 @@ export function CountUp({ value }: { value: string }) {
     const controls = animate(0, target, {
       duration: target > 100 ? 1.6 : 1.1,
       ease: [0.22, 1, 0.36, 1],
-      onUpdate: (latest) => setShown(`${Math.round(latest).toLocaleString("en-US")}${suffix}`),
+      onUpdate: (latest) =>
+        setShown(`${Math.round(latest).toLocaleString("en-US")}${suffix}`),
     });
     return () => controls.stop();
   }, [inView, reduce, target, suffix]);

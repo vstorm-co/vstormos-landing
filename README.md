@@ -163,8 +163,64 @@ scripts/              logo and contributor generators
   (Simple Icons CC0, Font Awesome Free CC BY 4.0, @lobehub/icons MIT). The marks are their owners'
   trademarks; the footer states they identify connection options and imply no partnership.
 - **Capability illustrations** and **console screenshots:** from the AgenticOS repository.
-- **Photography and the engraving:** generated images, layered and recoloured for the page.
+- **Photography and the engraving:** generated landscape images, layered and recoloured for the page.
+  Trail Supply product photos are illustrative Unsplash images; source URLs, license and
+  hashes are recorded in `public/screens/trail-supply/images.json`. Products and policies
+  in the prepared demo are fictional.
 - **Founder photos:** published by Vstorm on vstorm.co.
 
 `examples/` holds reference screenshots used while designing. It is not part of the site and
 is ignored by git.
+
+## Workflow motion check
+
+The homepage's connected-work diagram is illustrative, separate from product
+screenshots. Its traces play once on entry, finishing within 4.3 seconds, and stop outside
+the viewport. There is no playback button. Reduced motion keeps the diagram static. Mobile uses a vertical
+layout; tablets keep a compact horizontal one.
+
+After building and serving the export, run the browser check with an existing
+Playwright installation (no model or external service calls):
+
+```bash
+PLAYWRIGHT_PACKAGE=/path/to/node_modules/@playwright/test \
+  node scripts/check-workflow-motion.mjs
+```
+
+`PREVIEW_URL` overrides the local preview URL, `CHECK_OUTPUT` selects a capture
+directory, and `BROWSER_CHANNEL` defaults to `chrome`. The check covers five widths,
+actual trace movement, finite playback, absence of a pause control, offscreen
+suspension and reduced motion. It writes screenshots and a compact JSON result.
+
+
+### Hero product capture
+
+The hero uses the complete current-console chat capture, including navigation.
+The same complete image is used on mobile; it is never replaced with a cropped
+conversation. Foreground scenery and callouts do not cover the application window.
+The caption identifies the prepared conversation and fictional data. Product
+screens in the shared showcase and control sections also use contain sizing.
+
+
+## Device presentation
+
+The home page's Browser, desktop and mobile section uses real console captures in illustrative laptop
+and phone frames. A shared Motion scroll timeline opens the laptop around its hinge, levels the perspective and brings the phone into view. The metal frame includes a labelled keyboard, speaker grilles and trackpad; the phone uses one clipped glass surface, vector status icons and side buttons. Platform rows use generated browser and operating-system marks (macOS, Windows, Linux, iOS and Android). The keyboard deck stays anchored; there is no timed bounce or animated brightness filter. The approach follows the scroll-driven pattern in Aceternity UI’s MacBook Scroll (https://ui.aceternity.com/components/macbook-scroll), using the existing Motion dependency.
+Reduced-motion preferences show the final static composition. The accepted hero is unchanged.
+
+- `public/screens/devices/desktop-chat.webp`: prepared Revenue Pulse conversation from the AgenticOS
+  README source captures; fictional sales data, complete console navigation.
+- `public/screens/devices/mobile-chat.jpg`: browser-use capture on 3 November 2026 at 390×844 CSS pixels
+  (390×844 native JPEG). A real AgenticOS response compares fictional campaign costs per lead: €37.50,
+  €30.77 and €42.86. Conversation: `1f5c6f22-bb3b-4b0c-945c-bdc2694a6415` on the test deployment.
+  This shows the **mobile browser console**, not a native iOS or Android installation. No upscaling.
+  Capture provenance stays here; the device section has no production-note caption.
+
+Product copy and structured FAQ describe v1.38.2. Installation instructions are grounded in the released
+`docs/deploy.md`, `docs/desktop.md` and `docs/mobile.md`. Public native mobile distribution is unavailable;
+link readers to the browser/home-screen route and development-build instructions instead of store badges.
+
+
+### Installation entry points
+
+`Quickstart` separates a company server setup from a desktop client download. `DesktopInstall` provides keyboard-accessible OS tabs, versioned release-asset links and Homebrew copying. The server panel includes an IT handoff brief and an explicitly incomplete configuration starting point linked to the full deployment guide. Local Docker exploration and mobile browser access are separate options. Keep release filenames aligned with `RELEASE`; do not imply that installing a client deploys the backend.

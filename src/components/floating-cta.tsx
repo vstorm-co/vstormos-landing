@@ -9,14 +9,14 @@ import { asset } from "@/lib/site";
 
 /**
  * A small "Book a demo" pill in the corner once the hero has scrolled away, on
- * phones too. It steps aside where it would cover the product movie, and where
+ * phones too. It steps aside where it would cover the product movie or workflow illustration, and where
  * the page already asks the same thing: the pricing, the Vstorm section and the footer.
  */
 export function FloatingCta() {
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
-    const quiet = ["how", "pricing", "vstorm", "faq"];
+    const quiet = ["how", "workflow-motion", "pricing", "vstorm", "faq"];
     const update = () => {
       const hero = document.getElementById("top");
       const pastHero = hero !== null && hero.getBoundingClientRect().bottom < 0;

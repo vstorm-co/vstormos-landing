@@ -1,7 +1,17 @@
 "use client";
 
-import { AppWindow, Box, Check, Code2, Download, GitBranch, Maximize2, SlidersHorizontal } from "lucide-react";
-import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
+import {
+  AppWindow,
+  Box,
+  Check,
+  Code2,
+  Download,
+  GitBranch,
+  Maximize2,
+  SlidersHorizontal,
+} from "lucide-react";
+import { AnimatePresence, motion, useInView } from "motion/react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { useEffect, useRef, useState } from "react";
 
 import { BlobAgent } from "@/components/blob";
@@ -28,9 +38,19 @@ const STEPS: readonly { drawing: Drawing; amount?: number; lit: number }[] = [
   { drawing: "scene", lit: 3 },
 ];
 
-const ASKS: Record<Drawing, { prompt: string; agent: string; color: string; source: string; title: string }> = {
+const ASKS: Record<
+  Drawing,
+  {
+    prompt: string;
+    agent: string;
+    color: string;
+    source: string;
+    title: string;
+  }
+> = {
   flow: {
-    prompt: "How does a refund get approved? Draw it, with a slider for the amount.",
+    prompt:
+      "How does a refund get approved? Draw it, with a slider for the amount.",
     agent: "Support Desk",
     color: "#f2b8c6",
     source: "from the refund policy",
@@ -53,10 +73,26 @@ const ASKS: Record<Drawing, { prompt: string; agent: string; color: string; sour
 };
 
 const KINDS = [
-  { icon: GitBranch, title: "Diagrams and flows", body: "From your documents, in SVG or Mermaid." },
-  { icon: SlidersHorizontal, title: "Calculators and simulators", body: "A whole HTML page with sliders and a canvas." },
-  { icon: Box, title: "3D scenes", body: "three.js, rotated and zoomed in the chat." },
-  { icon: AppWindow, title: "Saved as an app", body: "One click, versions included, opened by link." },
+  {
+    icon: GitBranch,
+    title: "Diagrams and flows",
+    body: "From your documents, in SVG or Mermaid.",
+  },
+  {
+    icon: SlidersHorizontal,
+    title: "Calculators and simulators",
+    body: "A whole HTML page with sliders and a canvas.",
+  },
+  {
+    icon: Box,
+    title: "3D scenes",
+    body: "three.js, rotated and zoomed in the chat.",
+  },
+  {
+    icon: AppWindow,
+    title: "Saved as an app",
+    body: "One click, versions included, opened by link.",
+  },
 ] as const;
 
 /* ---------- The refund flow ---------------------------------------------- */
@@ -69,9 +105,27 @@ function approver(amount: number) {
 }
 
 const OUTCOMES = [
-  { label: "Finance approves", note: "above $2,000", y: 34, who: "FN", color: "#7fb4f0" },
-  { label: "Support lead approves", note: "$200 to $2,000", y: 116, who: "TB", color: "#f0a77f" },
-  { label: "Support Desk refunds", note: "up to $200", y: 198, who: "", color: "#f2b8c6" },
+  {
+    label: "Finance approves",
+    note: "above $2,000",
+    y: 34,
+    who: "FN",
+    color: "#7fb4f0",
+  },
+  {
+    label: "Support lead approves",
+    note: "$200 to $2,000",
+    y: 116,
+    who: "TB",
+    color: "#f0a77f",
+  },
+  {
+    label: "Support Desk refunds",
+    note: "up to $200",
+    y: 198,
+    who: "",
+    color: "#f2b8c6",
+  },
 ] as const;
 
 /** A right-angled wire with rounded corners, from the amount to one outcome. */
@@ -96,10 +150,26 @@ function RefundFlow({ amount }: { amount: number }) {
   }, []);
   return (
     <div className="flex h-full flex-col">
-      <div ref={scroller} className="min-h-0 flex-1 overflow-x-auto [scrollbar-width:none]">
-        <svg viewBox="0 0 640 250" className="h-full min-w-[520px] w-full" role="img" aria-label={`Refund of $${amount}: ${shown?.label}`}>
+      <div
+        ref={scroller}
+        className="min-h-0 flex-1 overflow-x-auto [scrollbar-width:none]"
+      >
+        <svg
+          viewBox="0 0 640 250"
+          className="h-full min-w-[520px] w-full"
+          role="img"
+          aria-label={`Refund of $${amount}: ${shown?.label}`}
+        >
           <defs>
-            <marker id="draw-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <marker
+              id="draw-arrow"
+              viewBox="0 0 10 10"
+              refX="9"
+              refY="5"
+              markerWidth="7"
+              markerHeight="7"
+              orient="auto"
+            >
               <path d="M0,0L10,5L0,10z" fill={INK} />
             </marker>
           </defs>
@@ -107,20 +177,63 @@ function RefundFlow({ amount }: { amount: number }) {
           {[
             { x: 14, w: 132, title: "Refund request", sub: "order #10482" },
             { x: 176, w: 136, title: "Within 14 days?", sub: "yes, day 9" },
-            { x: 342, w: 70, title: `$${amount.toLocaleString("en-US")}`, sub: "amount" },
+            {
+              x: 342,
+              w: 70,
+              title: `$${amount.toLocaleString("en-US")}`,
+              sub: "amount",
+            },
           ].map((node, index) => (
-            <motion.g key={index} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: index * 0.12 }}>
-              <rect x={node.x} y="116" width={node.w} height="52" rx="12" fill="#fff" stroke="#e4e4e7" />
-              <text x={node.x + node.w / 2} y="138" textAnchor="middle" fontSize="13" fontWeight="600" fill="#18181b">
+            <motion.g
+              key={index}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.12 }}
+            >
+              <rect
+                x={node.x}
+                y="116"
+                width={node.w}
+                height="52"
+                rx="12"
+                fill="#fff"
+                stroke="#e4e4e7"
+              />
+              <text
+                x={node.x + node.w / 2}
+                y="138"
+                textAnchor="middle"
+                fontSize="13"
+                fontWeight="600"
+                fill="#18181b"
+              >
                 {node.title}
               </text>
-              <text x={node.x + node.w / 2} y="155" textAnchor="middle" fontSize="11" fill="#a1a1aa">
+              <text
+                x={node.x + node.w / 2}
+                y="155"
+                textAnchor="middle"
+                fontSize="11"
+                fill="#a1a1aa"
+              >
                 {node.sub}
               </text>
             </motion.g>
           ))}
-          <path d="M146 142 H 172" stroke={INK} strokeWidth="2" fill="none" markerEnd="url(#draw-arrow)" />
-          <path d="M312 142 H 338" stroke={INK} strokeWidth="2" fill="none" markerEnd="url(#draw-arrow)" />
+          <path
+            d="M146 142 H 172"
+            stroke={INK}
+            strokeWidth="2"
+            fill="none"
+            markerEnd="url(#draw-arrow)"
+          />
+          <path
+            d="M312 142 H 338"
+            stroke={INK}
+            strokeWidth="2"
+            fill="none"
+            markerEnd="url(#draw-arrow)"
+          />
           {OUTCOMES.map((outcome, index) => {
             const on = lit === index;
             return (
@@ -140,15 +253,36 @@ function RefundFlow({ amount }: { amount: number }) {
                   width="174"
                   height="52"
                   rx="12"
-                  animate={{ fill: on ? "#eef0ff" : "#ffffff", stroke: on ? INK : "#e4e4e7" }}
+                  animate={{
+                    fill: on ? "#eef0ff" : "#ffffff",
+                    stroke: on ? INK : "#e4e4e7",
+                  }}
                   transition={{ duration: 0.35 }}
                   strokeWidth={on ? 1.5 : 1}
                 />
-                <circle cx="484" cy={outcome.y + 26} r="11" fill={outcome.color} />
-                <text x="484" y={outcome.y + 30} textAnchor="middle" fontSize="9" fontWeight="700" fill="#fff">
+                <circle
+                  cx="484"
+                  cy={outcome.y + 26}
+                  r="11"
+                  fill={outcome.color}
+                />
+                <text
+                  x="484"
+                  y={outcome.y + 30}
+                  textAnchor="middle"
+                  fontSize="9"
+                  fontWeight="700"
+                  fill="#fff"
+                >
                   {outcome.who || "SD"}
                 </text>
-                <text x="502" y={outcome.y + 23} fontSize="11.5" fontWeight="600" fill={on ? "#3b3fb8" : "#3f3f46"}>
+                <text
+                  x="502"
+                  y={outcome.y + 23}
+                  fontSize="11.5"
+                  fontWeight="600"
+                  fill={on ? "#3b3fb8" : "#3f3f46"}
+                >
                   {outcome.label}
                 </text>
                 <text x="502" y={outcome.y + 39} fontSize="10.5" fill="#a1a1aa">
@@ -187,17 +321,31 @@ function Calculator({ phase }: { phase: number }) {
     <div className="grid h-full gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
       <div className="space-y-3 text-[12px] text-[#52525b]">
         {[
-          { label: "Invoices per month", value: invoices.toLocaleString("en-US"), share: invoices / 2000 },
-          { label: "Minutes per invoice today", value: `${minutes} min`, share: minutes / 30 },
+          {
+            label: "Invoices per month",
+            value: invoices.toLocaleString("en-US"),
+            share: invoices / 2000,
+          },
+          {
+            label: "Minutes per invoice today",
+            value: `${minutes} min`,
+            share: minutes / 30,
+          },
           { label: "Hourly cost", value: "$45", share: 45 / 120 },
         ].map((row) => (
           <div key={row.label}>
             <div className="flex justify-between">
               <span>{row.label}</span>
-              <span className="font-mono font-medium text-[#18181b]">{row.value}</span>
+              <span className="font-mono font-medium text-[#18181b]">
+                {row.value}
+              </span>
             </div>
             <div className="relative mt-1.5 h-1.5 rounded-full bg-[#ececef]">
-              <motion.div className="absolute inset-y-0 left-0 rounded-full bg-[#1fb58f]" animate={{ width: `${row.share * 100}%` }} transition={{ duration: 0.9, ease: EASE }} />
+              <motion.div
+                className="absolute inset-y-0 left-0 rounded-full bg-[#1fb58f]"
+                animate={{ width: `${row.share * 100}%` }}
+                transition={{ duration: 0.9, ease: EASE }}
+              />
               <motion.span
                 className="absolute top-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-[#1fb58f] shadow"
                 animate={{ left: `${row.share * 100}%` }}
@@ -208,20 +356,36 @@ function Calculator({ phase }: { phase: number }) {
         ))}
         <div className="rounded-[12px] bg-[#0f2e25] p-3 text-white">
           <p className="text-[11px] text-white/60">Saved per year</p>
-          <p className="font-mono text-[24px] font-semibold tabular-nums">${saved.toLocaleString("en-US")}</p>
-          <p className="text-[11px] text-white/60">{hours} hours back every month</p>
+          <p className="font-mono text-[24px] font-semibold tabular-nums">
+            ${saved.toLocaleString("en-US")}
+          </p>
+          <p className="text-[11px] text-white/60">
+            {hours} hours back every month
+          </p>
         </div>
       </div>
       <div className="hidden flex-col sm:flex">
-        <p className="text-[12px] font-medium text-[#18181b]">Monthly cost, before vs after</p>
+        <p className="text-[12px] font-medium text-[#18181b]">
+          Monthly cost, before vs after
+        </p>
         <div className="mt-3 flex flex-1 items-end gap-6 border-b border-l border-[#ececef] px-6 pb-0">
           {[
             { label: "Today", value: before, color: "#0f2e25" },
             { label: "With Autopilot", value: after, color: "#8fd3b9" },
           ].map((bar) => (
-            <div key={bar.label} className="flex flex-1 flex-col items-center gap-1">
-              <span className="font-mono text-[11px] text-[#52525b]">${Math.round(bar.value).toLocaleString("en-US")}</span>
-              <motion.div className="w-full rounded-t-[6px]" style={{ background: bar.color }} animate={{ height: (bar.value / 11000) * 150 }} transition={{ duration: 0.9, ease: EASE }} />
+            <div
+              key={bar.label}
+              className="flex flex-1 flex-col items-center gap-1"
+            >
+              <span className="font-mono text-[11px] text-[#52525b]">
+                ${Math.round(bar.value).toLocaleString("en-US")}
+              </span>
+              <motion.div
+                className="w-full rounded-t-[6px]"
+                style={{ background: bar.color }}
+                animate={{ height: (bar.value / 11000) * 150 }}
+                transition={{ duration: 0.9, ease: EASE }}
+              />
             </div>
           ))}
         </div>
@@ -284,13 +448,24 @@ function Scene({ turning }: { turning: boolean }) {
     }),
   ).sort((a, b) => a.depth - b.depth);
 
-  const face = (points: { x: number; y: number }[]) => points.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
+  const face = (points: { x: number; y: number }[]) =>
+    points.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
 
   return (
-    <svg viewBox="0 0 640 250" className="h-full w-full" role="img" aria-label="Refunds by region and quarter as 3D bars">
+    <svg
+      viewBox="0 0 640 250"
+      className="h-full w-full"
+      role="img"
+      aria-label="Refunds by region and quarter as 3D bars"
+    >
       {/* the floor */}
       <polygon
-        points={face([project(-120, 0, -96), project(120, 0, -96), project(120, 0, 96), project(-120, 0, 96)])}
+        points={face([
+          project(-120, 0, -96),
+          project(120, 0, -96),
+          project(120, 0, 96),
+          project(-120, 0, 96),
+        ])}
         fill="#f4f4f8"
         stroke="#e4e4e7"
       />
@@ -301,13 +476,20 @@ function Scene({ turning }: { turning: boolean }) {
           [h, -h],
           [h, h],
           [-h, h],
-        ].map(([dx = 0, dz = 0]) => ({ base: project(bar.cx + dx, 0, bar.cz + dz), top: project(bar.cx + dx, bar.height, bar.cz + dz) }));
+        ].map(([dx = 0, dz = 0]) => ({
+          base: project(bar.cx + dx, 0, bar.cz + dz),
+          top: project(bar.cx + dx, bar.height, bar.cz + dz),
+        }));
         const sides = [0, 1, 2, 3]
           .map((index) => {
             const a = corners[index];
             const b = corners[(index + 1) % 4];
             if (!a || !b) return null;
-            return { index, depth: (a.base.depth + b.base.depth) / 2, points: [a.base, b.base, b.top, a.top] };
+            return {
+              index,
+              depth: (a.base.depth + b.base.depth) / 2,
+              points: [a.base, b.base, b.top, a.top],
+            };
           })
           .filter((side): side is NonNullable<typeof side> => side !== null)
           .sort((a, b) => b.depth - a.depth)
@@ -316,16 +498,34 @@ function Scene({ turning }: { turning: boolean }) {
         return (
           <g key={`${bar.r}-${bar.q}`}>
             {sides.map((side) => (
-              <polygon key={side.index} points={face(side.points)} fill={side.index % 2 ? colors[1] : colors[0]} stroke="#fff" strokeWidth="0.6" />
+              <polygon
+                key={side.index}
+                points={face(side.points)}
+                fill={side.index % 2 ? colors[1] : colors[0]}
+                stroke="#fff"
+                strokeWidth="0.6"
+              />
             ))}
-            <polygon points={face(corners.map((corner) => corner.top))} fill={colors[2]} stroke="#fff" strokeWidth="0.6" />
+            <polygon
+              points={face(corners.map((corner) => corner.top))}
+              fill={colors[2]}
+              stroke="#fff"
+              strokeWidth="0.6"
+            />
           </g>
         );
       })}
       {REGIONS.map((region, index) => {
         const label = project(-150, 0, (index - 1) * 52);
         return (
-          <text key={region} x={label.x} y={label.y} textAnchor="middle" fontSize="11" fill="#71717a">
+          <text
+            key={region}
+            x={label.x}
+            y={label.y}
+            textAnchor="middle"
+            fontSize="11"
+            fill="#71717a"
+          >
             {region}
           </text>
         );
@@ -341,14 +541,24 @@ export function Draws() {
   const visible = useInView(ref, { amount: 0.4 });
   const reduce = useReducedMotion();
   // It opens on the calculator, then plays on in order and wraps to the flow.
-  const [step, setStep] = useState(() => Math.max(0, STEPS.findIndex((item) => KINDS[item.lit]?.title === "Calculators and simulators")));
+  const [step, setStep] = useState(() =>
+    Math.max(
+      0,
+      STEPS.findIndex(
+        (item) => KINDS[item.lit]?.title === "Calculators and simulators",
+      ),
+    ),
+  );
   const [touched, setTouched] = useState(false);
   const [amount, setAmount] = useState(150);
 
   // Until somebody moves the slider, the window walks through a flow, a calculator and a 3D scene.
   useEffect(() => {
     if (!visible || touched || reduce) return;
-    const timer = window.setTimeout(() => setStep((current) => (current + 1) % STEPS.length), STEP_MS);
+    const timer = window.setTimeout(
+      () => setStep((current) => (current + 1) % STEPS.length),
+      STEP_MS,
+    );
     return () => window.clearTimeout(timer);
   }, [step, visible, touched, reduce]);
 
@@ -368,11 +578,19 @@ export function Draws() {
           muted="get a drawing you can use."
           body="An agent draws while it writes: a flow from your policy, a calculator with sliders, a 3D scene. It runs safely walled off from your data, and one click saves it as an app your team opens by link. Try the flow below."
         />
-        <Reveal delay={0.1} className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:items-stretch">
-          <div ref={ref} className="relative min-w-0 overflow-hidden rounded-[28px] bg-[#dfe7ef] p-3 shadow-[0_40px_90px_-50px_rgba(43,37,71,0.55)] ring-1 ring-black/5 sm:p-8">
+        <Reveal
+          delay={0.1}
+          className="mt-12 grid gap-5 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:items-stretch"
+        >
+          <div
+            ref={ref}
+            className="relative min-w-0 overflow-hidden rounded-[28px] bg-[#dfe7ef] p-3 shadow-[0_40px_90px_-50px_rgba(43,37,71,0.55)] ring-1 ring-black/5 sm:p-8"
+          >
             <img
               src={asset("/images/meadow-bg-3200.webp")}
-              srcSet={assetSet("/images/meadow-bg-1600.webp 1600w, /images/meadow-bg-3200.webp 3200w")}
+              srcSet={assetSet(
+                "/images/meadow-bg-1600.webp 1600w, /images/meadow-bg-3200.webp 3200w",
+              )}
               sizes="(min-width: 1240px) 720px, 100vw"
               alt=""
               loading="lazy"
@@ -381,11 +599,23 @@ export function Draws() {
             <div className="relative mx-auto max-w-[680px] overflow-hidden rounded-[18px] bg-white/95 shadow-[0_30px_80px_-30px_rgba(16,24,40,0.55)] ring-1 ring-black/5 backdrop-blur">
               <div className="space-y-3 p-4 sm:p-5">
                 <AnimatePresence mode="wait" initial={false}>
-                  <motion.div key={drawing} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.3, ease: EASE }} className="space-y-3">
-                    <p className="ml-auto w-fit max-w-[90%] rounded-[16px] rounded-br-[6px] bg-[#f4f4f5] px-3.5 py-2 text-[13px] text-[#27272a]">{ask.prompt}</p>
+                  <motion.div
+                    key={drawing}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.3, ease: EASE }}
+                    className="space-y-3"
+                  >
+                    <p className="ml-auto w-fit max-w-[90%] rounded-[16px] rounded-br-[6px] bg-[#f4f4f5] px-3.5 py-2 text-[13px] text-[#27272a]">
+                      {ask.prompt}
+                    </p>
                     <div className="flex items-center gap-2 text-[12px] font-semibold text-[#18181b]">
-                      <BlobAgent color={ask.color} size={22} hop={false} /> {ask.agent}
-                      <span className="font-normal text-[#a1a1aa]">· {ask.source}</span>
+                      <BlobAgent color={ask.color} size={22} hop={false} />{" "}
+                      {ask.agent}
+                      <span className="font-normal text-[#a1a1aa]">
+                        · {ask.source}
+                      </span>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -393,10 +623,15 @@ export function Draws() {
 
               <div className="relative mx-4 mb-4 overflow-hidden rounded-[14px] border border-[#ececef] sm:mx-5 sm:mb-5">
                 <div className="flex items-center justify-between gap-2 border-b border-[#f0f0f2] bg-[#fafafa] px-3 py-2">
-                  <span className="truncate text-[12px] font-medium text-[#3f3f46]">{ask.title}</span>
+                  <span className="truncate text-[12px] font-medium text-[#3f3f46]">
+                    {ask.title}
+                  </span>
                   <span className="flex shrink-0 items-center gap-1 text-[#a1a1aa]">
                     {[Maximize2, Code2, Download].map((Icon, index) => (
-                      <span key={index} className="hidden size-6 items-center justify-center rounded-[6px] sm:inline-flex">
+                      <span
+                        key={index}
+                        className="hidden size-6 items-center justify-center rounded-[6px] sm:inline-flex"
+                      >
                         <Icon className="size-3.5" />
                       </span>
                     ))}
@@ -405,7 +640,12 @@ export function Draws() {
                       transition={{ duration: 0.3, delay: 0.5 }}
                       className={`ml-1 inline-flex h-6 shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-2.5 text-[11px] font-medium ${saved ? "bg-[#16794c] text-white" : "bg-[#18181b] text-white"}`}
                     >
-                      {saved ? <Check className="size-3" /> : <AppWindow className="size-3" />} {saved ? "Saved to Apps" : "Save to Apps"}
+                      {saved ? (
+                        <Check className="size-3" />
+                      ) : (
+                        <AppWindow className="size-3" />
+                      )}{" "}
+                      {saved ? "Saved to Apps" : "Save to Apps"}
                     </motion.span>
                   </span>
                 </div>
@@ -429,7 +669,6 @@ export function Draws() {
                       )}
                     </motion.div>
                   </AnimatePresence>
-
                 </div>
 
                 {drawing === "flow" ? (
@@ -448,17 +687,28 @@ export function Draws() {
                       className="h-1.5 flex-1 cursor-pointer accent-[#5b5bd6]"
                       aria-label="Refund amount in dollars"
                     />
-                    <span className="w-14 text-right font-mono text-[12.5px] font-medium tabular-nums text-[#18181b]">${shownAmount.toLocaleString("en-US")}</span>
+                    <span className="w-14 text-right font-mono text-[12.5px] font-medium tabular-nums text-[#18181b]">
+                      ${shownAmount.toLocaleString("en-US")}
+                    </span>
                   </label>
                 ) : null}
               </div>
             </div>
           </div>
 
-          <SpotlightList items={KINDS} lit={lit} onPick={(index) => {
+          <SpotlightList
+            items={KINDS}
+            lit={lit}
+            onPick={(index) => {
               setTouched(false);
-              setStep(Math.max(0, STEPS.findIndex((item) => item.lit === index)));
-            }} />
+              setStep(
+                Math.max(
+                  0,
+                  STEPS.findIndex((item) => item.lit === index),
+                ),
+              );
+            }}
+          />
         </Reveal>
         <SectionLinks docs={links.visuals} docsLabel="What agents can draw" />
       </div>

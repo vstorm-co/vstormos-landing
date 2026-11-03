@@ -33,10 +33,15 @@ const geistMono = localFont({
   display: "swap",
 });
 
-const title = "AgenticOS: open-source AI teammates for your company";
+const title = "AgenticOS: open-source, self-hosted AI agent platform";
 const description =
-  "The self-hosted agent layer: build, run and govern AI agents on your own infrastructure. Chat, apps, a real browser, 4,700+ MCP servers and an API, with budgets, approvals and a recorded run. Apache-2.0, built on Pydantic AI by Vstorm.";
-const ogImage = { url: "/images/og.jpg", width: 1200, height: 630, alt: "AgenticOS: put AI to work across your company" };
+  "Open-source, self-hosted AI agent platform for your company’s AI teammates. Build, run and govern agents on your own servers and models. Apache-2.0.";
+const ogImage = {
+  url: "/images/og.jpg",
+  width: 1200,
+  height: 630,
+  alt: "AgenticOS: put AI to work across your company",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${PAGE_URL}/`),
@@ -73,8 +78,23 @@ export const metadata: Metadata = {
     description,
     images: [ogImage],
   },
-  twitter: { card: "summary_large_image", site: "@VstormCommunity", title, description, images: [ogImage] },
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  twitter: {
+    card: "summary_large_image",
+    site: "@VstormCommunity",
+    title,
+    description,
+    images: [ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 /*
@@ -93,7 +113,16 @@ const structuredData = {
       logo: `${PAGE_URL}/vstorm-logo.svg`,
       email: vstorm.email,
       sameAs: [vstorm.linkedin, vstorm.x, vstorm.github],
-      memberOf: { "@type": "Organization", name: "Agentic AI Foundation", url: "https://aaif.io/" },
+      award: "Open Agentic AI Innovation Award 2026 — Agentic AI Foundation",
+      subjectOf: {
+        "@type": "Article",
+        url: "https://aaif.io/blog/winners-of-the-first-aaif-annual-technical-excellence-awards",
+      },
+      memberOf: {
+        "@type": "Organization",
+        name: "Agentic AI Foundation",
+        url: "https://aaif.io/",
+      },
     },
     {
       "@type": "WebSite",
@@ -112,22 +141,28 @@ const structuredData = {
       image: `${PAGE_URL}/images/og.jpg`,
       applicationCategory: "BusinessApplication",
       applicationSubCategory: "AI agent platform",
-      operatingSystem: "Linux, macOS, Windows (WSL2)",
+      operatingSystem: "Web browser; desktop on macOS, Windows and Linux",
       softwareVersion: RELEASE,
       license: "https://www.apache.org/licenses/LICENSE-2.0",
-      downloadUrl: links.repo,
+      downloadUrl: links.downloads,
       installUrl: links.install,
       softwareHelp: { "@type": "CreativeWork", url: links.docs },
       featureList: [
-        "29 built-in capabilities: knowledge search with citations, a real web browser, a code sandbox, a coding agent (Claude Code or Codex), drawings, charts, apps, subagents, guardrails",
+        "36 built-in capabilities: knowledge search with citations, a real web browser, a code sandbox, a coding agent (Claude Code or Codex), drawings, charts, apps, subagents, guardrails",
         "4,700+ MCP servers in the gallery",
+        "Visual workflows, virtual tables, routines and voice calls",
         "28 model providers, including a ChatGPT subscription and local models through Ollama and vLLM",
         "Projects: shared files, instructions and a sandbox, with several people and agents in one live chat",
-        "8 surfaces: web chat, website widget, hosted page, HTTP API, WebSocket, Slack, Mattermost, Telegram",
+        "Web chat, website widget, hosted page, HTTP API, WebSocket, Slack, Mattermost, Telegram, Teams, Discord, desktop and browser voice",
         "Budgets checked before each model call, approvals, roles and groups, a hash-chained audit log",
         "Company sign-in through OIDC, LDAP and Kerberos",
       ],
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "Apache-2.0 licence; implementation by Vstorm on request" },
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+        description: "Apache-2.0 licence; implementation by Vstorm on request",
+      },
       author: { "@id": "https://vstorm.co/#organization" },
       sameAs: [links.repo, vstorm.agenticos],
     },
@@ -138,9 +173,14 @@ export const viewport: Viewport = {
   themeColor: "#2b2547",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${bricolage.variable} ${geistMono.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${bricolage.variable} ${geistMono.variable}`}
+    >
       <body>
         <script
           type="application/ld+json"

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import type { ReactNode } from "react";
 
 /** Fades a block up once it scrolls into view. */
@@ -29,7 +30,13 @@ export function Reveal({
   );
 }
 
-export function Eyebrow({ children, tone = "light" }: { children: ReactNode; tone?: "light" | "dark" }) {
+export function Eyebrow({
+  children,
+  tone = "light",
+}: {
+  children: ReactNode;
+  tone?: "light" | "dark";
+}) {
   const look =
     tone === "dark"
       ? "border-white/15 bg-white/[0.06] text-blob"
@@ -38,7 +45,9 @@ export function Eyebrow({ children, tone = "light" }: { children: ReactNode; ton
     <span
       className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[11.5px] font-medium uppercase tracking-[0.08em] ${look}`}
     >
-      <span className={`size-1.5 rounded-full ${tone === "dark" ? "bg-blob" : "bg-violet"}`} />
+      <span
+        className={`size-1.5 rounded-full ${tone === "dark" ? "bg-blob" : "bg-violet"}`}
+      />
       {children}
     </span>
   );
@@ -62,7 +71,9 @@ export function SectionHeading({
 }) {
   const centered = align === "center";
   return (
-    <Reveal className={`flex flex-col gap-5 ${centered ? "items-center text-center" : "items-start"}`}>
+    <Reveal
+      className={`flex flex-col gap-5 ${centered ? "items-center text-center" : "items-start"}`}
+    >
       <Eyebrow tone={tone}>{eyebrow}</Eyebrow>
       <h2
         className={`display-tight max-w-[24ch] text-balance text-[clamp(2.1rem,4.6vw,3.6rem)] font-medium ${tone === "dark" ? "text-white" : "text-ink"}`}
@@ -71,7 +82,9 @@ export function SectionHeading({
         {muted ? (
           <>
             {" "}
-            <span className={tone === "dark" ? "text-white/45" : "text-faint"}>{muted}</span>
+            <span className={tone === "dark" ? "text-white/75" : "text-ink-soft"}>
+              {muted}
+            </span>
           </>
         ) : null}
       </h2>
@@ -107,12 +120,14 @@ export function SplitHeading({
           {muted ? (
             <>
               {" "}
-              <span className="text-faint">{muted}</span>
+              <span className="text-ink-soft">{muted}</span>
             </>
           ) : null}
         </h2>
       </div>
-      <div className="max-w-[48ch] text-pretty text-[17px] leading-relaxed text-muted md:pb-2">{body}</div>
+      <div className="max-w-[48ch] text-pretty text-[17px] leading-relaxed text-muted md:pb-2">
+        {body}
+      </div>
     </Reveal>
   );
 }
@@ -121,8 +136,10 @@ type ButtonTone = "ink" | "white" | "ghost-light" | "ghost-dark";
 
 const BUTTON_TONES: Record<ButtonTone, string> = {
   ink: "bg-ink text-white hover:bg-violet shadow-[0_1px_0_rgba(255,255,255,0.12)_inset,0_8px_24px_-12px_rgba(22,20,31,0.6)]",
-  white: "bg-white text-ink hover:bg-blob shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)]",
-  "ghost-light": "bg-white/10 text-white ring-1 ring-white/25 backdrop-blur-md hover:bg-white/20",
+  white:
+    "bg-white text-ink hover:bg-blob shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)]",
+  "ghost-light":
+    "bg-white/10 text-white ring-1 ring-white/25 backdrop-blur-md hover:bg-white/20",
   "ghost-dark": "bg-card text-ink ring-1 ring-line-strong hover:ring-ink/40",
 };
 
@@ -150,10 +167,23 @@ export function ButtonLink({
 }
 
 /** The two ways out of a feature section: try it now, or read how it works. */
-export function SectionLinks({ docs, docsLabel = "How it works", tone = "light", className = "" }: { docs: string; docsLabel?: string; tone?: "light" | "dark"; className?: string }) {
+export function SectionLinks({
+  docs,
+  docsLabel = "How it works",
+  tone = "light",
+  className = "",
+}: {
+  docs: string;
+  docsLabel?: string;
+  tone?: "light" | "dark";
+  className?: string;
+}) {
   const dark = tone === "dark";
   return (
-    <Reveal delay={0.12} className={`mt-8 flex flex-wrap items-center justify-center gap-3 ${className}`}>
+    <Reveal
+      delay={0.12}
+      className={`mt-8 flex flex-wrap items-center justify-center gap-3 ${className}`}
+    >
       <ButtonLink href="#quickstart" tone={dark ? "white" : "ink"}>
         Run it in 10 minutes
       </ButtonLink>

@@ -14,6 +14,8 @@ const SURFACE_MARK: Record<(typeof surfaces)[number], { icon: LucideIcon } | { b
   Slack: { brand: "slack" },
   Mattermost: { brand: "mattermost" },
   Telegram: { brand: "telegram" },
+  "Microsoft Teams": { brand: "teams" },
+  Discord: { icon: MessageSquare },
 };
 
 function SurfaceMark({ surface }: { surface: (typeof surfaces)[number] }) {
@@ -95,7 +97,7 @@ export function Integrations() {
         <Reveal delay={0.05} className="mt-5">
           <div className="rounded-[22px] bg-card p-6 ring-1 ring-line md:p-7">
             <div className="flex flex-col gap-1.5 md:flex-row md:items-baseline md:justify-between">
-              <h3 className="font-display text-[20px] font-medium tracking-[-0.02em]">One agent, eight places it answers</h3>
+              <h3 className="font-display text-[20px] font-medium tracking-[-0.02em]">One agent, wherever your team works</h3>
               <p className="text-[15px] text-muted">Publish once: the same agent, rules and history everywhere.</p>
             </div>
             <ul className="mt-5 flex flex-wrap gap-2">
