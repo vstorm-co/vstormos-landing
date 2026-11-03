@@ -216,7 +216,7 @@ Reduced-motion preferences show the final static composition. The accepted hero 
   This shows the **mobile browser console**, not a native iOS or Android installation. No upscaling.
   Capture provenance stays here; the device section has no production-note caption.
 
-Product copy and structured FAQ describe v1.38.1. Installation instructions are grounded in the released
+Product copy and structured FAQ describe v1.38.2. Installation instructions are grounded in the released
 `docs/deploy.md`, `docs/desktop.md` and `docs/mobile.md`. Public native mobile distribution is unavailable;
 link readers to the browser/home-screen route and development-build instructions instead of store badges.
 
