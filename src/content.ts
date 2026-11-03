@@ -695,7 +695,7 @@ export const useCases = [
   {
     team: "Customer support",
     color: "#f2b8c6",
-    count: 5,
+    count: 6,
     items: [
       {
         title: "Put a support assistant on your website",
