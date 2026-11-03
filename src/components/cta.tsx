@@ -44,7 +44,7 @@ export function Cta() {
               </ButtonLink>
             </div>
             <a href={links.deck} target="_blank" rel="noreferrer" className="mt-6 text-[14px] font-medium text-white/75 underline decoration-white/30 underline-offset-4 hover:text-white hover:decoration-white">
-              Or click through the 14-slide introduction
+              Or click through the introduction
             </a>
           </div>
         </div>

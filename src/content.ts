@@ -91,7 +91,7 @@ export const pilots = [
 
 export const figures = [
   {
-    value: "29",
+    value: "36",
     art: "tool_search",
     label: "built-in capabilities, switched on per agent",
   },
@@ -203,7 +203,7 @@ export const showcase: readonly Showcase[] = [
   },
 ];
 
-/** The README's six groups; the names add up to the 29 built-in capabilities. `art` keys the console's dioramas. */
+/** The six groups cover the 36 built-in capabilities registered in v1.38.2. `art` keys the console's dioramas. */
 export const capabilityGroups = [
   {
     art: "knowledge",
@@ -222,7 +222,7 @@ export const capabilityGroups = [
     art: "browser_use",
     title: "Web",
     body: "Search, read pages, or drive a real browser you can take over at a sign-in.",
-    names: ["Web search", "Read web pages", "Web browser"],
+    names: ["Web search", "Read web pages", "Web browser", "Computer use"],
   },
   {
     art: "sandbox",
@@ -235,6 +235,11 @@ export const capabilityGroups = [
       "Charts",
       "Visuals",
       "Image generation",
+      "Text to speech",
+      "Video generation",
+      "Watch a command",
+      "Tables",
+      "Workflows",
       "Apps",
     ],
   },
@@ -251,6 +256,7 @@ export const capabilityGroups = [
       "Date and time",
       "Instruction reminders",
       "Ask the user",
+      "Follow-ups",
     ],
   },
   {

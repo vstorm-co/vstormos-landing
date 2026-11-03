@@ -16,7 +16,7 @@ export function UseCases() {
           eyebrow="Use cases"
           title="Start with one task"
           muted="your team repeats."
-          body="29 tutorials give you a sample input, the configuration, the exact prompt and a check you can run. Pick the one whose result somebody on the team can judge."
+          body="30 tutorials give you a sample input, the configuration, the exact prompt and a check you can run. Pick the one whose result somebody on the team can judge."
         />
 
         <div className="rail sm:grid mt-14 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -83,7 +83,7 @@ export function UseCases() {
             rel="noreferrer"
             className="inline-flex h-11 items-center gap-1.5 rounded-full bg-card px-5 text-[14.5px] font-medium text-ink ring-1 ring-line-strong transition-colors hover:ring-ink/40"
           >
-            All 29 tutorials <ArrowUpRight className="size-4" />
+            All 30 tutorials <ArrowUpRight className="size-4" />
           </a>
           <p className="max-w-[60ch] text-[13px] text-faint">
             Starting points with reference runs by the maintainers, not customer
