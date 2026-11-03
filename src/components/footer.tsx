@@ -17,6 +17,8 @@ const COLUMNS = [
       { label: "Integrations", href: "#integrations" },
       { label: "Security", href: "#control" },
       { label: "Quick start", href: "#quickstart" },
+      { label: "Browser, desktop & mobile", href: "#everywhere" },
+      { label: "Desktop downloads", href: links.downloads },
     ],
   },
   {

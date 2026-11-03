@@ -251,7 +251,7 @@ export function Coding() {
           eyebrow="New · Coding agents"
           title="Claude Code and Codex,"
           muted="on your team."
-          body="Any agent can hand software work to Claude Code or Codex. They work on the agent's own private computer, on the subscription you already pay for, and report every step under the answer like a colleague would."
+          body="Any agent can hand software work to Claude Code or Codex. Run them in the agent's sandbox, or choose your own computer in the desktop app. Local tasks use an approved folder and your coding agent's own sign-in, with a native confirmation before they start."
         />
         <Reveal
           delay={0.1}

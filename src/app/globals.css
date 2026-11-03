@@ -432,3 +432,154 @@ details > summary::-webkit-details-marker {
 @media (max-width: 360px) {
   .workflow-node:not(.workflow-node--agent) .workflow-node-detail { display: none; }
 }
+
+/* One scroll timeline drives the hinge and the arrival of the phone. */
+.everywhere-section { background: var(--color-paper); overflow: clip; }
+.device-scene { position: relative; isolation: isolate; height: 960px; perspective: 1600px; }
+.device-scene-landscape { position: absolute; inset: 2% -3% 0; z-index: -2; border-radius: 36px; background: linear-gradient(180deg, var(--color-paper) 0%, transparent 28%, transparent 70%, var(--color-paper) 100%); opacity: .38; mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent); }
+.device-orbit { position: absolute; inset: 8% 4% 16%; z-index: -1; border: 1px solid color-mix(in srgb, var(--color-violet) 13%, transparent); border-radius: 50%; transform: rotate(-12deg); }
+.device-orbit-two { inset: 19% 0 23%; transform: rotate(13deg); }
+.device-laptop { position: absolute; inset-inline-start: 2%; inset-block-start: 13%; width: 82%; perspective: 2400px; transform-style: preserve-3d; }
+.device-laptop-lid { position: relative; transform-origin: center bottom; padding: 15px 9px 9px; border: 1px solid #b6b5bc; border-radius: 22px 22px 10px 10px; background: #18191d; box-shadow: 0 12px 24px -16px #2b254760, inset 0 0 0 2px #46444f; backface-visibility: hidden; transform-style: preserve-3d; overflow: hidden; }
+.device-camera { position: absolute; inset-block-start: 5px; inset-inline-start: calc(50% - 2px); width: 4px; height: 4px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #728ca7, #152032 55%, #030509); box-shadow: 0 0 0 2px #111216; }
+.device-desktop-toolbar { display: flex; align-items: center; gap: 5px; height: 24px; padding-inline: 10px; border-radius: 8px 8px 0 0; color: #5b5868; background: #efedf3; }
+.device-desktop-toolbar > span { width: 6px; height: 6px; border-radius: 50%; background: #c3becd; }
+.device-desktop-toolbar p { margin-inline-start: 14px; font: 9px var(--font-sans); }
+.device-desktop-screen { display: block; width: 100%; height: auto; border-radius: 0 0 5px 5px; }
+.device-lid-depth { position: absolute; inset: -2px; border: 2px solid #a4a0ae; border-radius: inherit; transform: translateZ(-3px); pointer-events: none; }
+.device-screen-power { position: relative; overflow: hidden; border-radius: 8px; }
+.device-screen-shade { position: absolute; inset: 0; border-radius: inherit; background: #111015; opacity: 0; pointer-events: none; }
+.device-laptop-base { position: relative; height: 95px; margin-inline: -2%; transform-style: preserve-3d; }
+.device-keyboard-deck { position: absolute; inset-block-start: -1px; inset-inline: 0; height: 180px; padding: 9px 12% 8px; border: 1px solid #b7b8bd; border-radius: 3px 3px 17px 17px; background: linear-gradient(100deg, #bec0c6, #e9eaed 30%, #d4d6dc 70%, #afb2bb); transform: rotateX(62deg); transform-origin: top center; box-shadow: inset 0 2px 1px #ffffffc0, inset 0 -2px 2px #8e919a; }
+.device-keyboard-deck::before, .device-keyboard-deck::after { content: ""; position: absolute; inset-block-start: 12px; width: 6%; height: 95px; background: radial-gradient(#85878f 0.6px, transparent 0.9px) 0 0 / 3px 3px; opacity: .65; }
+.device-keyboard-deck::before { inset-inline-start: 3%; }
+.device-keyboard-deck::after { inset-inline-end: 3%; }
+.device-keyboard { display: grid; gap: 3px; padding: 4px; border: 1px solid #878a93; border-radius: 6px; background: #484b54; box-shadow: inset 0 2px 3px #0b0c1040; }
+.device-keyboard-row { display: flex; gap: 3px; }
+.device-keyboard-row > span { flex: 1; display: grid; place-items: center; min-width: 0; height: 12px; border: 1px solid #363943; border-radius: 3px; color: #d3d5dc; background: linear-gradient(#292c33, #202229); box-shadow: 0 1px 0 #747782, inset 0 1px 0 #444751; font: 500 clamp(3px, .48vw, 6px) var(--font-sans); }
+.device-keyboard-row > .device-key-wide { flex: 1.6; }
+.device-keyboard-row > .device-key-space { flex: 5; }
+.device-keyboard-row:first-child > span { height: 7px; }
+.device-trackpad { width: 28%; height: 47px; margin: 8px auto 0; border: 1px solid #aaadb6; border-radius: 5px; background: linear-gradient(115deg, #d8dae0, #d0d3da); box-shadow: inset 0 1px 1px #ffffff90, 0 1px 0 #ffffff60; }
+.device-front-edge { position: absolute; inset-block-start: 84px; inset-inline: -1%; height: 7px; border: 1px solid #9fa3ad; border-radius: 2px 2px 65% 65% / 2px 2px 100% 100%; background: linear-gradient(#f2f3f5, #a6a9b3 60%, #7e828e); box-shadow: 0 15px 20px -8px #2b254760; }
+.device-front-edge > span { position: absolute; inset-block-start: -1px; inset-inline-start: 43%; width: 14%; height: 3px; border-radius: 0 0 8px 8px; background: linear-gradient(#8f939e, #cdd0d8); }
+.device-phone { position: absolute; z-index: 2; inset-inline-end: 1%; inset-block-start: 5%; width: 23%; padding: 5px; border: 1px solid #9c9da5; border-radius: 42px; background: linear-gradient(115deg, #e5e5e9, #676974 18%, #d6d7dd 46%, #686b76 80%, #d1d3db); box-shadow: 0 3px 0 #272930, 10px 26px 40px -14px #2b254770, inset 0 0 0 2px #292b33; }
+.device-phone-glass { position: relative; overflow: hidden; border: 3px solid #131419; border-radius: 36px; background: #f7f9fb; }
+.device-phone-status { position: relative; display: flex; align-items: center; justify-content: space-between; height: 35px; padding-inline: 16px; color: #171921; background: #f7f9fb; font: 600 10px var(--font-sans); }
+.device-phone-signals { display: flex; align-items: center; gap: 3px; }
+.device-phone-signals > svg { width: 11px; height: 11px; stroke-width: 2.3; }
+.device-phone-signals > svg:last-child { width: 15px; }
+.device-phone-island { position: absolute; z-index: 2; inset-block-start: 10px; inset-inline-start: 35%; width: 30%; height: 15px; border-radius: 20px; background: #111216; box-shadow: inset 0 1px 1px #44464e; }
+.device-phone-island::after { content: ""; position: absolute; inset-block-start: 5px; inset-inline-end: 6px; width: 5px; height: 5px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #4b6c8f, #101722 60%); }
+.device-phone-screen { display: block; width: 100%; height: auto; }
+.device-phone-home { position: absolute; inset-block-end: 6px; inset-inline-start: 34%; width: 32%; height: 4px; border-radius: 10px; background: #252831; }
+.device-phone-button { position: absolute; width: 3px; border-radius: 2px; background: linear-gradient(90deg, #7b7e89, #d6d8df, #5b5e68); }
+.device-phone-button-volume { inset-inline-start: -3px; inset-block-start: 20%; height: 12%; }
+.device-phone-button-power { inset-inline-end: -3px; inset-block-start: 28%; height: 13%; }
+.device-platforms { display: flex; flex-wrap: wrap; gap: 8px 16px; padding: 0; margin-block-start: 18px; list-style: none; }
+.device-platforms > li { display: flex; align-items: center; gap: 7px; color: var(--color-ink-soft); font: 12px var(--font-sans); }
+
+@media (max-width: 1000px) {
+  .device-scene { height: 560px; }
+  .device-laptop { inset-block-start: 20%; }
+  .device-phone { width: 25%; inset-block-start: 9%; border-radius: 32px; padding: 4px; }
+  .device-phone-glass { border-radius: 27px; }
+}
+@media (max-width: 640px) {
+  .device-scene { height: 440px; margin-inline: -10px; }
+  .device-scene-landscape { inset: 0 -3%; }
+  .device-laptop { width: 90%; inset-inline-start: 2%; inset-block-start: 17%; }
+  .device-laptop-lid { padding: 10px 5px 5px; border-radius: 12px 12px 6px 6px; }
+  .device-desktop-toolbar { height: 15px; padding-inline: 5px; gap: 3px; }
+  .device-desktop-toolbar > span { width: 4px; height: 4px; }
+  .device-desktop-toolbar p { font-size: 5px; margin-inline-start: 5px; }
+  .device-laptop-base { height: 34px; margin-inline: -1%; }
+  .device-keyboard-deck { height: 64px; padding: 4px 11%; border-radius: 2px 2px 6px 6px; }
+  .device-keyboard { gap: 1px; padding: 2px; border-radius: 3px; }
+  .device-keyboard-row { gap: 1px; }
+  .device-keyboard-row > span { height: 4px; border-radius: 1px; font-size: 2px; border: 0; }
+  .device-keyboard-row:first-child > span { height: 3px; }
+  .device-keyboard-deck::before, .device-keyboard-deck::after { inset-block-start: 6px; height: 29px; background-size: 2px 2px; }
+  .device-trackpad { height: 14px; margin-block-start: 3px; border-radius: 2px; }
+  .device-front-edge { inset-block-start: 30px; height: 4px; }
+  .device-phone { width: 35%; inset-block-start: 30%; inset-inline-end: 0; padding: 3px; border-radius: 23px; }
+  .device-phone-glass { border-width: 2px; border-radius: 19px; }
+  .device-phone-status { height: 19px; padding-inline: 8px; font-size: 6px; }
+  .device-phone-signals { gap: 1px; }
+  .device-phone-signals > svg { width: 6px; height: 6px; }
+  .device-phone-signals > svg:last-child { width: 8px; }
+  .device-phone-island { inset-block-start: 6px; height: 7px; }
+  .device-phone-island::after { inset-block-start: 2px; inset-inline-end: 3px; width: 3px; height: 3px; }
+  .device-phone-home { height: 2px; inset-block-end: 4px; }
+
+}
+@media (prefers-reduced-motion: reduce) {
+  .device-laptop, .device-laptop-lid, .device-phone { transform: none !important; opacity: 1 !important; }
+  .device-screen-shade { display: none; }
+}
+
+/* Installation keeps company setup separate from an employee's client download. */
+.install-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.install-panel { min-width: 0; padding: 36px; border: 1px solid var(--color-line-strong); border-radius: 24px; background: var(--color-card); scroll-margin-block-start: 100px; }
+.install-kicker { font: 11px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--color-ink-soft); }
+.install-panel h3 { margin-block-start: 20px; font: 500 clamp(30px, 3.1vw, 42px)/1.08 var(--font-display); letter-spacing: -.035em; }
+.install-description { margin-block-start: 18px; font-size: 15px; line-height: 1.7; color: var(--color-ink-soft); }
+.install-server { background: linear-gradient(145deg, var(--color-card), color-mix(in srgb, var(--color-violet) 5%, var(--color-card))); }
+.install-server-visual { display: grid; justify-items: center; gap: 12px; margin-block: 28px; padding: 25px 16px; border: 1px solid var(--color-line); border-radius: 15px; background: var(--color-paper); color: var(--color-violet); }
+.install-server-visual > span { font: 10px var(--font-mono); letter-spacing: .08em; }
+.install-server-visual > div { display: flex; gap: 8px; border-block-start: 1px solid var(--color-line-strong); padding-block-start: 14px; }
+.install-server-visual > div span { padding: 6px 12px; border: 1px solid var(--color-line); border-radius: 8px; background: var(--color-card); font-size: 12px; }
+.install-requirements { display: grid; gap: 11px; margin-block: 24px; font-size: 13px; color: var(--color-ink-soft); }
+.install-requirements li { display: flex; gap: 9px; align-items: center; }
+.install-requirements svg { flex-shrink: 0; color: var(--color-violet); }
+.install-primary-link { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 19px; border-radius: 30px; background: var(--color-violet); color: white; font-size: 14px; }
+.install-handoff { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-block-start: 22px; font-size: 13px; color: var(--color-ink-soft); }
+.install-developer, .install-local { margin-block-start: 24px; padding-block-start: 20px; border-block-start: 1px solid var(--color-line); font-size: 13px; line-height: 1.7; }
+.install-developer summary, .install-local summary, .install-note summary { cursor: pointer; font-weight: 500; color: var(--color-ink); }
+.install-developer p, .install-local p, .install-note p { margin-block: 12px; color: var(--color-ink-soft); }
+.install-command { display: flex; align-items: start; gap: 12px; padding: 16px; margin-block: 16px; border: 1px solid var(--color-line); border-radius: 12px; background: var(--color-paper); }
+.install-command pre { flex: 1; min-width: 0; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; font: 12px/1.8 var(--font-mono); }
+.install-help { margin-block-start: 24px; font-size: 13px; color: var(--color-ink-soft); }
+.install-help a, .install-text-link { display: inline-flex; align-items: center; gap: 5px; }
+.install-help a, .install-developer > a, .install-local > a, .install-note a { color: var(--color-violet); text-decoration: underline; text-underline-offset: 4px; }
+.install-os-tabs { display: flex; gap: 4px; padding: 5px; margin-block: 26px 18px; border: 1px solid var(--color-line); border-radius: 14px; background: var(--color-paper); }
+.install-os-tabs button { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 7px; border: 1px solid transparent; border-radius: 10px; color: var(--color-ink-soft); font-size: 13px; cursor: pointer; }
+.install-os-tabs button[aria-selected="true"] { background: var(--color-card); border-color: var(--color-line-strong); color: var(--color-ink); box-shadow: 0 2px 4px color-mix(in srgb, var(--color-violet) 6%, transparent); }
+.install-downloads { display: grid; gap: 9px; }
+.install-download { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px; border: 1px solid var(--color-line-strong); border-radius: 12px; }
+.install-download:hover { border-color: var(--color-violet); background: var(--color-paper); }
+.install-download strong { display: block; font-size: 14px; font-weight: 500; }
+.install-download small { display: block; margin-block-start: 4px; font-size: 12px; color: var(--color-ink-soft); }
+.install-download > svg { color: var(--color-violet); flex-shrink: 0; }
+.install-os-tip { margin-block: 14px; font-size: 12px; line-height: 1.7; color: var(--color-ink-soft); }
+.install-brew { padding: 16px; margin-block-start: 22px; border: 1px solid var(--color-line); border-radius: 12px; background: var(--color-paper); }
+.install-brew > div { display: flex; align-items: start; gap: 10px; margin-block-start: 10px; }
+.install-brew code { flex: 1; min-width: 0; overflow-wrap: anywhere; font: 12px/1.8 var(--font-mono); }
+.install-note { margin-block-start: 16px; font-size: 12px; line-height: 1.7; }
+.install-footnote { display: flex; align-items: start; gap: 7px; margin-block-start: 24px; font-size: 12px; line-height: 1.6; color: var(--color-ink-soft); }
+.install-footnote svg { flex-shrink: 0; margin-block-start: 2px; }
+.install-text-link { margin-block-start: 18px; font-size: 12px; text-decoration: underline; text-underline-offset: 4px; }
+.install-connect { display: flex; align-items: start; gap: 16px; padding: 24px; margin-block-start: 24px; border: 1px solid var(--color-line-strong); border-radius: 16px; background: var(--color-card); }
+.install-connect-number { display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; background: var(--color-violet); color: white; font: 12px var(--font-mono); }
+.install-connect p { flex: 1; font-size: 14px; line-height: 1.7; color: var(--color-ink-soft); }
+.install-connect strong { display: block; color: var(--color-ink); }
+.install-connect > a { display: inline-flex; gap: 5px; align-items: center; margin-block-start: 4px; font-size: 13px; white-space: nowrap; }
+@media (max-width: 850px) {
+  .install-paths { grid-template-columns: 1fr; }
+  .install-panel { padding: 28px; }
+}
+@media (max-width: 480px) {
+  .install-panel { padding: 22px; }
+  .install-os-tabs button { font-size: 12px; gap: 5px; }
+  .install-command, .install-brew > div { flex-direction: column; }
+  .install-connect { flex-wrap: wrap; padding: 20px; }
+  .install-connect p { flex-basis: calc(100% - 44px); }
+  .install-connect > a { margin-inline-start: 44px; }
+}
+
+.install-mobile { display: flex; gap: 16px; align-items: center; margin-block-start: 22px; padding-inline: 24px; color: var(--color-ink-soft); font-size: 13px; line-height: 1.7; }
+.install-mobile > div { display: flex; gap: 8px; flex-shrink: 0; }
+.install-mobile > p { flex: 1; }
+.install-mobile strong { color: var(--color-ink); }
+.install-mobile > a { display: inline-flex; gap: 5px; align-items: center; white-space: nowrap; text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 640px) { .install-mobile { flex-wrap: wrap; padding-inline: 4px; } .install-mobile p { flex-basis: calc(100% - 64px); } .install-mobile > a { margin-inline-start: 62px; } }

@@ -14,6 +14,8 @@ const SURFACE_MARK: Record<(typeof surfaces)[number], { icon: LucideIcon } | { b
   Slack: { brand: "slack" },
   Mattermost: { brand: "mattermost" },
   Telegram: { brand: "telegram" },
+  "Microsoft Teams": { brand: "teams" },
+  Discord: { icon: MessageSquare },
 };
 
 function SurfaceMark({ surface }: { surface: (typeof surfaces)[number] }) {

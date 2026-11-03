@@ -26,6 +26,7 @@ import { Expertise } from "@/components/expertise";
 import { Pricing } from "@/components/pricing";
 import { Vstorm } from "@/components/vstorm";
 import { Recognition } from "@/components/recognition";
+import { Everywhere } from "@/components/everywhere";
 import { PlatformChoice } from "@/components/platform-choice";
 import { WorkflowBridge, WorkflowMotion } from "@/components/workflow-motion";
 import { faq } from "@/content";
@@ -58,6 +59,7 @@ export default function Home() {
         <Together />
         <WorkflowBridge />
         <Coding />
+        <Everywhere />
         <Expertise />
         <HowItWorks />
         <WorkflowMotion />

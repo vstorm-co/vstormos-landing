@@ -200,3 +200,27 @@ The same complete image is used on mobile; it is never replaced with a cropped
 conversation. Foreground scenery and callouts do not cover the application window.
 The caption identifies the prepared conversation and fictional data. Product
 screens in the shared showcase and control sections also use contain sizing.
+
+
+## Device presentation
+
+The home page's Browser, desktop and mobile section uses real console captures in illustrative laptop
+and phone frames. A shared Motion scroll timeline opens the laptop around its hinge, levels the perspective and brings the phone into view. The metal frame includes a labelled keyboard, speaker grilles and trackpad; the phone uses one clipped glass surface, vector status icons and side buttons. Platform rows use generated browser and operating-system marks (macOS, Windows, Linux, iOS and Android). The keyboard deck stays anchored; there is no timed bounce or animated brightness filter. The approach follows the scroll-driven pattern in Aceternity UI’s MacBook Scroll (https://ui.aceternity.com/components/macbook-scroll), using the existing Motion dependency.
+Reduced-motion preferences show the final static composition. The accepted hero is unchanged.
+
+- `public/screens/devices/desktop-chat.webp`: prepared Revenue Pulse conversation from the AgenticOS
+  README source captures; fictional sales data, complete console navigation.
+- `public/screens/devices/mobile-chat.jpg`: browser-use capture on 3 November 2026 at 390×844 CSS pixels
+  (390×844 native JPEG). A real AgenticOS response compares fictional campaign costs per lead: €37.50,
+  €30.77 and €42.86. Conversation: `1f5c6f22-bb3b-4b0c-945c-bdc2694a6415` on the test deployment.
+  This shows the **mobile browser console**, not a native iOS or Android installation. No upscaling.
+  Capture provenance stays here; the device section has no production-note caption.
+
+Product copy and structured FAQ describe v1.38.1. Installation instructions are grounded in the released
+`docs/deploy.md`, `docs/desktop.md` and `docs/mobile.md`. Public native mobile distribution is unavailable;
+link readers to the browser/home-screen route and development-build instructions instead of store badges.
+
+
+### Installation entry points
+
+`Quickstart` separates a company server setup from a desktop client download. `DesktopInstall` provides keyboard-accessible OS tabs, versioned release-asset links and Homebrew copying. The server panel includes an IT handoff brief and an explicitly incomplete configuration starting point linked to the full deployment guide. Local Docker exploration and mobile browser access are separate options. Keep release filenames aligned with `RELEASE`; do not imply that installing a client deploys the backend.

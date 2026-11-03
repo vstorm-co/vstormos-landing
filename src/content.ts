@@ -1,9 +1,9 @@
-// Product statements checked against AgenticOS v1.35.3 (2 November 2026).
+// Product statements checked against AgenticOS v1.38.2 (3 November 2026).
 // The MCP count is the gallery's number and nothing else.
 import type { LogoName } from "@/components/brand-icon";
 
 /** The product release the page describes; update it with the figures below at each release. */
-export const RELEASE = "1.35.3";
+export const RELEASE = "1.38.2";
 
 export const DOCS = "https://vstorm-co.github.io/agenticos";
 export const REPO = "https://github.com/vstorm-co/agenticos";
@@ -37,6 +37,9 @@ export const links = {
   tables: `${DOCS}/virtual-tables/`,
   voice: `${DOCS}/voice/`,
   desktop: `${DOCS}/desktop/`,
+  mobile: `${DOCS}/mobile/`,
+  deploy: `${DOCS}/deploy/`,
+  downloads: `${REPO}/releases/latest`,
   securityPolicy: `${REPO}/blob/main/SECURITY.md`,
   licence: `${REPO}/blob/main/LICENSE`,
   discussions: `${REPO}/discussions`,
@@ -264,7 +267,7 @@ export const capabilityGroups = [
   {
     art: "channel_tools",
     title: "Chat channels",
-    body: "Look up people and threads in Slack, Telegram and Mattermost, where an @mention runs as the sender.",
+    body: "Connect Slack, Teams, Discord, Telegram and Mattermost. Available channel tools and account-linking rules depend on the integration.",
     names: ["Channel lookup"],
   },
 ] as const;
@@ -278,6 +281,8 @@ export const surfaces = [
   "Slack",
   "Mattermost",
   "Telegram",
+  "Microsoft Teams",
+  "Discord",
 ] as const;
 
 export const connections = [
@@ -422,6 +427,14 @@ export const setups = [
 ] as const;
 
 export const faq = [
+  {
+    q: "Does AgenticOS have a desktop app?",
+    a: "Yes. GitHub releases provide installers for macOS, Windows and Linux. Connect the app to your organization's HTTPS deployment or create a local Docker instance. Desktop adds Quick Ask, approved local files and computer access, and local Claude Code or Codex. macOS builds are not Apple-notarized; the installation guide explains the available installation methods.",
+  },
+  {
+    q: "Can I use AgenticOS on iPhone or Android?",
+    a: "Yes, through your deployment's mobile browser console, which can be added to the home screen. Native iOS and Android source is also included, with platform features such as biometrics, widgets and native notifications, but it currently requires a development build and your own signing where needed. There are no public App Store, Google Play, TestFlight or supported native release downloads yet.",
+  },
   {
     q: "Is AgenticOS free for commercial use?",
     a: "Yes. It is licensed under Apache-2.0, which allows commercial use, modification and private deployment. You pay for the infrastructure you run it on and for the model providers and services you choose.",
