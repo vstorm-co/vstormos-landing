@@ -33,7 +33,7 @@ export default function RolloutPage() {
           title={
             <>
               AgenticOS, rolled out{" "}
-              <span className="text-ink-soft">by the team that builds it.</span>
+              <span className="text-accent">by the team that builds it.</span>
             </>
           }
           lead="Vstorm maps your processes, builds the agents inside your environment, trains your people and hands the system over, or keeps running it for you. You pay for implementation and tailoring, with no subscription, no seat count and no long-term commitment."

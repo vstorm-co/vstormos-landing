@@ -38,7 +38,7 @@ function Stage() {
             <img src={asset("/vstorm-logo-light.svg")} alt="Vstorm" width={136} height={24} className="h-[20px] w-auto" />
           </a>
           <h2 className="display-tight mt-6 text-balance text-[clamp(2.3rem,5vw,4.1rem)] font-medium">
-            Want it running in your company? <span className="text-white/50">We build it in.</span>
+            Want it running in your company? <span className="text-blob">We build it in.</span>
           </h2>
           <p className="mt-5 max-w-[48ch] text-pretty text-[17px] leading-relaxed text-white/75">
             The team that builds AgenticOS maps your processes, builds the agents inside your environment and hands
@@ -118,7 +118,7 @@ export function Vstorm() {
         <div className="mt-20 md:mt-24">
           <Reveal className="flex flex-wrap items-end justify-between gap-4">
             <h3 className="display-tight text-[clamp(1.7rem,3vw,2.5rem)] font-medium text-ink">
-              How we deliver it <span className="text-ink-soft">in three phases.</span>
+              How we deliver it <span className="text-accent">in three phases.</span>
             </h3>
             <p className="max-w-[46ch] text-[15px] text-muted">
               A transformation manager runs the change alongside: the roadmap, adoption and upskilling. You pay for
@@ -146,7 +146,7 @@ export function Vstorm() {
         <div className="mt-20 md:mt-24">
           <Reveal className="flex flex-wrap items-end justify-between gap-4">
             <h3 className="display-tight text-[clamp(1.7rem,3vw,2.5rem)] font-medium text-ink">
-              Agents we have put in production <span className="text-ink-soft">for clients.</span>
+              Agents we have put in production <span className="text-accent">for clients.</span>
             </h3>
             <a href={vstorm.caseStudies} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-[14.5px] font-medium text-ink-soft hover:text-ink">
               All case studies <ArrowUpRight className="size-4" />

@@ -431,20 +431,25 @@ export const comparison = [
 ] as const;
 
 /** How a person brings a plan they already pay for (AgenticOS 1.95: docs/models.md, docs/desktop.md). */
-export const subscriptionRoutes = [
+export const subscriptionRoutes: readonly {
+  id: "sign-in" | "plan-keys" | "desktop";
+  title: string;
+  body: string;
+  plans: readonly { name: string; logo?: LogoName }[];
+}[] = [
   {
     id: "sign-in",
     title: "Sign in from the console",
     body: "Connect a personal account under Settings, or straight from the model picker. The person's agents then run on that plan, with no API key.",
     plans: [
-      "Claude (Pro, Max)",
-      "ChatGPT (Codex)",
-      "Google Antigravity",
-      "GitHub Copilot",
-      "Grok",
-      "Kimi Code",
-      "Devin",
-      "Meta AI",
+      { name: "Claude (Pro, Max)", logo: "claude" },
+      { name: "ChatGPT (Codex)", logo: "openai" },
+      { name: "Google Antigravity", logo: "antigravity" },
+      { name: "GitHub Copilot", logo: "copilot" },
+      { name: "Grok", logo: "grok" },
+      { name: "Kimi Code", logo: "kimi" },
+      { name: "Devin", logo: "devin" },
+      { name: "Meta AI", logo: "meta" },
     ],
   },
   {
@@ -452,12 +457,12 @@ export const subscriptionRoutes = [
     title: "Add a plan key",
     body: "Coding plans that issue their own key work like any model provider, with the model list from that key.",
     plans: [
-      "OpenCode Go",
-      "Kimi Code",
-      "Z.AI GLM Coding Plan",
-      "Alibaba Coding Plan",
-      "Ollama Cloud",
-      "MiniMax",
+      { name: "OpenCode Go", logo: "opencode" },
+      { name: "Kimi Code", logo: "kimi" },
+      { name: "Z.AI GLM Coding Plan" },
+      { name: "Alibaba Coding Plan", logo: "alibaba" },
+      { name: "Ollama Cloud", logo: "ollama" },
+      { name: "MiniMax", logo: "minimax" },
     ],
   },
   {
@@ -465,17 +470,17 @@ export const subscriptionRoutes = [
     title: "Hand work to your coding agent",
     body: "In the desktop app, a chat can pass software work to the coding agent you already use, with its own sign-in, in a folder you approve.",
     plans: [
-      "Claude Code",
-      "Codex",
-      "OpenCode",
-      "Cursor",
-      "Cline",
-      "Gemini through Antigravity",
-      "Kimi Code",
-      "Qwen",
-      "Devin",
-      "Mistral Vibe",
-      "Grok Build",
+      { name: "Claude Code", logo: "claudecode" },
+      { name: "Codex", logo: "codex" },
+      { name: "OpenCode", logo: "opencode" },
+      { name: "Cursor", logo: "cursor" },
+      { name: "Cline", logo: "cline" },
+      { name: "Gemini through Antigravity", logo: "gemini" },
+      { name: "Kimi Code", logo: "kimi" },
+      { name: "Qwen", logo: "qwen" },
+      { name: "Devin", logo: "devin" },
+      { name: "Mistral Vibe", logo: "mistral" },
+      { name: "Grok Build", logo: "grok" },
     ],
   },
 ] as const;

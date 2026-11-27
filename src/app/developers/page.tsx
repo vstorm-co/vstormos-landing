@@ -41,7 +41,7 @@ export default function DevelopersPage() {
           title={
             <>
               An agent platform{" "}
-              <span className="text-ink-soft">your engineers can extend.</span>
+              <span className="text-accent">your engineers can extend.</span>
             </>
           }
           lead="Capabilities are typed Python on Pydantic AI, agents are YAML specs in your own repository, and every published agent answers over an HTTP API, a WebSocket and an MCP server. Apache-2.0, built in the open."

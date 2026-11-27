@@ -84,7 +84,7 @@ export function SectionHeading({
         {muted ? (
           <>
             {" "}
-            <span className={tone === "dark" ? "text-white/75" : "text-ink-soft"}>
+            <span className={tone === "dark" ? "text-blob" : "text-accent"}>
               {muted}
             </span>
           </>
@@ -122,7 +122,7 @@ export function SplitHeading({
           {muted ? (
             <>
               {" "}
-              <span className="text-ink-soft">{muted}</span>
+              <span className="text-accent">{muted}</span>
             </>
           ) : null}
         </h2>

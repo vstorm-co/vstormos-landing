@@ -40,7 +40,7 @@ export default function ProductPage() {
           title={
             <>
               See what AI teammates do{" "}
-              <span className="text-ink-soft">in AgenticOS.</span>
+              <span className="text-accent">in AgenticOS.</span>
             </>
           }
           lead="Agents that hand work to each other, a real browser, apps people open by link, drawings from your documents, skills written by your best people, and the browser, desktop and phone apps they all run in. Real product screens with demonstration data."

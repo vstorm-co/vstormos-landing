@@ -1,30 +1,40 @@
 import { ArrowUpRight, Check, KeyRound, Laptop, LogIn, Server } from "lucide-react";
 
-import { Mark, providerGlyph } from "@/components/brand-icon";
+import { ServiceIcon, type LogoName } from "@/components/brand-icon";
 import { ButtonLink, Reveal, SplitHeading } from "@/components/ui";
 import { companyModels, links, subscriptionRoutes, subscriptionTerms } from "@/content";
 import { asset } from "@/lib/site";
 
 const ROUTE_ICON = { "sign-in": LogIn, "plan-keys": KeyRound, desktop: Laptop } as const;
 
-const PICKER = [
+const PICKER: readonly {
+  group: string;
+  rows: readonly { logo: LogoName; name: string; note: string; on?: boolean }[];
+}[] = [
   {
     group: "Your subscriptions",
     rows: [
-      { glyph: "anthropic", name: "Claude Code (Pro, Max)", note: "connected", on: true },
-      { glyph: "openai_codex", name: "ChatGPT (Codex)", note: "connected" },
-      { glyph: "github", name: "GitHub Copilot", note: "Connect" },
+      { logo: "claude", name: "Claude Code (Pro, Max)", note: "connected", on: true },
+      { logo: "openai", name: "ChatGPT (Codex)", note: "connected" },
+      { logo: "copilot", name: "GitHub Copilot", note: "Connect" },
+      { logo: "gemini", name: "Google Antigravity", note: "Connect" },
     ],
   },
   {
     group: "Organization keys",
-    rows: [{ glyph: "anthropic", name: "Claude Sonnet 5.5", note: "API key" }],
+    rows: [{ logo: "claude", name: "Claude Sonnet 5.5", note: "API key" }],
   },
   {
     group: "On your hardware",
-    rows: [{ glyph: "ollama", name: "Llama on Ollama", note: "local" }],
+    rows: [{ logo: "ollama", name: "Llama on Ollama", note: "local" }],
   },
-] as const;
+];
+
+const ROUTE_TINT = {
+  "sign-in": "bg-[#fdeee8] text-[#c4623f]",
+  "plan-keys": "bg-[#e6f4ee] text-[#1a8f6b]",
+  desktop: "bg-[#e9edff] text-[#4f5bd5]",
+} as const;
 
 /** The console's model picker as a person sees it: their own plans first, company keys and local models beside them. */
 export function SubscriptionPicker() {
@@ -37,13 +47,13 @@ export function SubscriptionPicker() {
         <div key={section.group} className="border-b border-[#f0f0f2] last:border-b-0">
           <p className="px-3.5 pb-1 pt-2.5 text-[10.5px] font-medium text-[#a1a1aa]">{section.group}</p>
           {section.rows.map((model) => {
-            const on = "on" in model && model.on;
+            const on = model.on === true;
             return (
               <div
                 key={model.name}
                 className={`flex items-center gap-2.5 px-3.5 py-2 text-[12.5px] ${on ? "bg-[#f6f5ff]" : ""}`}
               >
-                <Mark glyph={providerGlyph(model.glyph)} className="size-4 text-[#18181b]" mono />
+                <ServiceIcon name={model.logo} className="size-4" />
                 <span className="font-medium text-[#18181b]">{model.name}</span>
                 <span
                   className={`ml-auto text-[11px] ${model.note === "Connect" ? "font-medium text-[#5b5bd6]" : "text-[#a1a1aa]"}`}
@@ -96,17 +106,26 @@ export function Subscriptions({ onPage = false }: { onPage?: boolean }) {
                 return (
                   <li key={route.id} className="py-6 md:py-7">
                     <div className="flex items-center gap-2.5">
-                      <Icon className="size-[18px] text-violet" strokeWidth={1.9} />
+                      <span className={`inline-flex size-8 items-center justify-center rounded-[10px] ${ROUTE_TINT[route.id]}`}>
+                        <Icon className="size-4" strokeWidth={2} />
+                      </span>
                       <h3 className="font-display text-[19px] font-medium tracking-[-0.02em] text-ink">{route.title}</h3>
                     </div>
                     <p className="mt-2 text-pretty text-[15px] leading-relaxed text-muted">{route.body}</p>
                     <ul className="mt-3 flex flex-wrap gap-1.5">
                       {route.plans.map((plan) => (
                         <li
-                          key={plan}
-                          className="rounded-full bg-paper px-2.5 py-1 text-[12.5px] font-medium text-ink-soft ring-1 ring-line"
+                          key={plan.name}
+                          className="flex items-center gap-1.5 rounded-full bg-white py-1 pl-1.5 pr-3 text-[12.5px] font-medium text-ink ring-1 ring-line"
                         >
-                          {plan}
+                          {plan.logo ? (
+                            <ServiceIcon name={plan.logo} className="size-4" />
+                          ) : (
+                            <span className="inline-flex size-4 items-center justify-center rounded-full bg-ink text-[8px] font-semibold text-white">
+                              {plan.name[0]}
+                            </span>
+                          )}
+                          {plan.name}
                         </li>
                       ))}
                     </ul>

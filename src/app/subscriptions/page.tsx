@@ -106,7 +106,7 @@ export default function SubscriptionsPage() {
           title={
             <>
               It works with the AI subscriptions{" "}
-              <span className="text-ink-soft">you already pay for.</span>
+              <span className="text-accent">you already pay for.</span>
             </>
           }
           lead="Sign in with Claude, ChatGPT, Google Antigravity, GitHub Copilot, Grok or Kimi, and your agents in AgenticOS run on that plan, with no API key. Your people keep the plan they like; the work moves into an open-source workspace your company runs and governs."

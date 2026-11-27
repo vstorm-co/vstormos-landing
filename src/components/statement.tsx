@@ -12,7 +12,7 @@ export function Statement() {
           <Eyebrow>From shadow AI to company AI</Eyebrow>
           <h2 className="display-tight mx-auto mt-6 max-w-[1080px] text-balance text-[clamp(1.4rem,3.6vw,3rem)] font-medium leading-[1.14]">
             Your people already use AI, each in a personal account.{" "}
-            <span className="text-faint">What they teach it, what it remembers and what it costs stay outside the company.</span>
+            <span className="text-accent">What they teach it, what it remembers and what it costs stay outside the company.</span>
           </h2>
           <p className="mx-auto mt-8 max-w-[64ch] text-balance text-[17px] leading-relaxed text-ink-soft md:text-[19px]">
             AgenticOS gives that work one governed place: AI teammates{" "}

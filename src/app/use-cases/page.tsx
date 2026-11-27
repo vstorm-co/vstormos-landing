@@ -102,7 +102,7 @@ export default function UseCaseIndex() {
                 </p>
                 <h2 className="display-tight mt-3 max-w-[24ch] text-[clamp(1.8rem,3vw,2.5rem)] font-medium leading-tight">
                   {guide.title}{" "}
-                  <span className="text-muted">{guide.emphasis}</span>
+                  <span className="text-accent">{guide.emphasis}</span>
                 </h2>
                 <p className="mt-4 max-w-[58ch] text-[15px] leading-relaxed text-muted">
                   {guide.description}

@@ -119,7 +119,7 @@ function SectionTitle({
         {muted ? (
           <>
             {" "}
-            <span className="text-muted">{muted}</span>
+            <span className="text-accent">{muted}</span>
           </>
         ) : null}
       </h2>

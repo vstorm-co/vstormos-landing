@@ -94,7 +94,7 @@ export default function CompareIndex() {
           title={
             <>
               Which AI platform fits the work?{" "}
-              <span className="text-muted">Start with the job.</span>
+              <span className="text-accent">Start with the job.</span>
             </>
           }
           lead="Compare the job, deployment, licence and operating controls. Some products offer managed assistants, others combine agents and workflows with self-hosting. AgenticOS provides a shared workspace on your infrastructure with configurable model providers. Each guide explains where the alternative may fit better."
