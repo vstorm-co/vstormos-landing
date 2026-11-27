@@ -114,7 +114,7 @@ export const comparisons = [
       {
         area: "Surfaces for an agent",
         them: "ChatGPT, Slack, schedules, an API trigger",
-        us: "Web chat, widget, hosted page, API, WebSocket, Slack, Teams, Telegram, Mattermost and browser voice",
+        us: "Web chat, widget, hosted page, API, WebSocket, Slack, Teams, Telegram, Mattermost, Discord, Matrix, SMS, email, iMessage and telephone calls",
       },
       {
         area: "API",
@@ -216,7 +216,7 @@ export const comparisons = [
       {
         area: "Surfaces",
         them: "Web, desktop, mobile, Chrome, Microsoft 365, Slack through Claude Tag in beta",
-        us: "Web chat, widget, hosted page, API, WebSocket, Slack, Teams, Telegram, Mattermost and browser voice",
+        us: "Web chat, widget, hosted page, API, WebSocket, Slack, Teams, Telegram, Mattermost, Discord, Matrix, SMS, email, iMessage and telephone calls",
       },
       {
         area: "Who uses it",
@@ -284,7 +284,7 @@ export const comparisons = [
       },
       {
         q: "Can people outside the company use an AgenticOS agent?",
-        a: "Yes. An agent answers through a website widget, a hosted page link, the HTTP API, Slack, Telegram or Mattermost, with no seat needed.",
+        a: "Yes. An agent answers through a website widget, a hosted page link, the HTTP API, Slack, Teams, Telegram, Mattermost, email, SMS or a phone call, with no seat needed.",
       },
     ],
     guide: guide("claude-apps"),
@@ -328,7 +328,7 @@ export const comparisons = [
       {
         area: "Surfaces",
         them: "Teams, Microsoft 365, SharePoint, web, WhatsApp, voice",
-        us: "Web chat, widget, hosted page, API, WebSocket, Slack, Teams, Telegram, Mattermost and browser voice",
+        us: "Web chat, widget, hosted page, API, WebSocket, Slack, Teams, Telegram, Mattermost, Discord, Matrix, SMS, email, iMessage and telephone calls",
       },
       {
         area: "Identity",
@@ -361,7 +361,7 @@ export const comparisons = [
     ],
     enough: [
       "You want agents embedded in Microsoft 365 Copilot and the Power Platform ecosystem, and your users already hold the relevant licences.",
-      "You need Power Platform connectors, agent flows, voice or WhatsApp. AgenticOS supports Teams and browser voice calls; telephone and WhatsApp channels are not included.",
+      "You need Power Platform connectors, agent flows or WhatsApp. AgenticOS supports Teams, browser voice and telephone calls through your own Twilio number; a WhatsApp channel is not included.",
       "Purview, Sentinel and Power Platform data policies are how your organization governs everything else.",
     ],
     together:
@@ -468,7 +468,7 @@ export const comparisons = [
     enough: [
       "The job is moving data between many systems, with branches, retries and schedules.",
       "You want its large integration library and visual canvas. AgenticOS also has a visual workflow canvas; node libraries and execution semantics differ.",
-      "You need review channels such as Microsoft Teams, WhatsApp or Gmail, or its evaluation metrics.",
+      "You need human review in WhatsApp or Gmail, or its large library of integration nodes. AgenticOS has Teams, email and eval runs, but no WhatsApp channel.",
     ],
     together:
       "An n8n workflow can call an AgenticOS agent over the HTTP API and get the answer back, with the agent's budget checked and the run recorded. An AgenticOS webhook trigger can start an agent when n8n posts to it.",
@@ -549,7 +549,7 @@ export const comparisons = [
       {
         area: "Kubernetes",
         them: "Community Helm charts; official high availability is Enterprise",
-        us: "Docker Compose on one host, with an external Postgres and more hosts documented; no Kubernetes manifests",
+        us: "A maintained Helm chart for the API, worker and console with external data services; Docker Compose on one host; OpenShift unvalidated",
       },
     ],
     further: [
@@ -631,7 +631,7 @@ export const comparisons = [
       {
         area: "Surfaces",
         them: "Web app, iOS app, iMessage, Slack, Gmail, Superhuman, email",
-        us: "Web chat, widget, hosted page, API, WebSocket, Slack, Teams, Telegram, Mattermost and browser voice",
+        us: "Web chat, widget, hosted page, API, WebSocket, Slack, Teams, Telegram, Mattermost, Discord, Matrix, SMS, email, iMessage and telephone calls",
       },
       {
         area: "Sharing",
@@ -975,6 +975,839 @@ export const comparisons = [
     guide: "https://vstorm-co.github.io/agenticos/about/openai-dots/",
     scene: "meadow",
     screens: [SCREENS.builder, SCREENS.approvals],
+  },
+  {
+    slug: "kortix",
+    name: "Kortix",
+    checkedDate: "26 November 2026",
+    metaTitle: "Kortix CompanyOS alternative under Apache-2.0",
+    description:
+      "Kortix CompanyOS moved to the Elastic License 2.0 and runs agent sessions in its cloud. AgenticOS is Apache-2.0 and runs every part on your servers.",
+    lead: "Kortix CompanyOS describes a company as a git repository of agents, skills and connectors. AgenticOS describes itself in almost the same words, as a layer for a company's agents. The difference is in two places a legal or IT review checks first: the licence, and where agent sessions actually run.",
+    glance: [
+      {
+        area: "Licence",
+        them: "Elastic License 2.0 since 18 February 2026; Apache-2.0 before December 2025",
+        us: "Apache-2.0",
+      },
+      {
+        area: "Where it runs",
+        them: "Kortix cloud, or self-hosted web, API and database with agent sessions in Kortix's cloud sandboxes",
+        us: "Your infrastructure, including the sandbox; air-gapped setups are possible",
+      },
+      {
+        area: "Spend control",
+        them: "A budget per workspace that blocks or warns",
+        us: "A monthly budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Sign-in and roles",
+        them: "SAML, SCIM, groups and custom roles behind an Enterprise licence key",
+        us: "OIDC SSO, LDAP and Kerberos, six roles and per-resource grants in every deployment",
+      },
+      {
+        area: "Audit",
+        them: "Locked archive; reading it needs Enterprise",
+        us: "Tamper-evident audit log with CSV and JSONL export",
+      },
+      {
+        area: "Channels",
+        them: "Slack, Teams, Telegram, Discord, email; voice experimental",
+        us: "Web chat, widget, hosted page, API, Slack, Teams, Telegram, Mattermost, Discord, Matrix, SMS, email, iMessage and telephone calls",
+      },
+    ],
+    further: [
+      {
+        title: "A licence that lets you host it for others",
+        body: "The Elastic License 2.0 forbids providing the software to third parties as a hosted or managed service and circumventing its licence key. The Kortix licence changed three times in under a year. AgenticOS is Apache-2.0: run it for every department, subsidiary or client, under your own brand.",
+      },
+      {
+        title: "Self-hosting that keeps the work on your servers",
+        body: "Kortix documents that a self-hosted install runs the web app, API and database while agent sessions keep running in its cloud sandboxes. In AgenticOS the sandbox is part of your deployment, and a fresh install sends no prompts or documents anywhere.",
+      },
+      {
+        title: "A budget per agent, not per workspace",
+        body: "One runaway agent cannot exhaust everyone's allowance: AgenticOS checks each agent's budget and the organization's cap before each model request, and delegated work spends the parent agent's budget.",
+      },
+    ],
+    enough: [
+      "You want a company described entirely as files in one git repository and edited with a coding agent.",
+      "You need SAML or SCIM today and will buy the Enterprise licence key. AgenticOS has neither yet.",
+    ],
+    together:
+      "Run the same document task in both, then watch outbound connections from the self-hosted server while an agent works, and give an agent a budget of a few cents. The results show where the work runs and what each product stops.",
+    faq: [
+      {
+        q: "Is Kortix CompanyOS open source?",
+        a: "Not under an OSI licence. Its repository moved to the Elastic License 2.0 on 18 February 2026, which forbids offering it as a hosted service and circumventing its licence key. AgenticOS is Apache-2.0.",
+      },
+      {
+        q: "Can Kortix run fully on my own servers?",
+        a: "According to its documentation, self-hosting runs the web app, API and database, while agent sessions still run in Kortix's cloud sandboxes. AgenticOS runs every part, including the sandbox, on your infrastructure.",
+      },
+    ],
+    guide: guide("kortix"),
+    scene: "lake",
+    screens: [SCREENS.spend, SCREENS.approvals],
+  },
+  {
+    slug: "lobehub",
+    name: "LobeHub",
+    checkedDate: "26 November 2026",
+    metaTitle: "LobeHub alternative for governed team agents",
+    description:
+      "LobeHub puts agents in team chats under a licence with commercial conditions. AgenticOS is Apache-2.0, with budgets, approvals and Teams, email and phone.",
+    lead: "LobeHub calls its product super-agents on your team: agents that join the chat tools a team already uses, with 90+ model providers, MCP, memory and a skill market. AgenticOS makes the same promise of agents in the team's channels. The differences are the licence, the governance around each agent and how many organizations one deployment serves.",
+    glance: [
+      {
+        area: "Licence",
+        them: "LobeHub Community License: Apache 2.0 with commercial conditions",
+        us: "Apache-2.0",
+      },
+      {
+        area: "Channels",
+        them: "Discord, Slack, Telegram, LINE, WeChat, Feishu, DingTalk and others; no Microsoft Teams",
+        us: "Web chat, widget, hosted page, API, Slack, Teams, Telegram, Mattermost, Discord, Matrix, SMS, email, iMessage and telephone calls",
+      },
+      {
+        area: "Spend control",
+        them: "A credit pool with usage tracking",
+        us: "A monthly budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Approvals",
+        them: "Confirmed by the person using the agent",
+        us: "Decided by the people you choose, per capability, tool and MCP connection",
+      },
+      {
+        area: "Roles and audit",
+        them: "Business workspace plan; SAML on Enterprise",
+        us: "Six roles, per-resource grants and a tamper-evident audit log in every deployment",
+      },
+      {
+        area: "Pricing",
+        them: "Personal plans $20 to $200 a month; workspace plans from $19.90 a month",
+        us: "No licence or seat fee; model usage at your provider's rates",
+      },
+    ],
+    further: [
+      {
+        title: "A licence without commercial conditions",
+        body: "LobeHub may be used commercially without modifying its source code; developing and distributing a derivative work needs a commercial licence, and business features are not in the open-source build. AgenticOS is Apache-2.0.",
+      },
+      {
+        title: "Governance on every agent",
+        body: "Each AgenticOS agent has an owner, published versions, a budget checked before each model request and approvals routed to someone other than the person chatting, all in one audit log.",
+      },
+      {
+        title: "Many organizations in one deployment",
+        body: "AgenticOS organizations are tenants isolated in the schema, so one deployment serves several companies or departments.",
+      },
+    ],
+    enough: [
+      "You want a polished consumer-grade chat and a large skill market for a small team.",
+      "Your teams work in LINE, WeChat, Feishu or DingTalk, which AgenticOS does not cover.",
+    ],
+    together:
+      "Add one agent to the same Slack channel in both products, ask for a tool that needs approval and decide it as someone else, then cap the agent's budget at a few cents. Compare what each allows, refuses and logs.",
+    faq: [
+      {
+        q: "Is LobeHub open source?",
+        a: "Its code is public under the LobeHub Community License, which adds conditions to Apache 2.0: commercial use without modifying the code, and a commercial licence for distributing derivative works. AgenticOS is plain Apache-2.0.",
+      },
+      {
+        q: "Can AgenticOS agents join team chats like LobeHub agents?",
+        a: "Yes. A published agent answers in Slack, Microsoft Teams, Telegram, Mattermost, Discord and Matrix, and a linked user's requests run as that person.",
+      },
+    ],
+    guide: guide("lobehub"),
+    scene: "meadow",
+    screens: [SCREENS.subagents, SCREENS.approvals],
+  },
+  {
+    slug: "onyx",
+    name: "Onyx",
+    checkedDate: "26 November 2026",
+    metaTitle: "Onyx alternative: governed agents, not only search",
+    description:
+      "Onyx is strong company search with agents; its enterprise controls sit in ee directories. AgenticOS gives every agent a budget, approvals and an audit log.",
+    lead: "Onyx is an open-source AI platform built around company search: chat with any model over 40+ connectors, with agents, MCP and bots in Slack and Discord. AgenticOS starts from the agent, which has an owner, versions, a budget and approvals and answers in many channels.",
+    glance: [
+      {
+        area: "Licence",
+        them: "MIT, with ee directories that need a seat licence in production",
+        us: "Apache-2.0",
+      },
+      {
+        area: "Knowledge",
+        them: "40+ connectors and strong retrieval",
+        us: "Knowledge bases with parser control and syncing connectors; no reranker yet",
+      },
+      {
+        area: "Spend control",
+        them: "Per workspace on Business; per user and group on Enterprise",
+        us: "A monthly budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Approvals",
+        them: "Confirmed by the user in its Craft feature",
+        us: "Decided by the people you choose, per capability, tool and MCP connection",
+      },
+      {
+        area: "Tenancy",
+        them: "One organization per self-hosted install",
+        us: "Many organizations in one deployment",
+      },
+      {
+        area: "Pricing",
+        them: "Community free; Business $20 per user a month; Enterprise custom",
+        us: "No licence or seat fee; model usage at your provider's rates",
+      },
+    ],
+    further: [
+      {
+        title: "An agent is an object with an owner",
+        body: "An AgenticOS agent is a versioned spec: instructions, model, capabilities and budget, promoted through environments and exported as YAML. A business owner changes it and every change stays readable.",
+      },
+      {
+        title: "Governance in the open-source product",
+        body: "Onyx keeps SCIM, custom roles and per-user spending limits in Enterprise. AgenticOS ships budgets, approvals, the tamper-evident audit log and directory sign-in in every deployment.",
+      },
+      {
+        title: "Channels beyond chat",
+        body: "The same published agent answers in Microsoft Teams, email, SMS, telephone calls and a hosted page, and other agents reach it over A2A.",
+      },
+    ],
+    enough: [
+      "Search across many SaaS sources is the main job and its connectors cover your systems.",
+      "One organization per install is enough and per-seat pricing suits you.",
+    ],
+    together:
+      "Connect the same source in both and ask the same questions. Then give an agent a harmless tool, require a second person's approval and cap its budget at a few cents.",
+    faq: [
+      {
+        q: "Is Onyx open source?",
+        a: "Most of it is MIT. Code in its ee directories is under the Onyx Enterprise License, which needs a seat licence for production use. AgenticOS is Apache-2.0 throughout.",
+      },
+      {
+        q: "Does AgenticOS replace enterprise search?",
+        a: "It answers from synced knowledge bases, but its focus is agents that act. If search across dozens of SaaS tools is the main need, compare connector coverage first.",
+      },
+    ],
+    guide: guide("onyx"),
+    scene: "lake",
+    screens: [SCREENS.builder, SCREENS.approvals],
+  },
+  {
+    slug: "open-webui-librechat",
+    name: "Open WebUI and LibreChat",
+    checkedDate: "26 November 2026",
+    metaTitle: "Open WebUI and LibreChat alternative for company agents",
+    description:
+      "Open WebUI and LibreChat give people a self-hosted chat. AgenticOS gives the company agents with owners, budgets, approvals and channels beyond the chat window.",
+    lead: "Open WebUI and LibreChat are the self-hosted chat interfaces IT usually deploys first, so people stop pasting company data into personal AI accounts. AgenticOS answers a different question: which agents does the company own, who is responsible for them and what may they spend.",
+    glance: [
+      {
+        area: "Licence",
+        them: "Open WebUI: BSD-3 with a branding clause above 50 users. LibreChat: MIT, admin panel AGPL-3.0",
+        us: "Apache-2.0",
+      },
+      {
+        area: "Sign-in",
+        them: "Open WebUI: OIDC, LDAP, SCIM. LibreChat: OIDC, SAML, LDAP",
+        us: "OIDC SSO, LDAP and Kerberos; no SAML or SCIM yet",
+      },
+      {
+        area: "Spend control",
+        them: "Open WebUI: not described. LibreChat: token balance per user",
+        us: "A monthly budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Agent lifecycle",
+        them: "Models, presets and agents with access lists",
+        us: "Published versions, environments, eval runs and YAML export",
+      },
+      {
+        area: "Channels",
+        them: "Their own web interface; LibreChat has Slack in beta",
+        us: "Web chat, widget, hosted page, API, Slack, Teams, Telegram, Mattermost, Discord, Matrix, SMS, email, iMessage and telephone calls",
+      },
+    ],
+    further: [
+      {
+        title: "A chat window is not an agent the company owns",
+        body: "In AgenticOS an agent has an owner, a published version, environments, eval runs and a spec that exports as YAML. When it changes, you know who changed it, can test it first and can roll back.",
+      },
+      {
+        title: "Spend and approvals per agent",
+        body: "A budget stops an agent's next model request at its cap, and a tool call can wait for approval by someone other than the person chatting, with every decision in a tamper-evident audit log.",
+      },
+      {
+        title: "The same agent where people already work",
+        body: "A published agent answers in Slack, Teams, email, a website widget and over the API, with desktop and phone apps for quick asks and approvals.",
+      },
+    ],
+    enough: [
+      "You need a company chat with model choice for every employee, and agents with owners and budgets are not the goal yet.",
+      "You need SAML or SCIM today. AgenticOS has neither yet.",
+    ],
+    together:
+      "Many teams keep a chat interface for everyday use and run governed agents in AgenticOS beside it, reachable over the HTTP API and as an MCP server.",
+    faq: [
+      {
+        q: "Is AgenticOS a self-hosted ChatGPT like Open WebUI?",
+        a: "It includes web chat, but it is built around company agents, each with an owner, versions, a budget, approvals and channels. Open WebUI and LibreChat are built around the chat interface itself.",
+      },
+      {
+        q: "Can I keep Open WebUI and add AgenticOS?",
+        a: "Yes. Keep the chat interface and run governed agents in AgenticOS, which answers over the HTTP API, Slack, Teams and the other surfaces.",
+      },
+    ],
+    guide: guide("open-webui-librechat"),
+    scene: "meadow",
+    screens: [SCREENS.builder, SCREENS.spend],
+  },
+  {
+    slug: "agno",
+    name: "Agno AgentOS",
+    checkedDate: "26 November 2026",
+    metaTitle: "AgenticOS vs Agno AgentOS: different products",
+    description:
+      "AgenticOS and Agno AgentOS share a similar name, not code. Compare a Python framework with a hosted control plane with an Apache-2.0 platform for companies.",
+    lead: "Agno is a Python agent framework with a runtime called AgentOS and a control plane sold as a service. AgenticOS, by Vstorm, is a complete application for a company's agents: a browser console for business teams, governance and channels, all under Apache-2.0 on your servers.",
+    glance: [
+      {
+        area: "Who builds agents",
+        them: "Developers, in Python",
+        us: "Business teams in a browser; engineers extend it with capabilities in code",
+      },
+      {
+        area: "Licence",
+        them: "Apache-2.0 framework and runtime; closed control plane",
+        us: "Apache-2.0 for the whole application",
+      },
+      {
+        area: "Where it runs",
+        them: "Runtime on your servers; control plane as SaaS, self-hosted as an Enterprise add-on",
+        us: "Your infrastructure, every part",
+      },
+      {
+        area: "Spend control and tenancy",
+        them: "Not described",
+        us: "Budgets per agent and per organization; many organizations in one deployment",
+      },
+      {
+        area: "Pricing",
+        them: "Pro $150 a month for one connection and three seats; SAML +$300 a month",
+        us: "No licence or seat fee; model usage at your provider's rates",
+      },
+    ],
+    further: [
+      {
+        title: "A product for the business, not only for developers",
+        body: "With Agno an agent is Python code. In AgenticOS a business owner writes instructions, switches on capabilities, binds knowledge and publishes a version; configuration can only reach what engineers registered.",
+      },
+      {
+        title: "The whole application is open source",
+        body: "Agno's control plane is a hosted product, and running it yourself is an Enterprise add-on. Every part of AgenticOS, including the console, governance and channels, is Apache-2.0.",
+      },
+    ],
+    enough: [
+      "Your team writes agents in Python and wants a framework with a runtime, not a console for business users.",
+      "You need WhatsApp today; AgenticOS has no WhatsApp channel.",
+    ],
+    together:
+      "AgenticOS runs on Pydantic AI and connects to outside agents over A2A and to tools over MCP, so agents built elsewhere can sit beside governed AgenticOS agents.",
+    faq: [
+      {
+        q: "Is AgenticOS the same as Agno AgentOS?",
+        a: "No. AgenticOS is an Apache-2.0 application for company agents maintained by Vstorm at github.com/vstorm-co/agenticos. Agno AgentOS is the runtime of the Agno Python framework. They share no code.",
+      },
+    ],
+    guide: guide("agno"),
+    scene: "lake",
+    screens: [SCREENS.builder, SCREENS.subagents],
+  },
+  {
+    slug: "openagents",
+    name: "OpenAgents",
+    checkedDate: "26 November 2026",
+    metaTitle: "OpenAgents alternative: build and govern your agents",
+    description:
+      "OpenAgents coordinates agents built elsewhere in a shared workspace. AgenticOS builds and governs the company's own agents, with budgets, audit and sign-in.",
+    lead: "OpenAgents calls itself a collaboration OS for people and AI agents: shared threads, a browser, issues and routines, with around 27 agent runtimes such as Claude Code, Codex and Cursor plugged in. Both products are Apache-2.0, self-hosted and have desktop and phone apps. OpenAgents coordinates agents built elsewhere; AgenticOS builds, runs and governs the company's own.",
+    glance: [
+      {
+        area: "What it is",
+        them: "A shared workspace for people and agents from many runtimes",
+        us: "A platform where a business team builds, publishes and governs company agents",
+      },
+      {
+        area: "Licence",
+        them: "Apache-2.0",
+        us: "Apache-2.0",
+      },
+      {
+        area: "Spend control",
+        them: "Not described",
+        us: "A monthly budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Sign-in and audit",
+        them: "Roles on self-hosted; SSO and audit not described",
+        us: "OIDC SSO, LDAP, Kerberos, six roles and a tamper-evident audit log",
+      },
+      {
+        area: "Coding agents",
+        them: "About 27 CLIs with their own keys",
+        us: "Claude Code, Codex and other runtimes in the desktop app; the coding agent in a sandbox",
+      },
+    ],
+    further: [
+      {
+        title: "Separate agents, each with an owner",
+        body: "Instead of one assistant expected to do everything, a company builds several narrow agents, each with instructions, a model profile, capabilities, a budget and an owner, and sees which one did what.",
+      },
+      {
+        title: "Governance a company review asks for",
+        body: "AgenticOS checks spend before each model request, writes every action to a tamper-evident audit log, signs people in through the company directory and serves many organizations from one deployment.",
+      },
+    ],
+    enough: [
+      "Your people already use many coding agents and want one shared room for them.",
+      "You want to coordinate agents rather than build and govern them.",
+    ],
+    together:
+      "AgenticOS is an MCP server and speaks A2A, so a governed AgenticOS agent can be reached from another workspace while its budget, approvals and audit stay in AgenticOS.",
+    faq: [
+      {
+        q: "Is OpenAgents an alternative to AgenticOS?",
+        a: "Partly. Both are Apache-2.0 and self-hosted. OpenAgents is a collaboration layer for agents built elsewhere; AgenticOS builds and governs the agents, with budgets, approvals, audit and directory sign-in.",
+      },
+    ],
+    guide: guide("openagents"),
+    scene: "meadow",
+    screens: [SCREENS.subagents, SCREENS.approvals],
+  },
+  {
+    slug: "openhuman",
+    name: "OpenHuman",
+    checkedDate: "26 November 2026",
+    metaTitle: "OpenHuman alternative for a whole organization",
+    description:
+      "OpenHuman is a fast GPL-3.0 agent harness for one person. AgenticOS is an Apache-2.0 platform for many agents with owners, roles, budgets and an audit log.",
+    lead: "OpenHuman presents itself as the fastest and cheapest open-source agent harness, a Rust desktop app with memory, voice, desktop control, workflow graphs, 14 channels and 26 providers plus local models. AgenticOS is built for an organization rather than one person.",
+    glance: [
+      {
+        area: "What it is",
+        them: "A personal and developer agent harness, early beta",
+        us: "A platform for company agents with a browser Builder",
+      },
+      {
+        area: "Licence",
+        them: "GPL-3.0",
+        us: "Apache-2.0",
+      },
+      {
+        area: "Spend control",
+        them: "Cost of each call tracked",
+        us: "A budget per agent and per organization, enforced before each model request",
+      },
+      {
+        area: "Organization",
+        them: "One person; no tenants, roles or SSO described",
+        us: "Many organizations, six roles, per-resource grants, OIDC SSO, LDAP and Kerberos",
+      },
+      {
+        area: "Audit",
+        them: "Replayable run logs",
+        us: "Tamper-evident audit log with CSV and JSONL export",
+      },
+    ],
+    further: [
+      {
+        title: "Many narrow agents instead of one that does everything",
+        body: "Each AgenticOS agent has a purpose, its own instructions, capabilities and budget, and a published version. You see which agent ran, what it cost and what it changed.",
+      },
+      {
+        title: "A budget that stops, not only a counter",
+        body: "AgenticOS refuses the next model request when an agent's budget or the organization's cap is reached, and delegated work spends the parent agent's budget.",
+      },
+    ],
+    enough: [
+      "One person or a developer wants the fastest local harness with desktop control.",
+      "Raw efficiency on a small server matters more than roles, budgets and audit.",
+    ],
+    together:
+      "Benchmarks measure a harness on coding tasks. For company use, add a second person with another role, run an agent past a budget of a few cents and require someone else's approval for a tool call.",
+    faq: [
+      {
+        q: "Is OpenHuman an alternative to AgenticOS?",
+        a: "For one person's agents, it can be. For a company, AgenticOS adds tenants, roles, directory sign-in, a budget enforced before each model request, approvals by someone else and an organization-wide audit log.",
+      },
+    ],
+    guide: guide("openhuman"),
+    scene: "lake",
+    screens: [SCREENS.spend, SCREENS.subagents],
+  },
+  {
+    slug: "diy-stack",
+    name: "DIY stack",
+    checkedDate: "26 November 2026",
+    metaTitle: "AgenticOS vs a DIY stack of Open WebUI, LiteLLM and n8n",
+    description:
+      "Open WebUI, LiteLLM, Langfuse, n8n and Keycloak assembled by IT, or one Apache-2.0 application with budgets per agent, approvals and one audit log.",
+    lead: "Many IT teams build company AI from well-known open-source parts: a chat interface, LiteLLM as a gateway with key budgets, Langfuse for traces, n8n for workflows and Keycloak for single sign-on. Every part is mature. AgenticOS integrates the same jobs in one application.",
+    glance: [
+      {
+        area: "Spend limits",
+        them: "LiteLLM budgets per key, team or tag",
+        us: "A budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Permissions",
+        them: "Separate users and roles in each part",
+        us: "One permission model with six roles and per-resource grants",
+      },
+      {
+        area: "Audit",
+        them: "Separate logs per part",
+        us: "One tamper-evident audit log",
+      },
+      {
+        area: "Traces",
+        them: "Langfuse",
+        us: "Run history and cost, eval runs and Logfire export; no trace dashboard of its own",
+      },
+      {
+        area: "Licences",
+        them: "Sustainable Use (n8n), a branding clause (Open WebUI), enterprise directories (LiteLLM, Langfuse)",
+        us: "Apache-2.0",
+      },
+      {
+        area: "Upgrades",
+        them: "Five or six release cycles",
+        us: "One release and one changelog",
+      },
+    ],
+    further: [
+      {
+        title: "An agent the whole stack knows about",
+        body: "In a DIY stack the invoice agent's prompt sits in the chat interface, its key in LiteLLM, its traces in Langfuse and its workflow in n8n. In AgenticOS it is one versioned spec with an owner, a budget and approvals.",
+      },
+      {
+        title: "A budget that knows which agent spent it",
+        body: "LiteLLM refuses requests past a key's budget but does not know which agent, conversation or tool caused the cost. AgenticOS checks each agent's budget and charges delegated work to the delegating agent.",
+      },
+    ],
+    enough: [
+      "You already run most of the parts and need only a chat interface on top.",
+      "You want Langfuse tracing and n8n's node library, and have the people to integrate them.",
+    ],
+    together:
+      "Keep the parts you run: a LiteLLM proxy works as an AgenticOS model provider, and n8n can call AgenticOS agents over the HTTP API.",
+    faq: [
+      {
+        q: "Can AgenticOS use our LiteLLM gateway?",
+        a: "Yes. A model profile can point at a LiteLLM proxy, so your gateway's keys and routing stay in place while AgenticOS adds budgets per agent, approvals and audit.",
+      },
+      {
+        q: "Does AgenticOS replace Langfuse?",
+        a: "Not fully. AgenticOS records run history and cost, runs evaluations and exports traces to Logfire, but has no trace dashboard of its own.",
+      },
+    ],
+    guide: guide("diy-stack"),
+    scene: "meadow",
+    screens: [SCREENS.spend, SCREENS.builder],
+  },
+  {
+    slug: "langdock",
+    name: "Langdock",
+    checkedDate: "26 November 2026",
+    metaTitle: "Langdock alternative without a seat fee",
+    description:
+      "Langdock is a German per-seat AI platform with strong governance. AgenticOS runs agents on your servers under Apache-2.0, with no seat fee.",
+    lead: "Langdock is the most complete governance offering among European SaaS products: SAML and SCIM on every plan, custom roles, monthly limits per agent, approvals in workflows and agent evaluations, hosted on Azure in the EU. AgenticOS covers much of the same governance as open source on your own servers, and still lacks SAML, SCIM and custom roles.",
+    glance: [
+      {
+        area: "Where it runs",
+        them: "SaaS on Azure in the EU; single-tenant and on-premises for large contracts",
+        us: "Your infrastructure, any cloud or on-premises",
+      },
+      {
+        area: "Spend control",
+        them: "Limits per workspace, person, group, agent and workflow",
+        us: "A budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Sign-in and roles",
+        them: "SAML and SCIM on every plan; up to five custom roles",
+        us: "OIDC SSO, LDAP and Kerberos; six built-in roles; no SAML, SCIM or custom roles yet",
+      },
+      {
+        area: "Licence",
+        them: "Proprietary",
+        us: "Apache-2.0",
+      },
+      {
+        area: "Pricing",
+        them: "€23.20 to €99 per user a month billed annually; workflows €449 per workspace a month",
+        us: "No licence or seat fee; model usage at your provider's rates",
+      },
+    ],
+    further: [
+      {
+        title: "No seat fee",
+        body: "For 200 people, Langdock's published plans come to roughly €56,000 to €238,000 a year before workflow add-ons. AgenticOS has no seat fee; compare on your own usage, since seat plans include model usage within limits.",
+      },
+      {
+        title: "Your servers, from the first user",
+        body: "Langdock's dedicated and on-premises options are for large contracts. AgenticOS runs on your infrastructure from the start, with local models if you need them.",
+      },
+    ],
+    enough: [
+      "You need SAML, SCIM or custom roles today.",
+      "You want a managed EU service with ISO 27001 and SOC 2 Type II reports and no servers to run.",
+    ],
+    together:
+      "Run the same agent in both with a monthly limit of a few cents, route a tool call to a second person, then price a year for your headcount: seats against infrastructure and model usage.",
+    faq: [
+      {
+        q: "Is AgenticOS a European alternative to Langdock?",
+        a: "It is an open-source alternative you host wherever you choose, including in the EU or on-premises. Vstorm, which maintains it, is a Polish company.",
+      },
+      {
+        q: "What does AgenticOS lack compared with Langdock?",
+        a: "SAML and SCIM, custom roles and certifications for a managed service. You certify your own AgenticOS deployment; its security page maps the controls for a review.",
+      },
+    ],
+    guide: guide("langdock"),
+    scene: "lake",
+    screens: [SCREENS.spend, SCREENS.approvals],
+  },
+  {
+    slug: "dust",
+    name: "Dust",
+    checkedDate: "26 November 2026",
+    metaTitle: "Dust alternative you host yourself",
+    description:
+      "Dust runs company agents in its own cloud, priced per seat. AgenticOS runs them on your servers under Apache-2.0, with a budget on every agent.",
+    lead: "Dust calls itself a multiplayer operating system for enterprise AI: agents on company data, MCP as client and server, and agents in Slack, Teams, email and Zendesk. It is a hosted service in a US or EU region. AgenticOS offers agents for the same buyer on infrastructure you run.",
+    glance: [
+      {
+        area: "Where it runs",
+        them: "Dust's cloud, US or EU region; no self-hosting",
+        us: "Your infrastructure, any cloud or on-premises",
+      },
+      {
+        area: "Spend control",
+        them: "Credit limits per person, group and API key",
+        us: "A budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Audit",
+        them: "Tamper-evident on Enterprise",
+        us: "Tamper-evident in every deployment",
+      },
+      {
+        area: "Pricing",
+        them: "Pro €24, Max €120 per user a month billed annually",
+        us: "No licence or seat fee; model usage at your provider's rates",
+      },
+    ],
+    further: [
+      {
+        title: "Hosting you choose",
+        body: "Dust runs only in its own cloud. AgenticOS runs where you deploy it, including on-premises and air-gapped, with local models if your data may not leave.",
+      },
+      {
+        title: "Limits on the agent, not only on the person",
+        body: "An AgenticOS agent that loops or is used heavily stops at its own budget without blocking anyone else.",
+      },
+    ],
+    enough: [
+      "You want a managed service that starts in minutes and have no team to run servers.",
+      "SAML and SCIM are a requirement; AgenticOS has neither yet.",
+    ],
+    together:
+      "Build the same agent on the same documents in both, cap its spend at a few cents, then ask your security team which of the two keeps every prompt and document inside your network.",
+    faq: [
+      {
+        q: "Can Dust be self-hosted?",
+        a: "Not according to its public pages: it runs in Dust's cloud, in a US or EU region, with single-tenant hosting on Enterprise. AgenticOS is self-hosted by design.",
+      },
+    ],
+    guide: guide("dust"),
+    scene: "meadow",
+    screens: [SCREENS.builder, SCREENS.spend],
+  },
+  {
+    slug: "mistral",
+    name: "Mistral AI Studio",
+    checkedDate: "26 November 2026",
+    metaTitle: "Mistral AI Studio alternative with any model",
+    description:
+      "Mistral pairs its models with its platform. AgenticOS is an Apache-2.0 platform that runs Mistral and 27 other providers, on your own servers.",
+    lead: "Mistral sells models and platform together: Le Chat Enterprise, no-code agents and AI Studio, in the cloud, serverless or self-hosted, under a strong European brand. AgenticOS adds another kind of sovereignty: the platform is open source and the choice of model stays yours, Mistral's included.",
+    glance: [
+      {
+        area: "Models",
+        them: "Mainly Mistral's",
+        us: "28 providers, Mistral included, and local models",
+      },
+      {
+        area: "Licence",
+        them: "Proprietary platform; open-weight models",
+        us: "Apache-2.0",
+      },
+      {
+        area: "Governance",
+        them: "Not described publicly",
+        us: "Budgets per agent, approvals and a tamper-evident audit log, documented in full",
+      },
+      {
+        area: "Pricing",
+        them: "Through sales",
+        us: "No licence fee; model usage at your provider's rates",
+      },
+    ],
+    further: [
+      {
+        title: "Sovereignty includes the choice of model",
+        body: "AgenticOS runs agents behind a model profile with fallbacks. Switching a model changes one profile, not every agent.",
+      },
+      {
+        title: "The platform itself is open",
+        body: "Open weights do not make a platform open. Every part of AgenticOS is Apache-2.0.",
+      },
+    ],
+    enough: [
+      "You want one European vendor for both models and platform, under one contract.",
+      "Mistral's models are your standard and its assistant covers what employees need.",
+    ],
+    together:
+      "Mistral models work in AgenticOS like any other provider: keep them for most agents and route a few to another provider where it performs better.",
+    faq: [
+      {
+        q: "Can AgenticOS use Mistral models?",
+        a: "Yes. Mistral is a supported provider, and self-hosted open-weight models work through a custom endpoint on the model profile.",
+      },
+    ],
+    guide: guide("mistral"),
+    scene: "lake",
+    screens: [SCREENS.builder, SCREENS.subagents],
+  },
+  {
+    slug: "deepset",
+    name: "deepset",
+    checkedDate: "26 November 2026",
+    metaTitle: "deepset alternative: open source all the way up",
+    description:
+      "deepset's Haystack Enterprise Platform is sovereign AI with EU public-sector references. AgenticOS is an open platform whose whole application is Apache-2.0.",
+    lead: "deepset's Haystack Enterprise Platform calls itself the platform for sovereign AI. It runs in the cloud, self-hosted, air-gapped and on STACKIT, and powers AI@EC, the European Commission's AI platform. In AgenticOS the whole application, not only the framework, is Apache-2.0, and agents reach employees in their own channels.",
+    glance: [
+      {
+        area: "Licence",
+        them: "Proprietary platform; Haystack framework Apache-2.0",
+        us: "Apache-2.0 for the whole application",
+      },
+      {
+        area: "Where it runs",
+        them: "Cloud, self-hosted, air-gapped; STACKIT since 15 October 2026",
+        us: "Your infrastructure, including air-gapped",
+      },
+      {
+        area: "Channels",
+        them: "Applications and APIs built on the platform",
+        us: "Slack, Teams, email, SMS, telephone calls, widget and API; desktop and phone apps",
+      },
+      {
+        area: "References",
+        them: "European Commission (AI@EC); partners Celonis, HPE, NTT DATA, Materna",
+        us: "Earlier stage: no comparable public-sector reference yet",
+      },
+    ],
+    further: [
+      {
+        title: "Open source all the way up",
+        body: "A public body or integrator can audit every control in AgenticOS and keep running the code if the vendor relationship ends.",
+      },
+      {
+        title: "No sales process to start",
+        body: "Install AgenticOS from its repository and run a pilot on your own hardware today.",
+      },
+    ],
+    enough: [
+      "You need a vendor with public-sector references or a ready presence on STACKIT.",
+      "Your team builds retrieval pipelines in Haystack and wants a managed platform around them.",
+    ],
+    together:
+      "AgenticOS runs with Docker Compose or its Helm chart on any infrastructure that provides the resources it needs. Validate a specific European cloud before relying on it; no STACKIT deployment is documented yet.",
+    faq: [
+      {
+        q: "Is AgenticOS a sovereign AI platform like deepset?",
+        a: "Both run on your infrastructure, including air-gapped, with any model. In AgenticOS the whole application is Apache-2.0; at deepset the framework is open and the platform proprietary.",
+      },
+    ],
+    guide: guide("deepset"),
+    scene: "meadow",
+    screens: [SCREENS.approvals, SCREENS.builder],
+  },
+  {
+    slug: "slack-agents",
+    name: "Claude Tag / Slackbot",
+    checkedDate: "26 November 2026",
+    metaTitle: "AgenticOS vs Claude Tag and Slackbot",
+    description:
+      "Claude Tag and Slackbot put one vendor's agent in Slack. AgenticOS puts company agents in Slack, Teams, email and the phone, with any model, on your servers.",
+    lead: "Claude Tag puts Anthropic's Claude in Slack channels as a shared team member, with spend limits per organization and channel. Slackbot became a personal agent that routes work to Agentforce and other agents. Both install in a click. AgenticOS puts the company's own agents in Slack too, and in Teams, email, SMS and the phone at the same time.",
+    glance: [
+      {
+        area: "Where it works",
+        them: "Slack",
+        us: "Slack, Teams, Telegram, Mattermost, Discord, Matrix, SMS, email, iMessage, telephone calls, web chat and API",
+      },
+      {
+        area: "Models",
+        them: "Claude only, or Salesforce's choice",
+        us: "28 providers; a different model per agent",
+      },
+      {
+        area: "Spend control",
+        them: "Claude Tag: per organization and per channel",
+        us: "A budget per agent and per organization, checked before each model request",
+      },
+      {
+        area: "Where it runs",
+        them: "Anthropic's or Salesforce's cloud",
+        us: "Your infrastructure",
+      },
+    ],
+    further: [
+      {
+        title: "One agent in every tool",
+        body: "Each vendor's agent lives in one product. A published AgenticOS agent answers in Slack, Teams, email, SMS and the phone with one set of instructions, one knowledge base, one budget and one audit log.",
+      },
+      {
+        title: "Approvals where the request happens",
+        body: "A tool call that needs a decision appears as buttons in the same chat, or in the console and the phone app, for the people you choose.",
+      },
+    ],
+    enough: [
+      "The whole company is on Slack and one model vendor, and a one-click install matters more than control.",
+      "Nobody is available to deploy and operate a platform.",
+    ],
+    together:
+      "An AgenticOS agent can run on Claude in Slack while another agent in Teams uses a different model, both writing to the same audit log.",
+    faq: [
+      {
+        q: "Can AgenticOS use Claude in Slack like Claude Tag?",
+        a: "Yes. An AgenticOS agent can run on Claude and answer in Slack, while another agent in Microsoft Teams runs on a different model, each with its own budget.",
+      },
+    ],
+    guide: guide("slack-agents"),
+    scene: "lake",
+    screens: [SCREENS.approvals, SCREENS.spend],
   },
 ] as const satisfies readonly Comparison[];
 

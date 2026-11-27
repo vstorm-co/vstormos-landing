@@ -68,6 +68,84 @@ export const comparisonStories = {
     intro:
       "Bring company knowledge, specialist agents and the people doing the work together on a platform you operate.",
   },
+  kortix: {
+    headline: "Same idea.",
+    emphasis: "A different licence.",
+    intro:
+      "Agents for the whole company, with every part on your servers and a licence that lets you host it for others.",
+  },
+  lobehub: {
+    headline: "Agents on the team.",
+    emphasis: "Governed by the company.",
+    intro:
+      "Put agents in the team’s chats, with an owner, a budget and approvals behind each one.",
+  },
+  onyx: {
+    headline: "Beyond search.",
+    emphasis: "Agents that act.",
+    intro:
+      "Give each agent an owner, versions, a budget and approvals, and let it answer wherever people work.",
+  },
+  "open-webui-librechat": {
+    headline: "A chat for everyone.",
+    emphasis: "Agents the company owns.",
+    intro:
+      "Keep a chat for everyday questions and run the company’s agents with owners, budgets and approvals.",
+  },
+  agno: {
+    headline: "Similar names.",
+    emphasis: "Different products.",
+    intro:
+      "A complete application for business teams, with governance and channels, all under Apache-2.0.",
+  },
+  openagents: {
+    headline: "Coordinate agents?",
+    emphasis: "Build and govern them.",
+    intro:
+      "Create the company’s own agents, each with an owner and a budget, and see which one did what.",
+  },
+  openhuman: {
+    headline: "One person’s harness.",
+    emphasis: "A whole company’s agents.",
+    intro:
+      "Roles, directory sign-in, budgets and an audit log for many agents and many people.",
+  },
+  "diy-stack": {
+    headline: "Six tools.",
+    emphasis: "One application.",
+    intro:
+      "One permission model, one audit log and a budget that knows which agent spent it.",
+  },
+  langdock: {
+    headline: "Strong governance.",
+    emphasis: "No seat fee.",
+    intro:
+      "Run the company’s agents on your own servers and pay model providers directly.",
+  },
+  dust: {
+    headline: "Company agents.",
+    emphasis: "On your servers.",
+    intro:
+      "Choose where the agents run and give each one its own budget.",
+  },
+  mistral: {
+    headline: "Sovereign AI.",
+    emphasis: "Any model.",
+    intro:
+      "An open platform that runs Mistral and every other provider behind one model profile.",
+  },
+  deepset: {
+    headline: "Sovereign AI.",
+    emphasis: "Open all the way up.",
+    intro:
+      "The whole application under Apache-2.0, with agents in the channels employees already use.",
+  },
+  "slack-agents": {
+    headline: "One agent.",
+    emphasis: "Every channel.",
+    intro:
+      "The same company agent in Slack, Teams, email and the phone, with any model and one audit log.",
+  },
 } as const;
 
 export const comparisonExamples = [

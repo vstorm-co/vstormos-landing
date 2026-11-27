@@ -5,11 +5,11 @@ import { comparisons } from "@/compare";
 import { CompareHero, Crumb, TryActions } from "@/components/compare";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
-import { links } from "@/content";
+import { DOCS, links } from "@/content";
 import { asset } from "@/lib/site";
 
 const description =
-  "Compare AI agent platforms for team workspaces, workflow automation and personal assistants. Review deployment, licensing, controls and fit with AgenticOS.";
+  "Compare AI agent platforms: team workspaces, open-source platforms, self-hosted chat, European vendors and automation. Review deployment, licences and controls.";
 
 export const metadata: Metadata = {
   title: "Compare AgenticOS with ChatGPT, Claude, Copilot Studio and more",
@@ -38,7 +38,34 @@ const groups = [
     title: "A workspace for the team",
     description:
       "Compare shared work, company knowledge, deployment and the people who will operate it.",
-    slugs: ["chatgpt-enterprise", "claude-enterprise", "sauna", "grok-bot"],
+    slugs: [
+      "chatgpt-enterprise",
+      "claude-enterprise",
+      "slack-agents",
+      "sauna",
+      "grok-bot",
+    ],
+  },
+  {
+    id: "open-source-platforms",
+    title: "Open-source agent platforms",
+    description:
+      "Compare licences, where agent sessions run, budgets per agent and who can approve a tool call.",
+    slugs: ["kortix", "lobehub", "agno", "openagents", "openhuman"],
+  },
+  {
+    id: "self-hosted-chat",
+    title: "Self-hosted chat, search or a DIY stack",
+    description:
+      "Compare a company chat or search tool, or a stack of open-source parts, with agents the company owns.",
+    slugs: ["open-webui-librechat", "onyx", "diy-stack"],
+  },
+  {
+    id: "european-platforms",
+    title: "European AI platforms",
+    description:
+      "Compare hosting, seat fees, model choice and sign-in with European SaaS and sovereign platforms.",
+    slugs: ["langdock", "dust", "mistral", "deepset"],
   },
   {
     id: "agent-builders",
@@ -143,7 +170,16 @@ export default function CompareIndex() {
             >
               the docs
             </a>
-            , with every source linked.
+            , with every source linked.{" "}
+            <a
+              href={`${DOCS}/about/licence-terms/`}
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-ink-soft underline decoration-line-strong underline-offset-4 hover:text-ink"
+            >
+              Licence terms compared
+            </a>{" "}
+            quotes the clauses behind each open-source licence.
           </p>
         </section>
       </main>
