@@ -51,7 +51,7 @@ export function PlatformChoice() {
           >
             Which AI setup
             <br />
-            <span className="text-muted">fits your team?</span>
+            <span className="text-accent">fits your team?</span>
           </h2>
         </Reveal>
         <div className="mt-12 grid gap-10 lg:grid-cols-3 lg:gap-12">

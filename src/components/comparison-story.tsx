@@ -200,7 +200,7 @@ export function ComparisonDetails({ item }: { item: Comparison }) {
           >
             Build for your team.
             <br />
-            <span className="text-white/70">Run it your way.</span>
+            <span className="text-blob">Run it your way.</span>
           </h2>
         </Reveal>
         <div className="mt-12 grid items-start gap-12 lg:grid-cols-2 lg:gap-16">

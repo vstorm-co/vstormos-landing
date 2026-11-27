@@ -12,30 +12,51 @@ export const CONTRIBUTORS: readonly Contributor[] = [
   {
     "login": "DEENUU1",
     "name": "Kacper Włodarczyk",
-    "contributions": 1068,
+    "contributions": 1281,
     "url": "https://github.com/DEENUU1",
     "avatar": "/contributors/DEENUU1.png"
   },
   {
     "login": "OchnikBartek",
     "name": "OchnikBartek",
-    "contributions": 177,
+    "contributions": 186,
     "url": "https://github.com/OchnikBartek",
     "avatar": "/contributors/OchnikBartek.png"
   },
   {
     "login": "MichalZelasko",
     "name": "Michał Żelasko",
-    "contributions": 26,
+    "contributions": 39,
     "url": "https://github.com/MichalZelasko",
     "avatar": "/contributors/MichalZelasko.png"
   },
   {
     "login": "galaxai",
     "name": "Szymon Hawryluk",
-    "contributions": 10,
+    "contributions": 17,
     "url": "https://github.com/galaxai",
     "avatar": "/contributors/galaxai.png"
+  },
+  {
+    "login": "rrajpuro",
+    "name": "Rahul Raj Purohit",
+    "contributions": 15,
+    "url": "https://github.com/rrajpuro",
+    "avatar": "/contributors/rrajpuro.png"
+  },
+  {
+    "login": "Woleek",
+    "name": "Dawid Wolkiewicz",
+    "contributions": 4,
+    "url": "https://github.com/Woleek",
+    "avatar": "/contributors/Woleek.png"
+  },
+  {
+    "login": "Kali-G",
+    "name": "Julius Doe",
+    "contributions": 4,
+    "url": "https://github.com/Kali-G",
+    "avatar": "/contributors/Kali-G.png"
   },
   {
     "login": "henfircreo",
@@ -52,6 +73,13 @@ export const CONTRIBUTORS: readonly Contributor[] = [
     "avatar": "/contributors/michalsikorski-zen.png"
   },
   {
+    "login": "lxcxjxhx",
+    "name": "Hyacinth-of-Security",
+    "contributions": 2,
+    "url": "https://github.com/lxcxjxhx",
+    "avatar": "/contributors/lxcxjxhx.png"
+  },
+  {
     "login": "rahul05ranjan",
     "name": "Rahul",
     "contributions": 2,
@@ -59,11 +87,32 @@ export const CONTRIBUTORS: readonly Contributor[] = [
     "avatar": "/contributors/rahul05ranjan.png"
   },
   {
-    "login": "Woleek",
-    "name": "Dawid Wolkiewicz",
+    "login": "jihtsan",
+    "name": "joo00der",
+    "contributions": 2,
+    "url": "https://github.com/jihtsan",
+    "avatar": "/contributors/jihtsan.png"
+  },
+  {
+    "login": "arnavsharma2077-a11y",
+    "name": "Arnav Sharma",
     "contributions": 1,
-    "url": "https://github.com/Woleek",
-    "avatar": "/contributors/Woleek.png"
+    "url": "https://github.com/arnavsharma2077-a11y",
+    "avatar": "/contributors/arnavsharma2077-a11y.png"
+  },
+  {
+    "login": "tistaharahap",
+    "name": "Batista Harahap",
+    "contributions": 1,
+    "url": "https://github.com/tistaharahap",
+    "avatar": "/contributors/tistaharahap.png"
+  },
+  {
+    "login": "BruceLIOU",
+    "name": "Bruce LIOU",
+    "contributions": 1,
+    "url": "https://github.com/BruceLIOU",
+    "avatar": "/contributors/BruceLIOU.png"
   },
   {
     "login": "LovingCivilian",
@@ -78,6 +127,13 @@ export const CONTRIBUTORS: readonly Contributor[] = [
     "contributions": 1,
     "url": "https://github.com/breezeFur",
     "avatar": "/contributors/breezeFur.png"
+  },
+  {
+    "login": "knowhycodata",
+    "name": "knowhy",
+    "contributions": 1,
+    "url": "https://github.com/knowhycodata",
+    "avatar": "/contributors/knowhycodata.png"
   },
   {
     "login": "labmimors",
@@ -96,4 +152,4 @@ export const CONTRIBUTORS: readonly Contributor[] = [
 ];
 
 /** The star count when this file was generated; the page refreshes it in the browser. */
-export const STARS_AT_BUILD = 161;
+export const STARS_AT_BUILD = 903;

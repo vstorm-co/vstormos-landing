@@ -35,7 +35,7 @@ const geistMono = localFont({
 
 const title = "AgenticOS: open-source, self-hosted AI agent platform";
 const description =
-  "Open-source, self-hosted AI agent platform for your company’s AI teammates. Build, run and govern agents on your own servers and models. Apache-2.0.";
+  "Open-source, self-hosted AI agent platform. Run governed AI agents on your servers, on 40+ model providers or the Claude and ChatGPT plans your team has.";
 const ogImage = {
   url: "/images/og.jpg",
   width: 1200,
@@ -53,7 +53,14 @@ export const metadata: Metadata = {
     "AgenticOS",
     "AI agents",
     "AI teammates",
+    "AI agent platform for business",
     "self-hosted AI agents",
+    "shadow AI",
+    "use Claude subscription for agents",
+    "ChatGPT subscription without API key",
+    "Claude Code for teams",
+    "ChatGPT Enterprise alternative",
+    "Copilot Studio alternative",
     "open-source agent platform",
     "agent layer",
     "on-premise AI",
@@ -148,12 +155,12 @@ const structuredData = {
       installUrl: links.install,
       softwareHelp: { "@type": "CreativeWork", url: links.docs },
       featureList: [
-        "36 built-in capabilities: knowledge search with citations, a real web browser, a code sandbox, a coding agent (Claude Code or Codex), drawings, charts, apps, subagents, guardrails",
+        "39 built-in capabilities: knowledge search with citations, a real web browser, a code sandbox, a coding agent (Claude Code or Codex), telephone calls, drawings, charts, apps, subagents, guardrails",
         "4,700+ MCP servers in the gallery",
         "Visual workflows, virtual tables, routines and voice calls",
-        "28 model providers, including a ChatGPT subscription and local models through Ollama and vLLM",
+        "40+ model providers, local models through Ollama and vLLM, and each person's own subscriptions: Claude (Pro, Max), ChatGPT (Codex), Google Antigravity, GitHub Copilot, Grok, Kimi Code and coding plan keys",
         "Projects: shared files, instructions and a sandbox, with several people and agents in one live chat",
-        "Web chat, website widget, hosted page, HTTP API, WebSocket, Slack, Mattermost, Telegram, Teams, Discord, desktop and browser voice",
+        "Web chat, website widget, hosted page, HTTP API, WebSocket, Slack, Microsoft Teams, Mattermost, Telegram, Discord, Matrix, SMS, email, iMessage, telephone calls, desktop and phone apps",
         "Budgets checked before each model call, approvals, roles and groups, a hash-chained audit log",
         "Company sign-in through OIDC, LDAP and Kerberos",
       ],

@@ -197,7 +197,7 @@ export default async function UseCasePage({ params }: Props) {
               <h2 className="display-tight mt-5 max-w-[18ch] text-[clamp(2rem,4vw,3.2rem)] font-medium leading-tight">
                 Build a version
                 <br />
-                <span className="text-muted">you can inspect.</span>
+                <span className="text-accent">you can inspect.</span>
               </h2>
               <p className="mt-6 max-w-[42ch] text-[15px] leading-relaxed text-muted">
                 AgenticOS runs on your infrastructure. Set up the model, tools
@@ -234,7 +234,7 @@ export default async function UseCasePage({ params }: Props) {
           <h2 className="display-tight max-w-[18ch] text-[clamp(2rem,4vw,3rem)] font-medium leading-tight">
             Questions worth
             <br />
-            <span className="text-muted">settling first.</span>
+            <span className="text-accent">settling first.</span>
           </h2>
           <div className="divide-y divide-line border-y border-line">
             {item.questions.map(({ q, a }) => (

@@ -79,7 +79,7 @@ export function WorkflowMotion() {
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>
             <p className="font-mono text-[12px] uppercase tracking-[0.12em] text-muted">Connected work</p>
-            <h2 id="workflow-motion-title" className="display-tight mt-4 max-w-[760px] text-[clamp(2rem,4.6vw,4rem)] font-medium">Different starting points.<br /><span className="text-ink-soft">One connected workflow.</span></h2>
+            <h2 id="workflow-motion-title" className="display-tight mt-4 max-w-[760px] text-[clamp(2rem,4.6vw,4rem)] font-medium">Different starting points.<br /><span className="text-accent">One connected workflow.</span></h2>
           </div>
         </div>
         <figure className="mt-10 md:mt-14">
@@ -97,18 +97,5 @@ export function WorkflowMotion() {
         </figure>
       </div>
     </section>
-  );
-}
-
-/** A quiet visual bridge between the team and coding sections. */
-export function WorkflowBridge() {
-  return (
-    <div className="workflow-bridge" aria-hidden>
-      <svg viewBox="0 0 1200 120" fill="none" preserveAspectRatio="none">
-        <path d="M-30 30 C180 30 230 100 440 100 S720 20 920 20 S1100 90 1230 90" />
-        <path d="M-30 60 C180 60 230 20 440 20 S720 100 920 100 S1100 50 1230 50" />
-        <path d="M-30 90 C180 90 230 60 440 60 S720 60 920 60 S1100 20 1230 20" />
-      </svg>
-    </div>
   );
 }

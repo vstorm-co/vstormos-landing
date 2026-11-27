@@ -54,6 +54,24 @@ const LOGOS = {
   monday: "monday-icon",
   clickup: "clickup",
   ycombinator: "ycombinator",
+  openai: "openai-icon",
+  claudecode: "claude-code",
+  codex: "codex",
+  gemini: "google-gemini-icon",
+  copilot: "github-copilot",
+  grok: "grok-icon",
+  meta: "meta-icon",
+  mistral: "mistral-ai-icon",
+  cursor: "cursor-icon",
+  kimi: "moonshot-ai-icon",
+  qwen: "qwen-icon",
+  devin: "devin",
+  cline: "cline-icon",
+  opencode: "opencode-icon",
+  minimax: "minimax-icon",
+  antigravity: "antigravity",
+  aws: "aws",
+  azure: "azure-icon",
 };
 
 /** Marks the logos set lacks: simple-icons slug, drawn in the brand's own hex. */
@@ -62,6 +80,7 @@ const SIMPLE = {
   gdocs: "googledocs",
   prefect: "prefect",
   ollama: "ollama",
+  alibaba: "alibabacloud",
 };
 
 const set = JSON.parse(await readFile(new URL("../node_modules/@iconify-json/logos/icons.json", import.meta.url), "utf8"));

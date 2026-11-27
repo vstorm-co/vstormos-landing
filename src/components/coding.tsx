@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeftRight, Check, KeyRound, LogIn } from "lucide-react";
+import { ArrowLeftRight, Check } from "lucide-react";
 import { motion, useInView } from "motion/react";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { useEffect, useRef, useState, type ReactNode } from "react";
@@ -8,9 +8,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BlobAgent } from "@/components/blob";
 import {
   BrandIcon,
-  Mark,
   ServiceIcon,
-  providerGlyph,
 } from "@/components/brand-icon";
 import { CodingTask } from "@/components/together";
 import { Reveal, SectionHeading, SectionLinks } from "@/components/ui";
@@ -128,46 +126,41 @@ function HandOff() {
   );
 }
 
-function Subscription() {
+const LOCAL_AGENTS = [
+  { name: "Claude Code", brand: "claude_code", status: "signed in" },
+  { name: "Codex", brand: "codex", status: "signed in" },
+  { name: "OpenCode", status: "Set up" },
+  { name: "Cursor", brand: "cursor", status: "Set up" },
+  { name: "Gemini (Antigravity)", status: "Set up" },
+] as const;
+
+/** Desktop settings: the coding agents on this computer, each with its own sign-in. */
+function LocalAgents() {
   return (
     <div className="w-full max-w-[340px] overflow-hidden rounded-[14px] bg-white shadow-[0_18px_40px_-28px_rgba(43,37,71,0.6)] ring-1 ring-black/5">
       <p className="border-b border-[#f0f0f2] px-3.5 py-2.5 text-[11px] font-medium uppercase tracking-[0.06em] text-[#a1a1aa]">
-        Model for this agent
+        Coding agents on this computer
       </p>
-      {[
-        {
-          glyph: "openai_codex",
-          name: "ChatGPT (Codex subscription)",
-          note: "your plan",
-          on: true,
-        },
-        { glyph: "anthropic", name: "Claude Sonnet 5.5", note: "API key" },
-        { glyph: "ollama", name: "Llama on Ollama", note: "local" },
-      ].map((model) => (
-        <div
-          key={model.name}
-          className={`flex items-center gap-2.5 px-3.5 py-2.5 text-[12.5px] ${model.on ? "bg-[#f6f5ff]" : ""}`}
-        >
-          <Mark
-            glyph={providerGlyph(model.glyph)}
-            className="size-4 text-[#18181b]"
-            mono
-          />
-          <span className="font-medium text-[#18181b]">{model.name}</span>
-          <span className="ml-auto text-[11px] text-[#a1a1aa]">
-            {model.note}
-          </span>
-          {model.on ? <Check className="size-3.5 text-[#5b5bd6]" /> : null}
-        </div>
-      ))}
-      <div className="flex items-center justify-between gap-2 border-t border-[#f0f0f2] px-3.5 py-3">
-        <span className="inline-flex h-8 items-center gap-1.5 rounded-full bg-[#18181b] px-3 text-[12px] font-medium text-white">
-          <LogIn className="size-3.5" /> Sign in with ChatGPT
-        </span>
-        <span className="inline-flex items-center gap-1 text-[11.5px] text-[#16794c]">
-          <KeyRound className="size-3.5" /> no API key
-        </span>
-      </div>
+      {LOCAL_AGENTS.map((agent) => {
+        const ready = agent.status === "signed in";
+        return (
+          <div key={agent.name} className="flex items-center gap-2.5 px-3.5 py-2.5 text-[12.5px]">
+            {"brand" in agent ? (
+              <BrandIcon name={agent.brand} className="size-4" />
+            ) : (
+              <span className="inline-flex size-4 items-center justify-center rounded-[4px] bg-[#f4f4f5] text-[9px] font-semibold text-[#52525b]">
+                {agent.name[0]}
+              </span>
+            )}
+            <span className="font-medium text-[#18181b]">{agent.name}</span>
+            <span className={`ml-auto inline-flex items-center gap-1 text-[11px] ${ready ? "text-[#16794c]" : "font-medium text-[#5b5bd6]"}`}>
+              {ready ? <Check className="size-3.5" /> : null}
+              {agent.status}
+            </span>
+          </div>
+        );
+      })}
+      <p className="border-t border-[#f0f0f2] px-3.5 py-2.5 text-[11px] text-[#a1a1aa]">Works in a folder you approve</p>
     </div>
   );
 }
@@ -242,7 +235,7 @@ function FromClaudeCode() {
   );
 }
 
-/** #2141 and #2190: coding harnesses as colleagues, subscriptions as models, agents across companies, the platform from a coding tool. */
+/** Coding harnesses as colleagues, local coding agents on their own sign-in, agents across companies, the platform from a coding tool. */
 export function Coding() {
   return (
     <section id="coding" className="bg-paper px-5 pb-24 md:px-8 md:pb-32">
@@ -251,7 +244,7 @@ export function Coding() {
           eyebrow="New · Coding agents"
           title="Claude Code and Codex,"
           muted="on your team."
-          body="Any agent can hand software work to Claude Code or Codex. Run them in the agent's sandbox, or choose your own computer in the desktop app. Local tasks use an approved folder and your coding agent's own sign-in, with a native confirmation before they start."
+          body="Any agent can hand software work to Claude Code or Codex in its sandbox. In the desktop app, choose your own computer and the coding agent you already use, from OpenCode and Cursor to Gemini through Antigravity, each with its own sign-in, in a folder you approve and with a native confirmation before it starts."
         />
         <Reveal
           delay={0.1}
@@ -266,10 +259,10 @@ export function Coding() {
           </Card>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
             <Card
-              title="Already paying for ChatGPT? Put it to work."
-              body="Sign in with ChatGPT once and your agents run on your plan, no API key. Or run them on your own models, on your own servers: it is open source."
+              title="Your coding agent, your sign-in"
+              body="Claude Code, Codex, OpenCode, Cursor, Cline, Kimi Code, Qwen, Devin, Mistral Vibe and Grok Build run on your computer from the desktop app, on the plan each one is signed in to."
             >
-              <Subscription />
+              <LocalAgents />
             </Card>
             <div className="grid gap-4 lg:grid-cols-2">
               <Card

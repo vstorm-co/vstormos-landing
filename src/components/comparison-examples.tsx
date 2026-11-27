@@ -31,7 +31,7 @@ export function ComparisonExamples() {
             >
               Pick a job.
               <br />
-              <span className="text-muted">See it in action.</span>
+              <span className="text-accent">See it in action.</span>
             </h2>
           </div>
           <p className="max-w-[46ch] text-[17px] leading-relaxed text-muted">

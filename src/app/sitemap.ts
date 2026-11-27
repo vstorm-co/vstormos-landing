@@ -7,7 +7,7 @@ import { PAGE_URL } from "@/lib/site";
 export const dynamic = "force-static";
 
 // Date of the meaningful content revision, not the time a host rebuilds the same pages.
-const CONTENT_UPDATED = new Date("2026-11-02T00:00:00Z");
+const CONTENT_UPDATED = new Date("2026-11-27T00:00:00Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -23,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.5,
     },
+    ...["subscriptions/", "product/", "developers/", "rollout/"].map((path) => ({
+      url: `${PAGE_URL}/${path}`,
+      lastModified: CONTENT_UPDATED,
+      changeFrequency: "monthly" as const,
+      priority: path === "subscriptions/" ? 0.9 : 0.7,
+    })),
     {
       url: `${PAGE_URL}/compare/`,
       lastModified: CONTENT_UPDATED,

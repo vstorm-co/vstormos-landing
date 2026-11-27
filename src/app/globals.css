@@ -9,6 +9,8 @@
   --color-violet: #2b2547;
   --color-violet-deep: #1d1931;
   --color-blob: #bbd1ff;
+  /* The second phrase of a heading on light surfaces; `blob` takes that role on dark ones. */
+  --color-accent: #5b5bd6;
 
   --color-ink: #16141f;
   --color-ink-soft: #3b3846;
@@ -403,10 +405,6 @@ details > summary::-webkit-details-marker {
 .workflow-node--agent .workflow-node-mark { inline-size: 5.5rem; block-size: 5.5rem; border-radius: 1.8rem; background: var(--color-violet); border-color: var(--color-violet); box-shadow: 0 12px 45px -16px color-mix(in srgb, var(--color-violet) 55%, transparent); }
 .workflow-node--agent .workflow-node-mark > svg { inline-size: 3rem; block-size: 3rem; }
 .workflow-node--agent .workflow-node-label { font-size: 1rem; }
-.workflow-bridge { margin-inline: auto; max-inline-size: 1240px; block-size: 100px; overflow: hidden; }
-.workflow-bridge svg { inline-size: 100%; block-size: 100%; }
-.workflow-bridge path { stroke: var(--color-line-strong); stroke-width: 1; }
-.workflow-bridge path:nth-child(2) { stroke: color-mix(in srgb, var(--color-violet) 25%, transparent); }
 @media (min-width: 768px) and (max-width: 1023px) {
   .workflow-node { inline-size: 6rem; }
   .workflow-node-mark { inline-size: 2.75rem; block-size: 2.75rem; }
@@ -424,8 +422,7 @@ details > summary::-webkit-details-marker {
   .workflow-node-label { font-size: .75rem; }
   .workflow-node-detail { font-size: .625rem; max-inline-size: 6rem; }
   .workflow-node--agent .workflow-node-mark { inline-size: 4.5rem; block-size: 4.5rem; border-radius: 1.5rem; }
-  .workflow-bridge { block-size: 65px; }
-}
+  }
 @media (prefers-reduced-motion: reduce) {
   .workflow-scene[data-running] .workflow-pulse { animation: none; stroke-dasharray: none; opacity: .3; }
 }
