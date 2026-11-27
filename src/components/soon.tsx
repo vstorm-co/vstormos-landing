@@ -86,7 +86,7 @@ const DETAILS = [
   {
     icon: Mic,
     title: "Talk to any agent",
-    body: "Talk to a published agent with voice configured, from the console.",
+    body: "Talk to a published agent by voice in the console, on a widget, or over a phone line through your own Twilio number.",
   },
 ] as const;
 
@@ -961,7 +961,7 @@ export function Soon() {
           eyebrow="Available now"
           title="Workflows, tables and voice."
           muted="Build the whole process."
-          body="Connect triggers, agents, approvals and tables in a visual workflow, then inspect each run. Talk to a published agent with voice calls. These features ship in AgenticOS. The sequence below uses illustrative data and timings."
+          body="Connect triggers, agents, approvals and tables in a visual workflow, then inspect each run. Talk to a published agent by voice, in the browser or on the phone. These features ship in AgenticOS. The sequence below uses illustrative data and timings."
         />
 
         <Reveal

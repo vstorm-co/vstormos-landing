@@ -4,6 +4,8 @@ import { motion } from "motion/react";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import type { ReactNode } from "react";
 
+import { asset } from "@/lib/site";
+
 /** Fades a block up once it scrolls into view. */
 export function Reveal({
   children,
@@ -184,7 +186,7 @@ export function SectionLinks({
       delay={0.12}
       className={`mt-8 flex flex-wrap items-center justify-center gap-3 ${className}`}
     >
-      <ButtonLink href="#quickstart" tone={dark ? "white" : "ink"}>
+      <ButtonLink href={asset("/#quickstart")} tone={dark ? "white" : "ink"}>
         Run it in 10 minutes
       </ButtonLink>
       <ButtonLink href={docs} tone={dark ? "ghost-light" : "ghost-dark"}>

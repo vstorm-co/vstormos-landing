@@ -306,15 +306,23 @@ export function FitAndTogether({
   );
 }
 
-export function CompareFaq({ items }: { items: readonly Question[] }) {
+export function CompareFaq({
+  items,
+  title = "What people ask",
+  muted = "before they switch.",
+}: {
+  items: readonly Question[];
+  title?: string;
+  muted?: string;
+}) {
   return (
     <section id="faq" className="bg-card px-5 py-20 md:px-8 md:py-28">
       <div className="mx-auto grid max-w-[1240px] gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
         <Reveal>
           <SectionTitle
             eyebrow="FAQ"
-            title="What people ask"
-            muted="before they switch."
+            title={title}
+            muted={muted}
           />
         </Reveal>
         <Reveal delay={0.06} className="min-w-0">

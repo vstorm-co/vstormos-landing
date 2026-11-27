@@ -114,7 +114,7 @@ export function Ownership() {
           </ul>
           <div className="hidden overflow-hidden rounded-[24px] bg-card ring-1 ring-line md:block">
             <table className="w-full text-left text-[15px]">
-              <caption className="sr-only">AgenticOS compared with AI teammate products and n8n</caption>
+              <caption className="sr-only">AgenticOS compared with ChatGPT Enterprise, Copilot Studio, Dify and n8n</caption>
               <thead>
                 <tr className="border-b border-line text-[12.5px] uppercase tracking-[0.06em] text-faint">
                   <th scope="col" className="px-7 py-4 font-mono font-medium">Product</th>

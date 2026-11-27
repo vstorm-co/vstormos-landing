@@ -1,9 +1,10 @@
-// Product statements checked against AgenticOS v1.38.2 (3 November 2026).
+// Product statements checked against AgenticOS v1.95.0 (27 November 2026).
 // The MCP count is the gallery's number and nothing else.
 import type { LogoName } from "@/components/brand-icon";
+import { asset } from "@/lib/site";
 
 /** The product release the page describes; update it with the figures below at each release. */
-export const RELEASE = "1.38.2";
+export const RELEASE = "1.95.0";
 
 export const DOCS = "https://vstorm-co.github.io/agenticos";
 export const REPO = "https://github.com/vstorm-co/agenticos";
@@ -25,6 +26,8 @@ export const links = {
   governance: `${DOCS}/governance/`,
   permissions: `${DOCS}/permissions/`,
   models: `${DOCS}/models/`,
+  subscriptionAccounts: `${DOCS}/models/#subscription-accounts`,
+  desktopCodingAgents: `${DOCS}/desktop/#coding-agents-on-this-computer`,
   releaseNotes: `${DOCS}/release-notes/`,
   contributing: `${DOCS}/help/`,
   addCapability: `${DOCS}/howto/add-capability/`,
@@ -52,23 +55,23 @@ export const installCommand =
   "curl -fsSL https://raw.githubusercontent.com/vstorm-co/agenticos/main/scripts/quickstart.sh | bash";
 
 export const nav = [
-  { label: "Product", href: "#product" },
+  { label: "Product", href: asset("/product/") },
+  { label: "Subscriptions", href: asset("/subscriptions/") },
   { label: "Capabilities", href: "#capabilities" },
-  { label: "Integrations", href: "#integrations" },
   { label: "Security", href: "#control" },
-  { label: "Developers", href: "#engineers" },
+  { label: "Developers", href: asset("/developers/") },
   { label: "Pricing", href: "#pricing" },
   { label: "Docs", href: links.docs },
 ] as const;
 
 /** Keys of `PROVIDER_GLYPHS`; a missing one fails the build in `providerGlyph`. */
 export const heroModels: readonly { name: string; provider: string }[] = [
-  { name: "Anthropic", provider: "anthropic" },
-  { name: "OpenAI", provider: "openai" },
+  { name: "Claude", provider: "anthropic" },
+  { name: "ChatGPT", provider: "openai" },
   { name: "Gemini", provider: "google" },
+  { name: "GitHub Copilot", provider: "github" },
+  { name: "Grok", provider: "xai" },
   { name: "Mistral", provider: "mistral" },
-  { name: "DeepSeek", provider: "deepseek" },
-  { name: "Azure", provider: "azure" },
   { name: "Bedrock", provider: "bedrock" },
   { name: "Ollama", provider: "ollama" },
 ];
@@ -91,19 +94,19 @@ export const pilots = [
 
 export const figures = [
   {
-    value: "36",
+    value: "39",
     art: "tool_search",
     label: "built-in capabilities, switched on per agent",
   },
   {
-    value: "28",
+    value: "40+",
     art: "thinking",
-    label: "model providers, hosted, your plan or local",
+    label: "model providers: hosted, your own subscription or local",
   },
   {
     value: "Web + apps",
     art: "media",
-    label: "chat, desktop, voice, channels and API",
+    label: "chat, desktop, phone calls, chat apps and API",
   },
   { value: "4,700+", art: "web_research", label: "MCP servers in the gallery" },
 ] as const;
@@ -203,19 +206,19 @@ export const showcase: readonly Showcase[] = [
   },
 ];
 
-/** The six groups cover the 36 built-in capabilities registered in v1.38.2. `art` keys the console's dioramas. */
+/** The six groups cover the 39 capabilities a person can switch on in v1.95.0 (the registry's selectable ones). `art` keys the console's dioramas. */
 export const capabilityGroups = [
   {
     art: "knowledge",
     title: "Knowledge and memory",
-    body: "Answers from your documents with citations, and what the agent should remember.",
+    body: "Answers from your documents with citations, shared project files, and what the agent should remember.",
     names: [
       "Knowledge search",
       "Skills",
       "Context",
       "Memory",
-      "Memory (mem0)",
       "Past conversations",
+      "Projects",
     ],
   },
   {
@@ -227,18 +230,19 @@ export const capabilityGroups = [
   {
     art: "sandbox",
     title: "Files, code and output",
-    body: "Its own computer with files and a shell, Claude Code or Codex for software work, and drawings and pages people can open.",
+    body: "Its own computer with files and a shell, Claude Code, Codex or another installed coding agent for software work, and drawings and pages people can open.",
     names: [
       "Calculations",
       "Sandbox",
+      "Virtual terminal",
       "Coding agent",
+      "Other installed agents",
       "Charts",
       "Visuals",
       "Image generation",
       "Text to speech",
       "Video generation",
       "Watch a command",
-      "Tables",
       "Workflows",
       "Apps",
     ],
@@ -246,17 +250,19 @@ export const capabilityGroups = [
   {
     art: "subagents",
     title: "Reasoning and teamwork",
-    body: "Plan, think, hand parts of a job to other agents, and ask you when it is unsure.",
+    body: "Plan, think, hand parts of a job to other agents, keep work going in the background and ask you when it is unsure.",
     names: [
       "Subagents",
       "Planning",
       "Thinking",
       "Work while tools run",
+      "Background topics",
       "Tool search",
       "Date and time",
       "Instruction reminders",
       "Ask the user",
       "Follow-ups",
+      "Drafts",
     ],
   },
   {
@@ -272,9 +278,9 @@ export const capabilityGroups = [
   },
   {
     art: "channel_tools",
-    title: "Chat channels",
-    body: "Connect Slack, Teams, Discord, Telegram and Mattermost. Available channel tools and account-linking rules depend on the integration.",
-    names: ["Channel lookup"],
+    title: "Channels and calls",
+    body: "Agents answer in Slack, Teams, Discord, Telegram, Mattermost, Matrix, SMS, email and iMessage, and can call an opted-in person on the phone. Channel tools and account linking depend on the integration.",
+    names: ["Telephone calls"],
   },
 ] as const;
 
@@ -289,6 +295,11 @@ export const surfaces = [
   "Telegram",
   "Microsoft Teams",
   "Discord",
+  "Matrix",
+  "SMS",
+  "Email",
+  "iMessage",
+  "Phone calls",
 ] as const;
 
 export const connections = [
@@ -386,28 +397,28 @@ export const comparison = [
     name: "AgenticOS",
     where: "Your infrastructure",
     source: "Apache-2.0",
-    models: "28 providers, including local ones and your ChatGPT plan",
+    models: "40+ providers, your team’s own subscriptions or local models",
     own: true,
   },
   {
-    name: "OpenAI dots",
+    name: "ChatGPT Enterprise",
     where: "OpenAI’s cloud",
     source: "Proprietary",
     models: "OpenAI only",
     own: false,
   },
   {
-    name: "Grok Bot",
-    where: "xAI’s cloud",
+    name: "Copilot Studio",
+    where: "Microsoft’s cloud",
     source: "Proprietary",
-    models: "Grok only",
+    models: "OpenAI and Anthropic models, plus Azure Foundry",
     own: false,
   },
   {
-    name: "Viktor",
-    where: "Viktor’s cloud",
-    source: "Proprietary",
-    models: "OpenAI, Anthropic, Google, xAI",
+    name: "Dify",
+    where: "Self-hosted or Dify Cloud",
+    source: "Apache 2.0 with conditions",
+    models: "Many, including Ollama",
     own: false,
   },
   {
@@ -418,6 +429,65 @@ export const comparison = [
     own: false,
   },
 ] as const;
+
+/** How a person brings a plan they already pay for (AgenticOS 1.95: docs/models.md, docs/desktop.md). */
+export const subscriptionRoutes = [
+  {
+    id: "sign-in",
+    title: "Sign in from the console",
+    body: "Connect a personal account under Settings, or straight from the model picker. The person's agents then run on that plan, with no API key.",
+    plans: [
+      "Claude (Pro, Max)",
+      "ChatGPT (Codex)",
+      "Google Antigravity",
+      "GitHub Copilot",
+      "Grok",
+      "Kimi Code",
+      "Devin",
+      "Meta AI",
+    ],
+  },
+  {
+    id: "plan-keys",
+    title: "Add a plan key",
+    body: "Coding plans that issue their own key work like any model provider, with the model list from that key.",
+    plans: [
+      "OpenCode Go",
+      "Kimi Code",
+      "Z.AI GLM Coding Plan",
+      "Alibaba Coding Plan",
+      "Ollama Cloud",
+      "MiniMax",
+    ],
+  },
+  {
+    id: "desktop",
+    title: "Hand work to your coding agent",
+    body: "In the desktop app, a chat can pass software work to the coding agent you already use, with its own sign-in, in a folder you approve.",
+    plans: [
+      "Claude Code",
+      "Codex",
+      "OpenCode",
+      "Cursor",
+      "Cline",
+      "Gemini through Antigravity",
+      "Kimi Code",
+      "Qwen",
+      "Devin",
+      "Mistral Vibe",
+      "Grok Build",
+    ],
+  },
+] as const;
+
+/** What sits beside personal plans, so the subscription angle never stands alone. */
+export const companyModels = {
+  title: "For the whole company",
+  body: "Shared agents, schedules, workflows and your website run on company keys from 40+ providers, your Azure, Bedrock or Vertex contract, or open models through Ollama and vLLM on your own hardware.",
+} as const;
+
+export const subscriptionTerms =
+  "A subscription stays personal: a chat uses the signed-in person’s accounts and nobody else’s. Schedules, workflows, API calls and website visitors have no person behind them, so they run on company keys or your own models. Providers set their own terms for using a plan outside their apps; check them before relying on one.";
 
 export const setups = [
   {
@@ -462,8 +532,12 @@ export const faq = [
     a: "Yes. A project gives a team the same files, instructions and sandbox, and its chats are shared: everyone sees who is in the room, watches an agent's answer as it is written, replies to any message and brings in another agent, tool or document with an @. Each message carries its author's name, and each person keeps their own permissions.",
   },
   {
-    q: "Can it use the AI subscription we already pay for?",
-    a: "Yes. A person can sign in with ChatGPT once and run agents on that plan through Codex instead of a metered API key, and the coding agent can run Claude Code or Codex on a subscription. Budgets still count every run. A subscription belongs to one person, so for agents the whole company uses, an organization API key is the better fit. If you would rather not depend on any vendor's plan, the same agents run on your own models through Ollama, vLLM or any OpenAI-compatible server, on infrastructure you own.",
+    q: "Can it use the AI subscriptions we already pay for?",
+    a: "Yes. Each person can sign in from the console with Claude (Pro or Max), ChatGPT through Codex, Google Antigravity, GitHub Copilot, Grok, Kimi Code, Devin or Meta AI, or add a plan key such as OpenCode Go, Kimi Code or the Z.AI GLM Coding Plan, and run agents on that plan with no metered API key. In the desktop app, local coding agents such as Claude Code, Codex, OpenCode or Cursor keep their own sign-in. A subscription stays personal: schedules, workflows, API calls and website visitors have no person behind them, so they run on company keys or your own models through Ollama or vLLM. Providers set their own terms for using a plan outside their apps; check them before relying on one.",
+  },
+  {
+    q: "How do we move people off personal AI accounts?",
+    a: "Give them a better place to do the same work. In AgenticOS each person can connect the Claude, ChatGPT or other plan they already use, while their agents, files and conversations live in the company's deployment, under company sign-in, roles, budgets and an audit log. Shared agents, their skills and their knowledge belong to the company, so what people teach them stays when someone leaves. That is how shadow AI becomes AI the company can see and govern.",
   },
   {
     q: "Can it run with local models only?",
@@ -479,7 +553,7 @@ export const faq = [
   },
   {
     q: "How is it different from ChatGPT Enterprise, Copilot Studio or n8n?",
-    a: "AgenticOS runs on your infrastructure with any of 28 model providers and has no seat or credit fee of its own. It builds agents for the organization, published to chat, websites and APIs, rather than assistant seats for individual employees. It also includes a visual workflow canvas, virtual tables and routines; compare the nodes and integrations your task requires with n8n’s ecosystem.",
+    a: "AgenticOS runs on your infrastructure with any of 40+ model providers or your team’s own subscriptions, and has no seat or credit fee of its own. It builds agents for the organization, published to chat, websites and APIs, rather than assistant seats for individual employees. It also includes a visual workflow canvas, virtual tables and routines; compare the nodes and integrations your task requires with n8n’s ecosystem.",
   },
   {
     q: "What does it take to run?",

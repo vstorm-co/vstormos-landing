@@ -10,25 +10,18 @@ import { Integrations } from "@/components/integrations";
 import { Nav } from "@/components/nav";
 import { Ownership } from "@/components/ownership";
 import { Quickstart } from "@/components/quickstart";
-import { Showcase } from "@/components/showcase";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { Spotlights } from "@/components/spotlights";
 import { FloatingCta } from "@/components/floating-cta";
 import { Statement } from "@/components/statement";
+import { Subscriptions } from "@/components/subscriptions";
 import { Teammates } from "@/components/teammates";
 import { Together } from "@/components/together";
 import { Coding } from "@/components/coding";
-import { Draws } from "@/components/draws";
 import { Soon } from "@/components/soon";
 import { UseCases } from "@/components/use-cases";
-import { Engineers } from "@/components/engineers";
-import { Expertise } from "@/components/expertise";
 import { Pricing } from "@/components/pricing";
-import { Vstorm } from "@/components/vstorm";
 import { Recognition } from "@/components/recognition";
-import { Everywhere } from "@/components/everywhere";
-import { PlatformChoice } from "@/components/platform-choice";
-import { WorkflowBridge, WorkflowMotion } from "@/components/workflow-motion";
 import { faq } from "@/content";
 import { PAGE_URL } from "@/lib/site";
 
@@ -55,26 +48,18 @@ export default function Home() {
         <Hero />
         <Statement />
         <Recognition />
+        <Subscriptions />
         <Teammates />
         <Together />
-        <WorkflowBridge />
         <Coding />
-        <Everywhere />
-        <Expertise />
         <HowItWorks />
-        <WorkflowMotion />
-        <Showcase />
-        <Draws />
         <Capabilities />
-        <UseCases />
-        <PlatformChoice />
         <Integrations />
         <Soon />
         <Control />
         <Ownership />
-        <Engineers />
+        <UseCases />
         <Pricing />
-        <Vstorm />
         <Quickstart />
         <Faq />
         <Cta />

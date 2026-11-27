@@ -1,30 +1,35 @@
 import { AGENT_COLORS, Blob } from "@/components/blob";
 import { CapabilityArt } from "@/components/capability-art";
 import { CountUp } from "@/components/count-up";
-import { Reveal } from "@/components/ui";
+import { Eyebrow, Reveal } from "@/components/ui";
 import { figures, pilots } from "@/content";
 
 export function Statement() {
   return (
     <section className="relative z-40 -mt-7 rounded-t-[28px] bg-paper px-5 pb-24 pt-16 md:-mt-9 md:rounded-t-[36px] md:px-8 md:pb-32 md:pt-32">
       <div className="mx-auto max-w-[1240px]">
-        <Reveal>
-          <p className="display-tight mx-auto max-w-[1080px] text-balance text-center text-[clamp(1.4rem,3.6vw,3rem)] font-medium leading-[1.14]">
-            AgenticOS gives every team{" "}
-            <span className="inline-flex translate-y-[0.06em] items-center align-middle" aria-hidden>
+        <Reveal className="flex flex-col items-center text-center">
+          <Eyebrow>From shadow AI to company AI</Eyebrow>
+          <h2 className="display-tight mx-auto mt-6 max-w-[1080px] text-balance text-[clamp(1.4rem,3.6vw,3rem)] font-medium leading-[1.14]">
+            Your people already use AI, each in a personal account.{" "}
+            <span className="text-faint">What they teach it, what it remembers and what it costs stay outside the company.</span>
+          </h2>
+          <p className="mx-auto mt-8 max-w-[64ch] text-balance text-[17px] leading-relaxed text-ink-soft md:text-[19px]">
+            AgenticOS gives that work one governed place: AI teammates{" "}
+            <span className="inline-flex translate-y-[0.12em] items-center align-baseline" aria-hidden>
               {AGENT_COLORS.slice(0, 3).map((color, index) => (
                 <span
                   key={color}
-                  className="inline-flex size-[1.05em] items-center justify-center rounded-full bg-paper ring-[3px] ring-paper"
+                  className="inline-flex size-[1.1em] items-center justify-center rounded-full bg-paper ring-[2px] ring-paper"
                   style={{ marginLeft: index === 0 ? 0 : "-0.3em", zIndex: 3 - index }}
                 >
                   <Blob color={color} className="size-full" />
                 </span>
               ))}
             </span>{" "}
-            AI teammates: agents that work with files, run code, browse the web and use your
-            company’s tools and knowledge.{" "}
-            <span className="text-faint">Built in a browser, shared with colleagues, run on servers you own.</span>
+            that work with files, run code, browse the web and use your company’s tools and knowledge,
+            under company sign-in, budgets, approvals and an audit log. Built in a browser, shared with
+            colleagues, run on servers you own, on any model or the plans your people already pay for.
           </p>
         </Reveal>
 

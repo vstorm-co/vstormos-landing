@@ -10,14 +10,15 @@ const COLUMNS = [
   {
     title: "Product",
     items: [
-      { label: "Highlights", href: "#product" },
+      { label: "Product tour", href: asset("/product/") },
+      { label: "Use your subscriptions", href: asset("/subscriptions/") },
       { label: "Use cases", href: asset("/use-cases/") },
       { label: "How it works", href: "#how" },
       { label: "Capabilities", href: "#capabilities" },
       { label: "Integrations", href: "#integrations" },
       { label: "Security", href: "#control" },
       { label: "Quick start", href: "#quickstart" },
-      { label: "Browser, desktop & mobile", href: "#everywhere" },
+      { label: "Browser, desktop & mobile", href: asset("/product/#everywhere") },
       { label: "Desktop downloads", href: links.downloads },
     ],
   },
@@ -26,7 +27,7 @@ const COLUMNS = [
     items: [
       { label: "Documentation", href: links.docs },
       { label: "Introduction deck", href: links.deck },
-      { label: "Product tour", href: links.tour },
+      { label: "Interactive tour", href: links.tour },
       { label: "Tutorials", href: links.useCases },
       { label: "Comparisons", href: asset("/compare/") },
       { label: "Release notes", href: links.releaseNotes },
@@ -35,6 +36,7 @@ const COLUMNS = [
   {
     title: "Build on it",
     items: [
+      { label: "For developers", href: asset("/developers/") },
       { label: "Architecture", href: links.architecture },
       { label: "HTTP API", href: links.api },
       { label: "Add a capability", href: links.addCapability },
@@ -47,7 +49,7 @@ const COLUMNS = [
     items: [
       { label: "About Vstorm", href: vstorm.site },
       { label: "Open-source projects", href: links.oss },
-      { label: "AgenticOS rollouts", href: vstorm.agenticos },
+      { label: "AgenticOS rollouts", href: asset("/rollout/") },
       { label: "Case studies", href: vstorm.caseStudies },
       { label: "Schedule a meeting", href: vstorm.meeting },
       { label: "Contact", href: vstorm.contact },

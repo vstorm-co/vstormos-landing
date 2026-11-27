@@ -2,23 +2,26 @@
 
 > AgenticOS is an open-source, self-hosted AI agent platform for a company's AI teammates (Apache-2.0): "AI teammates" that work with files, run code in a sandbox, browse the web and use the company's own tools and knowledge. Teams build and publish agents in a browser; engineers extend them in typed Python. It runs on the company's own infrastructure with Docker Compose and is built on Pydantic AI by Vstorm.
 
-Key facts (AgenticOS v1.35.0, checked 2 November 2026):
+Key facts (AgenticOS v1.95.0, checked 27 November 2026):
 
-- Licence: Apache-2.0. Commercial use, modification and private deployment are allowed. There is no seat or credit fee; you pay for your infrastructure and the model usage you choose.
-- Where it runs: your own servers (Docker Compose). A host with 4 vCPU and 8 GB RAM runs it (typically $10 to $50 a month in the cloud, with no per-seat fee). It can run fully local with Ollama or vLLM.
-- Models: 28 providers, a ChatGPT subscription through Codex, hosted (OpenAI, Anthropic, Google Gemini, Mistral and others), through your cloud contract (Azure OpenAI, AWS Bedrock, Google Vertex AI) or local.
-- Capabilities: 29 built in, switched on per agent: knowledge search with citations (RAG), skills, context, memory, web search, a real web browser the user can take over, a code sandbox with files and a shell, a coding agent that hands work to Claude Code or Codex, drawings (diagrams, calculators, 3D scenes), charts, image generation, apps (published pages with a stable link and versions), subagents, planning, guardrails that redact secrets and personal data.
+- Licence: Apache-2.0. Commercial use, modification and private deployment are allowed. There is no seat or credit fee; you pay for your infrastructure and the model usage you choose. The default PDF parser is a bundled AGPL-3.0 component.
+- Where it runs: your own servers (Docker Compose, or a maintained Helm chart for Kubernetes). A host with 4 vCPU and 8 GB RAM runs it (typically $10 to $50 a month in the cloud, with no per-seat fee). It can run fully local with Ollama or vLLM.
+- Models: 40+ providers, hosted (OpenAI, Anthropic, Google Gemini, Mistral and others), through your cloud contract (Azure OpenAI, AWS Bedrock, Google Vertex AI) or local.
+- Subscriptions you already pay for: each person can sign in from the console with Claude (Pro, Max), ChatGPT (Codex), Google Antigravity, GitHub Copilot, Grok, Kimi Code, Devin or Meta AI, or add a plan key (OpenCode Go, Kimi Code, Z.AI GLM Coding Plan, Alibaba Coding Plan, Ollama Cloud, MiniMax), and run agents on that plan with no API key. A subscription stays personal: schedules, workflows, API calls and website visitors run on company keys or own models. Providers set their own terms for using a plan outside their apps. Details: https://vstorm-co.github.io/vstormos-landing/subscriptions/
+- Coding agents: an agent hands software work to Claude Code or Codex in a sandbox; in the desktop app, a chat can use the coding agent already on the computer (Claude Code, Codex, OpenCode, Cursor, Cline, Gemini through Antigravity, Kimi Code, Qwen, Devin, Mistral Vibe, Grok Build) with its own sign-in.
+- Capabilities: 39 built in, switched on per agent: knowledge search with citations (RAG), skills, context, memory, projects, web search, a real web browser the user can take over, computer use, a code sandbox, a coding agent, drawings (diagrams, calculators, 3D scenes), charts, image and video generation, apps (published pages with a stable link and versions), workflows, subagents, planning, telephone calls, guardrails that redact secrets and personal data.
 - Integrations: 4,700+ MCP servers in the gallery; document sync from Google Drive, S3/MinIO, Git, websites, SharePoint and OneDrive.
-- Surfaces: web chat, desktop, voice calls, a website widget, a hosted page, HTTP API, WebSocket, Slack, Mattermost, Telegram and Teams; configuration differs by surface.
-- Automation: a visual workflow canvas with typed steps, virtual tables for structured records, and routines for schedules and events. MCP tools can be explicitly called from workflow steps without model-driven tool selection.
-- Control: roles and department groups, company sign-in (OIDC SSO, LDAP, Kerberos), monthly budgets checked before each model call, approvals for sensitive tools, a hash-chained audit log, an envelope-encrypted credential vault, sandboxed code execution. Native MFA, SAML and SCIM are not available yet; MFA comes from the identity provider.
-- Skills and context: a team's procedures become skills and its standing facts (thresholds, owners, policies) become context; every agent reads both, so a rule changed once changes every agent that uses it.
+- Surfaces: web chat, desktop app, voice calls, a website widget, a hosted page, HTTP API, WebSocket, Slack, Microsoft Teams, Mattermost, Telegram, Discord, Matrix, SMS, email, iMessage, telephone calls through Twilio, and A2A for other agents.
+- Automation: a visual workflow canvas with typed steps, virtual tables for structured records, and routines for schedules and events.
+- Quality: eval runs score an agent version against a versioned dataset and a baseline; suites can gate promotion between environments.
+- Control: roles and department groups, company sign-in (OIDC SSO, LDAP, Kerberos), monthly budgets per agent and organization checked before each model call, approvals for sensitive tools, a hash-chained audit log, an envelope-encrypted credential vault, sandboxed code execution. Native MFA, SAML, SCIM and custom roles are not available yet; MFA comes from the identity provider and SAML works through a broker such as Keycloak.
+- Shadow AI: people keep the AI plans they already use, while their agents, files and conversations live in the company's deployment under company sign-in, roles, budgets and an audit log.
 - Projects: a project gives several people and their agents the same files, instructions and sandbox, in one live chat with presence, replies and @-mentions.
-- Visuals: agents draw diagrams, calculators with sliders, charts and 3D scenes under their answer, and save them as apps.
-- Background work: a turn keeps running for up to an hour after the person leaves, and notifies them when it ends.
 - Agents are versioned specs that export to YAML.
 - AgenticOS is also an MCP server: Claude Code, Codex and Cursor can run its agents and read runs.
 - Install: curl -fsSL https://raw.githubusercontent.com/vstorm-co/agenticos/main/scripts/quickstart.sh | bash
+
+Pages: product tour https://vstorm-co.github.io/vstormos-landing/product/ · for developers https://vstorm-co.github.io/vstormos-landing/developers/ · rollout by Vstorm https://vstorm-co.github.io/vstormos-landing/rollout/
 
 Who makes it: Vstorm (https://vstorm.co), an agentic AI engineering company from Wrocław, Poland. Vstorm is an official Pydantic implementation partner, an OpenAI Select Partner, an Anthropic Claude Certified Services Partner and a member of the Agentic AI Foundation.
 
@@ -30,7 +33,8 @@ Product or service: both. AgenticOS is open-source software anyone can run; Vsto
 - [Installation](https://vstorm-co.github.io/agenticos/install/): Docker Compose setup and the installer
 - [Capability reference](https://vstorm-co.github.io/agenticos/reference/capabilities/): every capability, its tools and settings
 - [Security and data flows](https://vstorm-co.github.io/agenticos/security/): threat model, controls, what leaves the deployment
-- [Comparisons](https://vstorm-co.github.io/agenticos/about/comparison/): AgenticOS against Claude, ChatGPT, Copilot Studio, Dify, n8n and others
+- [Comparisons](https://vstorm-co.github.io/agenticos/about/comparison/): AgenticOS against Claude, ChatGPT, Copilot Studio, Dify, n8n, Kortix, LobeHub, Onyx, Open WebUI, Langdock, Dust, deepset and others
+- [All comparison pages](https://vstorm-co.github.io/vstormos-landing/compare/)
 - [AgenticOS vs ChatGPT Enterprise](https://vstorm-co.github.io/vstormos-landing/compare/chatgpt-enterprise/)
 - [AgenticOS vs Claude Enterprise](https://vstorm-co.github.io/vstormos-landing/compare/claude-enterprise/)
 - [AgenticOS vs Copilot Studio](https://vstorm-co.github.io/vstormos-landing/compare/copilot-studio/)

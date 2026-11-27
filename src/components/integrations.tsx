@@ -1,4 +1,4 @@
-import { ArrowUpRight, Braces, Globe, MessageSquare, PanelBottom, Radio, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, Braces, Globe, Mail, MessageCircle, MessageSquare, PanelBottom, Phone, Radio, Smartphone, type LucideIcon } from "lucide-react";
 
 import { ServiceIcon, type LogoName } from "@/components/brand-icon";
 import { McpClients } from "@/components/mcp-clients";
@@ -16,6 +16,11 @@ const SURFACE_MARK: Record<(typeof surfaces)[number], { icon: LucideIcon } | { b
   Telegram: { brand: "telegram" },
   "Microsoft Teams": { brand: "teams" },
   Discord: { icon: MessageSquare },
+  Matrix: { icon: MessageSquare },
+  SMS: { icon: Smartphone },
+  Email: { icon: Mail },
+  iMessage: { icon: MessageCircle },
+  "Phone calls": { icon: Phone },
 };
 
 function SurfaceMark({ surface }: { surface: (typeof surfaces)[number] }) {

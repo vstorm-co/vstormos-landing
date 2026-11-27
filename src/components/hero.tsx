@@ -129,7 +129,7 @@ export function Hero() {
           className="flex flex-col items-center"
         >
           <motion.a
-            href="#product"
+            href={asset("/product/")}
             {...rise(0.1, 12)}
             className="group inline-flex items-center gap-2 rounded-full bg-white/10 py-1 pl-1 pr-3 text-[13px] font-medium text-white/85 ring-1 ring-white/20 backdrop-blur-md transition-colors hover:bg-white/[0.16]"
           >
@@ -208,7 +208,7 @@ export function Hero() {
           >
             Free to run yourself under Apache-2.0. Rolled out by{" "}
             <a
-              href="#vstorm"
+              href={asset("/rollout/")}
               className="text-white/85 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-white"
             >
               Vstorm
@@ -425,7 +425,7 @@ export function Hero() {
               <span>Console screenshot · fictional catalog. Floating cards illustrate product features.</span>
               <a href={asset("/use-cases/ai-shopping-assistant/")} className="inline-flex items-center gap-1 rounded text-white underline decoration-white/40 underline-offset-4 hover:decoration-white focus-visible:outline-white">Explore this use case <ArrowRight className="size-3" /></a>
             </p>
-        <p className="sr-only">Works with the models you already use:</p>
+        <p className="sr-only">Works with the AI subscriptions and models you already use:</p>
         {/* Phones: one moving line instead of three wrapped ones over the screenshot. */}
         <div
           className="overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)] lg:hidden"
@@ -441,7 +441,7 @@ export function Hero() {
             aria-hidden
             className="max-w-[22ch] text-[13.5px] font-medium leading-snug text-white/65"
           >
-            Works with the models you already use
+            Works with the AI subscriptions and models you already use
           </p>
           <ModelList className="gap-x-8 lg:gap-x-10" />
         </div>

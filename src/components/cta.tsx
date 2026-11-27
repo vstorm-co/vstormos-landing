@@ -36,7 +36,7 @@ export function Cta() {
               model and access rules you choose.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <ButtonLink href="#quickstart" tone="white" className="h-12 px-6">
+              <ButtonLink href={asset("/#quickstart")} tone="white" className="h-12 px-6">
                 Get started <ArrowRight className="size-4" />
               </ButtonLink>
               <ButtonLink href={vstorm.contact} tone="ghost-light" className="h-12 px-6">
