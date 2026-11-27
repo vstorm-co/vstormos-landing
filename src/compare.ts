@@ -1293,7 +1293,7 @@ export const comparisons = [
       },
       {
         area: "Spend control and tenancy",
-        them: "Not described",
+        them: "Budgets not described; opt-in per-user data isolation for multi-tenant deployments",
         us: "Budgets per agent and per organization; many organizations in one deployment",
       },
       {
@@ -1662,8 +1662,8 @@ export const comparisons = [
       },
       {
         area: "Governance",
-        them: "Not described publicly",
-        us: "Budgets per agent, approvals and a tamper-evident audit log, documented in full",
+        them: "A monthly spending limit per workspace, allow/ask/deny per tool, audit logs on Enterprise",
+        us: "A budget per agent checked before each model request, an approvals queue and a tamper-evident audit log in every deployment",
       },
       {
         area: "Pricing",
